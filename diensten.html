@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mijn Diensten - MNRV</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page-desktop">
+
+  <!-- Explorer Window (full page) -->
+  <div class="page-window">
+
+    <!-- Title Bar -->
+    <div class="win-titlebar">
+      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
+        <path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/>
+      </svg>
+      <span class="win-titlebar-title">C:\MNRV\Diensten</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <a href="index.html" class="win-titlebar-btn close-btn" title="Terug naar bureaublad" style="text-decoration:none;color:inherit;">X</a>
+      </div>
+    </div>
+
+    <!-- Menu Bar -->
+    <div class="win-menubar">
+      <span class="win-menubar-item">Bestand</span>
+      <span class="win-menubar-item">Bewerken</span>
+      <span class="win-menubar-item">Beeld</span>
+      <span class="win-menubar-item">Help</span>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="win-toolbar">
+      <a href="index.html" class="win-toolbar-btn" style="text-decoration:none;color:inherit;">
+        <svg viewBox="0 0 16 16"><polygon points="10,2 2,8 10,14" fill="#000"/></svg>
+        Terug
+      </a>
+      <div class="win-toolbar-separator"></div>
+      <span class="win-toolbar-btn">
+        <svg viewBox="0 0 16 16"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+        Mappen
+      </span>
+    </div>
+
+    <!-- Address Bar -->
+    <div class="win-addressbar">
+      <label>Adres:</label>
+      <input type="text" value="C:\MNRV\Diensten\" readonly class="win-input">
+    </div>
+
+    <!-- Explorer Layout -->
+    <div class="win-body no-border" style="flex:1;display:flex;overflow:hidden;">
+      <div class="explorer-layout" style="width:100%;height:100%;">
+
+        <!-- Tree Sidebar -->
+        <div class="explorer-tree">
+          <div class="tree-item" onclick="showService('all')" id="tree-all">
+            <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><rect x="2" y="2" width="12" height="12" rx="1" fill="#808080"/><text x="8" y="11" text-anchor="middle" fill="#fff" font-size="8">C</text></svg>
+            <span>MNRV Diensten</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-item selected" onclick="showService('agents')" id="tree-agents">
+              <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+              <span>AI Agents</span>
+            </div>
+            <div class="tree-item" onclick="showService('webshop')" id="tree-webshop">
+              <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+              <span>Webshop Ontwikkeling</span>
+            </div>
+            <div class="tree-item" onclick="showService('uxui')" id="tree-uxui">
+              <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+              <span>UX/UI Optimalisatie</span>
+            </div>
+            <div class="tree-item" onclick="showService('strategie')" id="tree-strategie">
+              <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+              <span>AI Strategie</span>
+            </div>
+            <div class="tree-item" onclick="showService('integraties')" id="tree-integraties">
+              <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+              <span>Integraties</span>
+            </div>
+            <div class="tree-item" onclick="showService('maatwerk')" id="tree-maatwerk">
+              <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+              <span>Maatwerk AI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="explorer-content" id="service-content">
+
+          <!-- AI Agents -->
+          <div class="service-panel" id="panel-agents">
+            <div class="win-card">
+              <h3>AI Agents voor E-commerce</h3>
+              <p>Onze AI agents werken als slimme medewerkers voor jouw webshop. Ze helpen klanten 24/7 met productadvies, begeleiden hen door het bestelproces en bieden persoonlijke aanbevelingen op basis van gedrag en voorkeuren.</p>
+              <p><strong>Wat wij bieden:</strong></p>
+              <ul style="margin:4px 0 8px 20px;font-size:11px;line-height:1.6;">
+                <li>Slimme chatbots voor klantenservice</li>
+                <li>Productadviseur-agents die converteren</li>
+                <li>Checkout begeleiding die afhaakgedrag verlaagt</li>
+                <li>Geautomatiseerde upsell en cross-sell</li>
+                <li>Meertalige ondersteuning</li>
+              </ul>
+              <a href="contact.html" class="win-btn" style="text-decoration:none;margin-top:4px;">Meer informatie</a>
+            </div>
+          </div>
+
+          <!-- Webshop Ontwikkeling -->
+          <div class="service-panel" id="panel-webshop" style="display:none;">
+            <div class="win-card">
+              <h3>Webshop Ontwikkeling</h3>
+              <p>Wij bouwen webshops die klaar zijn voor de toekomst. Met geintegreerde AI-mogelijkheden vanaf dag een, op de platformen die je kent en vertrouwt.</p>
+              <p><strong>Platformen:</strong></p>
+              <ul style="margin:4px 0 8px 20px;font-size:11px;line-height:1.6;">
+                <li><strong>Magento 2</strong> &mdash; B2B en B2C, Hyva Commerce, maatwerk modules</li>
+                <li><strong>Shopify</strong> &mdash; Shopify Plus, B2B oplossingen, headless commerce</li>
+                <li><strong>WooCommerce</strong> &mdash; WordPress-gebaseerd, flexibel en betaalbaar</li>
+                <li><strong>Custom</strong> &mdash; Op maat gebouwde platformen met API-first architectuur</li>
+              </ul>
+              <p>Elke webshop wordt uitgerust met AI-ready koppelingen en slimme automatiseringen.</p>
+              <a href="contact.html" class="win-btn" style="text-decoration:none;margin-top:4px;">Offerte aanvragen</a>
+            </div>
+          </div>
+
+          <!-- UX/UI -->
+          <div class="service-panel" id="panel-uxui" style="display:none;">
+            <div class="win-card">
+              <h3>UX/UI Optimalisatie met AI</h3>
+              <p>AI maakt het mogelijk om jouw webshop continu te optimaliseren op basis van echte gebruikersdata. Geen aannames meer, maar datagedreven design-beslissingen.</p>
+              <p><strong>Onze aanpak:</strong></p>
+              <ul style="margin:4px 0 8px 20px;font-size:11px;line-height:1.6;">
+                <li>AI-gedreven A/B testing en personalisatie</li>
+                <li>Heatmap-analyse met slimme aanbevelingen</li>
+                <li>Dynamische content op basis van gebruikersprofiel</li>
+                <li>Conversie-optimalisatie met machine learning</li>
+                <li>Gepersonaliseerde zoekresultaten en filtering</li>
+              </ul>
+              <a href="contact.html" class="win-btn" style="text-decoration:none;margin-top:4px;">Plan een gesprek</a>
+            </div>
+          </div>
+
+          <!-- Strategie -->
+          <div class="service-panel" id="panel-strategie" style="display:none;">
+            <div class="win-card">
+              <h3>AI Strategie & Workshops</h3>
+              <p>Voordat je investeert in AI, heb je een helder plan nodig. Wij helpen je de juiste strategie te ontwikkelen en zorgen dat jouw team klaar is voor de toekomst.</p>
+              <p><strong>Onze diensten:</strong></p>
+              <ul style="margin:4px 0 8px 20px;font-size:11px;line-height:1.6;">
+                <li><strong>AI Workshop</strong> &mdash; Praktische kennissessie voor jouw team</li>
+                <li><strong>AI Strategie</strong> &mdash; Roadmap op maat voor jouw organisatie</li>
+                <li><strong>Implementatiebegeleiding</strong> &mdash; Van plan naar werkelijkheid</li>
+                <li><strong>Training</strong> &mdash; Jouw team leren werken met AI-tools</li>
+              </ul>
+              <a href="contact.html" class="win-btn" style="text-decoration:none;margin-top:4px;">Workshop boeken</a>
+            </div>
+          </div>
+
+          <!-- Integraties -->
+          <div class="service-panel" id="panel-integraties" style="display:none;">
+            <div class="win-card">
+              <h3>Integraties & Koppelingen</h3>
+              <p>AI werkt het beste als het naadloos samenwerkt met jouw bestaande systemen. Wij koppelen AI-oplossingen aan de tools die je al gebruikt.</p>
+              <p><strong>Koppelingen met:</strong></p>
+              <ul style="margin:4px 0 8px 20px;font-size:11px;line-height:1.6;">
+                <li>CRM-systemen (Salesforce, HubSpot, Pipedrive)</li>
+                <li>ERP-systemen (SAP, Exact, AFAS)</li>
+                <li>PIM-systemen (Akeneo, Pimcore)</li>
+                <li>Marketing automation (Mailchimp, ActiveCampaign)</li>
+                <li>Betaalproviders en fulfillment</li>
+              </ul>
+              <a href="contact.html" class="win-btn" style="text-decoration:none;margin-top:4px;">Bespreek mogelijkheden</a>
+            </div>
+          </div>
+
+          <!-- Maatwerk -->
+          <div class="service-panel" id="panel-maatwerk" style="display:none;">
+            <div class="win-card">
+              <h3>Maatwerk AI Oplossingen</h3>
+              <p>Soms past een standaardoplossing niet. Dan bouwen wij precies wat jouw organisatie nodig heeft &mdash; van voorspellende modellen tot intelligente recommendation engines.</p>
+              <p><strong>Voorbeelden:</strong></p>
+              <ul style="margin:4px 0 8px 20px;font-size:11px;line-height:1.6;">
+                <li>Custom recommendation engines voor productaanbevelingen</li>
+                <li>Voorspellende modellen voor voorraad en vraag</li>
+                <li>Intelligente prijsoptimalisatie</li>
+                <li>Natural Language Processing voor zoekoptimalisatie</li>
+                <li>Computer Vision voor visueel zoeken</li>
+              </ul>
+              <a href="contact.html" class="win-btn" style="text-decoration:none;margin-top:4px;">Neem contact op</a>
+            </div>
+          </div>
+
+          <!-- All services overview -->
+          <div class="service-panel" id="panel-all" style="display:none;">
+            <div class="list-view">
+              <div class="list-item" onclick="showService('agents')">
+                <svg viewBox="0 0 32 32" style="width:32px;height:32px;">
+                  <rect x="2" y="2" width="28" height="28" rx="2" fill="#1a1a3e" stroke="#4488ff"/>
+                  <text x="16" y="20" text-anchor="middle" fill="#fff" font-size="10">AI</text>
+                </svg>
+                <span>AI Agents</span>
+              </div>
+              <div class="list-item" onclick="showService('webshop')">
+                <svg viewBox="0 0 32 32" style="width:32px;height:32px;">
+                  <rect x="2" y="2" width="28" height="28" rx="2" fill="#fff" stroke="#0078d7"/>
+                  <text x="16" y="20" text-anchor="middle" fill="#0078d7" font-size="8">Shop</text>
+                </svg>
+                <span>Webshop</span>
+              </div>
+              <div class="list-item" onclick="showService('uxui')">
+                <svg viewBox="0 0 32 32" style="width:32px;height:32px;">
+                  <rect x="2" y="2" width="28" height="28" rx="2" fill="#000080"/>
+                  <text x="16" y="20" text-anchor="middle" fill="#fff" font-size="8">UX/UI</text>
+                </svg>
+                <span>UX/UI</span>
+              </div>
+              <div class="list-item" onclick="showService('strategie')">
+                <svg viewBox="0 0 32 32" style="width:32px;height:32px;">
+                  <rect x="2" y="2" width="28" height="28" rx="2" fill="#c0c0c0" stroke="#808080"/>
+                  <text x="16" y="12" text-anchor="middle" fill="#000" font-size="7">Plan</text>
+                  <line x1="8" y1="16" x2="24" y2="16" stroke="#000" stroke-width="0.5"/>
+                  <line x1="8" y1="20" x2="20" y2="20" stroke="#000" stroke-width="0.5"/>
+                  <line x1="8" y1="24" x2="22" y2="24" stroke="#000" stroke-width="0.5"/>
+                </svg>
+                <span>AI Strategie</span>
+              </div>
+              <div class="list-item" onclick="showService('integraties')">
+                <svg viewBox="0 0 32 32" style="width:32px;height:32px;">
+                  <rect x="2" y="2" width="28" height="28" rx="2" fill="#008080"/>
+                  <text x="16" y="20" text-anchor="middle" fill="#fff" font-size="7">API</text>
+                </svg>
+                <span>Integraties</span>
+              </div>
+              <div class="list-item" onclick="showService('maatwerk')">
+                <svg viewBox="0 0 32 32" style="width:32px;height:32px;">
+                  <rect x="2" y="2" width="28" height="28" rx="2" fill="#800080"/>
+                  <text x="16" y="20" text-anchor="middle" fill="#fff" font-size="6">Custom</text>
+                </svg>
+                <span>Maatwerk AI</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="win-statusbar">
+      <span class="win-statusbar-section" id="status-text">6 objecten</span>
+      <span class="win-statusbar-section">MNRV Diensten</span>
+    </div>
+
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <a href="index.html" class="start-btn" style="text-decoration:none;color:inherit;">
+      <span style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:16px;height:16px;transform:skewX(-5deg);">
+        <span style="background:#ff0000;"></span><span style="background:#00aa00;"></span><span style="background:#0000ff;"></span><span style="background:#ffcc00;"></span>
+      </span>
+      <span>Start</span>
+    </a>
+    <div class="taskbar-windows" style="flex:1;">
+      <button class="taskbar-window-btn active">Mijn Diensten</button>
+    </div>
+    <div class="system-tray">
+      <span id="tray-clock" class="tray-clock">00:00</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Clock
+  function updateClock() {
+    var el = document.getElementById('tray-clock');
+    if (!el) return;
+    var now = new Date();
+    el.textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  // Service navigation
+  function showService(id) {
+    // Hide all panels
+    document.querySelectorAll('.service-panel').forEach(function(p) { p.style.display = 'none'; });
+    // Deselect all tree items
+    document.querySelectorAll('.tree-item').forEach(function(t) { t.classList.remove('selected'); });
+
+    // Show selected panel
+    var panel = document.getElementById('panel-' + id);
+    if (panel) panel.style.display = 'block';
+
+    // Select tree item
+    var tree = document.getElementById('tree-' + id);
+    if (tree) tree.classList.add('selected');
+  }
+</script>
+
+</body>
+</html>

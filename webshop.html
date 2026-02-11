@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MNRV Webshop - Internet Explorer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* === WEBSHOP-SPECIFIC STYLES === */
+
+    /* Category Filter Bar */
+    .shop-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      background: var(--win-chrome);
+      border-bottom: 1px solid var(--win-btn-shadow);
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .shop-filter-bar label {
+      font-size: 11px;
+      margin-right: 4px;
+      font-weight: bold;
+    }
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      height: 20px;
+      font-family: var(--font-main);
+      font-size: 10px;
+      background: var(--win-btn-face);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      cursor: pointer;
+    }
+    .filter-btn:active,
+    .filter-btn.active {
+      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
+      box-shadow: inset 1px 1px 0 var(--win-btn-shadow);
+      background: repeating-conic-gradient(var(--win-btn-face) 0% 25%, var(--win-btn-highlight) 0% 50%) 0 0 / 2px 2px;
+    }
+
+    /* Search in toolbar */
+    .shop-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+    }
+    .shop-search-wrap input {
+      width: 140px;
+      height: 20px;
+      font-family: var(--font-main);
+      font-size: 11px;
+      padding: 1px 4px;
+      border: 2px solid;
+      border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+      box-shadow: inset 1px 1px 0 var(--win-btn-dark);
+      background: var(--win-input-bg);
+    }
+
+    /* Enhanced Product Cards */
+    .product-card {
+      transition: none;
+      position: relative;
+    }
+    .product-card:hover {
+      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
+    }
+    .product-card .product-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .product-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #ff0000;
+      color: #fff;
+      font-size: 8px;
+      font-weight: bold;
+      padding: 1px 4px;
+      border: 1px solid #800000;
+    }
+    .product-tags {
+      display: flex;
+      gap: 2px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+      justify-content: center;
+    }
+    .product-tag {
+      font-size: 8px;
+      padding: 0 3px;
+      background: #e0e0e0;
+      border: 1px solid #808080;
+      color: #000080;
+    }
+    .product-actions {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .product-card .product-description {
+      font-size: 10px;
+      margin-bottom: 6px;
+      color: #404040;
+    }
+    .product-card .product-features {
+      font-size: 9px;
+      text-align: left;
+      margin: 4px 0 6px;
+      padding-left: 12px;
+      color: #404040;
+    }
+    .product-card .product-features li {
+      margin-bottom: 1px;
+    }
+
+    /* Cart Badge */
+    .cart-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ff0000;
+      color: #fff;
+      font-size: 9px;
+      font-weight: bold;
+      min-width: 14px;
+      height: 14px;
+      padding: 0 3px;
+      border-radius: 0;
+      border: 1px solid #800000;
+      margin-left: 2px;
+    }
+    .cart-badge.empty {
+      display: none;
+    }
+
+    /* Product Detail Modal */
+    .product-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 998;
+    }
+    .product-modal-overlay.visible {
+      display: block;
+    }
+    .product-modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      background: var(--win-chrome);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow), 4px 4px 0 rgba(0,0,0,0.3);
+      width: 450px;
+      max-width: 95vw;
+      max-height: 80vh;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .product-modal.visible {
+      display: flex;
+      flex-direction: column;
+    }
+    .product-modal .win-titlebar {
+      cursor: default;
+    }
+    .product-modal .modal-body {
+      padding: 12px;
+      overflow: auto;
+      flex: 1;
+    }
+    .modal-body .modal-header {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .modal-body .modal-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--win-input-bg);
+      border: 2px solid;
+      border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .modal-body .modal-info h2 {
+      font-size: 14px;
+      color: #000080;
+      margin-bottom: 2px;
+    }
+    .modal-body .modal-info .modal-price {
+      font-size: 14px;
+      font-weight: bold;
+      color: #008000;
+    }
+    .modal-body .modal-info .modal-type {
+      font-size: 10px;
+      color: #808080;
+    }
+    .modal-body .modal-description {
+      font-size: 11px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      padding: 8px;
+      background: var(--win-input-bg);
+      border: 2px solid;
+      border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+    }
+    .modal-body .modal-features {
+      margin-bottom: 10px;
+    }
+    .modal-body .modal-features h3 {
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+    .modal-body .modal-features ul {
+      font-size: 11px;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+    .modal-body .modal-quantity {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .modal-body .modal-quantity label {
+      font-size: 11px;
+    }
+    .qty-btn {
+      width: 20px;
+      height: 20px;
+      font-family: var(--font-main);
+      font-size: 11px;
+      background: var(--win-btn-face);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .qty-btn:active {
+      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
+    }
+    .qty-display {
+      width: 40px;
+      height: 20px;
+      text-align: center;
+      font-family: var(--font-main);
+      font-size: 11px;
+      border: 2px solid;
+      border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+      box-shadow: inset 1px 1px 0 var(--win-btn-dark);
+      background: var(--win-input-bg);
+      padding: 0;
+      line-height: 16px;
+    }
+    .modal-buttons {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+      padding-top: 8px;
+      border-top: 1px solid var(--win-btn-shadow);
+    }
+
+    /* Cart Window */
+    .cart-window {
+      display: none;
+      position: fixed;
+      z-index: 997;
+      background: var(--win-chrome);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow), 4px 4px 0 rgba(0,0,0,0.3);
+      width: 420px;
+      max-width: 95vw;
+      max-height: 70vh;
+      right: 20px;
+      top: 60px;
+    }
+    .cart-window.visible {
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-window .cart-body {
+      padding: 8px;
+      overflow: auto;
+      flex: 1;
+      max-height: 300px;
+    }
+    .cart-empty {
+      text-align: center;
+      padding: 24px;
+      color: #808080;
+      font-size: 11px;
+    }
+    .cart-empty svg {
+      display: block;
+      margin: 0 auto 8px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 11px;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-item-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .cart-item-name {
+      flex: 1;
+      font-weight: bold;
+    }
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .cart-item-qty .qty-btn {
+      width: 16px;
+      height: 16px;
+      font-size: 9px;
+    }
+    .cart-item-qty .qty-val {
+      width: 24px;
+      text-align: center;
+      font-size: 10px;
+    }
+    .cart-item-price {
+      font-weight: bold;
+      color: #000080;
+      white-space: nowrap;
+      min-width: 65px;
+      text-align: right;
+    }
+    .cart-item-remove {
+      width: 16px;
+      height: 16px;
+      background: var(--win-btn-face);
+      border: 1px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #ff0000;
+      font-weight: bold;
+      padding: 0;
+    }
+    .cart-footer {
+      padding: 8px;
+      border-top: 2px solid var(--win-btn-shadow);
+      background: var(--win-chrome);
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .cart-total-price {
+      color: #008000;
+    }
+    .cart-footer-buttons {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    /* Checkout Dialog */
+    .checkout-dialog {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      background: var(--win-chrome);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow), 4px 4px 0 rgba(0,0,0,0.3);
+      width: 380px;
+      max-width: 90vw;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .checkout-dialog.visible {
+      display: flex;
+      flex-direction: column;
+    }
+    .checkout-body {
+      padding: 16px;
+    }
+    .checkout-progress {
+      height: 16px;
+      border: 2px solid;
+      border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+      background: var(--win-chrome);
+      margin: 12px 0;
+    }
+    .checkout-progress-bar {
+      height: 100%;
+      background: #000080;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    .checkout-status {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .checkout-success {
+      text-align: center;
+      padding: 12px;
+    }
+    .checkout-success svg {
+      margin-bottom: 8px;
+    }
+    .checkout-success p {
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    /* Add to cart animation */
+    @keyframes addedFlash {
+      0% { background: var(--win-chrome); }
+      30% { background: #c0ffc0; }
+      100% { background: var(--win-chrome); }
+    }
+    .product-card.just-added {
+      animation: addedFlash 0.6s ease;
+    }
+
+    /* Notification toast */
+    .shop-toast {
+      position: fixed;
+      bottom: 44px;
+      right: 8px;
+      background: var(--win-chrome);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      padding: 6px 12px;
+      font-size: 11px;
+      z-index: 9998;
+      display: none;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+    }
+    .shop-toast.visible {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* No results state */
+    .no-results {
+      text-align: center;
+      padding: 32px;
+      color: #808080;
+      font-size: 11px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .product-modal {
+        width: 95vw;
+      }
+      .cart-window {
+        width: 95vw;
+        right: 2.5vw;
+      }
+      .shop-search-wrap input {
+        width: 100px;
+      }
+    }
+    @media (max-width: 480px) {
+      .modal-body .modal-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-desktop">
+
+  <!-- IE Window (full page) -->
+  <div class="page-window">
+
+    <!-- Title Bar -->
+    <div class="win-titlebar">
+      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
+        <circle cx="8" cy="8" r="6" fill="#0078d7"/>
+        <text x="8" y="11" text-anchor="middle" fill="#fff" font-size="8" font-weight="bold" font-style="italic" font-family="serif">e</text>
+      </svg>
+      <span class="win-titlebar-title">MNRV Webshop - Microsoft Internet Explorer</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <a href="index.html" class="win-titlebar-btn close-btn" title="Terug naar bureaublad" style="text-decoration:none;color:inherit;">X</a>
+      </div>
+    </div>
+
+    <!-- Menu Bar -->
+    <div class="win-menubar">
+      <span class="win-menubar-item">Bestand</span>
+      <span class="win-menubar-item">Bewerken</span>
+      <span class="win-menubar-item">Beeld</span>
+      <span class="win-menubar-item">Favorieten</span>
+      <span class="win-menubar-item">Extra</span>
+      <span class="win-menubar-item">Help</span>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="win-toolbar">
+      <a href="index.html" class="win-toolbar-btn" style="text-decoration:none;color:inherit;">
+        <svg viewBox="0 0 16 16"><polygon points="10,2 2,8 10,14" fill="#000"/></svg>
+        Terug
+      </a>
+      <button class="win-toolbar-btn" onclick="location.reload()">
+        <svg viewBox="0 0 16 16"><path d="M8 2 A6 6 0 1 1 2 8" fill="none" stroke="#000" stroke-width="1.5"/><polygon points="8,0 8,4 4,2" fill="#000"/></svg>
+        Vernieuwen
+      </button>
+      <a href="index.html" class="win-toolbar-btn" style="text-decoration:none;color:inherit;">
+        <svg viewBox="0 0 16 16"><path d="M8 2 L2 8 L5 8 L5 14 L11 14 L11 8 L14 8 Z" fill="#000"/></svg>
+        Start
+      </a>
+      <div class="win-toolbar-separator"></div>
+      <button class="win-toolbar-btn" id="cart-toolbar-btn" title="Winkelwagen openen">
+        <svg viewBox="0 0 16 16">
+          <path d="M1 1 L3 1 L5 10 L13 10 L15 4 L4 4" fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="6" cy="13" r="1.5" fill="#000"/>
+          <circle cx="12" cy="13" r="1.5" fill="#000"/>
+        </svg>
+        Wagen
+        <span class="cart-badge empty" id="cart-badge">0</span>
+      </button>
+    </div>
+
+    <!-- Address Bar -->
+    <div class="win-addressbar">
+      <label>Adres:</label>
+      <input type="text" value="https://www.mnrv.ai/webshop" readonly class="win-input" style="flex:1;">
+      <button class="win-btn" style="min-width:auto;padding:2px 8px;height:20px;">Ga</button>
+    </div>
+
+    <!-- Category Filter Bar -->
+    <div class="shop-filter-bar">
+      <label>Categorie:</label>
+      <button class="filter-btn active" data-filter="all">Alles</button>
+      <button class="filter-btn" data-filter="ai-agent">AI Agents</button>
+      <button class="filter-btn" data-filter="webshop">Webshop</button>
+      <button class="filter-btn" data-filter="ux-ui">UX/UI</button>
+      <button class="filter-btn" data-filter="strategie">Strategie</button>
+      <div class="shop-search-wrap">
+        <input type="text" id="shop-search" placeholder="Zoeken..." class="win-input">
+        <button class="win-btn" style="min-width:auto;padding:2px 8px;height:20px;" id="shop-search-btn">
+          <svg viewBox="0 0 16 16" style="width:12px;height:12px;">
+            <circle cx="7" cy="7" r="4" fill="none" stroke="#000" stroke-width="1.5"/>
+            <line x1="10" y1="10" x2="14" y2="14" stroke="#000" stroke-width="1.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="win-body" style="flex:1;overflow:auto;">
+      <div class="ie-page-content">
+
+        <!-- Header Banner -->
+        <div style="background:linear-gradient(135deg,#000080,#0078d7);padding:16px;text-align:center;margin:-16px -16px 16px -16px;">
+          <img src="mnrv logo.png" alt="MNRV" style="width:120px;max-width:100%;margin-bottom:8px;">
+          <h1 style="color:#ffffff;margin:0;font-size:16px;">MNRV Webshop</h1>
+          <p style="color:#c0c0c0;font-size:11px;margin-top:4px;">AI-Powered Oplossingen voor jouw Webshop &mdash; Klik op een product voor details</p>
+        </div>
+
+        <p>Welkom in de MNRV Webshop! Hier vind je onze AI-oplossingen en servicepakketten die jouw e-commerce platform naar een hoger niveau tillen. Klik op een product voor meer informatie of voeg het direct toe aan je wagen.</p>
+
+        <hr>
+
+        <h2>Populaire Pakketten</h2>
+
+        <div class="product-grid" id="product-grid">
+
+          <!-- Product 1: AI Chatbot Starter -->
+          <div class="product-card" data-product-id="chatbot-starter" data-category="ai-agent" data-price="499" data-billing="mnd">
+            <div class="product-img">
+              <span class="product-badge">Populair</span>
+              <svg viewBox="0 0 48 48" style="width:48px;height:48px;">
+                <rect x="4" y="4" width="40" height="40" rx="6" fill="#1a1a3e"/>
+                <rect x="10" y="12" width="28" height="18" rx="3" fill="#2a2a5e" stroke="#4488ff" stroke-width="1"/>
+                <circle cx="18" cy="20" r="2" fill="#4488ff"/>
+                <circle cx="30" cy="20" r="2" fill="#4488ff"/>
+                <path d="M18 25 Q24 29 30 25" fill="none" stroke="#4488ff" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="20" y="32" width="8" height="4" rx="1" fill="#4488ff"/>
+                <text x="24" y="44" text-anchor="middle" fill="#4488ff" font-size="5" font-weight="bold">AI CHAT</text>
+              </svg>
+            </div>
+            <div class="product-tags">
+              <span class="product-tag">AI</span>
+              <span class="product-tag">Chatbot</span>
+              <span class="product-tag">Klantenservice</span>
+            </div>
+            <div class="product-name">AI Chatbot Starter</div>
+            <p class="product-description">Basis AI chatbot voor klantenservice op jouw webshop</p>
+            <div class="product-price">Vanaf &euro;499/mnd</div>
+            <div class="product-actions">
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="openProductModal('chatbot-starter')">Details</button>
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="addToCart('chatbot-starter')">+ Wagen</button>
+            </div>
+          </div>
+
+          <!-- Product 2: Product Adviseur Pro -->
+          <div class="product-card" data-product-id="product-adviseur" data-category="ai-agent" data-price="899" data-billing="mnd">
+            <div class="product-img">
+              <svg viewBox="0 0 48 48" style="width:48px;height:48px;">
+                <rect x="4" y="4" width="40" height="40" rx="6" fill="#000080"/>
+                <rect x="10" y="10" width="12" height="16" rx="1" fill="#c0c0ff" stroke="#fff" stroke-width="0.5"/>
+                <rect x="26" y="10" width="12" height="16" rx="1" fill="#c0c0ff" stroke="#fff" stroke-width="0.5"/>
+                <path d="M24 30 L16 36 L32 36 Z" fill="#ffd700"/>
+                <text x="16" y="20" text-anchor="middle" fill="#000080" font-size="5">A</text>
+                <text x="32" y="20" text-anchor="middle" fill="#000080" font-size="5">B</text>
+                <text x="24" y="44" text-anchor="middle" fill="#ffd700" font-size="5" font-weight="bold">ADVISER</text>
+              </svg>
+            </div>
+            <div class="product-tags">
+              <span class="product-tag">AI</span>
+              <span class="product-tag">Productadvies</span>
+              <span class="product-tag">Personalisatie</span>
+            </div>
+            <div class="product-name">Product Adviseur Pro</div>
+            <p class="product-description">AI-gedreven productaanbevelingen op basis van klantgedrag</p>
+            <div class="product-price">Vanaf &euro;899/mnd</div>
+            <div class="product-actions">
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="openProductModal('product-adviseur')">Details</button>
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="addToCart('product-adviseur')">+ Wagen</button>
+            </div>
+          </div>
+
+          <!-- Product 3: UX Optimizer -->
+          <div class="product-card" data-product-id="ux-optimizer" data-category="ux-ui" data-price="699" data-billing="mnd">
+            <div class="product-img">
+              <svg viewBox="0 0 48 48" style="width:48px;height:48px;">
+                <rect x="4" y="4" width="40" height="40" rx="6" fill="#008080"/>
+                <rect x="10" y="10" width="28" height="20" rx="2" fill="#fff" stroke="#005050" stroke-width="1"/>
+                <rect x="12" y="12" width="8" height="6" fill="#00cccc"/>
+                <rect x="22" y="12" width="14" height="2" fill="#e0e0e0"/>
+                <rect x="22" y="16" width="10" height="2" fill="#e0e0e0"/>
+                <rect x="12" y="20" width="24" height="2" fill="#e0e0e0"/>
+                <rect x="12" y="24" width="24" height="4" rx="1" fill="#008080"/>
+                <path d="M24 34 L20 40 L28 40 Z" fill="#005050"/>
+                <text x="24" y="44" text-anchor="middle" fill="#fff" font-size="5" font-weight="bold">UX/UI</text>
+              </svg>
+            </div>
+            <div class="product-tags">
+              <span class="product-tag">UX/UI</span>
+              <span class="product-tag">A/B Testing</span>
+              <span class="product-tag">Conversie</span>
+            </div>
+            <div class="product-name">UX Optimizer</div>
+            <p class="product-description">AI A/B testing en personalisatie voor hogere conversie</p>
+            <div class="product-price">Vanaf &euro;699/mnd</div>
+            <div class="product-actions">
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="openProductModal('ux-optimizer')">Details</button>
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="addToCart('ux-optimizer')">+ Wagen</button>
+            </div>
+          </div>
+
+          <!-- Product 4: MNRV Enterprise -->
+          <div class="product-card" data-product-id="enterprise" data-category="webshop" data-price="0" data-billing="custom">
+            <div class="product-img">
+              <span class="product-badge">Premium</span>
+              <svg viewBox="0 0 48 48" style="width:48px;height:48px;">
+                <rect x="4" y="4" width="40" height="40" rx="6" fill="#800080"/>
+                <rect x="10" y="14" width="28" height="22" rx="2" fill="#a000a0" stroke="#ffd700" stroke-width="1"/>
+                <rect x="14" y="18" width="8" height="6" fill="#ffd700" opacity="0.3"/>
+                <rect x="26" y="18" width="8" height="6" fill="#ffd700" opacity="0.3"/>
+                <rect x="14" y="28" width="8" height="6" fill="#ffd700" opacity="0.3"/>
+                <rect x="26" y="28" width="8" height="6" fill="#ffd700" opacity="0.3"/>
+                <text x="24" y="12" text-anchor="middle" fill="#ffd700" font-size="6" font-weight="bold">MNRV</text>
+                <text x="24" y="44" text-anchor="middle" fill="#ffd700" font-size="5" font-weight="bold">ENTERPRISE</text>
+              </svg>
+            </div>
+            <div class="product-tags">
+              <span class="product-tag">Enterprise</span>
+              <span class="product-tag">Full Suite</span>
+              <span class="product-tag">Custom</span>
+            </div>
+            <div class="product-name">MNRV Enterprise</div>
+            <p class="product-description">Complete AI-suite: agents, optimalisatie, integraties</p>
+            <div class="product-price">Op aanvraag</div>
+            <div class="product-actions">
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="openProductModal('enterprise')">Details</button>
+              <a href="contact.html" class="win-btn" style="text-decoration:none;font-size:10px;min-width:auto;padding:2px 8px;">Offerte</a>
+            </div>
+          </div>
+
+          <!-- Product 5: AI Workshop -->
+          <div class="product-card" data-product-id="workshop" data-category="strategie" data-price="1250" data-billing="eenmalig">
+            <div class="product-img">
+              <svg viewBox="0 0 48 48" style="width:48px;height:48px;">
+                <rect x="4" y="4" width="40" height="40" rx="6" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+                <rect x="10" y="14" width="28" height="18" rx="2" fill="#fff" stroke="#808080" stroke-width="0.5"/>
+                <rect x="14" y="10" width="4" height="6" fill="#000080"/>
+                <rect x="30" y="10" width="4" height="6" fill="#000080"/>
+                <line x1="12" y1="18" x2="36" y2="18" stroke="#808080" stroke-width="0.5"/>
+                <line x1="12" y1="22" x2="36" y2="22" stroke="#808080" stroke-width="0.5"/>
+                <line x1="12" y1="26" x2="36" y2="26" stroke="#808080" stroke-width="0.5"/>
+                <circle cx="20" cy="24" r="3" fill="#000080" opacity="0.2"/>
+                <text x="20" y="25.5" text-anchor="middle" fill="#000080" font-size="4" font-weight="bold">AI</text>
+                <text x="24" y="40" text-anchor="middle" fill="#000" font-size="5" font-weight="bold">WORKSHOP</text>
+                <text x="24" y="46" text-anchor="middle" fill="#000080" font-size="4">halve dag</text>
+              </svg>
+            </div>
+            <div class="product-tags">
+              <span class="product-tag">Workshop</span>
+              <span class="product-tag">Training</span>
+              <span class="product-tag">Team</span>
+            </div>
+            <div class="product-name">AI Workshop</div>
+            <p class="product-description">Halve dag AI-workshop voor jouw team</p>
+            <div class="product-price">&euro;1.250 eenmalig</div>
+            <div class="product-actions">
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="openProductModal('workshop')">Details</button>
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="addToCart('workshop')">+ Wagen</button>
+            </div>
+          </div>
+
+          <!-- Product 6: AI Strategie Traject -->
+          <div class="product-card" data-product-id="strategie-traject" data-category="strategie" data-price="2500" data-billing="eenmalig">
+            <div class="product-img">
+              <svg viewBox="0 0 48 48" style="width:48px;height:48px;">
+                <rect x="4" y="4" width="40" height="40" rx="6" fill="#00aa00"/>
+                <path d="M12 36 L12 16 L20 28 L28 20 L36 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="16" r="2" fill="#fff"/>
+                <circle cx="20" cy="28" r="2" fill="#fff"/>
+                <circle cx="28" cy="20" r="2" fill="#fff"/>
+                <circle cx="36" cy="24" r="2" fill="#fff"/>
+                <path d="M34 22 L36 24 L34 26" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+                <text x="24" y="44" text-anchor="middle" fill="#fff" font-size="5" font-weight="bold">STRATEGIE</text>
+              </svg>
+            </div>
+            <div class="product-tags">
+              <span class="product-tag">Strategie</span>
+              <span class="product-tag">Roadmap</span>
+              <span class="product-tag">Maatwerk</span>
+            </div>
+            <div class="product-name">AI Strategie Traject</div>
+            <p class="product-description">Complete AI roadmap op maat voor jouw organisatie</p>
+            <div class="product-price">Vanaf &euro;2.500</div>
+            <div class="product-actions">
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="openProductModal('strategie-traject')">Details</button>
+              <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="addToCart('strategie-traject')">+ Wagen</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="no-results" id="no-results" style="display:none;">
+          <svg viewBox="0 0 32 32" style="width:32px;height:32px;">
+            <circle cx="16" cy="16" r="12" fill="#ffcc00" stroke="#000" stroke-width="1.5"/>
+            <text x="16" y="21" text-anchor="middle" font-size="14" fill="#000">?</text>
+          </svg>
+          <p>Geen producten gevonden voor deze zoekopdracht.</p>
+          <button class="win-btn" style="margin-top:8px;font-size:10px;" onclick="resetFilters()">Filters resetten</button>
+        </div>
+
+        <hr>
+
+        <h2>Waarom MNRV?</h2>
+        <table style="font-size:11px;border-collapse:collapse;width:100%;">
+          <tr style="background:#000080;color:#fff;">
+            <th style="padding:4px 8px;text-align:left;">Kenmerk</th>
+            <th style="padding:4px 8px;text-align:left;">Omschrijving</th>
+          </tr>
+          <tr style="background:#f0f0f0;">
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;"><strong>AI-First</strong></td>
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;">AI zit in het DNA van elke oplossing</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;"><strong>E-commerce Expert</strong></td>
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;">Magento, Shopify, WooCommerce, Custom</td>
+          </tr>
+          <tr style="background:#f0f0f0;">
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;"><strong>Resultaatgericht</strong></td>
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;">Meetbare impact op conversie en tevredenheid</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;"><strong>Maatwerk</strong></td>
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;">Oplossingen afgestemd op jouw specifieke situatie</td>
+          </tr>
+          <tr style="background:#f0f0f0;">
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;"><strong>Transparant</strong></td>
+            <td style="padding:4px 8px;border:1px solid #c0c0c0;">Duidelijke communicatie, geen verborgen kosten</td>
+          </tr>
+        </table>
+
+        <hr>
+
+        <div style="text-align:center;padding:16px;background:#f0f0f0;border:2px solid;border-color:#ffffff #808080 #808080 #ffffff;margin:12px 0;">
+          <p style="font-size:12px;"><strong>Klaar om te starten?</strong></p>
+          <p style="font-size:11px;margin:6px 0;">Neem contact op voor een vrijblijvend adviesgesprek.</p>
+          <a href="contact.html" class="win-btn win-btn-default" style="text-decoration:none;margin-top:8px;">Neem contact op</a>
+        </div>
+
+        <hr>
+        <p style="text-align:center;font-size:10px;color:#808080;">
+          &copy; 2026 MNRV - Alle rechten voorbehouden |
+          <a href="index.html">Bureaublad</a> |
+          <a href="diensten.html">Diensten</a> |
+          <a href="over-ons.html">Over ons</a> |
+          <a href="contact.html">Contact</a>
+        </p>
+
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="win-statusbar">
+      <span class="win-statusbar-section" id="shop-status">6 producten | Wagen: 0 items</span>
+      <span class="win-statusbar-section">Internet</span>
+    </div>
+
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div class="product-modal-overlay" id="modal-overlay"></div>
+  <div class="product-modal" id="product-modal">
+    <div class="win-titlebar">
+      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
+        <rect x="2" y="2" width="12" height="12" rx="2" fill="#000080"/>
+        <text x="8" y="11" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">i</text>
+      </svg>
+      <span class="win-titlebar-title" id="modal-title">Product Details</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" onclick="closeProductModal()">X</button>
+      </div>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <!-- Dynamically filled -->
+    </div>
+  </div>
+
+  <!-- Cart Window -->
+  <div class="cart-window" id="cart-window">
+    <div class="win-titlebar">
+      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
+        <path d="M1 1 L3 1 L5 10 L13 10 L15 4 L4 4" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="6" cy="13" r="1.5" fill="#fff"/>
+        <circle cx="12" cy="13" r="1.5" fill="#fff"/>
+      </svg>
+      <span class="win-titlebar-title">Winkelwagen</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" onclick="toggleCart()">X</button>
+      </div>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <!-- Dynamically filled -->
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <div class="cart-total-row">
+        <span>Totaal:</span>
+        <span class="cart-total-price" id="cart-total">&euro;0</span>
+      </div>
+      <div class="cart-footer-buttons">
+        <button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 8px;" onclick="clearCart()">Leegmaken</button>
+        <button class="win-btn win-btn-default" style="font-size:10px;min-width:auto;padding:2px 10px;" id="checkout-btn" onclick="startCheckout()">Afrekenen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Dialog -->
+  <div class="checkout-dialog" id="checkout-dialog">
+    <div class="win-titlebar">
+      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
+        <rect x="2" y="2" width="12" height="12" rx="2" fill="#008000"/>
+        <text x="8" y="11" text-anchor="middle" fill="#fff" font-size="8" font-weight="bold">$</text>
+      </svg>
+      <span class="win-titlebar-title">Bestelling verwerken...</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" onclick="closeCheckout()">X</button>
+      </div>
+    </div>
+    <div class="checkout-body" id="checkout-body">
+      <!-- Dynamically filled -->
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="shop-toast" id="shop-toast">
+    <svg viewBox="0 0 16 16" style="width:14px;height:14px;flex-shrink:0;">
+      <circle cx="8" cy="8" r="7" fill="#008000"/>
+      <path d="M5 8 L7 10 L11 6" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span id="toast-text">Item toegevoegd</span>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <a href="index.html" class="start-btn" style="text-decoration:none;color:inherit;">
+      <span style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:16px;height:16px;transform:skewX(-5deg);">
+        <span style="background:#ff0000;"></span><span style="background:#00aa00;"></span><span style="background:#0000ff;"></span><span style="background:#ffcc00;"></span>
+      </span>
+      <span>Start</span>
+    </a>
+    <div class="taskbar-windows" style="flex:1;">
+      <button class="taskbar-window-btn active">MNRV Webshop</button>
+    </div>
+    <div class="system-tray">
+      <span id="tray-clock" class="tray-clock">00:00</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ============================================
+  // PRODUCT DATA
+  // ============================================
+  var products = {
+    'chatbot-starter': {
+      id: 'chatbot-starter',
+      name: 'AI Chatbot Starter',
+      price: 499,
+      billing: '/mnd',
+      billingLabel: 'per maand',
+      category: 'ai-agent',
+      type: 'Maandelijks abonnement',
+      description: 'Een krachtige AI-chatbot die direct geïntegreerd wordt in jouw webshop. De chatbot beantwoordt klantvragen 24/7, begeleidt bezoekers naar de juiste producten en verlaagt de druk op je klantenservice team.',
+      features: [
+        'Automatische klantenservice 24/7',
+        'Integratie met Magento, Shopify & WooCommerce',
+        'Meertalige ondersteuning (NL/EN/DE/FR)',
+        'Zelflerend systeem op basis van jouw productdata',
+        'Dashboard met klantinzichten en analytics',
+        'Tot 5.000 gesprekken per maand',
+        'E-mail escalatie naar support team'
+      ]
+    },
+    'product-adviseur': {
+      id: 'product-adviseur',
+      name: 'Product Adviseur Pro',
+      price: 899,
+      billing: '/mnd',
+      billingLabel: 'per maand',
+      category: 'ai-agent',
+      type: 'Maandelijks abonnement',
+      description: 'Een AI-adviseur die klantgedrag analyseert en real-time gepersonaliseerde productaanbevelingen doet. Verhoog je gemiddelde orderwaarde en conversieratio met slimme cross-sell en upsell suggesties.',
+      features: [
+        'Real-time productaanbevelingen',
+        'Analyse van browse- en koopgedrag',
+        'Cross-sell en upsell optimalisatie',
+        'Gepersonaliseerde product bundles',
+        'A/B testing van aanbevelingsstrategieën',
+        'Integratie met bestaande productcatalogus',
+        'Gemiddeld +23% orderwaarde verhoging',
+        'Uitgebreid analytics dashboard'
+      ]
+    },
+    'ux-optimizer': {
+      id: 'ux-optimizer',
+      name: 'UX Optimizer',
+      price: 699,
+      billing: '/mnd',
+      billingLabel: 'per maand',
+      category: 'ux-ui',
+      type: 'Maandelijks abonnement',
+      description: 'AI-gedreven UX optimalisatie die automatisch varianten test en de beste layout, content en call-to-actions selecteert. Maximaliseer conversie zonder handmatig A/B tests op te zetten.',
+      features: [
+        'Automatische A/B en multivariate testing',
+        'AI-gestuurde layout optimalisatie',
+        'Heatmap en clickstream analyse',
+        'Personalisatie per bezoekerssegment',
+        'Conversie-funnel analyse en optimalisatie',
+        'Mobile UX optimalisatie',
+        'Maandelijks optimalisatierapport'
+      ]
+    },
+    'enterprise': {
+      id: 'enterprise',
+      name: 'MNRV Enterprise',
+      price: 0,
+      billing: '',
+      billingLabel: 'op aanvraag',
+      category: 'webshop',
+      type: 'Maatwerk pakket',
+      description: 'De complete MNRV AI-suite voor enterprise klanten. Bevat alle individuele producten plus custom integraties, dedicated support en een persoonlijke AI-strategie adviseur. Volledig afgestemd op jouw specifieke situatie.',
+      features: [
+        'Alle MNRV producten inbegrepen',
+        'Dedicated account manager',
+        'Custom AI-model training op jouw data',
+        'On-premise of private cloud deployment',
+        'SLA met 99.9% uptime garantie',
+        'Priority support met 1-uur responstijd',
+        'Kwartaal strategie review sessies',
+        'Custom API integraties',
+        'GDPR en compliance ondersteuning'
+      ]
+    },
+    'workshop': {
+      id: 'workshop',
+      name: 'AI Workshop',
+      price: 1250,
+      billing: '',
+      billingLabel: 'eenmalig',
+      category: 'strategie',
+      type: 'Eenmalige investering',
+      description: 'Een interactieve halve dag workshop voor jouw team. Ontdek hoe AI jouw e-commerce processen kan verbeteren, ga hands-on aan de slag met AI tools en ontwikkel een eerste actieplan.',
+      features: [
+        'Halve dag (4 uur) on-site of remote',
+        'AI landschap overzicht voor e-commerce',
+        'Hands-on sessie met AI tools',
+        'Use-case identificatie voor jouw business',
+        'Quick-win actieplan',
+        'Geschikt voor teams van 5-15 personen',
+        'Inclusief presentatiemateriaal',
+        'Follow-up call na 2 weken'
+      ]
+    },
+    'strategie-traject': {
+      id: 'strategie-traject',
+      name: 'AI Strategie Traject',
+      price: 2500,
+      billing: '',
+      billingLabel: 'eenmalig (vanaf)',
+      category: 'strategie',
+      type: 'Eenmalige investering',
+      description: 'Een volledig AI strategietraject op maat. We analyseren je huidige processen, identificeren AI-kansen en ontwikkelen een concrete roadmap met business cases, tijdlijn en ROI berekeningen.',
+      features: [
+        'Uitgebreide analyse van huidige processen',
+        'AI-readiness assessment',
+        'Identificatie van AI use cases',
+        'Business case per use case met ROI',
+        'Implementatie roadmap (12-18 maanden)',
+        'Technologie stack advies',
+        'Vendor selectie ondersteuning',
+        'Eindpresentatie aan stakeholders',
+        'Optioneel: begeleiding bij implementatie'
+      ]
+    }
+  };
+
+  // ============================================
+  // CART STATE
+  // ============================================
+  var cart = [];
+
+  function loadCart() {
+    try {
+      var saved = sessionStorage.getItem('mnrv-cart');
+      if (saved) cart = JSON.parse(saved);
+    } catch(e) { cart = []; }
+  }
+
+  function saveCart() {
+    try {
+      sessionStorage.setItem('mnrv-cart', JSON.stringify(cart));
+    } catch(e) {}
+  }
+
+  // ============================================
+  // CLOCK
+  // ============================================
+  function updateClock() {
+    var el = document.getElementById('tray-clock');
+    if (!el) return;
+    var now = new Date();
+    el.textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  }
+
+  // ============================================
+  // CATEGORY FILTERING
+  // ============================================
+  var activeFilter = 'all';
+  var activeSearch = '';
+
+  function initFilters() {
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeFilter = btn.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    var searchInput = document.getElementById('shop-search');
+    var searchBtn = document.getElementById('shop-search-btn');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        activeSearch = searchInput.value.toLowerCase().trim();
+        applyFilters();
+      });
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') applyFilters();
+      });
+    }
+    if (searchBtn) {
+      searchBtn.addEventListener('click', function() {
+        activeSearch = (document.getElementById('shop-search').value || '').toLowerCase().trim();
+        applyFilters();
+      });
+    }
+  }
+
+  function applyFilters() {
+    var cards = document.querySelectorAll('.product-card');
+    var visibleCount = 0;
+    cards.forEach(function(card) {
+      var cat = card.getAttribute('data-category');
+      var name = (card.querySelector('.product-name') || {}).textContent || '';
+      var desc = (card.querySelector('.product-description') || {}).textContent || '';
+      var tags = card.querySelectorAll('.product-tag');
+      var tagText = '';
+      tags.forEach(function(t) { tagText += ' ' + t.textContent; });
+      var searchText = (name + ' ' + desc + ' ' + tagText).toLowerCase();
+
+      var catMatch = (activeFilter === 'all' || cat === activeFilter);
+      var searchMatch = (!activeSearch || searchText.indexOf(activeSearch) !== -1);
+
+      if (catMatch && searchMatch) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    var noResults = document.getElementById('no-results');
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? '' : 'none';
+    }
+    updateStatus(visibleCount);
+  }
+
+  window.resetFilters = function() {
+    activeFilter = 'all';
+    activeSearch = '';
+    var searchInput = document.getElementById('shop-search');
+    if (searchInput) searchInput.value = '';
+    document.querySelectorAll('.filter-btn').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-filter') === 'all');
+    });
+    applyFilters();
+  };
+
+  // ============================================
+  // ADD TO CART
+  // ============================================
+  window.addToCart = function(productId) {
+    var product = products[productId];
+    if (!product) return;
+    if (product.price === 0) {
+      window.location.href = 'contact.html';
+      return;
+    }
+
+    var existing = null;
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].id === productId) { existing = cart[i]; break; }
+    }
+
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ id: productId, qty: 1 });
+    }
+
+    saveCart();
+    updateCartBadge();
+    updateStatus();
+    showToast(product.name + ' toegevoegd aan wagen');
+
+    // Flash animation on card
+    var card = document.querySelector('[data-product-id="' + productId + '"]');
+    if (card) {
+      card.classList.remove('just-added');
+      void card.offsetWidth; // trigger reflow
+      card.classList.add('just-added');
+    }
+
+    renderCart();
+  };
+
+  function addToCartFromModal(productId, qty) {
+    var product = products[productId];
+    if (!product || product.price === 0) return;
+
+    var existing = null;
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].id === productId) { existing = cart[i]; break; }
+    }
+
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ id: productId, qty: qty });
+    }
+
+    saveCart();
+    updateCartBadge();
+    updateStatus();
+    closeProductModal();
+    showToast(qty + 'x ' + product.name + ' toegevoegd');
+
+    var card = document.querySelector('[data-product-id="' + productId + '"]');
+    if (card) {
+      card.classList.remove('just-added');
+      void card.offsetWidth;
+      card.classList.add('just-added');
+    }
+
+    renderCart();
+    if (!document.getElementById('cart-window').classList.contains('visible')) {
+      toggleCart();
+    }
+  }
+
+  window.removeFromCart = function(productId) {
+    cart = cart.filter(function(item) { return item.id !== productId; });
+    saveCart();
+    updateCartBadge();
+    updateStatus();
+    renderCart();
+  };
+
+  window.changeCartQty = function(productId, delta) {
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].id === productId) {
+        cart[i].qty += delta;
+        if (cart[i].qty <= 0) {
+          cart.splice(i, 1);
+        }
+        break;
+      }
+    }
+    saveCart();
+    updateCartBadge();
+    updateStatus();
+    renderCart();
+  };
+
+  window.clearCart = function() {
+    cart = [];
+    saveCart();
+    updateCartBadge();
+    updateStatus();
+    renderCart();
+  };
+
+  // ============================================
+  // CART UI
+  // ============================================
+  function updateCartBadge() {
+    var badge = document.getElementById('cart-badge');
+    if (!badge) return;
+    var total = 0;
+    cart.forEach(function(item) { total += item.qty; });
+    badge.textContent = total;
+    badge.classList.toggle('empty', total === 0);
+  }
+
+  function getCartTotal() {
+    var total = 0;
+    cart.forEach(function(item) {
+      var p = products[item.id];
+      if (p) total += p.price * item.qty;
+    });
+    return total;
+  }
+
+  function renderCart() {
+    var body = document.getElementById('cart-body');
+    var totalEl = document.getElementById('cart-total');
+    var checkoutBtn = document.getElementById('checkout-btn');
+    if (!body) return;
+
+    if (cart.length === 0) {
+      body.innerHTML = '<div class="cart-empty">' +
+        '<svg viewBox="0 0 32 32" style="width:32px;height:32px;">' +
+        '<path d="M2 2 L6 2 L10 22 L26 22 L30 8 L8 8" fill="none" stroke="#c0c0c0" stroke-width="2" stroke-linejoin="round"/>' +
+        '<circle cx="12" cy="26" r="2" fill="#c0c0c0"/>' +
+        '<circle cx="24" cy="26" r="2" fill="#c0c0c0"/>' +
+        '</svg>' +
+        '<p>Je winkelwagen is leeg.</p>' +
+        '<p>Voeg producten toe om te beginnen.</p>' +
+        '</div>';
+      if (totalEl) totalEl.textContent = '\u20AC0';
+      if (checkoutBtn) checkoutBtn.disabled = true;
+      return;
+    }
+
+    if (checkoutBtn) checkoutBtn.disabled = false;
+
+    var html = '';
+    cart.forEach(function(item) {
+      var p = products[item.id];
+      if (!p) return;
+      var lineTotal = p.price * item.qty;
+      html += '<div class="cart-item">' +
+        '<div class="cart-item-name">' + p.name + '</div>' +
+        '<div class="cart-item-qty">' +
+        '<button class="qty-btn" onclick="changeCartQty(\'' + item.id + '\', -1)">&minus;</button>' +
+        '<span class="qty-val">' + item.qty + '</span>' +
+        '<button class="qty-btn" onclick="changeCartQty(\'' + item.id + '\', 1)">+</button>' +
+        '</div>' +
+        '<div class="cart-item-price">\u20AC' + lineTotal.toLocaleString('nl-NL') + p.billing + '</div>' +
+        '<button class="cart-item-remove" onclick="removeFromCart(\'' + item.id + '\')" title="Verwijderen">X</button>' +
+        '</div>';
+    });
+
+    body.innerHTML = html;
+    if (totalEl) totalEl.textContent = '\u20AC' + getCartTotal().toLocaleString('nl-NL');
+  }
+
+  window.toggleCart = function() {
+    var cartWin = document.getElementById('cart-window');
+    if (!cartWin) return;
+    cartWin.classList.toggle('visible');
+    renderCart();
+  };
+
+  // ============================================
+  // PRODUCT MODAL
+  // ============================================
+  var modalQty = 1;
+
+  window.openProductModal = function(productId) {
+    var product = products[productId];
+    if (!product) return;
+    modalQty = 1;
+
+    document.getElementById('modal-title').textContent = product.name + ' - Productinformatie';
+
+    var priceText = product.price > 0
+      ? '\u20AC' + product.price.toLocaleString('nl-NL') + ' ' + product.billingLabel
+      : 'Op aanvraag';
+
+    var featuresHtml = '';
+    product.features.forEach(function(f) {
+      featuresHtml += '<li>' + f + '</li>';
+    });
+
+    var addBtnHtml = product.price > 0
+      ? '<div class="modal-quantity">' +
+        '<label>Aantal:</label>' +
+        '<button class="qty-btn" onclick="modalChangeQty(-1)">&minus;</button>' +
+        '<input type="text" class="qty-display" id="modal-qty-display" value="1" readonly>' +
+        '<button class="qty-btn" onclick="modalChangeQty(1)">+</button>' +
+        '</div>' +
+        '<div class="modal-buttons">' +
+        '<button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 12px;" onclick="closeProductModal()">Sluiten</button>' +
+        '<button class="win-btn win-btn-default" style="font-size:10px;min-width:auto;padding:2px 12px;" onclick="modalAddToCart(\'' + productId + '\')">Toevoegen aan wagen</button>' +
+        '</div>'
+      : '<div class="modal-buttons">' +
+        '<button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 12px;" onclick="closeProductModal()">Sluiten</button>' +
+        '<a href="contact.html" class="win-btn win-btn-default" style="text-decoration:none;font-size:10px;min-width:auto;padding:2px 12px;">Offerte aanvragen</a>' +
+        '</div>';
+
+    document.getElementById('modal-body').innerHTML =
+      '<div class="modal-header">' +
+      '<div class="modal-icon">' + getProductIcon(productId) + '</div>' +
+      '<div class="modal-info">' +
+      '<h2>' + product.name + '</h2>' +
+      '<div class="modal-type">' + product.type + '</div>' +
+      '<div class="modal-price">' + priceText + '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="modal-description">' + product.description + '</div>' +
+      '<div class="modal-features">' +
+      '<h3>Kenmerken:</h3>' +
+      '<ul>' + featuresHtml + '</ul>' +
+      '</div>' +
+      addBtnHtml;
+
+    document.getElementById('product-modal').classList.add('visible');
+    document.getElementById('modal-overlay').classList.add('visible');
+  };
+
+  window.closeProductModal = function() {
+    document.getElementById('product-modal').classList.remove('visible');
+    document.getElementById('modal-overlay').classList.remove('visible');
+  };
+
+  window.modalChangeQty = function(delta) {
+    modalQty = Math.max(1, modalQty + delta);
+    var display = document.getElementById('modal-qty-display');
+    if (display) display.value = modalQty;
+  };
+
+  window.modalAddToCart = function(productId) {
+    addToCartFromModal(productId, modalQty);
+  };
+
+  function getProductIcon(productId) {
+    var card = document.querySelector('[data-product-id="' + productId + '"] .product-img svg');
+    return card ? card.outerHTML : '';
+  }
+
+  // Close modal on overlay click
+  document.getElementById('modal-overlay').addEventListener('click', function() {
+    closeProductModal();
+  });
+
+  // ============================================
+  // CHECKOUT
+  // ============================================
+  window.startCheckout = function() {
+    if (cart.length === 0) return;
+
+    var cartWin = document.getElementById('cart-window');
+    if (cartWin) cartWin.classList.remove('visible');
+
+    var dialog = document.getElementById('checkout-dialog');
+    var body = document.getElementById('checkout-body');
+
+    var itemsHtml = '';
+    cart.forEach(function(item) {
+      var p = products[item.id];
+      if (!p) return;
+      itemsHtml += '<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;">' +
+        '<span>' + item.qty + 'x ' + p.name + '</span>' +
+        '<span>\u20AC' + (p.price * item.qty).toLocaleString('nl-NL') + '</span>' +
+        '</div>';
+    });
+
+    body.innerHTML =
+      '<div style="margin-bottom:12px;">' +
+      '<p style="font-size:11px;font-weight:bold;margin-bottom:6px;">Bestelling overzicht:</p>' +
+      '<div style="background:#fff;border:2px solid;border-color:var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);padding:6px;">' +
+      itemsHtml +
+      '<div style="border-top:1px solid #808080;margin-top:4px;padding-top:4px;display:flex;justify-content:space-between;font-size:12px;font-weight:bold;">' +
+      '<span>Totaal:</span>' +
+      '<span style="color:#008000;">\u20AC' + getCartTotal().toLocaleString('nl-NL') + '</span>' +
+      '</div></div></div>' +
+      '<p style="font-size:11px;">Bestelling wordt verwerkt...</p>' +
+      '<div class="checkout-progress"><div class="checkout-progress-bar" id="checkout-progress-bar"></div></div>' +
+      '<div class="checkout-status" id="checkout-status">Verbinding maken met server...</div>';
+
+    dialog.classList.add('visible');
+
+    // Simulate checkout progress
+    var steps = [
+      { pct: 20, text: 'Verbinding maken met MNRV server...', delay: 800 },
+      { pct: 40, text: 'Producten valideren...', delay: 1200 },
+      { pct: 60, text: 'Beschikbaarheid controleren...', delay: 1000 },
+      { pct: 80, text: 'Bestelling aanmaken...', delay: 1500 },
+      { pct: 100, text: 'Bestelling bevestigd!', delay: 1000 }
+    ];
+
+    var bar = document.getElementById('checkout-progress-bar');
+    var status = document.getElementById('checkout-status');
+    var currentStep = 0;
+
+    function nextStep() {
+      if (currentStep >= steps.length) {
+        showCheckoutSuccess();
+        return;
+      }
+      var step = steps[currentStep];
+      bar.style.width = step.pct + '%';
+      status.textContent = step.text;
+      currentStep++;
+      setTimeout(nextStep, step.delay);
+    }
+
+    setTimeout(nextStep, 500);
+  };
+
+  function showCheckoutSuccess() {
+    var body = document.getElementById('checkout-body');
+    var titleEl = document.getElementById('checkout-dialog').querySelector('.win-titlebar-title');
+    if (titleEl) titleEl.textContent = 'Bestelling bevestigd!';
+
+    body.innerHTML =
+      '<div class="checkout-success">' +
+      '<svg viewBox="0 0 48 48" style="width:48px;height:48px;">' +
+      '<circle cx="24" cy="24" r="20" fill="#008000"/>' +
+      '<path d="M14 24 L21 31 L34 18" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '</svg>' +
+      '<p style="font-size:13px;font-weight:bold;color:#008000;margin-bottom:8px;">Bestelling succesvol ontvangen!</p>' +
+      '<p>Bedankt voor je interesse in MNRV. Ons team neemt binnen 24 uur contact met je op om de details te bespreken.</p>' +
+      '<p style="margin-top:8px;font-size:10px;color:#808080;">Referentienummer: MNRV-' + Date.now().toString(36).toUpperCase() + '</p>' +
+      '<div style="margin-top:12px;display:flex;gap:6px;justify-content:center;">' +
+      '<button class="win-btn" style="font-size:10px;min-width:auto;padding:2px 12px;" onclick="closeCheckout()">Verder winkelen</button>' +
+      '<a href="contact.html" class="win-btn win-btn-default" style="text-decoration:none;font-size:10px;min-width:auto;padding:2px 12px;">Contact opnemen</a>' +
+      '</div>' +
+      '</div>';
+
+    // Clear cart after successful checkout
+    cart = [];
+    saveCart();
+    updateCartBadge();
+    updateStatus();
+    renderCart();
+  }
+
+  window.closeCheckout = function() {
+    var dialog = document.getElementById('checkout-dialog');
+    if (dialog) dialog.classList.remove('visible');
+    var titleEl = dialog.querySelector('.win-titlebar-title');
+    if (titleEl) titleEl.textContent = 'Bestelling verwerken...';
+  };
+
+  // ============================================
+  // TOAST NOTIFICATION
+  // ============================================
+  var toastTimer = null;
+  function showToast(message) {
+    var toast = document.getElementById('shop-toast');
+    var text = document.getElementById('toast-text');
+    if (!toast || !text) return;
+    text.textContent = message;
+    toast.classList.add('visible');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() {
+      toast.classList.remove('visible');
+    }, 2500);
+  }
+
+  // ============================================
+  // STATUS BAR
+  // ============================================
+  function updateStatus(visibleCount) {
+    var el = document.getElementById('shop-status');
+    if (!el) return;
+    var total = 0;
+    cart.forEach(function(item) { total += item.qty; });
+    var productCount = typeof visibleCount === 'number' ? visibleCount : document.querySelectorAll('.product-card:not([style*="display: none"])').length;
+    el.textContent = productCount + ' producten | Wagen: ' + total + ' item' + (total !== 1 ? 's' : '');
+  }
+
+  // ============================================
+  // INIT
+  // ============================================
+  updateClock();
+  setInterval(updateClock, 10000);
+  loadCart();
+  initFilters();
+  updateCartBadge();
+  updateStatus();
+  renderCart();
+
+  // Cart toggle button
+  document.getElementById('cart-toolbar-btn').addEventListener('click', function() {
+    toggleCart();
+  });
+
+})();
+</script>
+
+</body>
+</html>

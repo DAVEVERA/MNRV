@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Over MNRV - Kladblok</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page-desktop">
+
+  <!-- Notepad Window (full page) -->
+  <div class="page-window">
+
+    <!-- Title Bar -->
+    <div class="win-titlebar">
+      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
+        <rect x="2" y="1" width="12" height="14" fill="#ffffff" stroke="#808080" stroke-width="0.5"/>
+        <line x1="4" y1="4" x2="12" y2="4" stroke="#000080" stroke-width="0.5"/>
+        <line x1="4" y1="7" x2="12" y2="7" stroke="#000" stroke-width="0.3"/>
+        <line x1="4" y1="10" x2="10" y2="10" stroke="#000" stroke-width="0.3"/>
+      </svg>
+      <span class="win-titlebar-title">over-mnrv.txt - Kladblok</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <a href="index.html" class="win-titlebar-btn close-btn" title="Terug naar bureaublad" style="text-decoration:none;color:inherit;">X</a>
+      </div>
+    </div>
+
+    <!-- Menu Bar -->
+    <div class="win-menubar">
+      <span class="win-menubar-item">Bestand</span>
+      <span class="win-menubar-item">Bewerken</span>
+      <span class="win-menubar-item">Zoeken</span>
+      <span class="win-menubar-item">Help</span>
+    </div>
+
+    <!-- Notepad Body -->
+    <div class="win-body" style="flex:1;">
+      <div class="notepad-textarea" style="padding:8px;font-family:var(--font-mono);font-size:12px;line-height:1.6;overflow:auto;white-space:pre-wrap;">
+===============================================
+        M . N . R . V
+     DE TOEKOMST VAN AI & E-COMMERCE
+===============================================
+
+
+OVER ONS
+--------
+
+MNRV is opgericht met een helder doel: de kracht
+van artificial intelligence toegankelijk maken voor
+elke webshop en elk online platform. Wij geloven
+dat AI geen luxe is, maar een noodzaak voor
+bedrijven die voorop willen lopen.
+
+
+ONZE MISSIE
+-----------
+
+Wij combineren AI-tools en intelligente agents met
+webshops om UX en UI naar een hoger niveau te
+tillen. Van slimme productaanbevelingen tot
+geautomatiseerde klantenservice -- wij maken
+technologie werkbaar, schaalbaar en effectief.
+
+
+WAT ONS UNIEK MAAKT
+--------------------
+
+> AI-First Benadering
+  Elke oplossing die wij bouwen heeft AI in het
+  DNA. Geen bijzaak, maar de kern van ons werk.
+
+> E-commerce Expertise
+  Jarenlange ervaring met Magento, Shopify,
+  WooCommerce en custom platformen.
+
+> Resultaatgericht
+  Wij meten succes in conversies, klanttevredenheid
+  en procesoptimalisatie -- niet in fancy features.
+
+> Transparant & Persoonlijk
+  Geen black box oplossingen. Wij leggen uit wat
+  AI doet, waarom het werkt, en hoe je het zelf
+  kunt beheren.
+
+
+ONZE DIENSTEN
+--------------
+
+[1] AI Agents voor E-commerce
+    Chatbots, productadviseurs, checkout support
+
+[2] Webshop Ontwikkeling
+    Magento, Shopify, WooCommerce, Custom
+
+[3] UX/UI Optimalisatie met AI
+    A/B testing, personalisatie, conversie
+
+[4] AI Strategie & Workshops
+    Roadmaps, training, implementatie
+
+[5] Integraties & Koppelingen
+    CRM, ERP, PIM, marketing automation
+
+[6] Maatwerk AI Oplossingen
+    Custom modellen, recommendation engines
+
+
+CONTACT
+-------
+
+E-mail:   info@mnrv.ai
+Web:      www.mnrv.ai
+LinkedIn: /company/mnrv
+GitHub:   /mnrv-ai
+
+
+-----------------------------------------------
+(c) 2026 MNRV - Alle rechten voorbehouden
+"De bedrijven die nu investeren in AI, bepalen
+ de standaard van morgen."
+-----------------------------------------------
+</div>
+    </div>
+
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <a href="index.html" class="start-btn" style="text-decoration:none;color:inherit;">
+      <span style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:16px;height:16px;transform:skewX(-5deg);">
+        <span style="background:#ff0000;"></span><span style="background:#00aa00;"></span><span style="background:#0000ff;"></span><span style="background:#ffcc00;"></span>
+      </span>
+      <span>Start</span>
+    </a>
+    <div class="taskbar-windows" style="flex:1;">
+      <button class="taskbar-window-btn active">over-mnrv.txt - Kladblok</button>
+    </div>
+    <div class="system-tray">
+      <span id="tray-clock" class="tray-clock">00:00</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function updateClock() {
+    var el = document.getElementById('tray-clock');
+    if (!el) return;
+    var now = new Date();
+    el.textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+</script>
+
+</body>
+</html>
