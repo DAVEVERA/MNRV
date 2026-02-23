@@ -649,6 +649,160 @@
       transform: scaleX(1.3);
     }
 
+    /* ============================================
+       APPS SHOWCASE WINDOW STYLES
+       ============================================ */
+    #apps-window {
+      display: none;
+      flex-direction: column;
+    }
+    #apps-window:not(.hidden) {
+      display: flex;
+    }
+    #apps-window .win-titlebar,
+    #apps-window .apps-toolbar,
+    #apps-window .win-addressbar,
+    #apps-window .win-statusbar {
+      flex-shrink: 0;
+    }
+
+    /* App navigation toolbar */
+    .apps-toolbar {
+      display: flex;
+      align-items: center;
+      background: var(--win-chrome);
+      border-bottom: 1px solid var(--win-btn-shadow);
+      padding: 3px 4px;
+      gap: 2px;
+    }
+    .apps-nav-btn {
+      width: 28px;
+      height: 26px;
+      background: var(--win-btn-face);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow);
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-main);
+    }
+    .apps-nav-btn:active {
+      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
+      box-shadow: inset 1px 1px 0 var(--win-btn-shadow);
+    }
+    .apps-nav-btn:hover {
+      background: #d4d0c8;
+    }
+
+    /* App tab buttons (scrollable horizontally) */
+    .apps-tabs {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0 2px;
+    }
+    .apps-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .apps-tab {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      height: 26px;
+      background: var(--win-btn-face);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow);
+      cursor: pointer;
+      font-family: var(--font-main);
+      font-size: 11px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.1s;
+    }
+    .apps-tab:hover {
+      background: #d4d0c8;
+    }
+    .apps-tab.active {
+      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
+      box-shadow: inset 1px 1px 0 var(--win-btn-shadow);
+      background: repeating-conic-gradient(var(--win-btn-face) 0% 25%, var(--win-btn-highlight) 0% 50%) 0 0 / 2px 2px;
+      font-weight: bold;
+    }
+    .apps-tab-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+    .apps-tab-label {
+      font-size: 11px;
+    }
+
+    /* Iframe container */
+    .apps-iframe-container {
+      flex: 1;
+      position: relative;
+      background: #808080;
+      overflow: hidden;
+      margin: 2px;
+      border: 2px solid;
+      border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+      box-shadow: inset 1px 1px 0 var(--win-btn-dark);
+    }
+    .apps-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+      display: block;
+    }
+
+    /* Loading overlay */
+    .apps-loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--win-chrome);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      z-index: 5;
+      font-family: var(--font-main);
+      font-size: 11px;
+    }
+    .apps-loading.show {
+      display: flex;
+    }
+    .apps-loading-icon {
+      font-size: 28px;
+      animation: appsLoadingSpin 1.2s linear infinite;
+    }
+    @keyframes appsLoadingSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .apps-progress-bar {
+      animation: appsProgressAnim 2.5s ease-in-out infinite;
+    }
+    @keyframes appsProgressAnim {
+      0% { width: 0%; }
+      50% { width: 80%; }
+      100% { width: 100%; }
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       #setup-wizard { width: 95vw !important; height: auto !important; }
@@ -658,6 +812,9 @@
       #word-window { width: 95vw !important; height: 80vh !important; }
       .wordart-gallery { grid-template-columns: repeat(3, 1fr); }
       #wordart-dialog { width: 95vw !important; }
+      #apps-window { width: 98vw !important; height: 85vh !important; }
+      .apps-tab-label { display: none; }
+      .apps-tab { padding: 3px 6px; }
     }
   </style>
 
@@ -833,6 +990,12 @@
     <div class="desktop-icon" tabindex="0" data-window="about-window">
       <img class="icon-img" src="assets/icons/w98_MSIE1_32x32_4.png" alt="Internet Explorer" draggable="false">
       <span class="icon-label">Internet Explorer</span>
+    </div>
+
+    <!-- Portfolio / Apps Showcase -->
+    <div class="desktop-icon" tabindex="0" data-window="apps-window">
+      <img class="icon-img" src="assets/icons/w98_ConnectedWorld_32x32_4.png" alt="Portfolio" draggable="false">
+      <span class="icon-label">Portfolio</span>
     </div>
 
     <!-- Prullenbak -->
@@ -1094,6 +1257,75 @@
     </div>
   </div>
 
+  <!-- ============================================
+       APPS SHOWCASE WINDOW (Portfolio)
+       ============================================ -->
+  <div id="apps-window" class="win-window hidden" style="width:820px;height:540px;left:50%;top:50%;transform:translate(-50%,-50%);">
+    <div class="win-titlebar">
+      <img class="win-titlebar-icon" src="assets/icons/w98_World_16x16_4.png" alt="Apps" draggable="false">
+      <span class="win-titlebar-title">MNRV Portfolio - App Showcase</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <!-- App navigation toolbar -->
+    <div class="apps-toolbar">
+      <button class="apps-nav-btn" id="apps-prev" title="Vorige app">&#9664;</button>
+      <div class="apps-tabs" id="apps-tabs">
+        <button class="apps-tab active" data-index="0">
+          <span class="apps-tab-icon">&#127912;</span>
+          <span class="apps-tab-label">D-Cor Vision AI</span>
+        </button>
+        <button class="apps-tab" data-index="1">
+          <span class="apps-tab-icon">&#127925;</span>
+          <span class="apps-tab-label">Windofy</span>
+        </button>
+        <button class="apps-tab" data-index="2">
+          <span class="apps-tab-icon">&#127864;</span>
+          <span class="apps-tab-label">Cocktails for Hire</span>
+        </button>
+        <button class="apps-tab" data-index="3">
+          <span class="apps-tab-icon">&#128200;</span>
+          <span class="apps-tab-label">CRM Systeem</span>
+        </button>
+        <button class="apps-tab" data-index="4">
+          <span class="apps-tab-icon">&#128197;</span>
+          <span class="apps-tab-label">PowerPlanner</span>
+        </button>
+        <button class="apps-tab" data-index="5">
+          <span class="apps-tab-icon">&#128513;</span>
+          <span class="apps-tab-label">SwapSmoel</span>
+        </button>
+      </div>
+      <button class="apps-nav-btn" id="apps-next" title="Volgende app">&#9654;</button>
+    </div>
+    <!-- App address bar -->
+    <div class="win-addressbar">
+      <label>Adres:</label>
+      <input type="text" id="apps-address" value="https://d-cor-vision-ai-782596882622.us-west1.run.app" readonly class="win-input">
+      <button class="win-btn" style="min-width:auto;padding:2px 8px;height:20px;" onclick="window.open(document.getElementById('apps-address').value,'_blank')">&#10138;</button>
+    </div>
+    <!-- Iframe container -->
+    <div class="apps-iframe-container">
+      <div class="apps-loading" id="apps-loading">
+        <div class="apps-loading-icon">&#9201;</div>
+        <span>Laden...</span>
+        <div class="win-progress" style="width:200px;margin-top:8px;">
+          <div class="win-progress-bar apps-progress-bar"></div>
+        </div>
+      </div>
+      <iframe id="apps-iframe" class="apps-iframe" src="about:blank" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"></iframe>
+    </div>
+    <!-- Status bar -->
+    <div class="win-statusbar">
+      <span class="win-statusbar-section" id="apps-status">Gereed</span>
+      <span class="win-statusbar-section" id="apps-counter">1 / 6</span>
+      <span class="win-statusbar-section">Internet</span>
+    </div>
+  </div>
+
 </div><!-- /.desktop -->
 
 <!-- Clippy context menu (ClippyJS creates its own agent DOM) -->
@@ -1197,6 +1429,10 @@
       <img src="assets/icons/w98_World_16x16_4.png" alt="" draggable="false">
       <span>Webshop</span>
     </a>
+    <div class="start-menu-item" onclick="if(window.MNRV){window.MNRV.showWindow('apps-window');window.MNRV.closeStartMenu();}">
+      <img src="assets/icons/Globe_16x16_4.png" alt="" draggable="false">
+      <span>Portfolio</span>
+    </div>
     <div class="start-menu-separator"></div>
     <a class="start-menu-item" href="over-ons.html">
       <img src="assets/icons/w98_Notepad_16x16_4.png" alt="" draggable="false">
@@ -1710,6 +1946,118 @@
       }
     }, 2000);
   }
+})();
+</script>
+
+<script>
+/* ============================================
+   APPS SHOWCASE (Portfolio iFrame Slider)
+   ============================================ */
+(function() {
+  'use strict';
+
+  var apps = [
+    { name: 'D-Cor Vision AI', url: 'https://d-cor-vision-ai-782596882622.us-west1.run.app', icon: '\uD83C\uDFA8' },
+    { name: 'Windofy', url: 'https://windofy-196757936410.us-west1.run.app', icon: '\uD83C\uDFB5' },
+    { name: 'Cocktails for Hire', url: 'https://cocktailsforhire.nl', icon: '\uD83C\uDF78' },
+    { name: 'CRM Systeem', url: 'https://salesintel-ai-272235684728.us-west1.run.app', icon: '\uD83D\uDCC8' },
+    { name: 'PowerPlanner', url: 'https://davevera.nl/powerplanner', icon: '\uD83D\uDCC5' },
+    { name: 'SwapSmoel', url: 'https://swapsmoel.nl', icon: '\uD83D\uDE01' }
+  ];
+
+  var currentApp = 0;
+  var iframe = document.getElementById('apps-iframe');
+  var addressBar = document.getElementById('apps-address');
+  var statusEl = document.getElementById('apps-status');
+  var counterEl = document.getElementById('apps-counter');
+  var loadingEl = document.getElementById('apps-loading');
+  var tabsContainer = document.getElementById('apps-tabs');
+  var prevBtn = document.getElementById('apps-prev');
+  var nextBtn = document.getElementById('apps-next');
+  var appsWindow = document.getElementById('apps-window');
+
+  if (!iframe || !appsWindow) return;
+
+  function loadApp(index) {
+    if (index < 0 || index >= apps.length) return;
+    currentApp = index;
+    var app = apps[currentApp];
+
+    // Update address bar
+    addressBar.value = app.url;
+
+    // Update status bar
+    statusEl.textContent = 'Laden: ' + app.name + '...';
+    counterEl.textContent = (currentApp + 1) + ' / ' + apps.length;
+
+    // Show loading overlay
+    loadingEl.classList.add('show');
+
+    // Update tabs
+    var tabs = tabsContainer.querySelectorAll('.apps-tab');
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+    if (tabs[currentApp]) {
+      tabs[currentApp].classList.add('active');
+      // Scroll the active tab into view
+      tabs[currentApp].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    // Load iframe
+    iframe.src = app.url;
+  }
+
+  // Iframe load event
+  iframe.addEventListener('load', function() {
+    loadingEl.classList.remove('show');
+    statusEl.textContent = 'Gereed - ' + apps[currentApp].name;
+  });
+
+  // Tab clicks
+  tabsContainer.addEventListener('click', function(e) {
+    var tab = e.target.closest('.apps-tab');
+    if (!tab) return;
+    var index = parseInt(tab.getAttribute('data-index'), 10);
+    if (!isNaN(index)) loadApp(index);
+  });
+
+  // Prev/Next buttons
+  prevBtn.addEventListener('click', function() {
+    var newIndex = currentApp - 1;
+    if (newIndex < 0) newIndex = apps.length - 1;
+    loadApp(newIndex);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    var newIndex = currentApp + 1;
+    if (newIndex >= apps.length) newIndex = 0;
+    loadApp(newIndex);
+  });
+
+  // Load the first app when the window is opened
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.attributeName === 'class' && !appsWindow.classList.contains('hidden')) {
+        // Only load if iframe is still about:blank
+        if (!iframe.src || iframe.src === 'about:blank' || iframe.getAttribute('src') === 'about:blank') {
+          loadApp(0);
+        }
+      }
+    });
+  });
+  observer.observe(appsWindow, { attributes: true });
+
+  // Keyboard navigation when apps window is focused
+  appsWindow.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+      prevBtn.click();
+      e.preventDefault();
+    } else if (e.key === 'ArrowRight') {
+      nextBtn.click();
+      e.preventDefault();
+    }
+  });
 })();
 </script>
 

@@ -1,0 +1,3 @@
+[submodule "assets/windows-95-ui-kit"]
+	path = assets/windows-95-ui-kit
+	url = https://github.com/themesberg/windows-95-ui-kit.git
