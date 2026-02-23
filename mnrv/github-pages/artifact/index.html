@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>MNRV - AI & E-commerce Solutions | Slimme Webshops & Chatbots</title>
+  <meta name="title" content="MNRV - AI & E-commerce Solutions | Slimme Webshops & Chatbots">
+  <meta name="description" content="MNRV combineert AI tools en agents met webshops voor betere UX en UI. AI chatbots, webshop ontwikkeling, UX optimalisatie en automation. Ontdek de toekomst van e-commerce.">
+  <meta name="keywords" content="AI webshop, e-commerce AI, AI chatbot Nederland, webshop ontwikkeling, UX optimalisatie, AI agents, conversie optimalisatie, intelligente webshop, AI tools, machine learning e-commerce">
+  <meta name="author" content="MNRV">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mnrv.nl/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mnrv.nl/">
+  <meta property="og:title" content="MNRV - AI & E-commerce Solutions | Slimme Webshops & Chatbots">
+  <meta property="og:description" content="MNRV combineert AI tools en agents met webshops voor betere UX en UI. Ontdek de toekomst van e-commerce met onze AI-gedreven oplossingen.">
+  <meta property="og:image" content="https://mnrv.nl/mnrv-logo2.jpg">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:site_name" content="MNRV">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://mnrv.nl/">
+  <meta property="twitter:title" content="MNRV - AI & E-commerce Solutions">
+  <meta property="twitter:description" content="MNRV combineert AI tools en agents met webshops voor betere UX en UI. Ontdek de toekomst van e-commerce.">
+  <meta property="twitter:image" content="https://mnrv.nl/mnrv-logo2.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="mnrv logo.png">
+  <link rel="apple-touch-icon" href="mnrv logo.png">
+
+  <!-- Geo Tags -->
+  <meta name="geo.region" content="NL">
+  <meta name="geo.placename" content="Nederland">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pi0/clippyjs/assets/clippy.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <style>
+    /* Win98 flag logo for Start button - inline SVG as data URI */
+    .start-flag {
+      width: 16px;
+      height: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1px;
+      transform: skewX(-5deg);
+    }
+    .start-flag span:nth-child(1) { background: #ff0000; }
+    .start-flag span:nth-child(2) { background: #00aa00; }
+    .start-flag span:nth-child(3) { background: #0000ff; }
+    .start-flag span:nth-child(4) { background: #ffcc00; }
+
+    /* ============================================
+       BOOT SEQUENCE STYLES
+       ============================================ */
+    #boot-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 99999;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #boot-overlay.done {
+      display: none;
+    }
+    #boot-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    /* Fade out */
+    #boot-overlay.fade-out {
+      animation: bootFadeOut 0.8s ease forwards;
+    }
+    @keyframes bootFadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* Hide desktop until boot finishes */
+    .desktop.booting,
+    .taskbar.booting,
+    .start-menu.booting {
+      visibility: hidden;
+    }
+
+    /* Skip button */
+    #boot-skip {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-family: "Fixedsys", "Courier New", monospace;
+      font-size: 10px;
+      color: #666;
+      cursor: pointer;
+      z-index: 100000;
+      border: none;
+      background: transparent;
+      padding: 4px 8px;
+    }
+    #boot-skip:hover {
+      color: #aaa;
+    }
+
+    /* ============================================
+       SETUP WIZARD STYLES
+       ============================================ */
+    .wizard-body {
+      display: flex;
+      height: calc(100% - 54px); /* minus titlebar + button bar */
+      overflow: hidden;
+    }
+    .wizard-sidebar {
+      width: 160px;
+      min-width: 160px;
+      background: linear-gradient(180deg, #000080 0%, #1084d0 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 10px;
+      gap: 24px;
+    }
+    .wizard-sidebar-logo {
+      width: 100px;
+      max-width: 100%;
+      border: 2px solid rgba(255,255,255,0.3);
+      image-rendering: auto;
+    }
+    .wizard-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    .wizard-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+      transition: color 0.2s;
+    }
+    .wizard-step.active {
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .wizard-step.completed {
+      color: rgba(255,255,255,0.8);
+    }
+    .wizard-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.4);
+      background: transparent;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .wizard-step.active .wizard-dot {
+      background: #ffffff;
+      border-color: #ffffff;
+    }
+    .wizard-step.completed .wizard-dot {
+      background: rgba(255,255,255,0.6);
+      border-color: rgba(255,255,255,0.8);
+    }
+    .wizard-content {
+      flex: 1;
+      padding: 20px 24px;
+      overflow-y: auto;
+      background: #c0c0c0;
+      position: relative;
+    }
+    .wizard-page {
+      display: none;
+      animation: wizardFadeIn 0.3s ease;
+    }
+    .wizard-page.active {
+      display: block;
+    }
+    @keyframes wizardFadeIn {
+      from { opacity: 0; transform: translateX(10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .wizard-page h2 {
+      font-size: 14px;
+      color: #000080;
+      margin: 0 0 12px 0;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+    }
+    .wizard-page p {
+      font-size: 11px;
+      line-height: 1.6;
+      margin: 0 0 10px 0;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+    }
+    .wizard-version-box {
+      background: #ffffff;
+      border: 1px solid #808080;
+      padding: 10px 14px;
+      margin: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+    }
+    .wizard-hint {
+      color: #808080;
+      font-style: italic;
+    }
+    .wizard-services {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wizard-service-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid #808080;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+    }
+    .wizard-service-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .wizard-service-card strong {
+      white-space: nowrap;
+      margin-right: 6px;
+    }
+    .wizard-service-card span {
+      color: #444;
+    }
+    .wizard-actions {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+    .wizard-actions .win-btn {
+      text-decoration: none;
+      font-size: 11px;
+    }
+    .wizard-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      padding: 8px 12px;
+      border-top: 1px solid #808080;
+      background: #c0c0c0;
+    }
+    .wizard-buttons .win-btn {
+      min-width: 75px;
+    }
+
+    /* ============================================
+       CLIPPY OVERRIDES (ClippyJS library)
+       ============================================ */
+    /* Keep Clippy pinned bottom-right, prevent dragging */
+    .clippy {
+      position: fixed !important;
+      bottom: 40px !important;
+      right: 20px !important;
+      left: auto !important;
+      top: auto !important;
+      z-index: 9000 !important;
+    }
+    .clippy-balloon {
+      z-index: 9001 !important;
+    }
+
+    /* Win95-style right-click context menu */
+    #clippy-ctx-menu {
+      position: fixed;
+      background: #c0c0c0;
+      border: 2px outset #dfdfdf;
+      padding: 2px;
+      display: none;
+      min-width: 170px;
+      z-index: 9002;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    #clippy-ctx-menu.show { display: block; }
+    .clippy-ctx-item {
+      padding: 4px 20px;
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .clippy-ctx-item:hover {
+      background: #000080;
+      color: #fff;
+    }
+    .clippy-ctx-sep {
+      height: 1px;
+      background: #808080;
+      margin: 2px 4px;
+    }
+
+    /* Tray icon */
+    #clippy-tray {
+      display: none;
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+    }
+    #clippy-tray.show { display: inline-block; }
+    #clippy-tray:hover { opacity: 0.7; }
+
+    /* ============================================
+       WORD 95 STYLES
+       ============================================ */
+    .word-menubar {
+      display: flex;
+      background: #c0c0c0;
+      border-bottom: 1px solid #808080;
+      padding: 1px 0;
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+    }
+    .word-menu-item {
+      padding: 2px 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .word-menu-item:hover {
+      background: #000080;
+      color: #fff;
+    }
+    .word-toolbar {
+      display: flex;
+      align-items: center;
+      background: #c0c0c0;
+      border-bottom: 1px solid #808080;
+      padding: 2px 4px;
+      gap: 2px;
+      flex-wrap: wrap;
+    }
+    .word-tb-btn {
+      width: 24px;
+      height: 22px;
+      background: #c0c0c0;
+      border: 1px solid transparent;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-family: "Times New Roman", serif;
+    }
+    .word-tb-btn:hover {
+      border: 1px outset #dfdfdf;
+    }
+    .word-tb-btn:active {
+      border: 1px inset #808080;
+    }
+    .word-tb-sep {
+      width: 1px;
+      height: 18px;
+      background: #808080;
+      margin: 0 3px;
+    }
+    .word-font-select, .word-size-select {
+      height: 20px;
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+      border: 1px inset #808080;
+      background: #fff;
+      padding: 0 2px;
+    }
+    .word-font-select { width: 130px; }
+    .word-size-select { width: 45px; }
+    .word-tb-wordart {
+      width: auto;
+      padding: 0 4px;
+      gap: 2px;
+    }
+    .word-tb-wordart-icon {
+      font-size: 14px;
+      font-weight: bold;
+      font-family: "Impact", "Arial Black", sans-serif;
+      background: linear-gradient(180deg, #ff0000, #ffcc00, #00cc00, #0066ff, #9900cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .word-doc-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #808080;
+      overflow: hidden;
+    }
+    .word-ruler {
+      display: flex;
+      background: #fff;
+      border-bottom: 1px solid #808080;
+      height: 16px;
+      padding: 0 4px;
+      font-size: 8px;
+      color: #808080;
+      font-family: "Tahoma", sans-serif;
+      align-items: center;
+    }
+    .word-ruler span {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid #c0c0c0;
+    }
+    .word-ruler span:last-child { border-right: none; }
+    .word-doc {
+      flex: 1;
+      background: #ffffff;
+      margin: 8px;
+      padding: 20px 24px;
+      font-family: "Times New Roman", serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      overflow-y: auto;
+      box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+      outline: none;
+      min-height: 150px;
+      cursor: text;
+    }
+    .word-doc:focus {
+      outline: none;
+    }
+    /* Make Word window use flex column for proper doc area sizing */
+    #word-window .win-titlebar ~ .word-menubar ~ .word-toolbar ~ .word-doc-area {
+      flex: 1;
+    }
+    #word-window {
+      display: none;
+      flex-direction: column;
+    }
+    #word-window:not(.hidden) {
+      display: flex;
+    }
+    #word-window .win-titlebar,
+    #word-window .word-menubar,
+    #word-window .word-toolbar,
+    #word-window .win-statusbar {
+      flex-shrink: 0;
+    }
+
+    /* ============================================
+       WORDART GALLERY STYLES
+       ============================================ */
+    .wordart-dialog-body {
+      padding: 12px 16px;
+      background: #c0c0c0;
+    }
+    .wordart-dialog-label {
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+      margin: 0 0 8px 0;
+    }
+    .wordart-gallery {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      background: #fff;
+      border: 2px inset #808080;
+      padding: 6px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .wordart-style-btn {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: 2px solid transparent;
+      background: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      overflow: hidden;
+      transition: border-color 0.1s;
+    }
+    .wordart-style-btn:hover {
+      border-color: #000080;
+    }
+    .wordart-style-btn.selected {
+      border-color: #000080;
+      background: #e0e0ff;
+    }
+    .wordart-text-input {
+      margin: 10px 0;
+      font-size: 11px;
+      font-family: "Tahoma", "MS Sans Serif", sans-serif;
+    }
+    .wordart-text-input label {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .wordart-preview {
+      background: #fff;
+      border: 2px inset #808080;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    /* --- WordArt Effect Classes --- */
+    .wordart-rendered {
+      display: inline-block;
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1.2;
+      padding: 4px 8px;
+      text-align: center;
+      user-select: all;
+      cursor: default;
+      margin: 8px auto;
+    }
+    .wordart-1 {
+      font-family: "Impact", "Arial Black", sans-serif;
+      background: linear-gradient(180deg, #000080 0%, #0066ff 50%, #000080 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px #000066;
+      text-shadow: 2px 2px 0px rgba(0,0,102,0.3);
+    }
+    .wordart-2 {
+      font-family: "Times New Roman", serif;
+      color: #cc0000;
+      text-shadow: 2px 2px 0 #800000, 3px 3px 0 rgba(0,0,0,0.2);
+      letter-spacing: 2px;
+    }
+    .wordart-3 {
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(180deg, #ff6600, #ffcc00);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px #cc5500;
+      transform: perspective(200px) rotateY(-15deg);
+    }
+    .wordart-4 {
+      font-family: "Comic Sans MS", "Comic Sans", cursive;
+      color: #009900;
+      text-shadow: 1px 1px 0 #006600, -1px -1px 0 #00cc00, 0 3px 6px rgba(0,0,0,0.2);
+      letter-spacing: 3px;
+    }
+    .wordart-5 {
+      font-family: "Impact", "Arial Black", sans-serif;
+      background: linear-gradient(180deg, #ffcc00, #ff6600, #cc0000);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: scaleY(1.5);
+    }
+    .wordart-6 {
+      font-family: "Times New Roman", serif;
+      color: transparent;
+      -webkit-text-stroke: 2px #000080;
+      font-style: italic;
+      letter-spacing: 4px;
+    }
+    .wordart-7 {
+      font-family: "Arial Black", "Impact", sans-serif;
+      background: linear-gradient(135deg, #9900cc, #ff00ff, #ff6699);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 3px 3px 6px rgba(153,0,204,0.3);
+      transform: rotate(-3deg);
+    }
+    .wordart-8 {
+      font-family: "Courier New", monospace;
+      color: #c0c0c0;
+      text-shadow: 1px 1px 0 #808080, 2px 2px 0 #606060, 3px 3px 0 #404040, 4px 4px 0 #202020;
+      -webkit-text-stroke: 1px #404040;
+    }
+    .wordart-9 {
+      font-family: "Impact", "Arial Black", sans-serif;
+      background: linear-gradient(180deg, #ffffff 0%, #4488ff 40%, #000080 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px #003399;
+      transform: perspective(300px) rotateX(15deg);
+    }
+    .wordart-10 {
+      font-family: "Times New Roman", serif;
+      color: #ffd700;
+      text-shadow: 1px 1px 0 #b8860b, 2px 2px 0 #8b6914, 0 0 10px rgba(255,215,0,0.5);
+      -webkit-text-stroke: 0.5px #b8860b;
+      font-weight: 900;
+    }
+    .wordart-11 {
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #8b00ff);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+    }
+    .wordart-12 {
+      font-family: "Impact", "Arial Black", sans-serif;
+      color: #003366;
+      text-shadow: 2px 0 0 #006699, -2px 0 0 #006699, 0 2px 0 #006699, 0 -2px 0 #006699, 4px 4px 0 rgba(0,0,0,0.15);
+      letter-spacing: 6px;
+    }
+    .wordart-13 {
+      font-family: "Comic Sans MS", "Comic Sans", cursive;
+      background: linear-gradient(180deg, #ff69b4, #ff1493, #c71585);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: rotate(3deg) skewX(-5deg);
+      letter-spacing: 2px;
+    }
+    .wordart-14 {
+      font-family: "Courier New", monospace;
+      color: #00ff00;
+      background: #000;
+      padding: 4px 12px;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+      letter-spacing: 3px;
+    }
+    .wordart-15 {
+      font-family: "Impact", "Arial Black", sans-serif;
+      background: linear-gradient(180deg, #c0c0c0, #ffffff, #c0c0c0);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 2px #404040;
+      transform: scaleX(1.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #setup-wizard { width: 95vw !important; height: auto !important; }
+      .wizard-sidebar { width: 100px; min-width: 100px; padding: 12px 6px; }
+      .wizard-sidebar-logo { width: 70px; }
+      .wizard-step-label { display: none; }
+      #word-window { width: 95vw !important; height: 80vh !important; }
+      .wordart-gallery { grid-template-columns: repeat(3, 1fr); }
+      #wordart-dialog { width: 95vw !important; }
+    }
+  </style>
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MNRV",
+    "description": "AI en E-commerce bureau gespecialiseerd in webshop ontwikkeling, AI chatbots en UX optimalisatie",
+    "url": "https://mnrv.nl",
+    "logo": "https://mnrv.nl/mnrv-logo2.jpg",
+    "foundingDate": "2024",
+    "email": "info@mnrv.ai",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "NL",
+      "addressRegion": "Nederland"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/mnrv",
+      "https://www.facebook.com/mnrv",
+      "https://www.instagram.com/mnrv",
+      "https://github.com/mnrv"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "email": "info@mnrv.ai",
+      "availableLanguage": ["nl", "en"]
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Nederland"
+    },
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "E-commerce",
+      "Web Development",
+      "UX Design",
+      "Chatbots",
+      "Machine Learning",
+      "Webshop Development"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MNRV",
+    "url": "https://mnrv.nl",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://mnrv.nl/webshop.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://mnrv.nl/#services",
+    "serviceType": "AI & E-commerce Solutions",
+    "provider": {
+      "@type": "Organization",
+      "name": "MNRV",
+      "url": "https://mnrv.nl"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Nederland"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "MNRV Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Chatbots",
+            "description": "24/7 Slimme conversatie-agents die klanten helpen"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Webshop Ontwikkeling",
+            "description": "AI-gedreven webshops met gepersonaliseerde ervaringen"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "UX Optimalisatie",
+            "description": "Data-gedreven verbeteringen voor maximale conversie"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+</head>
+<body>
+
+<!-- ============================================
+     BOOT SEQUENCE OVERLAY
+     ============================================ -->
+<div id="boot-overlay">
+
+  <video id="boot-video" autoplay muted playsinline src="assets/Windows%2095%20Boot%20sequence.mp4"></video>
+
+  <button id="boot-skip" onclick="skipBoot()">Druk op ESC om over te slaan</button>
+</div>
+
+<div class="desktop booting">
+
+  <!-- ============================================
+       DESKTOP ICONS
+       ============================================ -->
+  <div class="desktop-icons">
+
+    <!-- MNRV.exe -->
+    <div class="desktop-icon" tabindex="0" data-window="setup-wizard">
+      <img class="icon-img" src="assets/icons/w98_ComputerExplorerCool_32x32_4.png" alt="MNRV.exe" draggable="false">
+      <span class="icon-label">MNRV.exe</span>
+    </div>
+
+    <!-- Mijn Diensten -->
+    <a class="desktop-icon" tabindex="0" data-target="diensten.html">
+      <img class="icon-img" src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="Mijn Diensten" draggable="false">
+      <span class="icon-label">Mijn Diensten</span>
+    </a>
+
+    <!-- Over MNRV -->
+    <a class="desktop-icon" tabindex="0" data-target="over-ons.html">
+      <img class="icon-img" src="assets/icons/w98_Notepad_32x32_4.png" alt="Over MNRV" draggable="false">
+      <span class="icon-label">Over MNRV</span>
+    </a>
+
+    <!-- Contact -->
+    <a class="desktop-icon" tabindex="0" data-target="contact.html">
+      <img class="icon-img" src="assets/icons/w98_EnvelopeClosed_32x32_4.png" alt="Contact" draggable="false">
+      <span class="icon-label">Contact</span>
+    </a>
+
+    <!-- Webshop -->
+    <a class="desktop-icon" tabindex="0" data-target="webshop.html">
+      <img class="icon-img" src="assets/icons/w98_ComputerExplorer_32x32_4.png" alt="Webshop" draggable="false">
+      <span class="icon-label">Webshop</span>
+    </a>
+
+    <!-- Minesweeper -->
+    <a class="desktop-icon" tabindex="0" data-target="minesweeper.html">
+      <img class="icon-img" src="assets/icons/w98_Minesweeper_32x32_4.png" alt="Mijnenveger" draggable="false">
+      <span class="icon-label">Mijnenveger</span>
+    </a>
+
+    <!-- Word 95 -->
+    <div class="desktop-icon" tabindex="0" data-window="word-window">
+      <img class="icon-img" src="assets/icons/w98_WriteWordpad_32x32_4.png" alt="Word 95" draggable="false">
+      <span class="icon-label">Word 95</span>
+    </div>
+
+    <!-- Internet Explorer (about window) -->
+    <div class="desktop-icon" tabindex="0" data-window="about-window">
+      <img class="icon-img" src="assets/icons/w98_MSIE1_32x32_4.png" alt="Internet Explorer" draggable="false">
+      <span class="icon-label">Internet Explorer</span>
+    </div>
+
+    <!-- Prullenbak -->
+    <div class="desktop-icon" tabindex="0" data-window="recycle-dialog">
+      <img class="icon-img" src="assets/icons/w98_RecycleBinEmpty_32x32_4.png" alt="Prullenbak" draggable="false">
+      <span class="icon-label">Prullenbak</span>
+    </div>
+
+  </div>
+
+  <!-- ============================================
+       SETUP WIZARD
+       ============================================ -->
+  <div id="setup-wizard" class="win-window hidden" style="width:550px;height:420px;left:50%;top:50%;transform:translate(-50%,-50%);">
+    <div class="win-titlebar">
+      <img class="win-titlebar-icon" src="assets/icons/w98_AppWizard_16x16_4.png" alt="Setup" draggable="false">
+      <span class="win-titlebar-title">MNRV Setup Wizard</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <div class="wizard-body">
+      <!-- Blue sidebar -->
+      <div class="wizard-sidebar">
+        <img src="mnrv-logo2.jpg" alt="MNRV" class="wizard-sidebar-logo">
+        <div class="wizard-steps">
+          <div class="wizard-step active" data-step="0"><span class="wizard-dot"></span><span class="wizard-step-label">Welkom</span></div>
+          <div class="wizard-step" data-step="1"><span class="wizard-dot"></span><span class="wizard-step-label">Over Ons</span></div>
+          <div class="wizard-step" data-step="2"><span class="wizard-dot"></span><span class="wizard-step-label">Diensten</span></div>
+          <div class="wizard-step" data-step="3"><span class="wizard-dot"></span><span class="wizard-step-label">Aan de Slag</span></div>
+        </div>
+      </div>
+      <!-- Content area -->
+      <div class="wizard-content">
+        <!-- Page 1: Welkom -->
+        <div class="wizard-page active" data-page="0">
+          <h2>Welkom bij MNRV Setup</h2>
+          <p>Deze wizard helpt je om kennis te maken met <strong>MNRV</strong> &mdash; de toekomst van AI &amp; E-commerce.</p>
+          <p>Wij combineren AI tools en agents met webshops om UX en UI naar een hoger niveau te tillen.</p>
+          <div class="wizard-version-box">
+            <span>MNRV AI Platform</span>
+            <span>Versie 95.2026</span>
+          </div>
+          <p class="wizard-hint">Klik op <strong>Volgende</strong> om door te gaan.</p>
+        </div>
+        <!-- Page 2: Over Ons -->
+        <div class="wizard-page" data-page="1">
+          <h2>Over MNRV</h2>
+          <p>MNRV is een innovatief web- en app-bureau dat gespecialiseerd is in het combineren van <strong>AI-tools en agents</strong> met webshops.</p>
+          <p>Wij helpen bedrijven hun online platform naar het volgende niveau te tillen door slimme technologie te integreren in elke stap van de klantreis.</p>
+          <p>Van slimme chatbots tot gepersonaliseerde product&shy;aanbevelingen: wij maken jouw webshop <strong>futureproof</strong>.</p>
+          <p>Onze missie: de combinatie van mens en machine is de sleutel tot uitzonderlijke klantbeleving.</p>
+        </div>
+        <!-- Page 3: Diensten -->
+        <div class="wizard-page" data-page="2">
+          <h2>Onze Diensten</h2>
+          <div class="wizard-services">
+            <div class="wizard-service-card">
+              <svg viewBox="0 0 32 32" class="wizard-service-icon"><rect x="2" y="4" width="28" height="22" rx="2" fill="#000080"/><rect x="4" y="6" width="24" height="16" fill="#000"/><text x="16" y="17" text-anchor="middle" fill="#00ff00" font-size="7" font-family="monospace">&gt;_AI</text><rect x="10" y="26" width="12" height="2" fill="#808080"/></svg>
+              <strong>AI Chatbots</strong>
+              <span>Slimme conversatie-agents die klanten 24/7 helpen</span>
+            </div>
+            <div class="wizard-service-card">
+              <svg viewBox="0 0 32 32" class="wizard-service-icon"><rect x="2" y="2" width="28" height="28" rx="2" fill="#fff" stroke="#0078d7"/><circle cx="10" cy="26" r="2" fill="#808080"/><circle cx="22" cy="26" r="2" fill="#808080"/><path d="M6 12 L8 20 L24 20 L26 12 Z" fill="#00aa00" opacity="0.3" stroke="#00aa00" stroke-width="0.5"/></svg>
+              <strong>Webshop Ontwikkeling</strong>
+              <span>AI-gedreven webshops met gepersonaliseerde ervaringen</span>
+            </div>
+            <div class="wizard-service-card">
+              <svg viewBox="0 0 32 32" class="wizard-service-icon"><circle cx="16" cy="12" r="8" fill="none" stroke="#000080" stroke-width="2"/><path d="M16 20 L16 28" stroke="#000080" stroke-width="2"/><path d="M10 28 L22 28" stroke="#000080" stroke-width="2"/><circle cx="16" cy="12" r="3" fill="#000080"/><path d="M12 8 Q16 4 20 8" fill="none" stroke="#ff0000" stroke-width="1.5"/></svg>
+              <strong>UX Optimalisatie</strong>
+              <span>Data-gedreven verbeteringen voor maximale conversie</span>
+            </div>
+          </div>
+        </div>
+        <!-- Page 4: Aan de Slag -->
+        <div class="wizard-page" data-page="3">
+          <h2>Setup Voltooid!</h2>
+          <p>Je bent klaar om MNRV te verkennen. Gebruik de iconen op het bureaublad of kies een snelkoppeling hieronder:</p>
+          <div class="wizard-actions">
+            <a href="diensten.html" class="win-btn">Bekijk Diensten</a>
+            <a href="webshop.html" class="win-btn">Naar Webshop</a>
+            <a href="contact.html" class="win-btn">Neem Contact Op</a>
+          </div>
+          <p class="wizard-hint">Of klik <strong>Voltooien</strong> om de wizard te sluiten en het bureaublad te gebruiken.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Button bar -->
+    <div class="wizard-buttons">
+      <button class="win-btn" id="wizard-prev" disabled>&#9664; Vorige</button>
+      <button class="win-btn win-btn-default" id="wizard-next">Volgende &#9654;</button>
+      <button class="win-btn" id="wizard-cancel">Annuleren</button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       ABOUT MNRV WINDOW (IE-style)
+       ============================================ -->
+  <div id="about-window" class="win-window hidden" style="width:500px;height:400px;left:15%;top:10%;">
+    <div class="win-titlebar">
+      <img class="win-titlebar-icon" src="assets/icons/w98_MSIE1_16x16_4.png" alt="IE" draggable="false">
+      <span class="win-titlebar-title">Over MNRV - Internet Explorer</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <div class="win-addressbar">
+      <label>Adres:</label>
+      <input type="text" value="https://www.mnrv.ai/over-ons" readonly class="win-input">
+    </div>
+    <div class="win-body" style="padding:0;">
+      <div class="ie-page-content" style="padding:16px;">
+        <div style="text-align:center;margin-bottom:12px;">
+          <img src="mnrv logo.png" alt="MNRV" style="width:150px;max-width:100%;">
+        </div>
+        <h1>MNRV &mdash; De Toekomst van AI</h1>
+        <hr>
+        <h2>Wie zijn wij?</h2>
+        <p>MNRV is een innovatief web- en app-bureau dat gespecialiseerd is in het combineren van AI-tools en agents met webshops. Wij helpen bedrijven hun online platform naar het volgende niveau te tillen door slimme technologie te integreren in elke stap van de klantreis.</p>
+
+        <h2>Wat doen wij?</h2>
+        <p>Van AI-gedreven productaanbevelingen tot intelligente chatbots, van gepersonaliseerde UX tot geautomatiseerde workflows &mdash; wij bouwen de webshops van morgen, vandaag.</p>
+
+        <h2>Onze missie</h2>
+        <p>Wij geloven dat de combinatie van mens en machine de sleutel is tot uitzonderlijke klantbeleving. Door AI naadloos te integreren in e-commerce platforms, creeren wij digitale ervaringen die converteren, verrassen en binden.</p>
+
+        <hr>
+        <p style="text-align:center;font-size:10px;color:#808080;">&copy; 2026 MNRV - Alle rechten voorbehouden</p>
+      </div>
+    </div>
+    <div class="win-statusbar">
+      <span class="win-statusbar-section">Gereed</span>
+      <span class="win-statusbar-section">Internet</span>
+    </div>
+  </div>
+
+  <!-- ============================================
+       RECYCLE BIN DIALOG
+       ============================================ -->
+  <div id="recycle-dialog" class="win-window win-dialog hidden" style="width:320px;left:50%;top:50%;transform:translate(-50%,-50%);">
+    <div class="win-titlebar">
+      <span class="win-titlebar-title">Prullenbak</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <div class="dialog-content">
+      <svg class="dialog-icon" viewBox="0 0 32 32">
+        <circle cx="16" cy="16" r="14" fill="#0078d7" stroke="#005a9e" stroke-width="2"/>
+        <text x="16" y="22" text-anchor="middle" font-size="18" font-weight="bold" fill="#fff">i</text>
+      </svg>
+      <div class="dialog-text">
+        <p>De prullenbak is leeg.</p>
+        <p style="margin-top:6px;">Bij MNRV gooien we niets weg &mdash; alles wordt gerecycled tot AI-kracht!</p>
+      </div>
+    </div>
+    <div class="dialog-buttons">
+      <button class="win-btn win-btn-default" onclick="MNRV.hideWindow('recycle-dialog')">OK</button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       WORD 95 WINDOW
+       ============================================ -->
+  <div id="word-window" class="win-window hidden" style="width:620px;height:460px;left:10%;top:8%;">
+    <div class="win-titlebar">
+      <img class="win-titlebar-icon" src="assets/icons/w98_WriteWordpad_16x16_4.png" alt="Word" draggable="false">
+      <span class="win-titlebar-title">Microsoft Word - Document1</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <!-- Menu bar -->
+    <div class="word-menubar">
+      <span class="word-menu-item">Bestand</span>
+      <span class="word-menu-item">Bewerken</span>
+      <span class="word-menu-item">Beeld</span>
+      <span class="word-menu-item word-menu-insert" id="word-insert-menu">Invoegen</span>
+      <span class="word-menu-item">Opmaak</span>
+      <span class="word-menu-item">Extra</span>
+      <span class="word-menu-item">Help</span>
+    </div>
+    <!-- Toolbar -->
+    <div class="word-toolbar">
+      <button class="word-tb-btn" title="Nieuw" onclick="document.getElementById('word-doc').innerHTML=''">&#128196;</button>
+      <span class="word-tb-sep"></span>
+      <button class="word-tb-btn" title="Vet" onclick="document.execCommand('bold')"><b>B</b></button>
+      <button class="word-tb-btn" title="Cursief" onclick="document.execCommand('italic')"><i>I</i></button>
+      <button class="word-tb-btn" title="Onderstreept" onclick="document.execCommand('underline')"><u>U</u></button>
+      <span class="word-tb-sep"></span>
+      <button class="word-tb-btn" title="Links" onclick="document.execCommand('justifyLeft')">&#9776;</button>
+      <button class="word-tb-btn" title="Midden" onclick="document.execCommand('justifyCenter')">&#9776;</button>
+      <button class="word-tb-btn" title="Rechts" onclick="document.execCommand('justifyRight')">&#9776;</button>
+      <span class="word-tb-sep"></span>
+      <select class="word-font-select" onchange="document.execCommand('fontName',false,this.value)">
+        <option>Times New Roman</option>
+        <option>Arial</option>
+        <option>Comic Sans MS</option>
+        <option>Courier New</option>
+        <option>Impact</option>
+        <option>Tahoma</option>
+      </select>
+      <select class="word-size-select" onchange="document.execCommand('fontSize',false,this.value)">
+        <option value="2">10</option>
+        <option value="3" selected>12</option>
+        <option value="4">14</option>
+        <option value="5">18</option>
+        <option value="6">24</option>
+        <option value="7">36</option>
+      </select>
+      <span class="word-tb-sep"></span>
+      <button class="word-tb-btn word-tb-wordart" id="word-wordart-btn" title="WordArt invoegen">
+        <span class="word-tb-wordart-icon">A</span>
+      </button>
+    </div>
+    <!-- Document area -->
+    <div class="word-doc-area">
+      <div class="word-ruler">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+      </div>
+      <div id="word-doc" class="word-doc" contenteditable="true">
+        <p>Welkom bij Word 95! Typ hier je document of voeg WordArt in via de knop hierboven.</p>
+      </div>
+    </div>
+    <div class="win-statusbar">
+      <span class="win-statusbar-section">Pagina 1</span>
+      <span class="win-statusbar-section">Sec 1</span>
+      <span class="win-statusbar-section">1/1</span>
+      <span class="win-statusbar-section">Nederlands</span>
+    </div>
+  </div>
+
+  <!-- ============================================
+       WORDART GALLERY DIALOG
+       ============================================ -->
+  <div id="wordart-dialog" class="win-window win-dialog hidden" style="width:480px;left:50%;top:50%;transform:translate(-50%,-50%);">
+    <div class="win-titlebar">
+      <span class="win-titlebar-title">WordArt Galerie</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <div class="wordart-dialog-body">
+      <p class="wordart-dialog-label">Selecteer een WordArt-stijl:</p>
+      <div class="wordart-gallery" id="wordart-gallery"></div>
+      <div class="wordart-text-input">
+        <label>Je tekst hier:</label>
+        <input type="text" id="wordart-text" class="win-input" value="MNRV" style="width:100%;">
+      </div>
+      <div class="wordart-preview" id="wordart-preview"></div>
+      <div class="dialog-buttons" style="padding:8px 0 0;">
+        <button class="win-btn win-btn-default" id="wordart-ok">OK</button>
+        <button class="win-btn" id="wordart-cancel">Annuleren</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.desktop -->
+
+<!-- Clippy context menu (ClippyJS creates its own agent DOM) -->
+<div id="clippy-ctx-menu">
+  <div class="clippy-ctx-item" data-action="animate">Kunstje doen</div>
+  <div class="clippy-ctx-item" data-action="about">Over MNRV vertellen</div>
+  <div class="clippy-ctx-item" data-action="services">Diensten bekijken</div>
+  <div class="clippy-ctx-item" data-action="contact">Contact opnemen</div>
+  <div class="clippy-ctx-sep"></div>
+  <div class="clippy-ctx-item" data-action="hide">Clippy verbergen</div>
+</div>
+
+<!-- ============================================
+     TASKBAR
+     ============================================ -->
+<div class="taskbar booting">
+
+  <!-- Start Button -->
+  <button id="start-btn" class="start-btn">
+    <span class="start-flag"><span></span><span></span><span></span><span></span></span>
+    <span>Start</span>
+  </button>
+
+  <!-- Quick Launch (social icons) -->
+  <div class="quick-launch">
+    <!-- LinkedIn -->
+    <a href="#" title="LinkedIn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" fill="#0077b5">
+        <rect x="1" y="1" width="14" height="14" rx="2" fill="#0077b5"/>
+        <text x="4" y="12" fill="#fff" font-size="10" font-weight="bold" font-family="sans-serif">in</text>
+      </svg>
+    </a>
+    <!-- Facebook -->
+    <a href="#" title="Facebook" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" fill="#1877f2">
+        <rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2"/>
+        <text x="8" y="13" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold" font-family="sans-serif">f</text>
+      </svg>
+    </a>
+    <!-- Instagram -->
+    <a href="#" title="Instagram" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16">
+        <defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs>
+        <rect x="1" y="1" width="14" height="14" rx="4" fill="url(#ig)"/>
+        <circle cx="8" cy="8" r="3.5" fill="none" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="12" cy="4" r="1" fill="#fff"/>
+      </svg>
+    </a>
+    <!-- GitHub -->
+    <a href="#" title="GitHub" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" fill="#333">
+        <circle cx="8" cy="8" r="7" fill="#333"/>
+        <path d="M8 2C4.7 2 2 4.7 2 8c0 2.6 1.7 4.9 4 5.6.3.1.4-.1.4-.3v-1c-1.6.4-2-.8-2-.8-.3-.7-.7-.9-.7-.9-.5-.4 0-.4 0-.4.6 0 .9.6.9.6.5.9 1.4.6 1.7.5 0-.4.2-.6.4-.8-1.3-.1-2.6-.6-2.6-2.8 0-.6.2-1.1.6-1.5 0-.2-.3-.7 0-1.4 0 0 .5-.2 1.6.6a5.5 5.5 0 013 0c1.1-.7 1.6-.6 1.6-.6.3.7.1 1.2 0 1.4.4.4.6.9.6 1.5 0 2.2-1.3 2.7-2.6 2.8.2.2.4.5.4 1v1.5c0 .2.1.4.4.3 2.3-.7 4-3 4-5.6C14 4.7 11.3 2 8 2z" fill="#fff"/>
+      </svg>
+    </a>
+    <!-- WhatsApp -->
+    <a href="#" title="WhatsApp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" fill="#25d366">
+        <circle cx="8" cy="8" r="7" fill="#25d366"/>
+        <path d="M11.5 9.5c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.5.1-.1.2-.5.7-.6.8-.1.1-.2.1-.4 0-.2-.1-.9-.3-1.7-1-.6-.6-1-1.2-1.2-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3 0-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.1 1.5 2.4 3.7 3.3.5.2.9.3 1.2.4.5.2 1 .1 1.3.1.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1-.1-.1-.2-.1-.4-.2z" fill="#fff"/>
+      </svg>
+    </a>
+    <!-- Mail -->
+    <a href="mailto:info@mnrv.ai" title="E-mail">
+      <svg viewBox="0 0 16 16">
+        <rect x="1" y="3" width="14" height="10" rx="1" fill="#c0c000" stroke="#808000" stroke-width="0.5"/>
+        <polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.5"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Taskbar Window Buttons -->
+  <div id="taskbar-windows" class="taskbar-windows"></div>
+
+  <!-- System Tray -->
+  <div class="system-tray">
+    <svg id="clippy-tray" viewBox="0 0 16 16" title="Clippy weergeven">
+      <path d="M8 1C6.3 1 5 2.3 5 4v1C3.9 5 3 5.9 3 7v5c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2V4c0-1.7-1.3-3-3-3zm0 1.5c.8 0 1.5.7 1.5 1.5v1h-3V4c0-.8.7-1.5 1.5-1.5z" fill="#808080"/>
+    </svg>
+    <svg viewBox="0 0 16 16" style="width:16px;height:16px;">
+      <polygon points="3,4 13,4 8,12" fill="#000"/>
+    </svg>
+    <span id="tray-clock" class="tray-clock">00:00</span>
+  </div>
+
+</div>
+
+<!-- ============================================
+     START MENU
+     ============================================ -->
+<div id="start-menu" class="start-menu booting">
+  <div class="start-menu-sidebar">
+    <span>MNRV<em style="font-weight:normal;font-style:italic;font-size:9px;"> 98</em></span>
+  </div>
+  <div class="start-menu-items">
+    <a class="start-menu-item" href="diensten.html">
+      <img src="assets/icons/w98_DirectoryClosed_16x16_4.png" alt="" draggable="false">
+      <span>Diensten</span>
+    </a>
+    <a class="start-menu-item" href="webshop.html">
+      <img src="assets/icons/w98_World_16x16_4.png" alt="" draggable="false">
+      <span>Webshop</span>
+    </a>
+    <div class="start-menu-separator"></div>
+    <a class="start-menu-item" href="over-ons.html">
+      <img src="assets/icons/w98_Notepad_16x16_4.png" alt="" draggable="false">
+      <span>Over MNRV</span>
+    </a>
+    <a class="start-menu-item" href="contact.html">
+      <img src="assets/icons/w98_EnvelopeClosed_16x16_4.png" alt="" draggable="false">
+      <span>Contact</span>
+    </a>
+    <div class="start-menu-separator"></div>
+    <div class="start-menu-item" style="display:flex;gap:8px;">
+      <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" fill="#0077b5"/><text x="3" y="12" fill="#fff" font-size="8" font-weight="bold">in</text></svg>
+      <a href="#" target="_blank" style="color:inherit;text-decoration:none;">LinkedIn</a>
+    </div>
+    <div class="start-menu-item" style="display:flex;gap:8px;">
+      <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#25d366"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">W</text></svg>
+      <a href="#" target="_blank" style="color:inherit;text-decoration:none;">WhatsApp</a>
+    </div>
+    <div class="start-menu-separator"></div>
+    <div class="start-menu-item" id="start-shutdown">
+      <img src="assets/icons/w98_ShutDownNormal_16x16_4.png" alt="" draggable="false">
+      <span>Afsluiten...</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================
+   BOOT SEQUENCE CONTROLLER (Video)
+   ============================================ */
+(function() {
+  var overlay = document.getElementById('boot-overlay');
+  var video = document.getElementById('boot-video');
+  var bootSkipped = false;
+
+  // Check sessionStorage - only boot once per session
+  if (sessionStorage.getItem('mnrv-booted')) {
+    finishBoot(true);
+    return;
+  }
+
+  // ESC to skip
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') skipBoot();
+  });
+
+  // Video ended → finish boot
+  video.addEventListener('ended', function() {
+    if (!bootSkipped) finishBoot(false);
+  });
+
+  // Fallback: if video fails to load, skip boot
+  video.addEventListener('error', function() {
+    if (!bootSkipped) finishBoot(false);
+  });
+
+  // Handle autoplay promise (browsers may block even muted video)
+  var playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(function() {
+      // Autoplay blocked - skip boot silently
+      if (!bootSkipped) finishBoot(false);
+    });
+  }
+
+  // ---- Finish / Fade Out ----
+  function finishBoot(instant) {
+    sessionStorage.setItem('mnrv-booted', '1');
+    bootSkipped = true;
+
+    if (video) {
+      video.pause();
+    }
+
+    if (instant) {
+      overlay.classList.add('done');
+    } else {
+      overlay.classList.add('fade-out');
+      setTimeout(function() {
+        overlay.classList.add('done');
+      }, 800);
+    }
+
+    // Reveal desktop
+    document.querySelector('.desktop').classList.remove('booting');
+    document.querySelector('.taskbar').classList.remove('booting');
+    var startMenu = document.querySelector('.start-menu');
+    if (startMenu) startMenu.classList.remove('booting');
+  }
+
+  // Global skip function
+  window.skipBoot = function() {
+    finishBoot(false);
+  };
+})();
+</script>
+
+<script src="js/main.js"></script>
+<script>
+  // Point ClippyJS to jsdelivr CDN for agent assets (gitcdn.xyz is dead)
+  window.CLIPPY_CDN = 'https://cdn.jsdelivr.net/gh/pi0/clippyjs/assets/agents/';
+  // Silence ClippyJS sound errors (browsers block autoplay audio)
+  (function() {
+    var origPlay = HTMLAudioElement.prototype.play;
+    HTMLAudioElement.prototype.play = function() {
+      return origPlay.call(this).catch(function() {});
+    };
+  })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/clippyjs@0.0.3/dist/clippy.min.js"></script>
+
+<script>
+/* ============================================
+   CLIPPY ASSISTANT (ClippyJS - fully animated)
+   ============================================ */
+(function() {
+  var agent = null;
+  var clippyHidden = false;
+  var tray = document.getElementById('clippy-tray');
+  var ctxMenu = document.getElementById('clippy-ctx-menu');
+
+  // --- Tips ---
+  var generalTips = [
+    'Hallo! Ik ben Clippy, je MNRV assistent. Dubbelklik op een icoon om te beginnen!',
+    'Wist je dat? MNRV combineert AI met e-commerce voor de beste klantervaring.',
+    'Tip: Gebruik het Start-menu voor snelle navigatie naar alle pagina\u0027s.',
+    'Probeer eens de webshop! Daar vind je onze AI-gedreven producten.',
+    'MNRV maakt jouw webshop futureproof met slimme AI-agents.',
+    'Rechts-klik op mij voor meer opties!',
+    'Wist je dat AI-chatbots de klanttevredenheid met 40% kunnen verhogen?',
+    'Het lijkt erop dat je een bureaublad gebruikt. Wil je daar hulp bij?'
+  ];
+
+  var contextTips = {
+    'setup-wizard': ['De Setup Wizard helpt je MNRV te leren kennen!', 'In stap 3 zie je al onze diensten.'],
+    'about-window': ['Hier lees je alles over MNRV.', 'Internet Explorer was top... in 1998.'],
+    'word-window': ['Het lijkt erop dat je een document schrijft! Wil je daar hulp bij?', 'Probeer de WordArt-knop voor coole teksteffecten!', 'Tip: Selecteer tekst en gebruik de werkbalk voor opmaak.']
+  };
+
+  // Animations to play randomly (the fun expressive ones)
+  var funAnimations = [
+    'Wave', 'Greeting', 'Congratulate', 'LookRight', 'LookLeft',
+    'LookUp', 'LookDown', 'Thinking', 'GetAttention', 'IdleHeadScratch',
+    'IdleFingerTap', 'IdleEyeBrowRaise', 'IdleSideToSide', 'IdleAtom',
+    'IdleRopePile', 'IdleSnooze', 'GetArtsy', 'GetTechy', 'GetWizardy',
+    'CheckingSomething', 'Writing', 'Searching', 'Processing'
+  ];
+
+  // --- Wait for boot, then load Clippy ---
+  function waitForBoot() {
+    var desktop = document.querySelector('.desktop');
+    if (desktop && !desktop.classList.contains('booting')) {
+      setTimeout(loadClippy, 1500);
+    } else {
+      setTimeout(waitForBoot, 300);
+    }
+  }
+  waitForBoot();
+
+  function loadClippy() {
+    if (typeof clippy === 'undefined') return;
+
+    clippy.load('Clippy', function(a) {
+      agent = a;
+
+      // Show with greeting
+      agent.show();
+      agent.play('Greeting');
+      agent.speak(generalTips[0]);
+
+      // Disable the built-in drag (we want Clippy pinned)
+      var el = document.querySelector('.clippy');
+      if (el) {
+        el.style.pointerEvents = 'auto';
+        // Override jQuery UI draggable if present
+        try { $(el).draggable('disable'); } catch(e) {}
+        // Block drag events
+        el.addEventListener('mousedown', function(e) {
+          // Only allow clicks, not drags
+          e.stopPropagation();
+        }, true);
+      }
+
+      // Right-click for context menu
+      if (el) {
+        el.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          showCtxMenu(e.clientX, e.clientY);
+        });
+
+        // Left-click: play a random fun animation
+        el.addEventListener('click', function(e) {
+          e.stopPropagation();
+          hideCtxMenu();
+          playRandomAnimation();
+        });
+      }
+
+      // Schedule periodic tips + animations
+      scheduleTip();
+      scheduleIdleAnimation();
+
+      // Expose to MNRV namespace
+      if (window.MNRV) {
+        window.MNRV.clippyAgent = agent;
+        window.MNRV.clippyShowTip = function(text) {
+          if (agent && !clippyHidden) agent.speak(text);
+        };
+        window.MNRV.clippyDismissBubble = function() {
+          if (agent) agent.stopCurrent();
+        };
+      }
+    });
+  }
+
+  // --- Animations ---
+  function playRandomAnimation() {
+    if (!agent || clippyHidden) return;
+    var anim = funAnimations[Math.floor(Math.random() * funAnimations.length)];
+    agent.play(anim);
+  }
+
+  function scheduleIdleAnimation() {
+    setTimeout(function() {
+      if (!clippyHidden && agent) {
+        if (Math.random() < 0.4) {
+          playRandomAnimation();
+        }
+      }
+      scheduleIdleAnimation();
+    }, 8000 + Math.random() * 7000);
+  }
+
+  // --- Tips ---
+  function getRandomTip() {
+    var openWindows = document.querySelectorAll('.win-window:not(.hidden)');
+    for (var i = 0; i < openWindows.length; i++) {
+      var id = openWindows[i].id;
+      if (contextTips[id] && Math.random() < 0.4) {
+        var tips = contextTips[id];
+        return tips[Math.floor(Math.random() * tips.length)];
+      }
+    }
+    return generalTips[Math.floor(Math.random() * generalTips.length)];
+  }
+
+  function scheduleTip() {
+    setTimeout(function() {
+      if (!clippyHidden && agent) {
+        agent.speak(getRandomTip());
+        // Play a thinking/looking animation with the tip
+        var tipAnims = ['Thinking', 'LookUp', 'CheckingSomething', 'IdleEyeBrowRaise'];
+        agent.play(tipAnims[Math.floor(Math.random() * tipAnims.length)]);
+      }
+      scheduleTip();
+    }, 20000 + Math.random() * 10000);
+  }
+
+  // --- Context Menu ---
+  function showCtxMenu(x, y) {
+    ctxMenu.style.left = Math.min(x, window.innerWidth - 180) + 'px';
+    ctxMenu.style.top = (y - ctxMenu.offsetHeight - 10) + 'px';
+    ctxMenu.classList.add('show');
+  }
+
+  function hideCtxMenu() {
+    ctxMenu.classList.remove('show');
+  }
+
+  document.addEventListener('click', hideCtxMenu);
+
+  ctxMenu.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var item = e.target.closest('.clippy-ctx-item');
+    if (!item) return;
+    var action = item.getAttribute('data-action');
+    hideCtxMenu();
+
+    if (!agent) return;
+
+    switch (action) {
+      case 'animate':
+        playRandomAnimation();
+        break;
+      case 'about':
+        agent.play('Explain');
+        agent.speak('MNRV is een innovatief AI & E-commerce bureau. Bekijk de "Over MNRV" pagina voor meer info!');
+        break;
+      case 'services':
+        agent.play('GetTechy');
+        agent.speak('Onze diensten: AI Chatbots, Webshop Ontwikkeling en UX Optimalisatie!');
+        break;
+      case 'contact':
+        agent.play('Writing');
+        agent.speak('Wil je samenwerken? Ga naar Contact of mail naar info@mnrv.ai!');
+        break;
+      case 'hide':
+        hideClippy();
+        break;
+    }
+  });
+
+  // --- Hide / Show ---
+  function hideClippy() {
+    if (!agent) return;
+    clippyHidden = true;
+    agent.play('GoodBye');
+    setTimeout(function() {
+      agent.hide();
+      if (tray) tray.classList.add('show');
+    }, 1500);
+  }
+
+  function restoreClippy() {
+    if (!agent) return;
+    clippyHidden = false;
+    if (tray) tray.classList.remove('show');
+    agent.show();
+    agent.play('Greeting');
+    agent.speak('Ik ben terug! Heb je me gemist?');
+  }
+
+  if (tray) {
+    tray.addEventListener('click', function(e) {
+      e.stopPropagation();
+      restoreClippy();
+    });
+  }
+})();
+</script>
+
+<script>
+/* ============================================
+   WORD 95 + WORDART GALLERY
+   ============================================ */
+(function() {
+  'use strict';
+
+  // --- WordArt style definitions ---
+  var wordartStyles = [
+    { cls: 'wordart-1',  label: 'Blauw Verloop' },
+    { cls: 'wordart-2',  label: 'Rood Schaduw' },
+    { cls: 'wordart-3',  label: 'Oranje 3D' },
+    { cls: 'wordart-4',  label: 'Groen Speels' },
+    { cls: 'wordart-5',  label: 'Vuur Uitgerekt' },
+    { cls: 'wordart-6',  label: 'Blauw Outline' },
+    { cls: 'wordart-7',  label: 'Paars Roze' },
+    { cls: 'wordart-8',  label: 'Zilver Diepte' },
+    { cls: 'wordart-9',  label: 'Perspectief' },
+    { cls: 'wordart-10', label: 'Goud Luxe' },
+    { cls: 'wordart-11', label: 'Regenboog' },
+    { cls: 'wordart-12', label: 'Breed Blauw' },
+    { cls: 'wordart-13', label: 'Roze Schuin' },
+    { cls: 'wordart-14', label: 'Matrix Groen' },
+    { cls: 'wordart-15', label: 'Chrome Breed' }
+  ];
+
+  var selectedStyle = 0;
+  var galleryEl = document.getElementById('wordart-gallery');
+  var previewEl = document.getElementById('wordart-preview');
+  var textInput = document.getElementById('wordart-text');
+  var okBtn = document.getElementById('wordart-ok');
+  var cancelBtn = document.getElementById('wordart-cancel');
+  var wordartBtn = document.getElementById('word-wordart-btn');
+  var insertMenu = document.getElementById('word-insert-menu');
+  var wordDoc = document.getElementById('word-doc');
+
+  if (!galleryEl) return;
+
+  // --- Populate gallery ---
+  wordartStyles.forEach(function(style, i) {
+    var btn = document.createElement('button');
+    btn.className = 'wordart-style-btn';
+    btn.title = style.label;
+    btn.setAttribute('data-index', i);
+
+    var sample = document.createElement('span');
+    sample.className = 'wordart-rendered ' + style.cls;
+    sample.textContent = 'Ab';
+    sample.style.fontSize = '16px';
+    sample.style.padding = '0';
+    sample.style.margin = '0';
+    btn.appendChild(sample);
+
+    if (i === 0) btn.classList.add('selected');
+
+    btn.addEventListener('click', function() {
+      galleryEl.querySelectorAll('.wordart-style-btn').forEach(function(b) {
+        b.classList.remove('selected');
+      });
+      btn.classList.add('selected');
+      selectedStyle = i;
+      updatePreview();
+    });
+
+    galleryEl.appendChild(btn);
+  });
+
+  // --- Preview ---
+  function updatePreview() {
+    var text = textInput.value || 'MNRV';
+    var style = wordartStyles[selectedStyle];
+    previewEl.innerHTML = '';
+    var el = document.createElement('span');
+    el.className = 'wordart-rendered ' + style.cls;
+    el.textContent = text;
+    previewEl.appendChild(el);
+  }
+
+  textInput.addEventListener('input', updatePreview);
+  updatePreview();
+
+  // --- Open dialog ---
+  function openWordartDialog() {
+    if (window.MNRV && window.MNRV.showWindow) {
+      window.MNRV.showWindow('wordart-dialog');
+    } else {
+      var d = document.getElementById('wordart-dialog');
+      if (d) d.classList.remove('hidden');
+    }
+    updatePreview();
+  }
+
+  wordartBtn.addEventListener('click', openWordartDialog);
+
+  // Insert menu also opens WordArt
+  if (insertMenu) {
+    insertMenu.addEventListener('click', openWordartDialog);
+  }
+
+  // --- Insert WordArt into document ---
+  okBtn.addEventListener('click', function() {
+    var text = textInput.value || 'MNRV';
+    var style = wordartStyles[selectedStyle];
+
+    // Create WordArt element
+    var el = document.createElement('div');
+    el.style.textAlign = 'center';
+    el.style.margin = '12px 0';
+    el.contentEditable = 'false';
+
+    var art = document.createElement('span');
+    art.className = 'wordart-rendered ' + style.cls;
+    art.textContent = text;
+    art.style.fontSize = '32px';
+    art.contentEditable = 'false';
+    el.appendChild(art);
+
+    // Insert at end of doc (or at cursor if possible)
+    if (wordDoc) {
+      var sel = window.getSelection();
+      if (sel.rangeCount > 0 && wordDoc.contains(sel.anchorNode)) {
+        var range = sel.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(el);
+        // Move cursor after inserted element
+        range.setStartAfter(el);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } else {
+        wordDoc.appendChild(el);
+      }
+      // Add a new paragraph after for continued typing
+      var p = document.createElement('p');
+      p.innerHTML = '&nbsp;';
+      el.parentNode.insertBefore(p, el.nextSibling);
+    }
+
+    // Close dialog
+    if (window.MNRV && window.MNRV.hideWindow) {
+      window.MNRV.hideWindow('wordart-dialog');
+    } else {
+      var d = document.getElementById('wordart-dialog');
+      if (d) d.classList.add('hidden');
+    }
+  });
+
+  // --- Cancel ---
+  cancelBtn.addEventListener('click', function() {
+    if (window.MNRV && window.MNRV.hideWindow) {
+      window.MNRV.hideWindow('wordart-dialog');
+    } else {
+      var d = document.getElementById('wordart-dialog');
+      if (d) d.classList.add('hidden');
+    }
+  });
+
+  // --- Word 95: Focus doc on window open ---
+  var wordWindow = document.getElementById('word-window');
+  if (wordWindow) {
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName === 'class' && !wordWindow.classList.contains('hidden')) {
+          setTimeout(function() {
+            if (wordDoc) wordDoc.focus();
+          }, 100);
+        }
+      });
+    });
+    observer.observe(wordWindow, { attributes: true });
+  }
+
+  // --- Word 95: Context tips for Clippy ---
+  if (window.MNRV) {
+    // Add Word tips to Clippy if available
+    setTimeout(function() {
+      if (window.MNRV.clippyShowTip) {
+        // Clippy will give Word-related tips when Word is open
+      }
+    }, 2000);
+  }
+})();
+</script>
+
+</body>
+</html>

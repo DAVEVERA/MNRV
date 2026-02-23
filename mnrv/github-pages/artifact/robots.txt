@@ -1,0 +1,28 @@
+# robots.txt for mnrv.nl
+# Allow all search engines to crawl
+
+User-agent: *
+Allow: /
+
+# Disallow private or unnecessary paths
+Disallow: /assets/windows-95-ui-kit/
+Disallow: /Source.html
+
+# Sitemap location
+Sitemap: https://mnrv.nl/sitemap.xml
+
+# Crawl-delay (be nice to servers)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
