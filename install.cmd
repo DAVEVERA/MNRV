@@ -26,7 +26,7 @@ if /i "%PROCESSOR_ARCHITECTURE%"=="ARM64" goto :arch_valid
 if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" goto :arch_valid
 if /i "%PROCESSOR_ARCHITEW6432%"=="ARM64" goto :arch_valid
 
-echo Claude Code does not support 32-bit Windows. Please use a 64-bit version of Windows. >&2
+echo Please use a 64-bit version of Windows. >&2
 exit /b 1
 
 :arch_valid
