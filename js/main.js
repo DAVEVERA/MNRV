@@ -20,14 +20,6 @@
     initTaskbarButtons();
     closeStartMenuOnClickOutside();
 
-    // Auto-open setup wizard
-    initSetupWizard();
-    const wizardWin = document.getElementById('setup-wizard');
-    if (wizardWin) {
-      setTimeout(function() {
-        showWindow('setup-wizard');
-      }, 500);
-    }
 
     // Clippy is initialized via its own inline script in index.html
   });
@@ -505,58 +497,6 @@
     focusWindow(dialog);
   }
 
-  // --- Setup Wizard ---
-  function initSetupWizard() {
-    const wizard = document.getElementById('setup-wizard');
-    if (!wizard) return;
-
-    const pages = wizard.querySelectorAll('.wizard-page');
-    const steps = wizard.querySelectorAll('.wizard-step');
-    const prevBtn = document.getElementById('wizard-prev');
-    const nextBtn = document.getElementById('wizard-next');
-    const cancelBtn = document.getElementById('wizard-cancel');
-    let currentStep = 0;
-    const totalSteps = pages.length;
-
-    function goToStep(n) {
-      if (n < 0 || n >= totalSteps) return;
-      // Update pages
-      pages.forEach(function(p) { p.classList.remove('active'); });
-      pages[n].classList.add('active');
-      // Update sidebar indicators
-      steps.forEach(function(s, i) {
-        s.classList.remove('active', 'completed');
-        if (i < n) s.classList.add('completed');
-        if (i === n) s.classList.add('active');
-      });
-      currentStep = n;
-      // Update buttons
-      prevBtn.disabled = (currentStep === 0);
-      if (currentStep === totalSteps - 1) {
-        nextBtn.textContent = 'Voltooien \u2714';
-      } else {
-        nextBtn.textContent = 'Volgende \u25B6';
-      }
-    }
-
-    nextBtn.addEventListener('click', function() {
-      if (currentStep === totalSteps - 1) {
-        hideWindow('setup-wizard');
-      } else {
-        goToStep(currentStep + 1);
-      }
-    });
-
-    prevBtn.addEventListener('click', function() {
-      goToStep(currentStep - 1);
-    });
-
-    cancelBtn.addEventListener('click', function() {
-      hideWindow('setup-wizard');
-    });
-
-    goToStep(0);
-  }
 
   // --- Expose globals ---
   window.MNRV = {
