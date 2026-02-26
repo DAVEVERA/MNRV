@@ -40,783 +40,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/clippyjs/clippy.js/assets/clippy.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <style>
-    /* Win98 flag logo for Start button - inline SVG as data URI */
-    .start-flag {
-      width: 16px;
-      height: 16px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 1px;
-      transform: skewX(-5deg);
-    }
-    .start-flag span:nth-child(1) { background: #ff0000; }
-    .start-flag span:nth-child(2) { background: #00aa00; }
-    .start-flag span:nth-child(3) { background: #0000ff; }
-    .start-flag span:nth-child(4) { background: #ffcc00; }
-
-    /* ============================================
-       BOOT SEQUENCE STYLES
-       ============================================ */
-    #boot-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 99999;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    #boot-overlay.done {
-      display: none;
-    }
-    #boot-video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
-    }
-
-    /* Fade out */
-    #boot-overlay.fade-out {
-      animation: bootFadeOut 0.8s ease forwards;
-    }
-    @keyframes bootFadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    /* Hide desktop until boot finishes */
-    .desktop.booting,
-    .taskbar.booting,
-    .start-menu.booting {
-      visibility: hidden;
-    }
-
-    /* Skip button */
-    #boot-skip {
-      position: absolute;
-      bottom: 8px;
-      right: 12px;
-      font-family: "Fixedsys", "Courier New", monospace;
-      font-size: 10px;
-      color: #666;
-      cursor: pointer;
-      z-index: 100000;
-      border: none;
-      background: transparent;
-      padding: 4px 8px;
-    }
-    #boot-skip:hover {
-      color: #aaa;
-    }
-
-    /* ============================================
-       SETUP WIZARD STYLES
-       ============================================ */
-    .wizard-body {
-      display: flex;
-      height: calc(100% - 54px); /* minus titlebar + button bar */
-      overflow: hidden;
-    }
-    .wizard-sidebar {
-      width: 160px;
-      min-width: 160px;
-      background: linear-gradient(180deg, #000080 0%, #1084d0 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 10px;
-      gap: 24px;
-    }
-    .wizard-sidebar-logo {
-      width: 100px;
-      max-width: 100%;
-      border: 2px solid rgba(255,255,255,0.3);
-      image-rendering: auto;
-    }
-    .wizard-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-    }
-    .wizard-step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 8px;
-      color: rgba(255,255,255,0.5);
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-      transition: color 0.2s;
-    }
-    .wizard-step.active {
-      color: #ffffff;
-      font-weight: bold;
-    }
-    .wizard-step.completed {
-      color: rgba(255,255,255,0.8);
-    }
-    .wizard-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.4);
-      background: transparent;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .wizard-step.active .wizard-dot {
-      background: #ffffff;
-      border-color: #ffffff;
-    }
-    .wizard-step.completed .wizard-dot {
-      background: rgba(255,255,255,0.6);
-      border-color: rgba(255,255,255,0.8);
-    }
-    .wizard-content {
-      flex: 1;
-      padding: 20px 24px;
-      overflow-y: auto;
-      background: #c0c0c0;
-      position: relative;
-    }
-    .wizard-page {
-      display: none;
-      animation: wizardFadeIn 0.3s ease;
-    }
-    .wizard-page.active {
-      display: block;
-    }
-    @keyframes wizardFadeIn {
-      from { opacity: 0; transform: translateX(10px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .wizard-page h2 {
-      font-size: 14px;
-      color: #000080;
-      margin: 0 0 12px 0;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-    }
-    .wizard-page p {
-      font-size: 11px;
-      line-height: 1.6;
-      margin: 0 0 10px 0;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-    }
-    .wizard-version-box {
-      background: #ffffff;
-      border: 1px solid #808080;
-      padding: 10px 14px;
-      margin: 16px 0;
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-    }
-    .wizard-hint {
-      color: #808080;
-      font-style: italic;
-    }
-    .wizard-services {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .wizard-service-card {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #ffffff;
-      border: 1px solid #808080;
-      padding: 8px 12px;
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-    }
-    .wizard-service-icon {
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
-    }
-    .wizard-service-card strong {
-      white-space: nowrap;
-      margin-right: 6px;
-    }
-    .wizard-service-card span {
-      color: #444;
-    }
-    .wizard-actions {
-      display: flex;
-      gap: 8px;
-      margin: 16px 0;
-      flex-wrap: wrap;
-    }
-    .wizard-actions .win-btn {
-      text-decoration: none;
-      font-size: 11px;
-    }
-    .wizard-buttons {
-      display: flex;
-      justify-content: flex-end;
-      gap: 6px;
-      padding: 8px 12px;
-      border-top: 1px solid #808080;
-      background: #c0c0c0;
-    }
-    .wizard-buttons .win-btn {
-      min-width: 75px;
-    }
-
-    /* ============================================
-       CLIPPY OVERRIDES (ClippyJS library)
-       ============================================ */
-    /* Keep Clippy pinned bottom-right, prevent dragging */
-    .clippy {
-      position: fixed !important;
-      bottom: 40px !important;
-      right: 20px !important;
-      left: auto !important;
-      top: auto !important;
-      z-index: 9000 !important;
-    }
-    .clippy-balloon {
-      z-index: 9001 !important;
-    }
-
-    /* Win95-style right-click context menu */
-    #clippy-ctx-menu {
-      position: fixed;
-      background: #c0c0c0;
-      border: 2px outset #dfdfdf;
-      padding: 2px;
-      display: none;
-      min-width: 170px;
-      z-index: 9002;
-      box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    #clippy-ctx-menu.show { display: block; }
-    .clippy-ctx-item {
-      padding: 4px 20px;
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .clippy-ctx-item:hover {
-      background: #000080;
-      color: #fff;
-    }
-    .clippy-ctx-sep {
-      height: 1px;
-      background: #808080;
-      margin: 2px 4px;
-    }
-
-    /* Tray icon */
-    #clippy-tray {
-      display: none;
-      cursor: pointer;
-      width: 16px;
-      height: 16px;
-    }
-    #clippy-tray.show { display: inline-block; }
-    #clippy-tray:hover { opacity: 0.7; }
-
-    /* ============================================
-       WORD 95 STYLES
-       ============================================ */
-    .word-menubar {
-      display: flex;
-      background: #c0c0c0;
-      border-bottom: 1px solid #808080;
-      padding: 1px 0;
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-    }
-    .word-menu-item {
-      padding: 2px 8px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .word-menu-item:hover {
-      background: #000080;
-      color: #fff;
-    }
-    .word-toolbar {
-      display: flex;
-      align-items: center;
-      background: #c0c0c0;
-      border-bottom: 1px solid #808080;
-      padding: 2px 4px;
-      gap: 2px;
-      flex-wrap: wrap;
-    }
-    .word-tb-btn {
-      width: 24px;
-      height: 22px;
-      background: #c0c0c0;
-      border: 1px solid transparent;
-      font-size: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      font-family: "Times New Roman", serif;
-    }
-    .word-tb-btn:hover {
-      border: 1px outset #dfdfdf;
-    }
-    .word-tb-btn:active {
-      border: 1px inset #808080;
-    }
-    .word-tb-sep {
-      width: 1px;
-      height: 18px;
-      background: #808080;
-      margin: 0 3px;
-    }
-    .word-font-select, .word-size-select {
-      height: 20px;
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-      border: 1px inset #808080;
-      background: #fff;
-      padding: 0 2px;
-    }
-    .word-font-select { width: 130px; }
-    .word-size-select { width: 45px; }
-    .word-tb-wordart {
-      width: auto;
-      padding: 0 4px;
-      gap: 2px;
-    }
-    .word-tb-wordart-icon {
-      font-size: 14px;
-      font-weight: bold;
-      font-family: "Impact", "Arial Black", sans-serif;
-      background: linear-gradient(180deg, #ff0000, #ffcc00, #00cc00, #0066ff, #9900cc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-    }
-    .word-doc-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: #808080;
-      overflow: hidden;
-    }
-    .word-ruler {
-      display: flex;
-      background: #fff;
-      border-bottom: 1px solid #808080;
-      height: 16px;
-      padding: 0 4px;
-      font-size: 8px;
-      color: #808080;
-      font-family: "Tahoma", sans-serif;
-      align-items: center;
-    }
-    .word-ruler span {
-      flex: 1;
-      text-align: center;
-      border-right: 1px solid #c0c0c0;
-    }
-    .word-ruler span:last-child { border-right: none; }
-    .word-doc {
-      flex: 1;
-      background: #ffffff;
-      margin: 8px;
-      padding: 20px 24px;
-      font-family: "Times New Roman", serif;
-      font-size: 12pt;
-      line-height: 1.5;
-      overflow-y: auto;
-      box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
-      outline: none;
-      min-height: 150px;
-      cursor: text;
-    }
-    .word-doc:focus {
-      outline: none;
-    }
-    /* Make Word window use flex column for proper doc area sizing */
-    #word-window .win-titlebar ~ .word-menubar ~ .word-toolbar ~ .word-doc-area {
-      flex: 1;
-    }
-    #word-window {
-      display: none;
-      flex-direction: column;
-    }
-    #word-window:not(.hidden) {
-      display: flex;
-    }
-    #word-window .win-titlebar,
-    #word-window .word-menubar,
-    #word-window .word-toolbar,
-    #word-window .win-statusbar {
-      flex-shrink: 0;
-    }
-
-    /* ============================================
-       WORDART GALLERY STYLES
-       ============================================ */
-    .wordart-dialog-body {
-      padding: 12px 16px;
-      background: #c0c0c0;
-    }
-    .wordart-dialog-label {
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-      margin: 0 0 8px 0;
-    }
-    .wordart-gallery {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 4px;
-      background: #fff;
-      border: 2px inset #808080;
-      padding: 6px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    .wordart-style-btn {
-      width: 100%;
-      aspect-ratio: 16/9;
-      border: 2px solid transparent;
-      background: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px;
-      font-size: 14px;
-      font-weight: bold;
-      overflow: hidden;
-      transition: border-color 0.1s;
-    }
-    .wordart-style-btn:hover {
-      border-color: #000080;
-    }
-    .wordart-style-btn.selected {
-      border-color: #000080;
-      background: #e0e0ff;
-    }
-    .wordart-text-input {
-      margin: 10px 0;
-      font-size: 11px;
-      font-family: "Tahoma", "MS Sans Serif", sans-serif;
-    }
-    .wordart-text-input label {
-      display: block;
-      margin-bottom: 4px;
-    }
-    .wordart-preview {
-      background: #fff;
-      border: 2px inset #808080;
-      min-height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      margin-bottom: 8px;
-      overflow: hidden;
-    }
-
-    /* --- WordArt Effect Classes --- */
-    .wordart-rendered {
-      display: inline-block;
-      font-size: 28px;
-      font-weight: bold;
-      line-height: 1.2;
-      padding: 4px 8px;
-      text-align: center;
-      user-select: all;
-      cursor: default;
-      margin: 8px auto;
-    }
-    .wordart-1 {
-      font-family: "Impact", "Arial Black", sans-serif;
-      background: linear-gradient(180deg, #000080 0%, #0066ff 50%, #000080 100%);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke: 1px #000066;
-      text-shadow: 2px 2px 0px rgba(0,0,102,0.3);
-    }
-    .wordart-2 {
-      font-family: "Times New Roman", serif;
-      color: #cc0000;
-      text-shadow: 2px 2px 0 #800000, 3px 3px 0 rgba(0,0,0,0.2);
-      letter-spacing: 2px;
-    }
-    .wordart-3 {
-      font-family: "Arial", sans-serif;
-      background: linear-gradient(180deg, #ff6600, #ffcc00);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke: 1px #cc5500;
-      transform: perspective(200px) rotateY(-15deg);
-    }
-    .wordart-4 {
-      font-family: "Comic Sans MS", "Comic Sans", cursive;
-      color: #009900;
-      text-shadow: 1px 1px 0 #006600, -1px -1px 0 #00cc00, 0 3px 6px rgba(0,0,0,0.2);
-      letter-spacing: 3px;
-    }
-    .wordart-5 {
-      font-family: "Impact", "Arial Black", sans-serif;
-      background: linear-gradient(180deg, #ffcc00, #ff6600, #cc0000);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transform: scaleY(1.5);
-    }
-    .wordart-6 {
-      font-family: "Times New Roman", serif;
-      color: transparent;
-      -webkit-text-stroke: 2px #000080;
-      font-style: italic;
-      letter-spacing: 4px;
-    }
-    .wordart-7 {
-      font-family: "Arial Black", "Impact", sans-serif;
-      background: linear-gradient(135deg, #9900cc, #ff00ff, #ff6699);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 3px 3px 6px rgba(153,0,204,0.3);
-      transform: rotate(-3deg);
-    }
-    .wordart-8 {
-      font-family: "Courier New", monospace;
-      color: #c0c0c0;
-      text-shadow: 1px 1px 0 #808080, 2px 2px 0 #606060, 3px 3px 0 #404040, 4px 4px 0 #202020;
-      -webkit-text-stroke: 1px #404040;
-    }
-    .wordart-9 {
-      font-family: "Impact", "Arial Black", sans-serif;
-      background: linear-gradient(180deg, #ffffff 0%, #4488ff 40%, #000080 100%);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke: 1px #003399;
-      transform: perspective(300px) rotateX(15deg);
-    }
-    .wordart-10 {
-      font-family: "Times New Roman", serif;
-      color: #ffd700;
-      text-shadow: 1px 1px 0 #b8860b, 2px 2px 0 #8b6914, 0 0 10px rgba(255,215,0,0.5);
-      -webkit-text-stroke: 0.5px #b8860b;
-      font-weight: 900;
-    }
-    .wordart-11 {
-      font-family: "Arial", sans-serif;
-      background: linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #8b00ff);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-    }
-    .wordart-12 {
-      font-family: "Impact", "Arial Black", sans-serif;
-      color: #003366;
-      text-shadow: 2px 0 0 #006699, -2px 0 0 #006699, 0 2px 0 #006699, 0 -2px 0 #006699, 4px 4px 0 rgba(0,0,0,0.15);
-      letter-spacing: 6px;
-    }
-    .wordart-13 {
-      font-family: "Comic Sans MS", "Comic Sans", cursive;
-      background: linear-gradient(180deg, #ff69b4, #ff1493, #c71585);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transform: rotate(3deg) skewX(-5deg);
-      letter-spacing: 2px;
-    }
-    .wordart-14 {
-      font-family: "Courier New", monospace;
-      color: #00ff00;
-      background: #000;
-      padding: 4px 12px;
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-      letter-spacing: 3px;
-    }
-    .wordart-15 {
-      font-family: "Impact", "Arial Black", sans-serif;
-      background: linear-gradient(180deg, #c0c0c0, #ffffff, #c0c0c0);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke: 2px #404040;
-      transform: scaleX(1.3);
-    }
-
-    /* ============================================
-       APPS SHOWCASE WINDOW STYLES
-       ============================================ */
-    #apps-window {
-      display: none;
-      flex-direction: column;
-    }
-    #apps-window:not(.hidden) {
-      display: flex;
-    }
-    #apps-window .win-titlebar,
-    #apps-window .apps-toolbar,
-    #apps-window .win-addressbar,
-    #apps-window .win-statusbar {
-      flex-shrink: 0;
-    }
-
-    /* App navigation toolbar */
-    .apps-toolbar {
-      display: flex;
-      align-items: center;
-      background: var(--win-chrome);
-      border-bottom: 1px solid var(--win-btn-shadow);
-      padding: 3px 4px;
-      gap: 2px;
-    }
-    .apps-nav-btn {
-      width: 28px;
-      height: 26px;
-      background: var(--win-btn-face);
-      border: 2px solid;
-      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
-      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow);
-      cursor: pointer;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-family: var(--font-main);
-    }
-    .apps-nav-btn:active {
-      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
-      box-shadow: inset 1px 1px 0 var(--win-btn-shadow);
-    }
-    .apps-nav-btn:hover {
-      background: #d4d0c8;
-    }
-
-    /* App tab buttons (scrollable horizontally) */
-    .apps-tabs {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      flex: 1;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      padding: 0 2px;
-    }
-    .apps-tabs::-webkit-scrollbar {
-      display: none;
-    }
-    .apps-tab {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 10px;
-      height: 26px;
-      background: var(--win-btn-face);
-      border: 2px solid;
-      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
-      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow);
-      cursor: pointer;
-      font-family: var(--font-main);
-      font-size: 11px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: background 0.1s;
-    }
-    .apps-tab:hover {
-      background: #d4d0c8;
-    }
-    .apps-tab.active {
-      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
-      box-shadow: inset 1px 1px 0 var(--win-btn-shadow);
-      background: repeating-conic-gradient(var(--win-btn-face) 0% 25%, var(--win-btn-highlight) 0% 50%) 0 0 / 2px 2px;
-      font-weight: bold;
-    }
-    .apps-tab-icon {
-      font-size: 13px;
-      line-height: 1;
-    }
-    .apps-tab-label {
-      font-size: 11px;
-    }
-
-    /* Iframe container */
-    .apps-iframe-container {
-      flex: 1;
-      position: relative;
-      background: #808080;
-      overflow: hidden;
-      margin: 2px;
-      border: 2px solid;
-      border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
-      box-shadow: inset 1px 1px 0 var(--win-btn-dark);
-    }
-    .apps-iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: #fff;
-      display: block;
-    }
-
-    /* Loading overlay */
-    .apps-loading {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--win-chrome);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      z-index: 5;
-      font-family: var(--font-main);
-      font-size: 11px;
-    }
-    .apps-loading.show {
-      display: flex;
-    }
-    .apps-loading-icon {
-      font-size: 28px;
-      animation: appsLoadingSpin 1.2s linear infinite;
-    }
-    @keyframes appsLoadingSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .apps-progress-bar {
-      animation: appsProgressAnim 2.5s ease-in-out infinite;
-    }
-    @keyframes appsProgressAnim {
-      0% { width: 0%; }
-      50% { width: 80%; }
-      100% { width: 100%; }
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      #setup-wizard { width: 95vw !important; height: auto !important; }
-      .wizard-sidebar { width: 100px; min-width: 100px; padding: 12px 6px; }
-      .wizard-sidebar-logo { width: 70px; }
-      .wizard-step-label { display: none; }
-      #word-window { width: 95vw !important; height: 80vh !important; }
-      .wordart-gallery { grid-template-columns: repeat(3, 1fr); }
-      #wordart-dialog { width: 95vw !important; }
-      #apps-window { width: 98vw !important; height: 85vh !important; }
-      .apps-tab-label { display: none; }
-      .apps-tab { padding: 3px 6px; }
-    }
-  </style>
+  
 
   <!-- JSON-LD Structured Data for SEO -->
   <script type="application/ld+json">
@@ -932,7 +156,7 @@
      ============================================ -->
 <div id="boot-overlay">
 
-  <video id="boot-video" autoplay muted playsinline src="assets/Windows%2095%20Boot%20sequence.mp4"></video>
+  <video id="boot-video" autoplay muted src="assets/Windows%2095%20Boot%20sequence.mp4"></video>
 
   <button id="boot-skip" onclick="skipBoot()">Druk op ESC om over te slaan</button>
 </div>
@@ -944,11 +168,7 @@
        ============================================ -->
   <div class="desktop-icons">
 
-    <!-- MNRV.exe -->
-    <div class="desktop-icon" tabindex="0" data-window="setup-wizard">
-      <img class="icon-img" src="assets/icons/w98_ComputerExplorerCool_32x32_4.png" alt="MNRV.exe" draggable="false">
-      <span class="icon-label">MNRV.exe</span>
-    </div>
+
 
     <!-- Mijn Diensten -->
     <a class="desktop-icon" tabindex="0" data-target="diensten.html">
@@ -1009,7 +229,7 @@
   <!-- ============================================
        SETUP WIZARD
        ============================================ -->
-  <div id="setup-wizard" class="win-window hidden" style="width:550px;height:420px;left:50%;top:50%;transform:translate(-50%,-50%);">
+  <div id="setup-wizard" class="win-window hide w-550 h-420 position-center">
     <div class="win-titlebar">
       <img class="win-titlebar-icon" src="assets/icons/w98_AppWizard_16x16_4.png" alt="Setup" draggable="false">
       <span class="win-titlebar-title">MNRV Setup Wizard</span>
@@ -1094,7 +314,7 @@
   <!-- ============================================
        ABOUT MNRV WINDOW (IE-style)
        ============================================ -->
-  <div id="about-window" class="win-window hidden" style="width:500px;height:400px;left:15%;top:10%;">
+  <div id="about-window" class="win-window hide w-500 h-400 position-custom-about">
     <div class="win-titlebar">
       <img class="win-titlebar-icon" src="assets/icons/w98_MSIE1_16x16_4.png" alt="IE" draggable="false">
       <span class="win-titlebar-title">Over MNRV - Internet Explorer</span>
@@ -1106,12 +326,12 @@
     </div>
     <div class="win-addressbar">
       <label>Adres:</label>
-      <input type="text" value="https://www.mnrv.ai/over-ons" readonly class="win-input">
+      <input type="text" value="https://www.mnrv.ai/over-ons" readonly class="win-input" title="Over ons adres" placeholder="Adres">
     </div>
-    <div class="win-body" style="padding:0;">
-      <div class="ie-page-content" style="padding:16px;">
-        <div style="text-align:center;margin-bottom:12px;">
-          <img src="mnrv logo.png" alt="MNRV" style="width:150px;max-width:100%;">
+    <div class="win-body p-0">
+      <div class="ie-page-content p-16">
+        <div class="text-center mb-12">
+          <img src="mnrv logo.png" alt="MNRV" class="w-150 max-w-full">
         </div>
         <h1>MNRV &mdash; De Toekomst van AI</h1>
         <hr>
@@ -1125,7 +345,7 @@
         <p>Wij geloven dat de combinatie van mens en machine de sleutel is tot uitzonderlijke klantbeleving. Door AI naadloos te integreren in e-commerce platforms, creeren wij digitale ervaringen die converteren, verrassen en binden.</p>
 
         <hr>
-        <p style="text-align:center;font-size:10px;color:#808080;">&copy; 2026 MNRV - Alle rechten voorbehouden</p>
+        <p class="text-center fs-10 text-darkgray">&copy; 2026 MNRV - Alle rechten voorbehouden</p>
       </div>
     </div>
     <div class="win-statusbar">
@@ -1137,7 +357,7 @@
   <!-- ============================================
        RECYCLE BIN DIALOG
        ============================================ -->
-  <div id="recycle-dialog" class="win-window win-dialog hidden" style="width:320px;left:50%;top:50%;transform:translate(-50%,-50%);">
+  <div id="recycle-dialog" class="win-window win-dialog hide w-320 position-center">
     <div class="win-titlebar">
       <span class="win-titlebar-title">Prullenbak</span>
       <div class="win-titlebar-buttons">
@@ -1151,7 +371,7 @@
       </svg>
       <div class="dialog-text">
         <p>De prullenbak is leeg.</p>
-        <p style="margin-top:6px;">Bij MNRV gooien we niets weg &mdash; alles wordt gerecycled tot AI-kracht!</p>
+        <p class="mt-6">Bij MNRV gooien we niets weg &mdash; alles wordt gerecycled tot AI-kracht!</p>
       </div>
     </div>
     <div class="dialog-buttons">
@@ -1162,7 +382,7 @@
   <!-- ============================================
        WORD 95 WINDOW
        ============================================ -->
-  <div id="word-window" class="win-window hidden" style="width:620px;height:460px;left:10%;top:8%;">
+  <div id="word-window" class="win-window hide w-620 h-460 position-custom-word">
     <div class="win-titlebar">
       <img class="win-titlebar-icon" src="assets/icons/w98_WriteWordpad_16x16_4.png" alt="Word" draggable="false">
       <span class="win-titlebar-title">Microsoft Word - Document1</span>
@@ -1194,7 +414,7 @@
       <button class="word-tb-btn" title="Midden" onclick="document.execCommand('justifyCenter')">&#9776;</button>
       <button class="word-tb-btn" title="Rechts" onclick="document.execCommand('justifyRight')">&#9776;</button>
       <span class="word-tb-sep"></span>
-      <select class="word-font-select" onchange="document.execCommand('fontName',false,this.value)">
+      <select class="word-font-select" onchange="document.execCommand('fontName',false,this.value)" title="Lettertype">
         <option>Times New Roman</option>
         <option>Arial</option>
         <option>Comic Sans MS</option>
@@ -1202,7 +422,7 @@
         <option>Impact</option>
         <option>Tahoma</option>
       </select>
-      <select class="word-size-select" onchange="document.execCommand('fontSize',false,this.value)">
+      <select class="word-size-select" onchange="document.execCommand('fontSize',false,this.value)" title="Tekstgrootte">
         <option value="2">10</option>
         <option value="3" selected>12</option>
         <option value="4">14</option>
@@ -1235,7 +455,7 @@
   <!-- ============================================
        WORDART GALLERY DIALOG
        ============================================ -->
-  <div id="wordart-dialog" class="win-window win-dialog hidden" style="width:480px;left:50%;top:50%;transform:translate(-50%,-50%);">
+  <div id="wordart-dialog" class="win-window win-dialog hide w-480 position-center">
     <div class="win-titlebar">
       <span class="win-titlebar-title">WordArt Galerie</span>
       <div class="win-titlebar-buttons">
@@ -1247,10 +467,10 @@
       <div class="wordart-gallery" id="wordart-gallery"></div>
       <div class="wordart-text-input">
         <label>Je tekst hier:</label>
-        <input type="text" id="wordart-text" class="win-input" value="MNRV" style="width:100%;">
+        <input type="text" id="wordart-text" class="win-input w-full" value="MNRV" title="WordArt tekst" placeholder="Tekst">
       </div>
       <div class="wordart-preview" id="wordart-preview"></div>
-      <div class="dialog-buttons" style="padding:8px 0 0;">
+      <div class="dialog-buttons pt-8">
         <button class="win-btn win-btn-default" id="wordart-ok">OK</button>
         <button class="win-btn" id="wordart-cancel">Annuleren</button>
       </div>
@@ -1260,7 +480,7 @@
   <!-- ============================================
        APPS SHOWCASE WINDOW (Portfolio)
        ============================================ -->
-  <div id="apps-window" class="win-window hidden" style="width:820px;height:540px;left:50%;top:50%;transform:translate(-50%,-50%);">
+  <div id="apps-window" class="win-window hide w-820 h-540 position-center">
     <div class="win-titlebar">
       <img class="win-titlebar-icon" src="assets/icons/w98_World_16x16_4.png" alt="Apps" draggable="false">
       <span class="win-titlebar-title">MNRV Portfolio - App Showcase</span>
@@ -1304,19 +524,19 @@
     <!-- App address bar -->
     <div class="win-addressbar">
       <label>Adres:</label>
-      <input type="text" id="apps-address" value="https://d-cor-vision-ai-782596882622.us-west1.run.app" readonly class="win-input">
-      <button class="win-btn" style="min-width:auto;padding:2px 8px;height:20px;" onclick="window.open(document.getElementById('apps-address').value,'_blank')">&#10138;</button>
+      <input type="text" id="apps-address" value="https://d-cor-vision-ai-782596882622.us-west1.run.app" readonly class="win-input" title="App adres" placeholder="Adres">
+      <button class="win-btn btn-sm" onclick="window.open(document.getElementById('apps-address').value,'_blank')">&#10138;</button>
     </div>
     <!-- Iframe container -->
     <div class="apps-iframe-container">
       <div class="apps-loading" id="apps-loading">
         <div class="apps-loading-icon">&#9201;</div>
         <span>Laden...</span>
-        <div class="win-progress" style="width:200px;margin-top:8px;">
+        <div class="win-progress w-200 mt-8">
           <div class="win-progress-bar apps-progress-bar"></div>
         </div>
       </div>
-      <iframe id="apps-iframe" class="apps-iframe" src="about:blank" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"></iframe>
+      <iframe id="apps-iframe" class="apps-iframe" src="about:blank" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation" title="App showcase iframe"></iframe>
     </div>
     <!-- Status bar -->
     <div class="win-statusbar">
@@ -1352,21 +572,21 @@
   <!-- Quick Launch (social icons) -->
   <div class="quick-launch">
     <!-- LinkedIn -->
-    <a href="#" title="LinkedIn" target="_blank" rel="noopener">
+    <a href="https://www.linkedin.com/in/davevera/" title="LinkedIn" target="_blank" rel="noopener">
       <svg viewBox="0 0 16 16" fill="#0077b5">
         <rect x="1" y="1" width="14" height="14" rx="2" fill="#0077b5"/>
         <text x="4" y="12" fill="#fff" font-size="10" font-weight="bold" font-family="sans-serif">in</text>
       </svg>
     </a>
     <!-- Facebook -->
-    <a href="#" title="Facebook" target="_blank" rel="noopener">
+    <a href="https://www.facebook.com/meneervera/" title="Facebook" target="_blank" rel="noopener">
       <svg viewBox="0 0 16 16" fill="#1877f2">
         <rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2"/>
         <text x="8" y="13" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold" font-family="sans-serif">f</text>
       </svg>
     </a>
     <!-- Instagram -->
-    <a href="#" title="Instagram" target="_blank" rel="noopener">
+    <a href="https://www.instagram.com/mnrv.ai/" title="Instagram" target="_blank" rel="noopener">
       <svg viewBox="0 0 16 16">
         <defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs>
         <rect x="1" y="1" width="14" height="14" rx="4" fill="url(#ig)"/>
@@ -1375,21 +595,21 @@
       </svg>
     </a>
     <!-- GitHub -->
-    <a href="#" title="GitHub" target="_blank" rel="noopener">
+    <a href="https://github.com/DAVEVERA" title="GitHub" target="_blank" rel="noopener">
       <svg viewBox="0 0 16 16" fill="#333">
         <circle cx="8" cy="8" r="7" fill="#333"/>
         <path d="M8 2C4.7 2 2 4.7 2 8c0 2.6 1.7 4.9 4 5.6.3.1.4-.1.4-.3v-1c-1.6.4-2-.8-2-.8-.3-.7-.7-.9-.7-.9-.5-.4 0-.4 0-.4.6 0 .9.6.9.6.5.9 1.4.6 1.7.5 0-.4.2-.6.4-.8-1.3-.1-2.6-.6-2.6-2.8 0-.6.2-1.1.6-1.5 0-.2-.3-.7 0-1.4 0 0 .5-.2 1.6.6a5.5 5.5 0 013 0c1.1-.7 1.6-.6 1.6-.6.3.7.1 1.2 0 1.4.4.4.6.9.6 1.5 0 2.2-1.3 2.7-2.6 2.8.2.2.4.5.4 1v1.5c0 .2.1.4.4.3 2.3-.7 4-3 4-5.6C14 4.7 11.3 2 8 2z" fill="#fff"/>
       </svg>
     </a>
     <!-- WhatsApp -->
-    <a href="#" title="WhatsApp" target="_blank" rel="noopener">
+    <a href="https://wa.me/31682456410" title="WhatsApp" target="_blank" rel="noopener">
       <svg viewBox="0 0 16 16" fill="#25d366">
         <circle cx="8" cy="8" r="7" fill="#25d366"/>
         <path d="M11.5 9.5c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.5.1-.1.2-.5.7-.6.8-.1.1-.2.1-.4 0-.2-.1-.9-.3-1.7-1-.6-.6-1-1.2-1.2-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3 0-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.1 1.5 2.4 3.7 3.3.5.2.9.3 1.2.4.5.2 1 .1 1.3.1.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1-.1-.1-.2-.1-.4-.2z" fill="#fff"/>
       </svg>
     </a>
     <!-- Mail -->
-    <a href="mailto:info@mnrv.ai" title="E-mail">
+    <a href="mailto:info@mnrv.nl" title="E-mail">
       <svg viewBox="0 0 16 16">
         <rect x="1" y="3" width="14" height="10" rx="1" fill="#c0c000" stroke="#808000" stroke-width="0.5"/>
         <polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.5"/>
@@ -1405,7 +625,7 @@
     <svg id="clippy-tray" viewBox="0 0 16 16" title="Clippy weergeven">
       <path d="M8 1C6.3 1 5 2.3 5 4v1C3.9 5 3 5.9 3 7v5c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2V4c0-1.7-1.3-3-3-3zm0 1.5c.8 0 1.5.7 1.5 1.5v1h-3V4c0-.8.7-1.5 1.5-1.5z" fill="#808080"/>
     </svg>
-    <svg viewBox="0 0 16 16" style="width:16px;height:16px;">
+    <svg viewBox="0 0 16 16" class="icon-16">
       <polygon points="3,4 13,4 8,12" fill="#000"/>
     </svg>
     <span id="tray-clock" class="tray-clock">00:00</span>
@@ -1418,7 +638,7 @@
      ============================================ -->
 <div id="start-menu" class="start-menu booting">
   <div class="start-menu-sidebar">
-    <span>MNRV<em style="font-weight:normal;font-style:italic;font-size:9px;"> 98</em></span>
+    <span>MNRV<em class="start-menu-mnrv98"> 98</em></span>
   </div>
   <div class="start-menu-items">
     <a class="start-menu-item" href="diensten.html">
@@ -1443,13 +663,13 @@
       <span>Contact</span>
     </a>
     <div class="start-menu-separator"></div>
-    <div class="start-menu-item" style="display:flex;gap:8px;">
+    <div class="start-menu-item d-flex gap-8">
       <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" fill="#0077b5"/><text x="3" y="12" fill="#fff" font-size="8" font-weight="bold">in</text></svg>
-      <a href="#" target="_blank" style="color:inherit;text-decoration:none;">LinkedIn</a>
+      <a href="#" target="_blank" class="clean-link">LinkedIn</a>
     </div>
-    <div class="start-menu-item" style="display:flex;gap:8px;">
+    <div class="start-menu-item d-flex gap-8">
       <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#25d366"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">W</text></svg>
-      <a href="#" target="_blank" style="color:inherit;text-decoration:none;">WhatsApp</a>
+      <a href="#" target="_blank" class="clean-link">WhatsApp</a>
     </div>
     <div class="start-menu-separator"></div>
     <div class="start-menu-item" id="start-shutdown">
@@ -1602,6 +822,7 @@
       agent.show();
       agent.play('Greeting');
       agent.speak(generalTips[0]);
+      agent.mute();
 
       // Disable the built-in drag (we want Clippy pinned)
       var el = document.querySelector('.clippy');

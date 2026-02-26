@@ -25,7 +25,7 @@
       <div class="win-titlebar-buttons">
         <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
         <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
-        <a href="index.html" class="win-titlebar-btn close-btn" title="Terug naar bureaublad" style="text-decoration:none;color:inherit;">X</a>
+        <a href="index.html" class="win-titlebar-btn close-btn clean-link" title="Terug naar bureaublad">X</a>
       </div>
     </div>
 
@@ -38,8 +38,8 @@
     </div>
 
     <!-- Notepad Body -->
-    <div class="win-body" style="flex:1;">
-      <div class="notepad-textarea" style="padding:8px;font-family:var(--font-mono);font-size:12px;line-height:1.6;overflow:auto;white-space:pre-wrap;">
+    <div class="win-body flex-1">
+      <div class="notepad-textarea p-8 fs-12 lh-16 overflow-auto">
 ===============================================
         M . N . R . V
      DE TOEKOMST VAN AI & E-COMMERCE
@@ -130,13 +130,13 @@ GitHub:   /mnrv-ai
 
   <!-- Taskbar -->
   <div class="taskbar">
-    <a href="index.html" class="start-btn" style="text-decoration:none;color:inherit;">
-      <span style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:16px;height:16px;transform:skewX(-5deg);">
-        <span style="background:#ff0000;"></span><span style="background:#00aa00;"></span><span style="background:#0000ff;"></span><span style="background:#ffcc00;"></span>
+    <a href="index.html" class="start-btn clean-link">
+      <span class="start-logo-grid">
+        <span class="bg-red-500"></span><span class="bg-green-500"></span><span class="bg-blue-500"></span><span class="bg-yellow-500"></span>
       </span>
       <span>Start</span>
     </a>
-    <div class="taskbar-windows" style="flex:1;">
+    <div class="taskbar-windows flex-1">
       <button class="taskbar-window-btn active">over-mnrv.txt - Kladblok</button>
     </div>
     <div class="system-tray">

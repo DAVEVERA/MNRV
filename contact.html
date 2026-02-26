@@ -28,18 +28,18 @@
       <div class="win-titlebar-buttons">
         <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
         <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
-        <a href="index.html" class="win-titlebar-btn close-btn" title="Terug naar bureaublad" style="text-decoration:none;color:inherit;">X</a>
+        <a href="index.html" class="win-titlebar-btn close-btn clean-link" title="Terug naar bureaublad">X</a>
       </div>
     </div>
 
     <!-- Window Body -->
-    <div class="win-body-grey" style="flex:1;overflow:auto;">
+    <div class="win-body-grey flex-1 overflow-auto">
 
-      <div style="max-width:600px;margin:0 auto;padding:8px;">
+      <div class="max-w-600 mx-auto p-8">
 
-        <div style="text-align:center;margin-bottom:12px;">
-          <img src="mnrv-logo2.jpg" alt="MNRV" style="width:120px;image-rendering:auto;">
-          <p style="font-size:12px;margin-top:6px;"><strong>Neem contact op met MNRV</strong></p>
+        <div class="text-center mb-12">
+          <img src="mnrv-logo2.jpg" alt="MNRV" class="w-120 render-auto">
+          <p class="fs-12 mt-6"><strong>Neem contact op met MNRV</strong></p>
         </div>
 
         <!-- Tabs -->
@@ -75,30 +75,30 @@
                 <input type="tel" id="telefoon" name="telefoon" class="win-input" required placeholder="+31 6 1234 5678">
               </div>
 
-              <div class="form-row" style="align-items:flex-start;">
-                <label for="bericht" style="margin-top:4px;">Bericht *</label>
+              <div class="form-row items-start">
+                <label for="bericht" class="mt-4">Bericht *</label>
                 <textarea id="bericht" name="bericht" class="win-textarea" required rows="5" placeholder="Vertel ons over uw project..."></textarea>
               </div>
 
               <div class="form-row">
                 <label>Interesse:</label>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                  <label style="width:auto;display:flex;align-items:center;gap:3px;">
+                <div class="d-flex flex-wrap gap-8">
+                  <label class="checkbox-label">
                     <input type="checkbox" class="win-checkbox" name="interesse" value="agents"> AI Agents
                   </label>
-                  <label style="width:auto;display:flex;align-items:center;gap:3px;">
+                  <label class="checkbox-label">
                     <input type="checkbox" class="win-checkbox" name="interesse" value="webshop"> Webshop
                   </label>
-                  <label style="width:auto;display:flex;align-items:center;gap:3px;">
+                  <label class="checkbox-label">
                     <input type="checkbox" class="win-checkbox" name="interesse" value="uxui"> UX/UI
                   </label>
-                  <label style="width:auto;display:flex;align-items:center;gap:3px;">
+                  <label class="checkbox-label">
                     <input type="checkbox" class="win-checkbox" name="interesse" value="strategie"> Strategie
                   </label>
                 </div>
               </div>
 
-              <div style="display:flex;justify-content:center;gap:8px;margin-top:12px;">
+              <div class="d-flex justify-center gap-8 mt-12">
                 <button type="submit" class="win-btn win-btn-default">Verzenden</button>
                 <button type="reset" class="win-btn">Annuleren</button>
               </div>
@@ -106,14 +106,14 @@
             </form>
 
             <!-- Success message (hidden by default) -->
-            <div id="success-msg" style="display:none;text-align:center;padding:20px;">
-              <svg viewBox="0 0 32 32" style="width:32px;height:32px;margin-bottom:8px;">
+            <div id="success-msg" class="hide text-center p-20">
+              <svg viewBox="0 0 32 32" class="icon-32 mb-8">
                 <circle cx="16" cy="16" r="14" fill="#00aa00" stroke="#008000" stroke-width="2"/>
                 <text x="16" y="22" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold">&#10003;</text>
               </svg>
-              <p style="font-size:12px;"><strong>Bericht verzonden!</strong></p>
-              <p style="font-size:11px;margin-top:4px;">Bedankt voor uw bericht. Wij nemen zo snel mogelijk contact met u op.</p>
-              <button class="win-btn" onclick="resetForm()" style="margin-top:12px;">Nieuw bericht</button>
+              <p class="fs-12"><strong>Bericht verzonden!</strong></p>
+              <p class="fs-11 mt-4">Bedankt voor uw bericht. Wij nemen zo snel mogelijk contact met u op.</p>
+              <button class="win-btn mt-12" onclick="resetForm()">Nieuw bericht</button>
             </div>
           </div>
 
@@ -121,8 +121,8 @@
           <div class="tab-panel" id="panel-info">
             <div class="win-groupbox">
               <legend>Bedrijfsgegevens</legend>
-              <table style="font-size:11px;line-height:2;">
-                <tr><td style="padding-right:16px;"><strong>Bedrijf:</strong></td><td>MNRV</td></tr>
+              <table class="fs-11 lh-2">
+                <tr><td class="pr-16"><strong>Bedrijf:</strong></td><td>MNRV</td></tr>
                 <tr><td><strong>E-mail:</strong></td><td><a href="mailto:info@mnrv.ai">info@mnrv.ai</a></td></tr>
                 <tr><td><strong>Telefoon:</strong></td><td><a href="tel:+31612345678">+31 6 1234 5678</a></td></tr>
                 <tr><td><strong>Website:</strong></td><td><a href="index.html">www.mnrv.ai</a></td></tr>
@@ -131,13 +131,13 @@
 
             <div class="win-groupbox">
               <legend>Openingstijden</legend>
-              <table style="font-size:11px;line-height:2;">
-                <tr><td style="padding-right:16px;">Maandag - Vrijdag:</td><td>09:00 - 17:30</td></tr>
+              <table class="fs-11 lh-2">
+                <tr><td class="pr-16">Maandag - Vrijdag:</td><td>09:00 - 17:30</td></tr>
                 <tr><td>Zaterdag - Zondag:</td><td>Gesloten</td></tr>
               </table>
             </div>
 
-            <p style="font-size:11px;margin-top:12px;line-height:1.6;">
+            <p class="fs-11 mt-12 lh-16">
               Voor dringende vragen kunt u ons ook bereiken via
               <a href="#" target="_blank">WhatsApp</a>.
             </p>
@@ -145,34 +145,34 @@
 
           <!-- Social Tab -->
           <div class="tab-panel" id="panel-social">
-            <p style="font-size:11px;margin-bottom:12px;">Volg MNRV op social media en blijf op de hoogte van de laatste AI-ontwikkelingen:</p>
+            <p class="fs-11 mb-12">Volg MNRV op social media en blijf op de hoogte van de laatste AI-ontwikkelingen:</p>
 
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <a href="#" target="_blank" class="win-btn" style="text-decoration:none;min-width:200px;display:flex;align-items:center;gap:8px;justify-content:flex-start;">
-                <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><rect x="1" y="1" width="14" height="14" rx="2" fill="#0077b5"/><text x="4" y="12" fill="#fff" font-size="10" font-weight="bold">in</text></svg>
+            <div class="flex-col gap-8">
+              <a href="#" target="_blank" class="win-btn social-btn">
+                <svg viewBox="0 0 16 16" class="icon-16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#0077b5"/><text x="4" y="12" fill="#fff" font-size="10" font-weight="bold">in</text></svg>
                 LinkedIn
               </a>
-              <a href="#" target="_blank" class="win-btn" style="text-decoration:none;min-width:200px;display:flex;align-items:center;gap:8px;justify-content:flex-start;">
-                <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2"/><text x="8" y="13" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">f</text></svg>
+              <a href="#" target="_blank" class="win-btn social-btn">
+                <svg viewBox="0 0 16 16" class="icon-16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2"/><text x="8" y="13" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">f</text></svg>
                 Facebook
               </a>
-              <a href="#" target="_blank" class="win-btn" style="text-decoration:none;min-width:200px;display:flex;align-items:center;gap:8px;justify-content:flex-start;">
-                <svg viewBox="0 0 16 16" style="width:16px;height:16px;">
+              <a href="#" target="_blank" class="win-btn social-btn">
+                <svg viewBox="0 0 16 16" class="icon-16">
                   <defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs>
                   <rect x="1" y="1" width="14" height="14" rx="4" fill="url(#ig)"/><circle cx="8" cy="8" r="3.5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="4" r="1" fill="#fff"/>
                 </svg>
                 Instagram
               </a>
-              <a href="#" target="_blank" class="win-btn" style="text-decoration:none;min-width:200px;display:flex;align-items:center;gap:8px;justify-content:flex-start;">
-                <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><circle cx="8" cy="8" r="7" fill="#333"/><path d="M8 2C4.7 2 2 4.7 2 8c0 2.6 1.7 4.9 4 5.6.3.1.4-.1.4-.3v-1c-1.6.4-2-.8-2-.8-.3-.7-.7-.9-.7-.9-.5-.4 0-.4 0-.4.6 0 .9.6.9.6.5.9 1.4.6 1.7.5 0-.4.2-.6.4-.8-1.3-.1-2.6-.6-2.6-2.8 0-.6.2-1.1.6-1.5 0-.2-.3-.7 0-1.4 0 0 .5-.2 1.6.6a5.5 5.5 0 013 0c1.1-.7 1.6-.6 1.6-.6.3.7.1 1.2 0 1.4.4.4.6.9.6 1.5 0 2.2-1.3 2.7-2.6 2.8.2.2.4.5.4 1v1.5c0 .2.1.4.4.3 2.3-.7 4-3 4-5.6C14 4.7 11.3 2 8 2z" fill="#fff"/></svg>
+              <a href="#" target="_blank" class="win-btn social-btn">
+                <svg viewBox="0 0 16 16" class="icon-16"><circle cx="8" cy="8" r="7" fill="#333"/><path d="M8 2C4.7 2 2 4.7 2 8c0 2.6 1.7 4.9 4 5.6.3.1.4-.1.4-.3v-1c-1.6.4-2-.8-2-.8-.3-.7-.7-.9-.7-.9-.5-.4 0-.4 0-.4.6 0 .9.6.9.6.5.9 1.4.6 1.7.5 0-.4.2-.6.4-.8-1.3-.1-2.6-.6-2.6-2.8 0-.6.2-1.1.6-1.5 0-.2-.3-.7 0-1.4 0 0 .5-.2 1.6.6a5.5 5.5 0 013 0c1.1-.7 1.6-.6 1.6-.6.3.7.1 1.2 0 1.4.4.4.6.9.6 1.5 0 2.2-1.3 2.7-2.6 2.8.2.2.4.5.4 1v1.5c0 .2.1.4.4.3 2.3-.7 4-3 4-5.6C14 4.7 11.3 2 8 2z" fill="#fff"/></svg>
                 GitHub
               </a>
-              <a href="#" target="_blank" class="win-btn" style="text-decoration:none;min-width:200px;display:flex;align-items:center;gap:8px;justify-content:flex-start;">
-                <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><circle cx="8" cy="8" r="7" fill="#25d366"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">W</text></svg>
+              <a href="#" target="_blank" class="win-btn social-btn">
+                <svg viewBox="0 0 16 16" class="icon-16"><circle cx="8" cy="8" r="7" fill="#25d366"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">W</text></svg>
                 WhatsApp
               </a>
-              <a href="mailto:info@mnrv.ai" class="win-btn" style="text-decoration:none;min-width:200px;display:flex;align-items:center;gap:8px;justify-content:flex-start;">
-                <svg viewBox="0 0 16 16" style="width:16px;height:16px;"><rect x="1" y="3" width="14" height="10" rx="1" fill="#c0c000" stroke="#808000" stroke-width="0.5"/><polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.5"/></svg>
+              <a href="mailto:info@mnrv.ai" class="win-btn social-btn">
+                <svg viewBox="0 0 16 16" class="icon-16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#c0c000" stroke="#808000" stroke-width="0.5"/><polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.5"/></svg>
                 E-mail
               </a>
             </div>
@@ -192,13 +192,13 @@
 
   <!-- Taskbar -->
   <div class="taskbar">
-    <a href="index.html" class="start-btn" style="text-decoration:none;color:inherit;">
-      <span style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:16px;height:16px;transform:skewX(-5deg);">
-        <span style="background:#ff0000;"></span><span style="background:#00aa00;"></span><span style="background:#0000ff;"></span><span style="background:#ffcc00;"></span>
+    <a href="index.html" class="start-btn clean-link">
+      <span class="start-logo-grid">
+        <span class="bg-red-500"></span><span class="bg-green-500"></span><span class="bg-blue-500"></span><span class="bg-yellow-500"></span>
       </span>
       <span>Start</span>
     </a>
-    <div class="taskbar-windows" style="flex:1;">
+    <div class="taskbar-windows flex-1">
       <button class="taskbar-window-btn active">Contact - MNRV</button>
     </div>
     <div class="system-tray">
