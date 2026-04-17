@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "name": "MNRV",
+    "tagline": "AI \u00d7 E-commerce \u00d7 Maatwerk"
+  },
+  "chat": {
+    "placeholder": "Vraag het Clippy\u2026",
+    "send": "Verstuur",
+    "typing": "Clippy typt\u2026",
+    "thinking": "Clippy denkt na\u2026",
+    "errorFallback": "Sorry, er ging iets mis. Probeer het nog eens.",
+    "clear": "Gesprek wissen",
+    "historyToggle": "Gesprek",
+    "leadSent": "Top \u2014 Dave krijgt dit binnen een minuut in zijn inbox."
+  },
+  "intro": {
+    "greet": "Hoi, ik ben Clippy. Ik werk voor MNRV \u2014 AI-agents, webshops en maatwerk voor de volgende generatie e-commerce. Wat brengt jou hier?"
+  },
+  "locale": {
+    "switchTo": "EN"
+  },
+  "a11y": {
+    "clippyStage": "3D-animatie van Clippy",
+    "chatRegion": "Chat met Clippy"
+  }
+}

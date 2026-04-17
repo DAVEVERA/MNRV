@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "name": "MNRV",
+    "tagline": "AI \u00d7 E-commerce \u00d7 Custom Builds"
+  },
+  "chat": {
+    "placeholder": "Ask Clippy anything\u2026",
+    "send": "Send",
+    "typing": "Clippy is typing\u2026",
+    "thinking": "Clippy is thinking\u2026",
+    "errorFallback": "Sorry, something went wrong. Try again.",
+    "clear": "Clear conversation",
+    "historyToggle": "History",
+    "leadSent": "Got it \u2014 Dave will have this in his inbox within a minute."
+  },
+  "intro": {
+    "greet": "Hi, I'm Clippy. I work for MNRV \u2014 AI agents, webshops and custom builds for next-gen e-commerce. What brings you here?"
+  },
+  "locale": {
+    "switchTo": "NL"
+  },
+  "a11y": {
+    "clippyStage": "3D animation of Clippy",
+    "chatRegion": "Chat with Clippy"
+  }
+}
