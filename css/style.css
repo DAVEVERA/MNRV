@@ -210,6 +210,24 @@ a {
   image-rendering: pixelated;
 }
 
+/* --- Start Flag (4-color Win98 Windows logo) --- */
+.start-flag {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  width: 16px;
+  height: 16px;
+  transform: skewX(-5deg);
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.start-flag span:nth-child(1) { background: #ff0000; } /* rood  - links boven  */
+.start-flag span:nth-child(2) { background: #00aa00; } /* groen - rechts boven */
+.start-flag span:nth-child(3) { background: #0000ff; } /* blauw - links onder  */
+.start-flag span:nth-child(4) { background: #ffcc00; } /* geel  - rechts onder */
+
 /* --- Quick Launch --- */
 .quick-launch {
   display: flex;
@@ -501,7 +519,7 @@ a {
 .win-titlebar {
   display: flex;
   align-items: center;
-  height: 20px;
+  height: 18px;         /* Win98 SM_CYCAPTION = 18px */
   padding: 2px 3px;
   background: var(--win-titlebar);
   color: var(--win-titlebar-text);
