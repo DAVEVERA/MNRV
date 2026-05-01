@@ -179,12 +179,12 @@ a {
   gap: 2px;
 }
 
-/* --- Start Button --- */
+/* --- Start Button (authentic Win98) --- */
 .start-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 2px 6px;
+  gap: 4px;
+  padding: 2px 8px 2px 4px;
   height: 28px;
   background: var(--win-btn-face);
   border: 2px solid;
@@ -195,22 +195,30 @@ a {
   font-size: 11px;
   font-weight: bold;
   white-space: nowrap;
+  color: var(--win-text);
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
 .start-btn:active,
 .start-btn.active {
   border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
   box-shadow: inset 1px 1px 0 var(--win-btn-shadow);
-  padding: 3px 5px 1px 7px;
+  padding: 3px 7px 1px 5px;
 }
 
-.start-btn .start-logo {
+.start-btn .start-logo,
+.start-flag-img {
   width: 16px;
   height: 16px;
+  flex-shrink: 0;
   image-rendering: pixelated;
+  pointer-events: none;
+  display: block;
 }
 
-/* --- Start Flag (4-color Win98 Windows logo) --- */
+/* Legacy 4-color flag fallback (kept for backwards compat, hidden where the
+   img variant is used) */
 .start-flag {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -223,10 +231,10 @@ a {
   image-rendering: pixelated;
 }
 
-.start-flag span:nth-child(1) { background: #ff0000; } /* rood  - links boven  */
-.start-flag span:nth-child(2) { background: #00aa00; } /* groen - rechts boven */
-.start-flag span:nth-child(3) { background: #0000ff; } /* blauw - links onder  */
-.start-flag span:nth-child(4) { background: #ffcc00; } /* geel  - rechts onder */
+.start-flag span:nth-child(1) { background: #ff0000; }
+.start-flag span:nth-child(2) { background: #00aa00; }
+.start-flag span:nth-child(3) { background: #0000ff; }
+.start-flag span:nth-child(4) { background: #ffcc00; }
 
 /* --- Quick Launch --- */
 .quick-launch {

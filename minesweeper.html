@@ -301,12 +301,15 @@
 
   <!-- Taskbar -->
   <div class="taskbar">
-    <a href="index.html" class="start-btn clean-link">
-      <span class="start-flag"><span></span><span></span><span></span><span></span></span>
+    <a href="index.html" class="start-btn clean-link" title="Terug naar bureaublad">
+      <img class="start-flag-img" src="assets/icons/w98_Windows_16x16_4.png" alt="" draggable="false">
       <span>Start</span>
     </a>
-    <div class="taskbar-windows" style="flex:1;">
-      <button class="taskbar-window-btn active">Mijnenveger</button>
+    <div class="taskbar-windows flex-1">
+      <button class="taskbar-window-btn active" type="button">
+        <img src="assets/icons/w98_Minesweeper_16x16_4.png" alt="" draggable="false">
+        Mijnenveger
+      </button>
     </div>
     <div class="system-tray">
       <span id="tray-clock" class="tray-clock">00:00</span>

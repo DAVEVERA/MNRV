@@ -4,200 +4,411 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact - MNRV</title>
+  <meta name="description" content="Neem contact op met MNRV - AI &amp; E-Commerce specialisten. Stuur een bericht of bel ons direct.">
+  <link rel="icon" type="image/png" href="assets/icons/Mail_16x16_4.png">
   <link rel="stylesheet" href="css/style.css">
   <style>
+    /* Contact-specific layout */
     .contact-tabs { margin-bottom: 0; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
+
+    .contact-shell {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .contact-hero {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #fff;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      border: 2px solid;
+      border-color: #fff #000 #000 #fff;
+    }
+    .contact-hero img {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      image-rendering: pixelated;
+    }
+    .contact-hero h1 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0.4px;
+    }
+    .contact-hero p {
+      margin: 2px 0 0;
+      font-size: 11px;
+      color: #d4e7ff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 760px) {
+      .contact-grid { grid-template-columns: 2fr 1fr; }
+    }
+
+    .info-card {
+      background: #fff;
+      border: 2px solid;
+      border-color: #808080 #fff #fff #808080;
+      padding: 12px 14px;
+    }
+    .info-card h3 {
+      font-size: 12px;
+      color: #000080;
+      margin: 0 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #c0c0c0;
+    }
+    .info-card dl {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 4px 12px;
+      font-size: 11px;
+      margin: 0 0 8px;
+    }
+    .info-card dt { color: #555; }
+    .info-card dd { margin: 0; }
+    .info-card .small { font-size: 10px; color: #555; line-height: 1.5; }
+
+    .quick-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .quick-actions a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      background: var(--win-btn-face);
+      border: 2px solid;
+      border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+      box-shadow: inset 1px 1px 0 var(--win-btn-face), inset -1px -1px 0 var(--win-btn-shadow);
+      font-size: 11px;
+      text-decoration: none;
+      color: #000;
+    }
+    .quick-actions a:hover { background: #d4d0c8; }
+    .quick-actions a:active {
+      border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
+      box-shadow: inset 1px 1px 0 var(--win-btn-shadow);
+    }
+    .quick-actions svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .form-row.items-start { align-items: start; }
+    .form-row label { font-size: 11px; }
+    .form-row .win-input,
+    .form-row .win-textarea { width: 100%; }
+    .field-hint {
+      grid-column: 2 / -1;
+      font-size: 10px;
+      color: #777;
+      margin-top: -2px;
+    }
+    .field-error {
+      grid-column: 2 / -1;
+      font-size: 10px;
+      color: #b00020;
+      margin-top: 2px;
+      display: none;
+    }
+    .form-row.has-error .win-input,
+    .form-row.has-error .win-textarea {
+      outline: 2px solid #b00020;
+      outline-offset: -2px;
+    }
+    .form-row.has-error .field-error { display: block; }
+
+    .checkbox-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+    }
+    .char-counter {
+      font-size: 10px;
+      color: #777;
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    .openings {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 4px 12px;
+      font-size: 11px;
+    }
+    .openings span:nth-child(odd) { color: #555; }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-row label { font-weight: bold; }
+    }
   </style>
 </head>
 <body>
 
 <div class="page-desktop">
 
-  <!-- Contact Window (full page) -->
+  <!-- Contact Window -->
   <div class="page-window">
 
     <!-- Title Bar -->
     <div class="win-titlebar">
-      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
-        <rect x="1" y="3" width="14" height="10" rx="1" fill="#ffe766" stroke="#808000" stroke-width="0.5"/>
-        <polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.5"/>
-      </svg>
+      <img class="win-titlebar-icon" src="assets/icons/Mail_16x16_4.png" alt="" draggable="false">
       <span class="win-titlebar-title">Contact - MNRV</span>
       <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
-        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn min-btn" type="button" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" type="button" title="Maximaliseren">&#9633;</button>
         <a href="index.html" class="win-titlebar-btn close-btn clean-link" title="Terug naar bureaublad">X</a>
       </div>
+    </div>
+
+    <!-- Menu Bar -->
+    <div class="win-menubar">
+      <span class="win-menubar-item" tabindex="0" onclick="window.print()">Bestand</span>
+      <span class="win-menubar-item" tabindex="0" onclick="resetFormHard()">Bewerken</span>
+      <span class="win-menubar-item" tabindex="0" onclick="switchTab('info')">Beeld</span>
+      <span class="win-menubar-item" tabindex="0" onclick="alert('Contact - MNRV\\nVersie 1.0\\n\\n(c) 2026 MNRV')">Help</span>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="win-toolbar">
+      <a href="index.html" class="win-toolbar-btn clean-link">
+        <svg viewBox="0 0 16 16"><polygon points="10,2 2,8 10,14" fill="#000"/></svg>
+        Terug
+      </a>
+      <a href="diensten.html" class="win-toolbar-btn clean-link">
+        <svg viewBox="0 0 16 16"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
+        Diensten
+      </a>
+      <a href="webshop.html" class="win-toolbar-btn clean-link">
+        <svg viewBox="0 0 16 16"><path d="M2 4 L4 4 L5 11 L13 11 L14 5 L5 5" fill="none" stroke="#000" stroke-width="1.2"/><circle cx="6" cy="13" r="1" fill="#000"/><circle cx="12" cy="13" r="1" fill="#000"/></svg>
+        Webshop
+      </a>
+      <div class="win-toolbar-separator"></div>
+      <a href="mailto:info@mnrv.ai" class="win-toolbar-btn clean-link">
+        <svg viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#ffd700" stroke="#808000" stroke-width="0.5"/><polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.6"/></svg>
+        Direct mailen
+      </a>
     </div>
 
     <!-- Window Body -->
     <div class="win-body-grey flex-1 overflow-auto">
 
-      <div class="max-w-600 mx-auto p-8">
+      <div class="contact-shell">
 
-        <div class="text-center mb-12">
-          <img src="mnrv-logo2.jpg" alt="MNRV" class="w-120 render-auto">
-          <p class="fs-12 mt-6"><strong>Neem contact op met MNRV</strong></p>
-        </div>
+        <header class="contact-hero">
+          <img src="assets/icons/Mail_32x32_4.png" alt="">
+          <div>
+            <h1>Neem contact op met MNRV</h1>
+            <p>Doorgaans reageren we binnen 24 uur (werkdagen). We bijten niet.</p>
+          </div>
+        </header>
 
         <!-- Tabs -->
         <div class="win-tabs contact-tabs">
-          <button class="win-tab active" onclick="switchTab('form')" id="tab-form">Contactformulier</button>
-          <button class="win-tab" onclick="switchTab('info')" id="tab-info">Contactgegevens</button>
-          <button class="win-tab" onclick="switchTab('social')" id="tab-social">Social Media</button>
+          <button class="win-tab active" type="button" onclick="switchTab('form')" id="tab-form">Bericht</button>
+          <button class="win-tab" type="button" onclick="switchTab('info')" id="tab-info">Gegevens</button>
+          <button class="win-tab" type="button" onclick="switchTab('social')" id="tab-social">Social</button>
         </div>
 
         <div class="win-tab-content">
 
           <!-- Form Tab -->
           <div class="tab-panel active" id="panel-form">
-            <form id="contact-form" onsubmit="return handleSubmit(event)">
+            <div class="contact-grid">
+              <form id="contact-form" class="info-card" novalidate onsubmit="return handleSubmit(event)">
+                <h3>Stuur ons een bericht</h3>
 
-              <div class="form-row">
-                <label for="naam">Naam *</label>
-                <input type="text" id="naam" name="naam" class="win-input" required placeholder="Uw naam">
-              </div>
-
-              <div class="form-row">
-                <label for="email">E-mailadres *</label>
-                <input type="email" id="email" name="email" class="win-input" required placeholder="uw@email.nl">
-              </div>
-
-              <div class="form-row">
-                <label for="bedrijf">Bedrijf</label>
-                <input type="text" id="bedrijf" name="bedrijf" class="win-input" placeholder="Bedrijfsnaam (optioneel)">
-              </div>
-
-              <div class="form-row">
-                <label for="telefoon">Telefoon *</label>
-                <input type="tel" id="telefoon" name="telefoon" class="win-input" required placeholder="+31 6 1234 5678">
-              </div>
-
-              <div class="form-row items-start">
-                <label for="bericht" class="mt-4">Bericht *</label>
-                <textarea id="bericht" name="bericht" class="win-textarea" required rows="5" placeholder="Vertel ons over uw project..."></textarea>
-              </div>
-
-              <div class="form-row">
-                <label>Interesse:</label>
-                <div class="d-flex flex-wrap gap-8">
-                  <label class="checkbox-label">
-                    <input type="checkbox" class="win-checkbox" name="interesse" value="agents"> AI Agents
-                  </label>
-                  <label class="checkbox-label">
-                    <input type="checkbox" class="win-checkbox" name="interesse" value="webshop"> Webshop
-                  </label>
-                  <label class="checkbox-label">
-                    <input type="checkbox" class="win-checkbox" name="interesse" value="uxui"> UX/UI
-                  </label>
-                  <label class="checkbox-label">
-                    <input type="checkbox" class="win-checkbox" name="interesse" value="strategie"> Strategie
-                  </label>
+                <div class="form-row" id="row-naam">
+                  <label for="naam">Naam *</label>
+                  <input type="text" id="naam" name="naam" class="win-input" required minlength="2" placeholder="Voor- en achternaam" autocomplete="name">
+                  <div class="field-error">Vul minimaal 2 tekens in.</div>
                 </div>
-              </div>
 
-              <div class="d-flex justify-center gap-8 mt-12">
-                <button type="submit" class="win-btn win-btn-default">Verzenden</button>
-                <button type="reset" class="win-btn">Annuleren</button>
-              </div>
+                <div class="form-row" id="row-email">
+                  <label for="email">E-mail *</label>
+                  <input type="email" id="email" name="email" class="win-input" required placeholder="jij@bedrijf.nl" autocomplete="email">
+                  <div class="field-error">Geef een geldig e-mailadres op.</div>
+                </div>
 
-            </form>
+                <div class="form-row">
+                  <label for="bedrijf">Bedrijf</label>
+                  <input type="text" id="bedrijf" name="bedrijf" class="win-input" placeholder="Optioneel" autocomplete="organization">
+                </div>
 
-            <!-- Success message (hidden by default) -->
-            <div id="success-msg" class="hide text-center p-20">
-              <svg viewBox="0 0 32 32" class="icon-32 mb-8">
+                <div class="form-row" id="row-telefoon">
+                  <label for="telefoon">Telefoon</label>
+                  <input type="tel" id="telefoon" name="telefoon" class="win-input" placeholder="+31 6 1234 5678" autocomplete="tel">
+                  <div class="field-hint">Niet verplicht &mdash; handig als je gebeld wil worden.</div>
+                </div>
+
+                <div class="form-row items-start" id="row-bericht">
+                  <label for="bericht" style="margin-top:4px;">Bericht *</label>
+                  <textarea id="bericht" name="bericht" class="win-textarea" required minlength="10" maxlength="1000" rows="6" placeholder="Vertel kort waar je mee zit. Wat is het doel? Wat moet er beter? Welke timing?"></textarea>
+                  <div class="char-counter" id="char-counter">0 / 1000</div>
+                  <div class="field-error">Schrijf minimaal 10 tekens.</div>
+                </div>
+
+                <div class="form-row items-start">
+                  <label style="margin-top:2px;">Interesse</label>
+                  <div class="checkbox-grid">
+                    <label class="checkbox-label"><input type="checkbox" class="win-checkbox" name="interesse" value="agents"> AI Agents</label>
+                    <label class="checkbox-label"><input type="checkbox" class="win-checkbox" name="interesse" value="webshop"> Webshop</label>
+                    <label class="checkbox-label"><input type="checkbox" class="win-checkbox" name="interesse" value="uxui"> UX/UI</label>
+                    <label class="checkbox-label"><input type="checkbox" class="win-checkbox" name="interesse" value="strategie"> Strategie</label>
+                    <label class="checkbox-label"><input type="checkbox" class="win-checkbox" name="interesse" value="integraties"> Integraties</label>
+                    <label class="checkbox-label"><input type="checkbox" class="win-checkbox" name="interesse" value="maatwerk"> Maatwerk</label>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-center gap-8 mt-12" style="padding-top:8px;border-top:1px solid #c0c0c0;">
+                  <button type="submit" class="win-btn win-btn-default">Verzenden</button>
+                  <button type="reset" class="win-btn" onclick="resetErrors()">Wissen</button>
+                </div>
+              </form>
+
+              <aside class="info-card">
+                <h3>Liever direct?</h3>
+                <p class="small">Geen zin in een formulier? Pak dan eentje hieronder.</p>
+                <div class="quick-actions">
+                  <a href="mailto:info@mnrv.ai">
+                    <svg viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#ffd700" stroke="#808000" stroke-width="0.5"/><polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.6"/></svg>
+                    info@mnrv.ai
+                  </a>
+                  <a href="tel:+31682456410">
+                    <svg viewBox="0 0 16 16"><path d="M3 2 L6 2 L7 6 L5 7 Q6 10 9 11 L10 9 L14 10 L14 13 Q14 14 13 14 Q5 14 2 6 Q2 2 3 2 Z" fill="#000080"/></svg>
+                    +31 6 82 45 64 10
+                  </a>
+                  <a href="https://wa.me/31682456410" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#25d366"/><path d="M11.5 9.5c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.5.1-.1.2-.5.7-.6.8-.1.1-.2.1-.4 0-.2-.1-.9-.3-1.7-1-.6-.6-1-1.2-1.2-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3 0-.1 0-.2 0-.3-.1-.1-.5-1.1-.6-1.5-.2-.4-.3-.4-.5-.4h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.1 1.5 2.4 3.7 3.3.5.2.9.3 1.2.4.5.2 1 .1 1.3.1.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1-.1-.1-.2-.1-.4-.2z" fill="#fff"/></svg>
+                    WhatsApp
+                  </a>
+                  <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#0077b5"/><text x="4" y="12" fill="#fff" font-size="10" font-weight="bold" font-family="sans-serif">in</text></svg>
+                    LinkedIn
+                  </a>
+                </div>
+
+                <h3 style="margin-top:14px;">Openingstijden</h3>
+                <div class="openings">
+                  <span>Ma &mdash; Vr</span><span>09:00 &mdash; 17:30</span>
+                  <span>Za &amp; Zo</span><span>Gesloten</span>
+                </div>
+                <p class="small" style="margin-top:8px;">Voor urgente zaken: WhatsApp werkt vaak het snelst.</p>
+              </aside>
+            </div>
+
+            <!-- Success message -->
+            <div id="success-msg" class="info-card hide" style="margin-top:14px;text-align:center;">
+              <svg viewBox="0 0 32 32" class="icon-32" style="width:32px;height:32px;margin:8px auto;">
                 <circle cx="16" cy="16" r="14" fill="#00aa00" stroke="#008000" stroke-width="2"/>
                 <text x="16" y="22" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold">&#10003;</text>
               </svg>
               <p class="fs-12"><strong>Bericht verzonden!</strong></p>
-              <p class="fs-11 mt-4">Bedankt voor uw bericht. Wij nemen zo snel mogelijk contact met u op.</p>
-              <button class="win-btn mt-12" onclick="resetForm()">Nieuw bericht</button>
+              <p class="fs-11 mt-4">Bedankt &mdash; we reageren binnen 24 uur (werkdagen). Referentie: <strong id="msg-ref">&mdash;</strong></p>
+              <button class="win-btn mt-12" type="button" onclick="resetForm()">Nieuw bericht</button>
             </div>
           </div>
 
           <!-- Info Tab -->
           <div class="tab-panel" id="panel-info">
-            <div class="win-groupbox">
-              <legend>Bedrijfsgegevens</legend>
-              <table class="fs-11 lh-2">
-                <tr><td class="pr-16"><strong>Bedrijf:</strong></td><td>MNRV</td></tr>
-                <tr><td><strong>E-mail:</strong></td><td><a href="mailto:info@mnrv.ai">info@mnrv.ai</a></td></tr>
-                <tr><td><strong>Telefoon:</strong></td><td><a href="tel:+31612345678">+31 6 1234 5678</a></td></tr>
-                <tr><td><strong>Website:</strong></td><td><a href="index.html">www.mnrv.ai</a></td></tr>
-              </table>
+            <div class="contact-grid">
+              <div class="info-card">
+                <h3>Bedrijfsgegevens</h3>
+                <dl>
+                  <dt>Bedrijf</dt><dd>MNRV</dd>
+                  <dt>Eigenaar</dt><dd>Dave Vera</dd>
+                  <dt>E-mail</dt><dd><a href="mailto:info@mnrv.ai">info@mnrv.ai</a></dd>
+                  <dt>Telefoon</dt><dd><a href="tel:+31682456410">+31 6 82 45 64 10</a></dd>
+                  <dt>Website</dt><dd><a href="index.html">www.mnrv.ai</a></dd>
+                  <dt>Vestiging</dt><dd>Nederland</dd>
+                </dl>
+                <p class="small">Werken op locatie? Geen probleem &mdash; we komen graag langs voor een eerste gesprek of workshop.</p>
+              </div>
+              <aside class="info-card">
+                <h3>Openingstijden</h3>
+                <div class="openings">
+                  <span>Ma &mdash; Vr</span><span>09:00 &mdash; 17:30</span>
+                  <span>Za</span><span>Op afspraak</span>
+                  <span>Zo</span><span>Gesloten</span>
+                </div>
+                <h3 style="margin-top:14px;">Reactietijden</h3>
+                <div class="openings">
+                  <span>E-mail</span><span>&lt; 24 uur</span>
+                  <span>WhatsApp</span><span>&lt; 4 uur</span>
+                  <span>Offerte</span><span>2&ndash;3 dagen</span>
+                </div>
+              </aside>
             </div>
-
-            <div class="win-groupbox">
-              <legend>Openingstijden</legend>
-              <table class="fs-11 lh-2">
-                <tr><td class="pr-16">Maandag - Vrijdag:</td><td>09:00 - 17:30</td></tr>
-                <tr><td>Zaterdag - Zondag:</td><td>Gesloten</td></tr>
-              </table>
-            </div>
-
-            <p class="fs-11 mt-12 lh-16">
-              Voor dringende vragen kunt u ons ook bereiken via
-              <a href="https://wa.me/31682456410" target="_blank" rel="noopener noreferrer">WhatsApp</a>.
-            </p>
           </div>
 
           <!-- Social Tab -->
           <div class="tab-panel" id="panel-social">
-            <p class="fs-11 mb-12">Volg MNRV op social media en blijf op de hoogte van de laatste AI-ontwikkelingen:</p>
-
-            <div class="flex-col gap-8">
-              <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener noreferrer" class="win-btn social-btn">
-                <svg viewBox="0 0 16 16" class="icon-16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#0077b5"/><text x="4" y="12" fill="#fff" font-size="10" font-weight="bold">in</text></svg>
-                LinkedIn
-              </a>
-              <a href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener noreferrer" class="win-btn social-btn">
-                <svg viewBox="0 0 16 16" class="icon-16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2"/><text x="8" y="13" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">f</text></svg>
-                Facebook
-              </a>
-              <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener noreferrer" class="win-btn social-btn">
-                <svg viewBox="0 0 16 16" class="icon-16">
-                  <defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs>
-                  <rect x="1" y="1" width="14" height="14" rx="4" fill="url(#ig)"/><circle cx="8" cy="8" r="3.5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="4" r="1" fill="#fff"/>
-                </svg>
-                Instagram
-              </a>
-              <a href="https://github.com/DAVEVERA" target="_blank" rel="noopener noreferrer" class="win-btn social-btn">
-                <svg viewBox="0 0 16 16" class="icon-16"><circle cx="8" cy="8" r="7" fill="#333"/><path d="M8 2C4.7 2 2 4.7 2 8c0 2.6 1.7 4.9 4 5.6.3.1.4-.1.4-.3v-1c-1.6.4-2-.8-2-.8-.3-.7-.7-.9-.7-.9-.5-.4 0-.4 0-.4.6 0 .9.6.9.6.5.9 1.4.6 1.7.5 0-.4.2-.6.4-.8-1.3-.1-2.6-.6-2.6-2.8 0-.6.2-1.1.6-1.5 0-.2-.3-.7 0-1.4 0 0 .5-.2 1.6.6a5.5 5.5 0 013 0c1.1-.7 1.6-.6 1.6-.6.3.7.1 1.2 0 1.4.4.4.6.9.6 1.5 0 2.2-1.3 2.7-2.6 2.8.2.2.4.5.4 1v1.5c0 .2.1.4.4.3 2.3-.7 4-3 4-5.6C14 4.7 11.3 2 8 2z" fill="#fff"/></svg>
-                GitHub
-              </a>
-              <a href="https://wa.me/31682456410" target="_blank" rel="noopener noreferrer" class="win-btn social-btn">
-                <svg viewBox="0 0 16 16" class="icon-16"><circle cx="8" cy="8" r="7" fill="#25d366"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">W</text></svg>
-                WhatsApp
-              </a>
-              <a href="mailto:info@mnrv.ai" class="win-btn social-btn">
-                <svg viewBox="0 0 16 16" class="icon-16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#c0c000" stroke="#808000" stroke-width="0.5"/><polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.5"/></svg>
-                E-mail
-              </a>
+            <div class="info-card">
+              <h3>Volg MNRV</h3>
+              <p class="small">Updates over AI, e-commerce, projecten en handige tips.</p>
+              <div class="quick-actions">
+                <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#0077b5"/><text x="4" y="12" fill="#fff" font-size="10" font-weight="bold">in</text></svg>
+                  LinkedIn &mdash; Dave Vera
+                </a>
+                <a href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2"/><text x="8" y="13" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">f</text></svg>
+                  Facebook &mdash; Meneer Vera
+                </a>
+                <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 16 16"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="1" y="1" width="14" height="14" rx="4" fill="url(#ig)"/><circle cx="8" cy="8" r="3.5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="4" r="1" fill="#fff"/></svg>
+                  Instagram &mdash; @mnrv.ai
+                </a>
+                <a href="https://github.com/DAVEVERA" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#333"/><path d="M8 2C4.7 2 2 4.7 2 8c0 2.6 1.7 4.9 4 5.6.3.1.4-.1.4-.3v-1c-1.6.4-2-.8-2-.8-.3-.7-.7-.9-.7-.9-.5-.4 0-.4 0-.4.6 0 .9.6.9.6.5.9 1.4.6 1.7.5 0-.4.2-.6.4-.8-1.3-.1-2.6-.6-2.6-2.8 0-.6.2-1.1.6-1.5 0-.2-.3-.7 0-1.4 0 0 .5-.2 1.6.6a5.5 5.5 0 013 0c1.1-.7 1.6-.6 1.6-.6.3.7.1 1.2 0 1.4.4.4.6.9.6 1.5 0 2.2-1.3 2.7-2.6 2.8.2.2.4.5.4 1v1.5c0 .2.1.4.4.3 2.3-.7 4-3 4-5.6C14 4.7 11.3 2 8 2z" fill="#fff"/></svg>
+                  GitHub &mdash; DAVEVERA
+                </a>
+              </div>
             </div>
           </div>
 
         </div>
-
       </div>
     </div>
 
     <!-- Status Bar -->
     <div class="win-statusbar">
-      <span class="win-statusbar-section">Gereed</span>
+      <span class="win-statusbar-section" id="status-info">Klaar om te verzenden</span>
+      <span class="win-statusbar-section">Beveiligde verbinding</span>
     </div>
 
   </div>
 
   <!-- Taskbar -->
   <div class="taskbar">
-    <a href="index.html" class="start-btn clean-link">
-      <span class="start-flag"><span></span><span></span><span></span><span></span></span>
+    <a href="index.html" class="start-btn clean-link" title="Terug naar bureaublad">
+      <img class="start-flag-img" src="assets/icons/w98_Windows_16x16_4.png" alt="" draggable="false">
       <span>Start</span>
     </a>
     <div class="taskbar-windows flex-1">
-      <button class="taskbar-window-btn active">Contact - MNRV</button>
+      <button class="taskbar-window-btn active" type="button">
+        <img src="assets/icons/Mail_16x16_4.png" alt="" draggable="false">
+        Contact - MNRV
+      </button>
     </div>
     <div class="system-tray">
       <span id="tray-clock" class="tray-clock">00:00</span>
@@ -221,26 +432,94 @@
   function switchTab(id) {
     document.querySelectorAll('.win-tab').forEach(function(t) { t.classList.remove('active'); });
     document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
-    document.getElementById('tab-' + id).classList.add('active');
-    document.getElementById('panel-' + id).classList.add('active');
+    var tab = document.getElementById('tab-' + id);
+    var panel = document.getElementById('panel-' + id);
+    if (tab) tab.classList.add('active');
+    if (panel) panel.classList.add('active');
   }
 
-  // Form handling
+  // Char counter
+  (function() {
+    var ta = document.getElementById('bericht');
+    var counter = document.getElementById('char-counter');
+    if (!ta || !counter) return;
+    function update() {
+      var len = ta.value.length;
+      counter.textContent = len + ' / 1000';
+      counter.style.color = len > 950 ? '#b00020' : '#777';
+    }
+    ta.addEventListener('input', update);
+    update();
+  })();
+
+  function resetErrors() {
+    document.querySelectorAll('.form-row.has-error').forEach(function(r) { r.classList.remove('has-error'); });
+    var status = document.getElementById('status-info');
+    if (status) status.textContent = 'Klaar om te verzenden';
+  }
+  function resetFormHard() {
+    var form = document.getElementById('contact-form');
+    if (form) form.reset();
+    resetErrors();
+    var counter = document.getElementById('char-counter');
+    if (counter) counter.textContent = '0 / 1000';
+  }
+
+  function validate() {
+    resetErrors();
+    var ok = true;
+    var first = null;
+
+    var naam = document.getElementById('naam');
+    if (!naam.value || naam.value.trim().length < 2) {
+      document.getElementById('row-naam').classList.add('has-error');
+      ok = false; first = first || naam;
+    }
+
+    var email = document.getElementById('email');
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRe.test(email.value || '')) {
+      document.getElementById('row-email').classList.add('has-error');
+      ok = false; first = first || email;
+    }
+
+    var bericht = document.getElementById('bericht');
+    if (!bericht.value || bericht.value.trim().length < 10) {
+      document.getElementById('row-bericht').classList.add('has-error');
+      ok = false; first = first || bericht;
+    }
+
+    if (!ok && first) first.focus();
+    return ok;
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
+    var status = document.getElementById('status-info');
+    if (!validate()) {
+      if (status) status.textContent = 'Niet alle verplichte velden zijn ingevuld.';
+      return false;
+    }
     var form = document.getElementById('contact-form');
     var success = document.getElementById('success-msg');
-    form.style.display = 'none';
-    success.style.display = 'block';
+    var ref = document.getElementById('msg-ref');
+    if (ref) ref.textContent = 'MNRV-' + Date.now().toString(36).toUpperCase();
+    form.classList.add('hide');
+    success.classList.remove('hide');
+    if (status) status.textContent = 'Bericht verzonden';
     return false;
   }
 
   function resetForm() {
     var form = document.getElementById('contact-form');
     var success = document.getElementById('success-msg');
-    form.reset();
-    form.style.display = 'block';
-    success.style.display = 'none';
+    if (form) form.reset();
+    if (form) form.classList.remove('hide');
+    if (success) success.classList.add('hide');
+    resetErrors();
+    var counter = document.getElementById('char-counter');
+    if (counter) counter.textContent = '0 / 1000';
+    document.getElementById('naam').focus();
   }
 </script>
 

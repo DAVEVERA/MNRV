@@ -3,8 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mijn Diensten - MNRV</title>
+  <title>Diensten - MNRV</title>
+  <meta name="description" content="MNRV Diensten - AI Agents, Webshop ontwikkeling, UX/UI optimalisatie, AI strategie, integraties en maatwerk AI oplossingen.">
+  <link rel="icon" type="image/png" href="assets/icons/w98_DirectoryClosed_16x16_4.png">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Diensten-specific polish */
+    .tree-item {
+      cursor: pointer;
+      user-select: none;
+    }
+    .tree-item:hover {
+      background: #d4d0c8;
+    }
+    .tree-children .tree-item {
+      padding-left: 24px !important;
+    }
+    .explorer-content {
+      padding: 0 !important;
+    }
+    .service-panel {
+      padding: 16px 20px;
+      animation: panelFade 0.18s ease-out;
+    }
+    @keyframes panelFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .service-hero {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #fff;
+      border: 2px solid;
+      border-color: #fff #000 #000 #fff;
+    }
+    .service-hero img {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      image-rendering: pixelated;
+    }
+    .service-hero h2 {
+      margin: 0 0 2px 0;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+    .service-hero p {
+      margin: 0;
+      font-size: 11px;
+      color: #d4e7ff;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 14px;
+    }
+    .service-grid .panel-block {
+      background: #ffffff;
+      border: 2px solid;
+      border-color: #808080 #fff #fff #808080;
+      padding: 12px 14px;
+    }
+    .service-grid h3 {
+      font-size: 12px;
+      color: #000080;
+      margin: 0 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #c0c0c0;
+    }
+    .service-grid p { font-size: 11px; line-height: 1.5; margin-bottom: 6px; }
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 0;
+    }
+    .service-list li {
+      padding: 4px 0 4px 20px;
+      position: relative;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .service-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      color: #008000;
+      font-weight: bold;
+    }
+    .service-side dl {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 4px 8px;
+      font-size: 11px;
+      margin: 0 0 8px 0;
+    }
+    .service-side dt { color: #555; }
+    .service-side dd { margin: 0; font-weight: bold; color: #000080; }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin: 6px 0 8px;
+    }
+    .service-tag {
+      font-size: 9px;
+      padding: 1px 5px;
+      background: #e0e0e0;
+      border: 1px solid #808080;
+      color: #000080;
+    }
+    .service-cta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .service-pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .service-pillar {
+      background: #f4f4f4;
+      border: 1px solid #c0c0c0;
+      padding: 8px 10px;
+      font-size: 10px;
+    }
+    .service-pillar strong {
+      display: block;
+      color: #000080;
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+    .breadcrumb-bar {
+      font-size: 11px;
+      padding: 4px 8px;
+      background: #c0c0c0;
+      border-bottom: 1px solid #808080;
+    }
+    .breadcrumb-bar a { color: #0000ee; text-decoration: none; }
+    .breadcrumb-bar a:hover { text-decoration: underline; }
+
+    .list-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      padding: 16px 20px;
+    }
+    .list-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-align: center;
+      font-size: 11px;
+    }
+    .list-item:hover {
+      background: #d4e7ff;
+      border-color: #000080;
+    }
+    .list-item img {
+      width: 32px;
+      height: 32px;
+      image-rendering: pixelated;
+    }
+
+    @media (max-width: 768px) {
+      .service-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -15,42 +191,67 @@
 
     <!-- Title Bar -->
     <div class="win-titlebar">
-      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
-        <path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/>
-      </svg>
-      <span class="win-titlebar-title">C:\MNRV\Diensten</span>
+      <img class="win-titlebar-icon" src="assets/icons/w98_DirectoryOpen_16x16_4.png" alt="Map" draggable="false">
+      <span class="win-titlebar-title" id="window-title">C:\MNRV\Diensten</span>
       <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
-        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn min-btn" type="button" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" type="button" title="Maximaliseren">&#9633;</button>
         <a href="index.html" class="win-titlebar-btn close-btn clean-link" title="Terug naar bureaublad">X</a>
       </div>
     </div>
 
     <!-- Menu Bar -->
     <div class="win-menubar">
-      <span class="win-menubar-item">Bestand</span>
-      <span class="win-menubar-item">Bewerken</span>
-      <span class="win-menubar-item">Beeld</span>
-      <span class="win-menubar-item">Help</span>
+      <span class="win-menubar-item" tabindex="0" onclick="alert('Bestand-menu (demo).')">Bestand</span>
+      <span class="win-menubar-item" tabindex="0" onclick="alert('Bewerken-menu (demo).')">Bewerken</span>
+      <span class="win-menubar-item" tabindex="0" onclick="alert('Beeld-menu (demo).')">Beeld</span>
+      <span class="win-menubar-item" tabindex="0" onclick="window.location.href='contact.html'">Help</span>
     </div>
 
     <!-- Toolbar -->
     <div class="win-toolbar">
-      <a href="index.html" class="win-toolbar-btn clean-link">
+      <button class="win-toolbar-btn" type="button" id="nav-back" onclick="navHistory(-1)" title="Vorige (Alt+Left)" disabled>
         <svg viewBox="0 0 16 16"><polygon points="10,2 2,8 10,14" fill="#000"/></svg>
-        Terug
+        Vorige
+      </button>
+      <button class="win-toolbar-btn" type="button" id="nav-forward" onclick="navHistory(1)" title="Volgende (Alt+Right)" disabled>
+        <svg viewBox="0 0 16 16"><polygon points="6,2 14,8 6,14" fill="#000"/></svg>
+        Volgende
+      </button>
+      <div class="win-toolbar-separator"></div>
+      <a href="index.html" class="win-toolbar-btn clean-link" title="Terug naar bureaublad">
+        <svg viewBox="0 0 16 16"><path d="M8 2 L2 8 L5 8 L5 14 L11 14 L11 8 L14 8 Z" fill="#000"/></svg>
+        Bureaublad
       </a>
       <div class="win-toolbar-separator"></div>
-      <span class="win-toolbar-btn">
-        <svg viewBox="0 0 16 16"><path d="M1 4 L1 14 L15 14 L15 4 L8 4 L7 2 L1 2 Z" fill="#ffd700"/></svg>
-        Mappen
-      </span>
+      <button class="win-toolbar-btn" type="button" onclick="showService('all')" title="Alle diensten">
+        <svg viewBox="0 0 16 16"><rect x="2" y="3" width="3" height="3" fill="#000"/><rect x="6" y="3" width="3" height="3" fill="#000"/><rect x="10" y="3" width="3" height="3" fill="#000"/><rect x="2" y="7" width="3" height="3" fill="#000"/><rect x="6" y="7" width="3" height="3" fill="#000"/><rect x="10" y="7" width="3" height="3" fill="#000"/></svg>
+        Overzicht
+      </button>
+      <a href="webshop.html" class="win-toolbar-btn clean-link" title="Open de webshop">
+        <svg viewBox="0 0 16 16"><path d="M2 4 L4 4 L5 11 L13 11 L14 5 L5 5" fill="none" stroke="#000" stroke-width="1.2"/><circle cx="6" cy="13" r="1" fill="#000"/><circle cx="12" cy="13" r="1" fill="#000"/></svg>
+        Webshop
+      </a>
+      <a href="contact.html" class="win-toolbar-btn clean-link" title="Contact">
+        <svg viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#ffd700" stroke="#808000" stroke-width="0.5"/><polygon points="1,3 8,9 15,3" fill="none" stroke="#808000" stroke-width="0.6"/></svg>
+        Contact
+      </a>
     </div>
 
     <!-- Address Bar -->
     <div class="win-addressbar">
-      <label>Adres:</label>
-      <input type="text" value="C:\MNRV\Diensten\" readonly class="win-input" title="Adres" aria-label="Adres">
+      <label for="addr">Adres:</label>
+      <input id="addr" type="text" value="C:\MNRV\Diensten\AI Agents" readonly class="win-input flex-1" title="Adres" aria-label="Adres">
+      <button class="win-btn btn-sm" type="button" onclick="copyAddress()" title="Kopieer pad">Ga</button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar">
+      <a href="index.html">Bureaublad</a>
+      <span> &raquo; </span>
+      <a href="#" onclick="showService('all');return false;">MNRV</a>
+      <span> &raquo; </span>
+      <span id="crumb-current">Diensten</span>
     </div>
 
     <!-- Explorer Layout -->
@@ -60,7 +261,7 @@
         <!-- Tree Sidebar -->
         <div class="explorer-tree">
           <div class="tree-item" onclick="showService('all')" id="tree-all">
-            <img src="assets/icons/w98_MyComputer_16x16_4.png" alt="" draggable="false" class="icon-16">
+            <img src="assets/icons/w98_Computer_16x16_4.png" alt="" draggable="false" class="icon-16">
             <span>MNRV Diensten</span>
           </div>
           <div class="tree-children">
@@ -70,7 +271,7 @@
             </div>
             <div class="tree-item" onclick="showService('webshop')" id="tree-webshop">
               <img src="assets/icons/w98_DirectoryClosed_16x16_4.png" alt="" draggable="false" class="icon-16">
-              <span>Webshop Ontwikkeling</span>
+              <span>Webshop</span>
             </div>
             <div class="tree-item" onclick="showService('uxui')" id="tree-uxui">
               <img src="assets/icons/w98_DirectoryClosed_16x16_4.png" alt="" draggable="false" class="icon-16">
@@ -96,131 +297,299 @@
 
           <!-- AI Agents -->
           <div class="service-panel" id="panel-agents">
-            <div class="win-card">
-              <h3>AI Agents voor E-commerce</h3>
-              <p>Onze AI agents werken als slimme medewerkers voor jouw webshop. Ze helpen klanten 24/7 met productadvies, begeleiden hen door het bestelproces en bieden persoonlijke aanbevelingen op basis van gedrag en voorkeuren.</p>
-              <p><strong>Wat wij bieden:</strong></p>
-              <ul class="service-list">
-                <li>Slimme chatbots voor klantenservice</li>
-                <li>Productadviseur-agents die converteren</li>
-                <li>Checkout begeleiding die afhaakgedrag verlaagt</li>
-                <li>Geautomatiseerde upsell en cross-sell</li>
-                <li>Meertalige ondersteuning</li>
-              </ul>
-              <a href="contact.html" class="win-btn clean-link mt-4">Meer informatie</a>
+            <div class="service-hero">
+              <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+              <div>
+                <h2>AI Agents voor E-commerce</h2>
+                <p>24/7 conversaties die converteren &mdash; geen wachtrij, geen moeheid.</p>
+              </div>
+            </div>
+            <div class="service-grid">
+              <div class="panel-block">
+                <h3>Wat krijg je?</h3>
+                <p>Slimme medewerkers voor je webshop. Ze beantwoorden vragen,
+                  geven productadvies, begeleiden de checkout en doen
+                  cross-/upsell op het juiste moment.</p>
+                <ul class="service-list">
+                  <li>Chatbots met live hand-off naar mensen</li>
+                  <li>Productadviseur op basis van gedrag &amp; voorraad</li>
+                  <li>Checkout-begeleiding die afhakers terughaalt</li>
+                  <li>Meertalig (NL/EN/DE/FR) en altijd beschikbaar</li>
+                  <li>Dashboard met conversaties &amp; conversie-impact</li>
+                </ul>
+                <div class="service-cta">
+                  <a href="webshop.html" class="win-btn clean-link">Bekijk pakketten</a>
+                  <a href="contact.html" class="win-btn win-btn-default clean-link">Plan adviesgesprek</a>
+                </div>
+              </div>
+              <aside class="service-side panel-block">
+                <h3>Snel weten</h3>
+                <dl>
+                  <dt>Vanaf:</dt><dd>&euro;499/mnd</dd>
+                  <dt>Doorlooptijd:</dt><dd>2&ndash;4 weken</dd>
+                  <dt>Platform:</dt><dd>Magento, Shopify, Woo, custom</dd>
+                  <dt>Trial:</dt><dd>14 dagen gratis</dd>
+                </dl>
+                <div class="service-tags">
+                  <span class="service-tag">Chatbot</span>
+                  <span class="service-tag">24/7</span>
+                  <span class="service-tag">Meertalig</span>
+                  <span class="service-tag">Cross-sell</span>
+                </div>
+              </aside>
             </div>
           </div>
 
-          <!-- Webshop Ontwikkeling -->
+          <!-- Webshop -->
           <div class="service-panel hide" id="panel-webshop">
-            <div class="win-card">
-              <h3>Webshop Ontwikkeling</h3>
-              <p>Wij bouwen webshops die klaar zijn voor de toekomst. Met geintegreerde AI-mogelijkheden vanaf dag een, op de platformen die je kent en vertrouwt.</p>
-              <p><strong>Platformen:</strong></p>
-              <ul class="service-list">
-                <li><strong>Magento 2</strong> &mdash; B2B en B2C, Hyva Commerce, maatwerk modules</li>
-                <li><strong>Shopify</strong> &mdash; Shopify Plus, B2B oplossingen, headless commerce</li>
-                <li><strong>WooCommerce</strong> &mdash; WordPress-gebaseerd, flexibel en betaalbaar</li>
-                <li><strong>Custom</strong> &mdash; Op maat gebouwde platformen met API-first architectuur</li>
-              </ul>
-              <p>Elke webshop wordt uitgerust met AI-ready koppelingen en slimme automatiseringen.</p>
-              <a href="contact.html" class="win-btn clean-link mt-4">Offerte aanvragen</a>
+            <div class="service-hero">
+              <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+              <div>
+                <h2>Webshop Ontwikkeling</h2>
+                <p>Snelle, schaalbare shops &mdash; klaar voor AI vanaf dag &eacute;&eacute;n.</p>
+              </div>
+            </div>
+            <div class="service-grid">
+              <div class="panel-block">
+                <h3>Onze platforms</h3>
+                <p>We bouwen op de stack die past bij jouw schaal en team.</p>
+                <ul class="service-list">
+                  <li><strong>Magento 2 / Adobe Commerce</strong> &mdash; Hyv&auml;, B2B, complexe catalogi</li>
+                  <li><strong>Shopify (Plus)</strong> &mdash; B2C, headless, snelle launch</li>
+                  <li><strong>WooCommerce</strong> &mdash; flexibel, betaalbaar, WordPress-based</li>
+                  <li><strong>Custom (Next.js, headless)</strong> &mdash; API-first, eigen UX</li>
+                </ul>
+                <p>Elke shop krijgt AI-koppelingen, monitoring en CI/CD vanaf launch.</p>
+                <div class="service-cta">
+                  <a href="contact.html" class="win-btn win-btn-default clean-link">Offerte aanvragen</a>
+                  <a href="webshop.html" class="win-btn clean-link">Voorbeelden</a>
+                </div>
+              </div>
+              <aside class="service-side panel-block">
+                <h3>Snel weten</h3>
+                <dl>
+                  <dt>Vanaf:</dt><dd>&euro;7.500</dd>
+                  <dt>Launch:</dt><dd>4&ndash;12 weken</dd>
+                  <dt>Hosting:</dt><dd>AWS, GCP, Vercel</dd>
+                  <dt>Onderhoud:</dt><dd>SLA optioneel</dd>
+                </dl>
+                <div class="service-tags">
+                  <span class="service-tag">Magento</span>
+                  <span class="service-tag">Shopify</span>
+                  <span class="service-tag">Headless</span>
+                  <span class="service-tag">B2B</span>
+                </div>
+              </aside>
             </div>
           </div>
 
           <!-- UX/UI -->
           <div class="service-panel hide" id="panel-uxui">
-            <div class="win-card">
-              <h3>UX/UI Optimalisatie met AI</h3>
-              <p>AI maakt het mogelijk om jouw webshop continu te optimaliseren op basis van echte gebruikersdata. Geen aannames meer, maar datagedreven design-beslissingen.</p>
-              <p><strong>Onze aanpak:</strong></p>
-              <ul class="service-list">
-                <li>AI-gedreven A/B testing en personalisatie</li>
-                <li>Heatmap-analyse met slimme aanbevelingen</li>
-                <li>Dynamische content op basis van gebruikersprofiel</li>
-                <li>Conversie-optimalisatie met machine learning</li>
-                <li>Gepersonaliseerde zoekresultaten en filtering</li>
-              </ul>
-              <a href="contact.html" class="win-btn clean-link mt-4">Plan een gesprek</a>
+            <div class="service-hero">
+              <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+              <div>
+                <h2>UX/UI Optimalisatie met AI</h2>
+                <p>Datagedreven design &mdash; geen onderbuik, wel resultaat.</p>
+              </div>
+            </div>
+            <div class="service-grid">
+              <div class="panel-block">
+                <h3>Hoe werken wij?</h3>
+                <p>We meten echt gedrag, testen varianten en laten AI de winners
+                  uitserveren. Continu, niet eens per kwartaal.</p>
+                <ul class="service-list">
+                  <li>AI-gedreven A/B en multivariate testen</li>
+                  <li>Heatmaps &amp; clickstream-analyse</li>
+                  <li>Personalisatie per segment of bezoeker</li>
+                  <li>Funnel-optimalisatie en checkout-tuning</li>
+                  <li>Mobile-first UX audits</li>
+                </ul>
+                <div class="service-pillars">
+                  <div class="service-pillar"><strong>+15-30%</strong>conversie typisch</div>
+                  <div class="service-pillar"><strong>30 dagen</strong>tot eerste resultaten</div>
+                  <div class="service-pillar"><strong>Live dashboard</strong>altijd inzicht</div>
+                </div>
+                <div class="service-cta">
+                  <a href="contact.html" class="win-btn win-btn-default clean-link">Plan een audit</a>
+                </div>
+              </div>
+              <aside class="service-side panel-block">
+                <h3>Snel weten</h3>
+                <dl>
+                  <dt>Vanaf:</dt><dd>&euro;699/mnd</dd>
+                  <dt>Audit:</dt><dd>&euro;1.450 eenmalig</dd>
+                  <dt>Tools:</dt><dd>GA4, Hotjar, eigen ML</dd>
+                  <dt>Rapport:</dt><dd>maandelijks</dd>
+                </dl>
+                <div class="service-tags">
+                  <span class="service-tag">A/B</span>
+                  <span class="service-tag">CRO</span>
+                  <span class="service-tag">Heatmaps</span>
+                  <span class="service-tag">Mobile</span>
+                </div>
+              </aside>
             </div>
           </div>
 
           <!-- Strategie -->
           <div class="service-panel hide" id="panel-strategie">
-            <div class="win-card">
-              <h3>AI Strategie & Workshops</h3>
-              <p>Voordat je investeert in AI, heb je een helder plan nodig. Wij helpen je de juiste strategie te ontwikkelen en zorgen dat jouw team klaar is voor de toekomst.</p>
-              <p><strong>Onze diensten:</strong></p>
-              <ul class="service-list">
-                <li><strong>AI Workshop</strong> &mdash; Praktische kennissessie voor jouw team</li>
-                <li><strong>AI Strategie</strong> &mdash; Roadmap op maat voor jouw organisatie</li>
-                <li><strong>Implementatiebegeleiding</strong> &mdash; Van plan naar werkelijkheid</li>
-                <li><strong>Training</strong> &mdash; Jouw team leren werken met AI-tools</li>
-              </ul>
-              <a href="contact.html" class="win-btn clean-link mt-4">Workshop boeken</a>
+            <div class="service-hero">
+              <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+              <div>
+                <h2>AI Strategie &amp; Workshops</h2>
+                <p>Eerst denken, dan bouwen &mdash; met een plan dat je team begrijpt.</p>
+              </div>
+            </div>
+            <div class="service-grid">
+              <div class="panel-block">
+                <h3>Wat leveren we op?</h3>
+                <ul class="service-list">
+                  <li><strong>AI Workshop</strong> &mdash; halve dag, hands-on, voor 5&ndash;15 personen</li>
+                  <li><strong>AI Strategie</strong> &mdash; roadmap met use-cases, ROI en planning</li>
+                  <li><strong>Implementatiebegeleiding</strong> &mdash; van plan naar werkende oplossing</li>
+                  <li><strong>Trainingen</strong> &mdash; je team leert AI-tools in te zetten</li>
+                </ul>
+                <p>Iedere case krijgt een business-case met verwachte ROI &mdash; geen
+                  vaag &lsquo;dit-is-de-toekomst&rsquo; verhaal.</p>
+                <div class="service-cta">
+                  <a href="contact.html" class="win-btn win-btn-default clean-link">Workshop boeken</a>
+                  <a href="contact.html" class="win-btn clean-link">Vraag offerte aan</a>
+                </div>
+              </div>
+              <aside class="service-side panel-block">
+                <h3>Snel weten</h3>
+                <dl>
+                  <dt>Workshop:</dt><dd>&euro;1.250</dd>
+                  <dt>Strategie:</dt><dd>vanaf &euro;2.500</dd>
+                  <dt>Locatie:</dt><dd>on-site of remote</dd>
+                  <dt>Follow-up:</dt><dd>na 2 weken</dd>
+                </dl>
+                <div class="service-tags">
+                  <span class="service-tag">Workshop</span>
+                  <span class="service-tag">Roadmap</span>
+                  <span class="service-tag">Training</span>
+                </div>
+              </aside>
             </div>
           </div>
 
           <!-- Integraties -->
           <div class="service-panel hide" id="panel-integraties">
-            <div class="win-card">
-              <h3>Integraties & Koppelingen</h3>
-              <p>AI werkt het beste als het naadloos samenwerkt met jouw bestaande systemen. Wij koppelen AI-oplossingen aan de tools die je al gebruikt.</p>
-              <p><strong>Koppelingen met:</strong></p>
-              <ul class="service-list">
-                <li>CRM-systemen (Salesforce, HubSpot, Pipedrive)</li>
-                <li>ERP-systemen (SAP, Exact, AFAS)</li>
-                <li>PIM-systemen (Akeneo, Pimcore)</li>
-                <li>Marketing automation (Mailchimp, ActiveCampaign)</li>
-                <li>Betaalproviders en fulfillment</li>
-              </ul>
-              <a href="contact.html" class="win-btn clean-link mt-4">Bespreek mogelijkheden</a>
+            <div class="service-hero">
+              <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+              <div>
+                <h2>Integraties &amp; Koppelingen</h2>
+                <p>AI werkt het beste als het &eacute;cht meedraait in je stack.</p>
+              </div>
+            </div>
+            <div class="service-grid">
+              <div class="panel-block">
+                <h3>Waar koppelen we mee?</h3>
+                <ul class="service-list">
+                  <li><strong>CRM</strong> &mdash; Salesforce, HubSpot, Pipedrive, Microsoft Dynamics</li>
+                  <li><strong>ERP</strong> &mdash; SAP, Exact, AFAS, NetSuite</li>
+                  <li><strong>PIM/DAM</strong> &mdash; Akeneo, Pimcore, Salsify</li>
+                  <li><strong>Marketing</strong> &mdash; Mailchimp, Klaviyo, ActiveCampaign, Brevo</li>
+                  <li><strong>Logistiek &amp; Pay</strong> &mdash; Mollie, Adyen, Stripe, Sendcloud, MyParcel</li>
+                </ul>
+                <p>Veilig, schaalbaar en met monitoring &mdash; niet via een knullige Zapier-spaghetti.</p>
+                <div class="service-cta">
+                  <a href="contact.html" class="win-btn win-btn-default clean-link">Bespreek mogelijkheden</a>
+                </div>
+              </div>
+              <aside class="service-side panel-block">
+                <h3>Snel weten</h3>
+                <dl>
+                  <dt>Vanaf:</dt><dd>&euro;1.950</dd>
+                  <dt>Doorlooptijd:</dt><dd>1&ndash;3 weken</dd>
+                  <dt>Monitoring:</dt><dd>inbegrepen</dd>
+                </dl>
+                <div class="service-tags">
+                  <span class="service-tag">CRM</span>
+                  <span class="service-tag">ERP</span>
+                  <span class="service-tag">PIM</span>
+                  <span class="service-tag">API</span>
+                </div>
+              </aside>
             </div>
           </div>
 
           <!-- Maatwerk -->
           <div class="service-panel hide" id="panel-maatwerk">
-            <div class="win-card">
-              <h3>Maatwerk AI Oplossingen</h3>
-              <p>Soms past een standaardoplossing niet. Dan bouwen wij precies wat jouw organisatie nodig heeft &mdash; van voorspellende modellen tot intelligente recommendation engines.</p>
-              <p><strong>Voorbeelden:</strong></p>
-              <ul class="service-list">
-                <li>Custom recommendation engines voor productaanbevelingen</li>
-                <li>Voorspellende modellen voor voorraad en vraag</li>
-                <li>Intelligente prijsoptimalisatie</li>
-                <li>Natural Language Processing voor zoekoptimalisatie</li>
-                <li>Computer Vision voor visueel zoeken</li>
-              </ul>
-              <a href="contact.html" class="win-btn clean-link mt-4">Neem contact op</a>
+            <div class="service-hero">
+              <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+              <div>
+                <h2>Maatwerk AI Oplossingen</h2>
+                <p>Standaard past niet altijd. Wij bouwen wat je nodig hebt.</p>
+              </div>
+            </div>
+            <div class="service-grid">
+              <div class="panel-block">
+                <h3>Voorbeelden</h3>
+                <ul class="service-list">
+                  <li>Recommendation engines voor productadvies</li>
+                  <li>Voorspellende modellen voor voorraad &amp; vraag</li>
+                  <li>Dynamische prijsoptimalisatie</li>
+                  <li>NLP voor zoek &amp; semantische tags</li>
+                  <li>Computer vision voor visueel zoeken</li>
+                  <li>Custom LLM-agents op je eigen data</li>
+                </ul>
+                <p>We werken in korte sprints met meetbare deliverables. Eerst PoC,
+                  dan productie &mdash; nooit andersom.</p>
+                <div class="service-cta">
+                  <a href="contact.html" class="win-btn win-btn-default clean-link">Bespreek je idee</a>
+                </div>
+              </div>
+              <aside class="service-side panel-block">
+                <h3>Snel weten</h3>
+                <dl>
+                  <dt>PoC:</dt><dd>vanaf &euro;3.500</dd>
+                  <dt>Productie:</dt><dd>op offerte</dd>
+                  <dt>Stack:</dt><dd>Python, TS, GCP/AWS</dd>
+                </dl>
+                <div class="service-tags">
+                  <span class="service-tag">ML</span>
+                  <span class="service-tag">NLP</span>
+                  <span class="service-tag">CV</span>
+                  <span class="service-tag">Custom</span>
+                </div>
+              </aside>
             </div>
           </div>
 
           <!-- All services overview -->
           <div class="service-panel hide" id="panel-all">
+            <div class="service-hero">
+              <img src="assets/icons/w98_Computer_32x32_4.png" alt="">
+              <div>
+                <h2>Overzicht &mdash; alle MNRV diensten</h2>
+                <p>Klik een onderwerp om de details te zien.</p>
+              </div>
+            </div>
             <div class="list-view">
               <div class="list-item" onclick="showService('agents')">
-                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="AI Agents" draggable="false">
-                <span>AI Agents</span>
+                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+                <span><strong>AI Agents</strong><br>chatbots &amp; productadvies</span>
               </div>
               <div class="list-item" onclick="showService('webshop')">
-                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="Webshop" draggable="false">
-                <span>Webshop</span>
+                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+                <span><strong>Webshop</strong><br>Magento, Shopify, custom</span>
               </div>
               <div class="list-item" onclick="showService('uxui')">
-                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="UX/UI" draggable="false">
-                <span>UX/UI</span>
+                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+                <span><strong>UX/UI</strong><br>A/B en personalisatie</span>
               </div>
               <div class="list-item" onclick="showService('strategie')">
-                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="AI Strategie" draggable="false">
-                <span>AI Strategie</span>
+                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+                <span><strong>Strategie</strong><br>workshops &amp; roadmap</span>
               </div>
               <div class="list-item" onclick="showService('integraties')">
-                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="Integraties" draggable="false">
-                <span>Integraties</span>
+                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+                <span><strong>Integraties</strong><br>CRM, ERP, PIM</span>
               </div>
               <div class="list-item" onclick="showService('maatwerk')">
-                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="Maatwerk AI" draggable="false">
-                <span>Maatwerk AI</span>
+                <img src="assets/icons/w98_DirectoryClosed_32x32_4.png" alt="">
+                <span><strong>Maatwerk</strong><br>ML, NLP, CV</span>
               </div>
             </div>
           </div>
@@ -232,19 +601,23 @@
     <!-- Status Bar -->
     <div class="win-statusbar">
       <span class="win-statusbar-section" id="status-text">6 objecten</span>
-      <span class="win-statusbar-section">MNRV Diensten</span>
+      <span class="win-statusbar-section" id="status-selected">AI Agents geselecteerd</span>
+      <span class="win-statusbar-section">MNRV</span>
     </div>
 
   </div>
 
   <!-- Taskbar -->
   <div class="taskbar">
-    <a href="index.html" class="start-btn clean-link">
-      <span class="start-flag"><span></span><span></span><span></span><span></span></span>
+    <a href="index.html" class="start-btn clean-link" title="Terug naar bureaublad">
+      <img class="start-flag-img" src="assets/icons/w98_Windows_16x16_4.png" alt="" draggable="false">
       <span>Start</span>
     </a>
     <div class="taskbar-windows flex-1">
-      <button class="taskbar-window-btn active">Mijn Diensten</button>
+      <button class="taskbar-window-btn active" type="button">
+        <img src="assets/icons/w98_DirectoryClosed_16x16_4.png" alt="" draggable="false">
+        Diensten
+      </button>
     </div>
     <div class="system-tray">
       <span id="tray-clock" class="tray-clock">00:00</span>
@@ -264,21 +637,75 @@
   updateClock();
   setInterval(updateClock, 10000);
 
-  // Service navigation
-  function showService(id) {
-    // Hide all panels
+  // ----- Service navigation with history -----
+  var labels = {
+    all:        { label: 'Alle diensten', path: 'C:\\MNRV\\Diensten' },
+    agents:     { label: 'AI Agents',           path: 'C:\\MNRV\\Diensten\\AI Agents' },
+    webshop:    { label: 'Webshop',             path: 'C:\\MNRV\\Diensten\\Webshop' },
+    uxui:       { label: 'UX/UI Optimalisatie', path: 'C:\\MNRV\\Diensten\\UX-UI' },
+    strategie:  { label: 'AI Strategie',        path: 'C:\\MNRV\\Diensten\\AI Strategie' },
+    integraties:{ label: 'Integraties',         path: 'C:\\MNRV\\Diensten\\Integraties' },
+    maatwerk:   { label: 'Maatwerk AI',         path: 'C:\\MNRV\\Diensten\\Maatwerk' }
+  };
+
+  var history = ['agents'];
+  var historyIdx = 0;
+
+  function renderHistoryButtons() {
+    document.getElementById('nav-back').disabled = historyIdx <= 0;
+    document.getElementById('nav-forward').disabled = historyIdx >= history.length - 1;
+  }
+
+  function navHistory(delta) {
+    var newIdx = historyIdx + delta;
+    if (newIdx < 0 || newIdx >= history.length) return;
+    historyIdx = newIdx;
+    showService(history[historyIdx], true);
+  }
+
+  function showService(id, fromHistory) {
+    if (!labels[id]) return;
     document.querySelectorAll('.service-panel').forEach(function(p) { p.classList.add('hide'); });
-    // Deselect all tree items
     document.querySelectorAll('.tree-item').forEach(function(t) { t.classList.remove('selected'); });
 
-    // Show selected panel
     var panel = document.getElementById('panel-' + id);
     if (panel) panel.classList.remove('hide');
 
-    // Select tree item
     var tree = document.getElementById('tree-' + id);
     if (tree) tree.classList.add('selected');
+
+    document.getElementById('addr').value = labels[id].path;
+    document.getElementById('crumb-current').textContent = labels[id].label;
+    document.getElementById('window-title').textContent = labels[id].path;
+    document.getElementById('status-selected').textContent = labels[id].label + (id === 'all' ? ' getoond' : ' geselecteerd');
+
+    if (!fromHistory) {
+      // truncate forward history
+      history = history.slice(0, historyIdx + 1);
+      if (history[history.length - 1] !== id) {
+        history.push(id);
+        historyIdx = history.length - 1;
+      }
+    }
+    renderHistoryButtons();
   }
+
+  function copyAddress() {
+    var addr = document.getElementById('addr');
+    if (!addr) return;
+    addr.select();
+    try {
+      navigator.clipboard.writeText(addr.value);
+    } catch (e) { /* ignore */ }
+  }
+
+  // Keyboard shortcuts: Alt+Left / Alt+Right
+  document.addEventListener('keydown', function(e) {
+    if (e.altKey && e.key === 'ArrowLeft') { e.preventDefault(); navHistory(-1); }
+    if (e.altKey && e.key === 'ArrowRight') { e.preventDefault(); navHistory(1); }
+  });
+
+  renderHistoryButtons();
 </script>
 
 </body>
