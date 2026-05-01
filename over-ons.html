@@ -38,11 +38,15 @@
     </div>
 
     <!-- Notepad Body -->
-    <div class="win-body flex-1">
-      <div class="notepad-textarea p-8 fs-12 lh-16 overflow-auto">
-===============================================
-        M . N . R . V
-     DE TOEKOMST VAN AI & E-COMMERCE
+    <div class="win-body flex-1" style="display:flex;flex-direction:column;overflow:hidden;">
+      <!-- MNRV Logo strip inside notepad -->
+      <div style="padding:6px 8px;border-bottom:1px solid #c0c0c0;background:#c0c0c0;display:flex;align-items:center;gap:8px;">
+        <img src="assets/mnrv-logo2.jpg" alt="MNRV" style="height:20px;width:auto;image-rendering:auto;">
+        <span style="font-family:'MS Sans Serif',Tahoma,sans-serif;font-size:10px;color:#000080;font-weight:bold;">MNRV &mdash; AI &amp; E-Commerce Specialists</span>
+      </div>
+      <textarea class="notepad-textarea" readonly spellcheck="false" style="flex:1;width:100%;resize:none;border:none;outline:none;">===============================================
+M . N . R . V
+   DE TOEKOMST VAN AI & E-COMMERCE
 ===============================================
 
 
@@ -112,10 +116,11 @@ ONZE DIENSTEN
 CONTACT
 -------
 
-E-mail:   info@mnrv.ai
-Web:      www.mnrv.ai
-LinkedIn: /company/mnrv
-GitHub:   /mnrv-ai
+E-mail:    info@mnrv.ai
+Web:       www.mnrv.ai
+LinkedIn:  linkedin.com/in/davevera
+GitHub:    github.com/DAVEVERA
+WhatsApp:  +31 6 82 45 64 10
 
 
 -----------------------------------------------
@@ -123,7 +128,7 @@ GitHub:   /mnrv-ai
 "De bedrijven die nu investeren in AI, bepalen
  de standaard van morgen."
 -----------------------------------------------
-</div>
+</textarea>
     </div>
 
   </div>
@@ -131,9 +136,7 @@ GitHub:   /mnrv-ai
   <!-- Taskbar -->
   <div class="taskbar">
     <a href="index.html" class="start-btn clean-link">
-      <span class="start-logo-grid">
-        <span class="bg-red-500"></span><span class="bg-green-500"></span><span class="bg-blue-500"></span><span class="bg-yellow-500"></span>
-      </span>
+      <span class="start-flag"><span></span><span></span><span></span><span></span></span>
       <span>Start</span>
     </a>
     <div class="taskbar-windows flex-1">

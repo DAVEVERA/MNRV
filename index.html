@@ -188,23 +188,11 @@
       <span class="icon-label">Contact</span>
     </a>
 
-    <!-- Webshop -->
-    <a class="desktop-icon" tabindex="0" data-target="webshop.html">
-      <img class="icon-img" src="assets/icons/w98_ComputerExplorer_32x32_4.png" alt="Webshop" draggable="false">
-      <span class="icon-label">Webshop</span>
-    </a>
-
     <!-- Minesweeper -->
     <a class="desktop-icon" tabindex="0" data-target="minesweeper.html">
       <img class="icon-img" src="assets/icons/w98_Minesweeper_32x32_4.png" alt="Mijnenveger" draggable="false">
       <span class="icon-label">Mijnenveger</span>
     </a>
-
-    <!-- Word 95 -->
-    <div class="desktop-icon" tabindex="0" data-window="word-window">
-      <img class="icon-img" src="assets/icons/w98_WriteWordpad_32x32_4.png" alt="Word 95" draggable="false">
-      <span class="icon-label">Word 95</span>
-    </div>
 
     <!-- Internet Explorer (about window) -->
     <div class="desktop-icon" tabindex="0" data-window="about-window">
@@ -216,12 +204,6 @@
     <div class="desktop-icon" tabindex="0" data-window="apps-window">
       <img class="icon-img" src="assets/icons/w98_ConnectedWorld_32x32_4.png" alt="Portfolio" draggable="false">
       <span class="icon-label">Portfolio</span>
-    </div>
-
-    <!-- Prullenbak -->
-    <div class="desktop-icon" tabindex="0" data-window="recycle-dialog">
-      <img class="icon-img" src="assets/icons/w98_RecycleBinEmpty_32x32_4.png" alt="Prullenbak" draggable="false">
-      <span class="icon-label">Prullenbak</span>
     </div>
 
   </div>
@@ -271,128 +253,7 @@
     </div>
   </div>
 
-  <!-- ============================================
-       RECYCLE BIN DIALOG
-       ============================================ -->
-  <div id="recycle-dialog" class="win-window win-dialog hide w-320 position-center">
-    <div class="win-titlebar">
-      <span class="win-titlebar-title">Prullenbak</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
-      </div>
-    </div>
-    <div class="dialog-content">
-      <svg class="dialog-icon" viewBox="0 0 32 32">
-        <circle cx="16" cy="16" r="14" fill="#0078d7" stroke="#005a9e" stroke-width="2"/>
-        <text x="16" y="22" text-anchor="middle" font-size="18" font-weight="bold" fill="#fff">i</text>
-      </svg>
-      <div class="dialog-text">
-        <p>De prullenbak is leeg.</p>
-        <p class="mt-6">Bij MNRV gooien we niets weg &mdash; alles wordt gerecycled tot AI-kracht!</p>
-      </div>
-    </div>
-    <div class="dialog-buttons">
-      <button class="win-btn win-btn-default" onclick="MNRV.hideWindow('recycle-dialog')">OK</button>
-    </div>
-  </div>
 
-  <!-- ============================================
-       WORD 95 WINDOW
-       ============================================ -->
-  <div id="word-window" class="win-window hide w-620 h-460 position-custom-word">
-    <div class="win-titlebar">
-      <img class="win-titlebar-icon" src="assets/icons/w98_WriteWordpad_16x16_4.png" alt="Word" draggable="false">
-      <span class="win-titlebar-title">Microsoft Word - Document1</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
-        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
-        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
-      </div>
-    </div>
-    <!-- Menu bar -->
-    <div class="word-menubar">
-      <span class="word-menu-item">Bestand</span>
-      <span class="word-menu-item">Bewerken</span>
-      <span class="word-menu-item">Beeld</span>
-      <span class="word-menu-item word-menu-insert" id="word-insert-menu">Invoegen</span>
-      <span class="word-menu-item">Opmaak</span>
-      <span class="word-menu-item">Extra</span>
-      <span class="word-menu-item">Help</span>
-    </div>
-    <!-- Toolbar -->
-    <div class="word-toolbar">
-      <button class="word-tb-btn" title="Nieuw" onclick="document.getElementById('word-doc').innerHTML=''">&#128196;</button>
-      <span class="word-tb-sep"></span>
-      <button class="word-tb-btn" title="Vet" onclick="document.execCommand('bold')"><b>B</b></button>
-      <button class="word-tb-btn" title="Cursief" onclick="document.execCommand('italic')"><i>I</i></button>
-      <button class="word-tb-btn" title="Onderstreept" onclick="document.execCommand('underline')"><u>U</u></button>
-      <span class="word-tb-sep"></span>
-      <button class="word-tb-btn" title="Links" onclick="document.execCommand('justifyLeft')">&#9776;</button>
-      <button class="word-tb-btn" title="Midden" onclick="document.execCommand('justifyCenter')">&#9776;</button>
-      <button class="word-tb-btn" title="Rechts" onclick="document.execCommand('justifyRight')">&#9776;</button>
-      <span class="word-tb-sep"></span>
-      <select class="word-font-select" onchange="document.execCommand('fontName',false,this.value)" title="Lettertype">
-        <option>Times New Roman</option>
-        <option>Arial</option>
-        <option>Comic Sans MS</option>
-        <option>Courier New</option>
-        <option>Impact</option>
-        <option>Tahoma</option>
-      </select>
-      <select class="word-size-select" onchange="document.execCommand('fontSize',false,this.value)" title="Tekstgrootte">
-        <option value="2">10</option>
-        <option value="3" selected>12</option>
-        <option value="4">14</option>
-        <option value="5">18</option>
-        <option value="6">24</option>
-        <option value="7">36</option>
-      </select>
-      <span class="word-tb-sep"></span>
-      <button class="word-tb-btn word-tb-wordart" id="word-wordart-btn" title="WordArt invoegen">
-        <span class="word-tb-wordart-icon">A</span>
-      </button>
-    </div>
-    <!-- Document area -->
-    <div class="word-doc-area">
-      <div class="word-ruler">
-        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-      </div>
-      <div id="word-doc" class="word-doc" contenteditable="true">
-        <p>Welkom bij Word 95! Typ hier je document of voeg WordArt in via de knop hierboven.</p>
-      </div>
-    </div>
-    <div class="win-statusbar">
-      <span class="win-statusbar-section">Pagina 1</span>
-      <span class="win-statusbar-section">Sec 1</span>
-      <span class="win-statusbar-section">1/1</span>
-      <span class="win-statusbar-section">Nederlands</span>
-    </div>
-  </div>
-
-  <!-- ============================================
-       WORDART GALLERY DIALOG
-       ============================================ -->
-  <div id="wordart-dialog" class="win-window win-dialog hide w-480 position-center">
-    <div class="win-titlebar">
-      <span class="win-titlebar-title">WordArt Galerie</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
-      </div>
-    </div>
-    <div class="wordart-dialog-body">
-      <p class="wordart-dialog-label">Selecteer een WordArt-stijl:</p>
-      <div class="wordart-gallery" id="wordart-gallery"></div>
-      <div class="wordart-text-input">
-        <label>Je tekst hier:</label>
-        <input type="text" id="wordart-text" class="win-input w-full" value="MNRV" title="WordArt tekst" placeholder="Tekst">
-      </div>
-      <div class="wordart-preview" id="wordart-preview"></div>
-      <div class="dialog-buttons pt-8">
-        <button class="win-btn win-btn-default" id="wordart-ok">OK</button>
-        <button class="win-btn" id="wordart-cancel">Annuleren</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ============================================
        APPS SHOWCASE WINDOW (Portfolio)
@@ -561,10 +422,6 @@
     <a class="start-menu-item" href="diensten.html">
       <img src="assets/icons/w98_DirectoryClosed_16x16_4.png" alt="" draggable="false">
       <span>Diensten</span>
-    </a>
-    <a class="start-menu-item" href="webshop.html">
-      <img src="assets/icons/w98_World_16x16_4.png" alt="" draggable="false">
-      <span>Webshop</span>
     </a>
     <div class="start-menu-item" onclick="if(window.MNRV){window.MNRV.showWindow('apps-window');window.MNRV.closeStartMenu();}">
       <img src="assets/icons/Globe_16x16_4.png" alt="" draggable="false">
@@ -903,188 +760,9 @@
 </script>
 
 <script>
-/* ============================================
-   WORD 95 + WORDART GALLERY
-   ============================================ */
-(function() {
-  'use strict';
-
-  // --- WordArt style definitions ---
-  var wordartStyles = [
-    { cls: 'wordart-1',  label: 'Blauw Verloop' },
-    { cls: 'wordart-2',  label: 'Rood Schaduw' },
-    { cls: 'wordart-3',  label: 'Oranje 3D' },
-    { cls: 'wordart-4',  label: 'Groen Speels' },
-    { cls: 'wordart-5',  label: 'Vuur Uitgerekt' },
-    { cls: 'wordart-6',  label: 'Blauw Outline' },
-    { cls: 'wordart-7',  label: 'Paars Roze' },
-    { cls: 'wordart-8',  label: 'Zilver Diepte' },
-    { cls: 'wordart-9',  label: 'Perspectief' },
-    { cls: 'wordart-10', label: 'Goud Luxe' },
-    { cls: 'wordart-11', label: 'Regenboog' },
-    { cls: 'wordart-12', label: 'Breed Blauw' },
-    { cls: 'wordart-13', label: 'Roze Schuin' },
-    { cls: 'wordart-14', label: 'Matrix Groen' },
-    { cls: 'wordart-15', label: 'Chrome Breed' }
-  ];
-
-  var selectedStyle = 0;
-  var galleryEl = document.getElementById('wordart-gallery');
-  var previewEl = document.getElementById('wordart-preview');
-  var textInput = document.getElementById('wordart-text');
-  var okBtn = document.getElementById('wordart-ok');
-  var cancelBtn = document.getElementById('wordart-cancel');
-  var wordartBtn = document.getElementById('word-wordart-btn');
-  var insertMenu = document.getElementById('word-insert-menu');
-  var wordDoc = document.getElementById('word-doc');
-
-  if (!galleryEl) return;
-
-  // --- Populate gallery ---
-  wordartStyles.forEach(function(style, i) {
-    var btn = document.createElement('button');
-    btn.className = 'wordart-style-btn';
-    btn.title = style.label;
-    btn.setAttribute('data-index', i);
-
-    var sample = document.createElement('span');
-    sample.className = 'wordart-rendered ' + style.cls;
-    sample.textContent = 'Ab';
-    sample.style.fontSize = '16px';
-    sample.style.padding = '0';
-    sample.style.margin = '0';
-    btn.appendChild(sample);
-
-    if (i === 0) btn.classList.add('selected');
-
-    btn.addEventListener('click', function() {
-      galleryEl.querySelectorAll('.wordart-style-btn').forEach(function(b) {
-        b.classList.remove('selected');
-      });
-      btn.classList.add('selected');
-      selectedStyle = i;
-      updatePreview();
-    });
-
-    galleryEl.appendChild(btn);
-  });
-
-  // --- Preview ---
-  function updatePreview() {
-    var text = textInput.value || 'MNRV';
-    var style = wordartStyles[selectedStyle];
-    previewEl.innerHTML = '';
-    var el = document.createElement('span');
-    el.className = 'wordart-rendered ' + style.cls;
-    el.textContent = text;
-    previewEl.appendChild(el);
-  }
-
-  textInput.addEventListener('input', updatePreview);
-  updatePreview();
-
-  // --- Open dialog ---
-  function openWordartDialog() {
-    if (window.MNRV && window.MNRV.showWindow) {
-      window.MNRV.showWindow('wordart-dialog');
-    } else {
-      var d = document.getElementById('wordart-dialog');
-      if (d) d.classList.remove('hidden');
-    }
-    updatePreview();
-  }
-
-  wordartBtn.addEventListener('click', openWordartDialog);
-
-  // Insert menu also opens WordArt
-  if (insertMenu) {
-    insertMenu.addEventListener('click', openWordartDialog);
-  }
-
-  // --- Insert WordArt into document ---
-  okBtn.addEventListener('click', function() {
-    var text = textInput.value || 'MNRV';
-    var style = wordartStyles[selectedStyle];
-
-    // Create WordArt element
-    var el = document.createElement('div');
-    el.style.textAlign = 'center';
-    el.style.margin = '12px 0';
-    el.contentEditable = 'false';
-
-    var art = document.createElement('span');
-    art.className = 'wordart-rendered ' + style.cls;
-    art.textContent = text;
-    art.style.fontSize = '32px';
-    art.contentEditable = 'false';
-    el.appendChild(art);
-
-    // Insert at end of doc (or at cursor if possible)
-    if (wordDoc) {
-      var sel = window.getSelection();
-      if (sel.rangeCount > 0 && wordDoc.contains(sel.anchorNode)) {
-        var range = sel.getRangeAt(0);
-        range.deleteContents();
-        range.insertNode(el);
-        // Move cursor after inserted element
-        range.setStartAfter(el);
-        range.collapse(true);
-        sel.removeAllRanges();
-        sel.addRange(range);
-      } else {
-        wordDoc.appendChild(el);
-      }
-      // Add a new paragraph after for continued typing
-      var p = document.createElement('p');
-      p.innerHTML = '&nbsp;';
-      el.parentNode.insertBefore(p, el.nextSibling);
-    }
-
-    // Close dialog
-    if (window.MNRV && window.MNRV.hideWindow) {
-      window.MNRV.hideWindow('wordart-dialog');
-    } else {
-      var d = document.getElementById('wordart-dialog');
-      if (d) d.classList.add('hidden');
-    }
-  });
-
-  // --- Cancel ---
-  cancelBtn.addEventListener('click', function() {
-    if (window.MNRV && window.MNRV.hideWindow) {
-      window.MNRV.hideWindow('wordart-dialog');
-    } else {
-      var d = document.getElementById('wordart-dialog');
-      if (d) d.classList.add('hidden');
-    }
-  });
-
-  // --- Word 95: Focus doc on window open ---
-  var wordWindow = document.getElementById('word-window');
-  if (wordWindow) {
-    var observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(m) {
-        if (m.attributeName === 'class' && !wordWindow.classList.contains('hidden')) {
-          setTimeout(function() {
-            if (wordDoc) wordDoc.focus();
-          }, 100);
-        }
-      });
-    });
-    observer.observe(wordWindow, { attributes: true });
-  }
-
-  // --- Word 95: Context tips for Clippy ---
-  if (window.MNRV) {
-    // Add Word tips to Clippy if available
-    setTimeout(function() {
-      if (window.MNRV.clippyShowTip) {
-        // Clippy will give Word-related tips when Word is open
-      }
-    }, 2000);
-  }
-})();
+/* Word 95 and WordArt removed */
 </script>
+
 
 <script>
 /* ============================================
