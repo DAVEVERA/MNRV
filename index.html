@@ -152,11 +152,64 @@
 <body>
 
 <!-- ============================================
+     LANDING ROUTE CHOICE
+     ============================================ -->
+<div id="landing-overlay" aria-label="Kies je MNRV ervaring">
+  <div class="landing-ambient" aria-hidden="true"></div>
+  <div class="landing-topline" aria-hidden="true">
+    <div class="matrix-intro" aria-live="polite">
+      <span id="matrix-typewriter"></span><span class="matrix-cursor">█</span>
+    </div>
+  </div>
+
+  <button class="landing-choice landing-choice-modern" id="landing-modern" type="button">
+    <span class="landing-choice-bg" aria-hidden="true"></span>
+    <span class="landing-choice-frame" aria-hidden="true">
+      <span class="landing-browser-preview">
+        <span class="landing-browser-bar"><i></i><i></i><i></i></span>
+        <span class="landing-browser-hero"></span>
+        <span class="landing-browser-lines"><i></i><i></i><i></i></span>
+      </span>
+    </span>
+    <span class="landing-content">
+      <span class="landing-title">MNRV</span>
+      <span class="landing-copy">Directe route naar informatie en contact.</span>
+      <span class="landing-meta">
+      </span>
+    </span>
+  </button>
+
+  <div class="landing-center-mark" aria-hidden="true">
+    <span class="landing-orbit"></span>
+    <img src="mnrv logo.png" alt="">
+    <span class="landing-center-label">Choose your journey</span>
+  </div>
+
+  <button class="landing-choice landing-choice-retro" id="landing-retro" type="button">
+    <span class="landing-choice-bg" aria-hidden="true"></span>
+    <span class="landing-choice-frame" aria-hidden="true">
+      <span class="landing-window-preview">
+        <span class="landing-window-title"><i></i><b>MNRV.EXE</b><em></em></span>
+        <span class="landing-window-body">
+          <i></i><i></i><i></i><i></i>
+        </span>
+      </span>
+    </span>
+    <span class="landing-content">
+      <span class="landing-title">Windows 95</span>
+      <span class="landing-copy">The lighter "site" of life.</span>
+      <span class="landing-meta">
+      </span>
+    </span>
+  </button>
+</div>
+
+<!-- ============================================
      BOOT SEQUENCE OVERLAY
      ============================================ -->
 <div id="boot-overlay">
 
-  <video id="boot-video" autoplay muted src="assets/Windows%2095%20Boot%20sequence.mp4"></video>
+  <video id="boot-video" muted preload="none" src="assets/Windows%2095%20Boot%20sequence.mp4"></video>
 
   <button id="boot-skip" onclick="skipBoot()">Druk op ESC om over te slaan</button>
 </div>
@@ -377,72 +430,194 @@
 
 <script>
 /* ============================================
-   BOOT SEQUENCE CONTROLLER (Video)
+   LANDING + BOOT SEQUENCE CONTROLLER (Video)
    ============================================ */
 (function() {
+  var landing = document.getElementById('landing-overlay');
+  var modernChoice = document.getElementById('landing-modern');
+  var retroChoice = document.getElementById('landing-retro');
   var overlay = document.getElementById('boot-overlay');
   var video = document.getElementById('boot-video');
-  var bootSkipped = false;
+  var bootStarted = false;
+  var bootFinished = false;
+  var selectedChoice = 'modern';
+  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var hour = new Date().getHours();
+  var dagdeel =
+    hour >= 5 && hour < 12 ? 'morgen' :
+    hour >= 12 && hour < 18 ? 'middag' :
+    hour >= 18 && hour < 23 ? 'avond' :
+    'nacht';
+  var matrixText = 'Goede ' + dagdeel + '. één keuze, jouw keuze. Links of rechts?';
+  var matrixTarget = document.getElementById('matrix-typewriter');
+  var matrixIndex = 0;
 
-  // Check sessionStorage - only boot once per session
-  if (sessionStorage.getItem('mnrv-booted')) {
-    finishBoot(true);
-    return;
+  function typeWriter() {
+    if (!matrixTarget || matrixIndex >= matrixText.length) return;
+    matrixTarget.textContent += matrixText.charAt(matrixIndex);
+    matrixIndex++;
+    setTimeout(typeWriter, 100);
   }
 
-  // ESC to skip
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') skipBoot();
-  });
+  setTimeout(typeWriter, 650);
 
-  // Video ended → finish boot
-  video.addEventListener('ended', function() {
-    if (!bootSkipped) finishBoot(false);
-  });
+  if (video) {
+    video.pause();
+    try {
+      video.currentTime = 0;
+    } catch (err) {}
+  }
 
-  // Fallback: if video fails to load, skip boot
-  video.addEventListener('error', function() {
-    if (!bootSkipped) finishBoot(false);
-  });
+  if (modernChoice) {
+    modernChoice.addEventListener('click', goModern);
+    modernChoice.addEventListener('focus', function() { selectedChoice = 'modern'; });
+    modernChoice.addEventListener('pointerenter', function() { selectedChoice = 'modern'; });
+  }
 
-  // Handle autoplay promise (browsers may block even muted video)
-  var playPromise = video.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(function() {
-      // Autoplay blocked - skip boot silently
-      if (!bootSkipped) finishBoot(false);
+  if (retroChoice) {
+    retroChoice.addEventListener('click', startBoot);
+    retroChoice.addEventListener('focus', function() { selectedChoice = 'retro'; });
+    retroChoice.addEventListener('pointerenter', function() { selectedChoice = 'retro'; });
+  }
+
+  if (canHover) {
+    [modernChoice, retroChoice].forEach(function(choice) {
+      if (!choice) return;
+      choice.addEventListener('pointermove', function(e) {
+        var rect = choice.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width - 0.5) * 5;
+        var y = ((e.clientY - rect.top) / rect.height - 0.5) * -5;
+        choice.style.setProperty('--tilt-x', x.toFixed(2) + 'deg');
+        choice.style.setProperty('--tilt-y', y.toFixed(2) + 'deg');
+      });
+      choice.addEventListener('pointerleave', function() {
+        choice.style.removeProperty('--tilt-x');
+        choice.style.removeProperty('--tilt-y');
+      });
     });
   }
 
-  // ---- Finish / Fade Out ----
+  document.addEventListener('keydown', function(e) {
+    if (!bootStarted) {
+      var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+
+      if (key === 'ArrowLeft') {
+        selectedChoice = 'modern';
+        if (modernChoice) modernChoice.focus();
+        e.preventDefault();
+        return;
+      }
+      if (key === 'ArrowRight') {
+        selectedChoice = 'retro';
+        if (retroChoice) retroChoice.focus();
+        e.preventDefault();
+        return;
+      }
+      if (key === 'a') {
+        goModern();
+        return;
+      }
+      if (key === 'd') {
+        startBoot();
+        return;
+      }
+      if (key === 'Enter') {
+        if (document.activeElement === modernChoice || selectedChoice === 'modern') {
+          goModern();
+        } else {
+          startBoot();
+        }
+        e.preventDefault();
+      }
+      return;
+    }
+
+    if (e.key === 'Escape') {
+      skipBoot();
+    }
+  });
+
+  if (video) {
+    video.addEventListener('ended', function() {
+      if (!bootFinished) finishBoot(false);
+    });
+
+    video.addEventListener('error', function() {
+      if (!bootFinished) finishBoot(false);
+    });
+  }
+
+  function goModern() {
+    window.location.href = 'assets/mnrv.html';
+  }
+
+  function startBoot() {
+    if (bootStarted) return;
+    bootStarted = true;
+
+    if (landing) {
+      landing.classList.add('fade-out');
+      setTimeout(function() {
+        landing.classList.add('done');
+      }, 420);
+    }
+
+    if (overlay) {
+      overlay.classList.add('active');
+      overlay.classList.remove('done', 'fade-out');
+    }
+
+    if (!video) {
+      finishBoot(false);
+      return;
+    }
+
+    try {
+      video.currentTime = 0;
+    } catch (err) {}
+
+    var playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function() {
+        if (!bootFinished) finishBoot(false);
+      });
+    }
+  }
+
   function finishBoot(instant) {
-    sessionStorage.setItem('mnrv-booted', '1');
-    bootSkipped = true;
+    if (bootFinished) return;
+    bootFinished = true;
 
     if (video) {
       video.pause();
     }
 
-    if (instant) {
-      overlay.classList.add('done');
-    } else {
-      overlay.classList.add('fade-out');
-      setTimeout(function() {
+    if (overlay) {
+      if (instant) {
         overlay.classList.add('done');
-      }, 800);
+      } else {
+        overlay.classList.add('fade-out');
+        setTimeout(function() {
+          overlay.classList.add('done');
+        }, 800);
+      }
     }
 
-    // Reveal desktop
-    document.querySelector('.desktop').classList.remove('booting');
-    document.querySelector('.taskbar').classList.remove('booting');
+    var desktop = document.querySelector('.desktop');
+    var taskbar = document.querySelector('.taskbar');
     var startMenu = document.querySelector('.start-menu');
+
+    if (desktop) desktop.classList.remove('booting');
+    if (taskbar) taskbar.classList.remove('booting');
     if (startMenu) startMenu.classList.remove('booting');
   }
 
-  // Global skip function
   window.skipBoot = function() {
+    if (!bootStarted || bootFinished) return;
     finishBoot(false);
   };
+
+  window.startBoot = startBoot;
 })();
 </script>
 
