@@ -14,13 +14,6 @@
 
   <!-- Main Pages -->
   <url>
-    <loc>https://mnrv.nl/over-ons.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://mnrv.nl/contact.html</loc>
     <lastmod>2026-02-11</lastmod>
     <changefreq>monthly</changefreq>

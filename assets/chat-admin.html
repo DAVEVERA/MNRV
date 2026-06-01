@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MNRV Chat Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f4f0;
+    --ink: #11161d;
+    --steel: #3d5a6e;
+    --mist: #c6bcaf;
+    --line: rgba(246,244,240,0.14);
+  }
+
+  * { box-sizing: border-box; }
+
+  [hidden] { display: none !important; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(198,188,175,0.18), transparent 34%),
+      linear-gradient(135deg, #0b0e13 0%, #1b2632 52%, #11161d 100%);
+    color: var(--paper);
+    font-family: Roboto, sans-serif;
+  }
+
+  .admin-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  header {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(11,14,19,0.62);
+    backdrop-filter: blur(16px);
+  }
+
+  .brand {
+    font-family: Poppins, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+
+  button {
+    min-height: 42px;
+    border: 1px solid rgba(246,244,240,0.16);
+    border-radius: 6px;
+    padding: 0 16px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  button.secondary {
+    background: transparent;
+    color: var(--paper);
+  }
+
+  button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+  }
+
+  .login {
+    width: min(460px, calc(100vw - 32px));
+    margin: 12vh auto;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(246,244,240,0.07);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.28);
+  }
+
+  .login h1 {
+    margin: 0 0 10px;
+    font-family: Poppins, sans-serif;
+    font-size: 30px;
+    line-height: 1.05;
+  }
+
+  .login p,
+  .empty {
+    color: rgba(246,244,240,0.62);
+    line-height: 1.6;
+  }
+
+  .login-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid rgba(246,244,240,0.16);
+    border-radius: 6px;
+    background: rgba(246,244,240,0.08);
+    color: var(--paper);
+    outline: none;
+  }
+
+  input {
+    min-height: 48px;
+    padding: 0 14px;
+  }
+
+  textarea {
+    min-height: 76px;
+    resize: vertical;
+    padding: 13px 14px;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: rgba(246,244,240,0.42);
+  }
+
+  .status {
+    min-height: 20px;
+    color: rgba(246,244,240,0.62);
+    font-size: 13px;
+  }
+
+  .chat-app {
+    display: grid;
+    grid-template-columns: minmax(260px, 340px) 1fr;
+    min-height: calc(100vh - 78px);
+  }
+
+  .conversations {
+    border-right: 1px solid var(--line);
+    background: rgba(11,14,19,0.34);
+    overflow-y: auto;
+  }
+
+  .conversation {
+    width: 100%;
+    min-height: 82px;
+    display: block;
+    padding: 14px 16px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    color: var(--paper);
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .conversation.active,
+  .conversation:hover {
+    background: rgba(246,244,240,0.08);
+  }
+
+  .conversation strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  .conversation span {
+    display: block;
+    overflow: hidden;
+    color: rgba(246,244,240,0.54);
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .conversation time {
+    display: block;
+    margin-top: 6px;
+    color: rgba(246,244,240,0.38);
+    font-family: Roboto, sans-serif;
+    font-size: 11px;
+  }
+
+  .thread-panel {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-width: 0;
+  }
+
+  .thread-head {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .thread-head h1 {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    font-size: 20px;
+  }
+
+  .thread-head p {
+    margin: 5px 0 0;
+    color: rgba(246,244,240,0.48);
+    font-size: 12px;
+  }
+
+  .thread {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 22px;
+    overflow-y: auto;
+  }
+
+  .message {
+    max-width: min(680px, 82%);
+    padding: 12px 14px;
+    border-radius: 14px;
+    line-height: 1.52;
+  }
+
+  .message.visitor {
+    align-self: flex-start;
+    background: rgba(246,244,240,0.12);
+  }
+
+  .message.agent {
+    align-self: flex-end;
+    background: var(--steel);
+  }
+
+  .message time {
+    display: block;
+    margin-top: 6px;
+    color: rgba(246,244,240,0.48);
+    font-size: 11px;
+  }
+
+  .reply {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    padding: 16px;
+    border-top: 1px solid var(--line);
+    background: rgba(11,14,19,0.56);
+  }
+
+  @media (max-width: 820px) {
+    header { padding: 16px; align-items: flex-start; flex-direction: column; }
+    .chat-app { grid-template-columns: 1fr; }
+    .conversations { max-height: 260px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .reply { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="admin-shell">
+  <header>
+    <div>
+      <div class="brand">MNRV</div>
+      <div class="status" id="admin-status">Chat admin laden...</div>
+    </div>
+    <div class="header-actions">
+      <button class="secondary" type="button" id="refresh-btn">Verversen</button>
+      <button class="secondary" type="button" id="logout-btn">Uitloggen</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="login" id="login-view">
+      <h1>Chat admin</h1>
+      <p>Log in met het MNRV e-mailadres. Na de magic link kun je live gesprekken bekijken en beantwoorden.</p>
+      <form class="login-form" id="login-form">
+        <input id="admin-email" type="email" autocomplete="email" value="info@mnrv.nl" aria-label="E-mailadres">
+        <button type="submit">Magic link sturen</button>
+      </form>
+    </section>
+
+    <section class="chat-app" id="chat-view" hidden>
+      <aside class="conversations" id="conversation-list"></aside>
+      <section class="thread-panel">
+        <div class="thread-head">
+          <h1 id="thread-title">Geen gesprek geselecteerd</h1>
+          <p id="thread-meta">Selecteer links een bezoeker.</p>
+        </div>
+        <div class="thread" id="thread"></div>
+        <form class="reply" id="reply-form">
+          <textarea id="reply-message" placeholder="Typ je antwoord..."></textarea>
+          <button type="submit">Verstuur</button>
+        </form>
+      </section>
+    </section>
+  </main>
+</div>
+
+<script src="./supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+let supabaseClient = null;
+let adminUser = null;
+let allMessages = [];
+let activeConversationId = null;
+let realtimeChannel = null;
+
+const statusEl = document.getElementById('admin-status');
+const loginView = document.getElementById('login-view');
+const chatView = document.getElementById('chat-view');
+const conversationList = document.getElementById('conversation-list');
+const thread = document.getElementById('thread');
+const threadTitle = document.getElementById('thread-title');
+const threadMeta = document.getElementById('thread-meta');
+const replyForm = document.getElementById('reply-form');
+const replyMessage = document.getElementById('reply-message');
+
+function setStatus(text) {
+  statusEl.textContent = text;
+}
+
+function getClient() {
+  if (supabaseClient) return supabaseClient;
+  const config = window.MNRV_SUPABASE_CONFIG;
+  if (!config || !config.url || !config.key) {
+    throw new Error('Supabase config ontbreekt.');
+  }
+  supabaseClient = window.supabase.createClient(config.url, config.key);
+  return supabaseClient;
+}
+
+function getAdminRedirectUrl() {
+  const config = window.MNRV_SUPABASE_CONFIG || {};
+  if (config.adminRedirectUrl) return config.adminRedirectUrl;
+
+  const currentUrl = window.location.href.split('#')[0];
+  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+    return currentUrl;
+  }
+
+  return 'https://mnrv.nl/assets/chat-admin.html';
+}
+
+function formatDate(value) {
+  return new Intl.DateTimeFormat('nl-NL', {
+    day: '2-digit',
+    month: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(new Date(value));
+}
+
+function groupConversations() {
+  const grouped = new Map();
+  allMessages.forEach(message => {
+    const existing = grouped.get(message.conversation_id) || {
+      conversation_id: message.conversation_id,
+      visitor_id: message.visitor_id,
+      messages: []
+    };
+    existing.messages.push(message);
+    existing.visitor_id = existing.visitor_id || message.visitor_id;
+    grouped.set(message.conversation_id, existing);
+  });
+
+  return Array.from(grouped.values()).sort((a, b) => {
+    const lastA = a.messages[a.messages.length - 1]?.created_at || '';
+    const lastB = b.messages[b.messages.length - 1]?.created_at || '';
+    return lastB.localeCompare(lastA);
+  });
+}
+
+function renderConversations() {
+  const conversations = groupConversations();
+  conversationList.innerHTML = '';
+
+  if (!conversations.length) {
+    conversationList.innerHTML = '<p class="empty" style="padding:18px;">Nog geen gesprekken.</p>';
+    renderThread();
+    return;
+  }
+
+  if (!activeConversationId) {
+    activeConversationId = conversations[0].conversation_id;
+  }
+
+  conversations.forEach((conversation, index) => {
+    const last = conversation.messages[conversation.messages.length - 1];
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'conversation' + (conversation.conversation_id === activeConversationId ? ' active' : '');
+    button.innerHTML =
+      '<strong>Bezoeker ' + String(index + 1).padStart(2, '0') + '</strong>' +
+      '<span>' + (last ? last.message : '') + '</span>' +
+      '<time>' + (last ? formatDate(last.created_at) : '') + '</time>';
+    button.addEventListener('click', () => {
+      activeConversationId = conversation.conversation_id;
+      renderConversations();
+      renderThread();
+    });
+    conversationList.appendChild(button);
+  });
+}
+
+function renderThread() {
+  const messages = allMessages.filter(message => message.conversation_id === activeConversationId);
+  thread.innerHTML = '';
+
+  if (!activeConversationId || !messages.length) {
+    threadTitle.textContent = 'Geen gesprek geselecteerd';
+    threadMeta.textContent = 'Selecteer links een bezoeker.';
+    thread.innerHTML = '<p class="empty">Nog geen berichten in dit gesprek.</p>';
+    return;
+  }
+
+  const active = messages[0];
+  threadTitle.textContent = 'Gesprek';
+  threadMeta.textContent = active.visitor_id ? 'Visitor ID: ' + active.visitor_id : active.conversation_id;
+
+  messages.forEach(message => {
+    const bubble = document.createElement('div');
+    bubble.className = 'message ' + message.sender;
+    bubble.innerHTML = '<div></div><time>' + formatDate(message.created_at) + '</time>';
+    bubble.firstChild.textContent = message.message;
+    thread.appendChild(bubble);
+  });
+
+  thread.scrollTop = thread.scrollHeight;
+}
+
+async function loadMessages() {
+  const client = getClient();
+  const { data, error } = await client
+    .from('chat_messages')
+    .select('id,conversation_id,visitor_id,sender,message,created_at')
+    .order('created_at', { ascending: true })
+    .limit(500);
+
+  if (error) {
+    setStatus('Geen toegang. Controleer SQL policy en admin e-mail.');
+    return;
+  }
+
+  allMessages = data || [];
+  setStatus(adminUser.email + ' - live');
+  renderConversations();
+  renderThread();
+}
+
+function subscribeRealtime() {
+  if (realtimeChannel) return;
+  const client = getClient();
+  realtimeChannel = client
+    .channel('mnrv-chat-admin')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'chat_messages' },
+      payload => {
+        if (!payload.new) return;
+        allMessages.push(payload.new);
+        renderConversations();
+        renderThread();
+      }
+    )
+    .subscribe();
+}
+
+async function sendReply(event) {
+  event.preventDefault();
+  const text = replyMessage.value.trim();
+  if (!text || !activeConversationId) return;
+
+  const messages = allMessages.filter(message => message.conversation_id === activeConversationId);
+  const target = messages.find(message => message.visitor_id);
+  if (!target || !target.visitor_id) {
+    setStatus('Kan geen visitor_id vinden voor dit gesprek.');
+    return;
+  }
+
+  const client = getClient();
+  const { error } = await client.from('chat_messages').insert({
+    conversation_id: activeConversationId,
+    visitor_id: target.visitor_id,
+    admin_id: adminUser.id,
+    sender: 'agent',
+    message: text,
+    page_path: '/assets/chat-admin.html',
+    user_agent: window.navigator.userAgent
+  });
+
+  if (error) {
+    setStatus('Antwoord versturen mislukt. Controleer admin policy.');
+    return;
+  }
+
+  replyMessage.value = '';
+}
+
+async function showAuthedState(user) {
+  adminUser = user;
+  loginView.hidden = true;
+  chatView.hidden = false;
+  await loadMessages();
+  subscribeRealtime();
+}
+
+async function init() {
+  const client = getClient();
+  const { data } = await client.auth.getSession();
+  if (data.session && data.session.user) {
+    await showAuthedState(data.session.user);
+  } else {
+    setStatus('Niet ingelogd');
+  }
+}
+
+document.getElementById('login-form').addEventListener('submit', async event => {
+  event.preventDefault();
+  const email = document.getElementById('admin-email').value.trim();
+  if (!email) return;
+  const redirectUrl = getAdminRedirectUrl();
+  const { error } = await getClient().auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: redirectUrl,
+      shouldCreateUser: false
+    }
+  });
+  setStatus(error ? 'Magic link kon niet worden verstuurd.' : 'Check je mail voor de login link. Redirect: ' + redirectUrl);
+});
+
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  await getClient().auth.signOut();
+  window.location.reload();
+});
+
+document.getElementById('refresh-btn').addEventListener('click', loadMessages);
+replyForm.addEventListener('submit', sendReply);
+replyMessage.addEventListener('keydown', event => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+    replyForm.requestSubmit();
+  }
+});
+
+init();
+</script>
+</body>
+</html>

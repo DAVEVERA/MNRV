@@ -244,21 +244,12 @@
   <div class="ms-window" id="ms-window">
     <!-- Title Bar -->
     <div class="ms-titlebar">
-      <svg class="ms-titlebar-icon" viewBox="0 0 16 16">
-        <circle cx="8" cy="8" r="5" fill="#000" stroke="#808080" stroke-width="1"/>
-        <line x1="4" y1="4" x2="6" y2="6" stroke="#000" stroke-width="1.5"/>
-        <line x1="12" y1="4" x2="10" y2="6" stroke="#000" stroke-width="1.5"/>
-        <line x1="8" y1="1" x2="8" y2="3" stroke="#000" stroke-width="1.5"/>
-        <line x1="8" y1="13" x2="8" y2="15" stroke="#000" stroke-width="1.5"/>
-        <line x1="1" y1="8" x2="3" y2="8" stroke="#000" stroke-width="1.5"/>
-        <line x1="13" y1="8" x2="15" y2="8" stroke="#000" stroke-width="1.5"/>
-        <circle cx="8" cy="8" r="2" fill="#808080"/>
-      </svg>
+      <img class="ms-titlebar-icon" src="assets/icons/w98_GameMine1_32x32_4.png" alt="" draggable="false">
       <span class="ms-titlebar-title">Mijnenveger</span>
       <div class="ms-titlebar-buttons">
         <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
         <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
-        <a href="index.html" class="win-titlebar-btn close-btn" title="Sluiten" style="text-decoration:none;color:inherit;">X</a>
+        <a href="index.html?retro=1" class="win-titlebar-btn close-btn" title="Sluiten" style="text-decoration:none;color:inherit;">X</a>
       </div>
     </div>
 
@@ -276,7 +267,7 @@
         <div class="ms-dropdown-sep"></div>
         <div class="ms-dropdown-item" id="best-times-btn">Beste tijden...</div>
         <div class="ms-dropdown-sep"></div>
-        <div class="ms-dropdown-item" onclick="window.location.href='index.html'">Afsluiten</div>
+        <div class="ms-dropdown-item" onclick="window.location.href='index.html?retro=1'">Afsluiten</div>
       </div>
 
       <button class="ms-menu-trigger" id="menu-help-btn">Help</button>
@@ -301,13 +292,13 @@
 
   <!-- Taskbar -->
   <div class="taskbar">
-    <a href="index.html" class="start-btn clean-link" title="Terug naar bureaublad">
+    <a href="index.html?retro=1" class="start-btn clean-link" title="Terug naar bureaublad">
       <img class="start-flag-img" src="assets/icons/w98_Windows_16x16_4.png" alt="" draggable="false">
       <span>Start</span>
     </a>
     <div class="taskbar-windows flex-1">
       <button class="taskbar-window-btn active" type="button">
-        <img src="assets/icons/w98_Minesweeper_16x16_4.png" alt="" draggable="false">
+        <img src="assets/icons/w98_GameMine1_32x32_4.png" alt="" draggable="false">
         Mijnenveger
       </button>
     </div>

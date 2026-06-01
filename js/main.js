@@ -377,11 +377,18 @@
     focusWindow(win);
     addTaskbarButton(id);
     updateTaskbarButtons();
+    win.querySelectorAll('video[data-window-autoplay]').forEach(function(video) {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function() {});
+      }
+    });
   }
 
   function hideWindow(id) {
     const win = document.getElementById(id);
     if (!win) return;
+    stopWindowMedia(win);
     win.classList.add('hidden');
     removeTaskbarButton(id);
   }
@@ -389,6 +396,7 @@
   function minimizeWindow(id) {
     const win = document.getElementById(id);
     if (!win) return;
+    stopWindowMedia(win);
     win.classList.remove('focused');
     win._wasMinimized = true;
     // Play minimize animation
@@ -400,6 +408,17 @@
       updateTaskbarButtons();
     });
     updateTaskbarButtons();
+  }
+
+  function stopWindowMedia(win) {
+    win.querySelectorAll('video').forEach(function(video) {
+      video.pause();
+      if (video.hasAttribute('data-window-reset')) {
+        try {
+          video.currentTime = 0;
+        } catch (e) {}
+      }
+    });
   }
 
   // --- Taskbar Window Buttons ---

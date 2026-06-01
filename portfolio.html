@@ -77,12 +77,12 @@
       <div class="win-titlebar-buttons">
         <button class="win-titlebar-btn min-btn" type="button" title="Minimaliseren">_</button>
         <button class="win-titlebar-btn max-btn" type="button" title="Maximaliseren">&#9633;</button>
-        <a href="index.html" class="win-titlebar-btn close-btn clean-link" title="Terug naar bureaublad">X</a>
+        <a href="index.html?retro=1" class="win-titlebar-btn close-btn clean-link" title="Terug naar bureaublad">X</a>
       </div>
     </div>
 
     <div class="win-toolbar">
-      <a href="index.html" class="win-toolbar-btn clean-link" title="Terug naar bureaublad">
+      <a href="index.html?retro=1" class="win-toolbar-btn clean-link" title="Terug naar bureaublad">
         <svg viewBox="0 0 16 16"><polygon points="10,2 2,8 10,14" fill="#000"/></svg>
         Terug
       </a>
@@ -107,7 +107,7 @@
     </div>
 
     <div class="win-body embed-body flex-1">
-      <iframe id="mnrv-frame" class="embed-frame" src="assets/mnrv.html" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation" allowfullscreen title="MNRV moderne website"></iframe>
+      <iframe id="mnrv-frame" class="embed-frame" src="assets/mnrv.html" sandbox="allow-scripts allow-popups allow-forms allow-presentation" allowfullscreen title="MNRV moderne website"></iframe>
     </div>
 
     <div class="win-statusbar">
@@ -118,7 +118,7 @@
   </div>
 
   <div class="taskbar">
-    <a href="index.html" class="start-btn clean-link" title="Terug naar bureaublad">
+    <a href="index.html?retro=1" class="start-btn clean-link" title="Terug naar bureaublad">
       <img class="start-flag-img" src="assets/icons/w98_Windows_16x16_4.png" alt="" draggable="false">
       <span>Start</span>
     </a>
@@ -140,7 +140,7 @@
     <button type="button" onclick="openExternal()">Open extern</button>
     <button type="button" onclick="closeFs()">Sluiten (Esc)</button>
   </div>
-  <iframe class="embed-fs-frame" id="embed-fs-frame" src="about:blank" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation" allowfullscreen title="MNRV moderne website fullscreen"></iframe>
+  <iframe class="embed-fs-frame" id="embed-fs-frame" src="about:blank" sandbox="allow-scripts allow-popups allow-forms allow-presentation" allowfullscreen title="MNRV moderne website fullscreen"></iframe>
 </div>
 
 <script>

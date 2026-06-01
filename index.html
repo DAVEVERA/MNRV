@@ -163,7 +163,9 @@
   </div>
 
   <button class="landing-choice landing-choice-modern" id="landing-modern" type="button">
-    <span class="landing-choice-bg" aria-hidden="true"></span>
+    <span class="landing-choice-bg" aria-hidden="true">
+      <video class="landing-route-video" autoplay muted loop playsinline preload="auto" src="assets/img/modernroute_bg.mp4"></video>
+    </span>
     <span class="landing-choice-frame" aria-hidden="true">
       <span class="landing-browser-preview">
         <span class="landing-browser-bar"><i></i><i></i><i></i></span>
@@ -172,7 +174,7 @@
       </span>
     </span>
     <span class="landing-content">
-      <span class="landing-title">MNRV</span>
+      <span class="landing-title">Modern route</span>
       <span class="landing-copy">Directe route naar informatie en contact.</span>
       <span class="landing-meta">
       </span>
@@ -186,7 +188,9 @@
   </div>
 
   <button class="landing-choice landing-choice-retro" id="landing-retro" type="button">
-    <span class="landing-choice-bg" aria-hidden="true"></span>
+    <span class="landing-choice-bg" aria-hidden="true">
+      <video class="landing-route-video" autoplay muted loop playsinline preload="auto" src="assets/img/marioretro_BG.mp4"></video>
+    </span>
     <span class="landing-choice-frame" aria-hidden="true">
       <span class="landing-window-preview">
         <span class="landing-window-title"><i></i><b>MNRV.EXE</b><em></em></span>
@@ -196,7 +200,7 @@
       </span>
     </span>
     <span class="landing-content">
-      <span class="landing-title">Windows 95</span>
+      <span class="landing-title">Retro route</span>
       <span class="landing-copy">The lighter "site" of life.</span>
       <span class="landing-meta">
       </span>
@@ -221,35 +225,39 @@
        ============================================ -->
   <div class="desktop-icons">
 
-
-
-    <!-- Over MNRV -->
-    <a class="desktop-icon" tabindex="0" data-target="over-ons.html">
-      <img class="icon-img" src="assets/icons/w98_Notepad_32x32_4.png" alt="Over MNRV" draggable="false">
-      <span class="icon-label">Over MNRV</span>
-    </a>
-
     <!-- Contact -->
     <a class="desktop-icon" tabindex="0" data-target="contact.html">
-      <img class="icon-img" src="assets/icons/w98_EnvelopeClosed_32x32_4.png" alt="Contact" draggable="false">
+      <img class="icon-img" src="img/icons/outlook_express-5.png" alt="Contact" draggable="false">
       <span class="icon-label">Contact</span>
     </a>
 
     <!-- Minesweeper -->
     <a class="desktop-icon" tabindex="0" data-target="minesweeper.html">
-      <img class="icon-img" src="assets/icons/w98_Minesweeper_32x32_4.png" alt="Mijnenveger" draggable="false">
+      <img class="icon-img" src="assets/icons/minesweeper.png" alt="Mijnenveger" draggable="false">
       <span class="icon-label">Mijnenveger</span>
     </a>
 
+    <!-- FreeCell -->
+    <a class="desktop-icon" tabindex="0" data-target="freecell/FreecellJS.html">
+      <img class="icon-img" src="freecell/img/favicon.png" alt="FreeCell" draggable="false">
+      <span class="icon-label">FreeCell</span>
+    </a>
+
+    <!-- Nedry Console -->
+    <div class="desktop-icon" tabindex="0" data-window="nedry-window">
+      <img class="icon-img" src="assets/icons/w98_ConsolePrompt_32x32_4.png" alt="Nedry Console" draggable="false">
+      <span class="icon-label">NEDRY.EXE</span>
+    </div>
+
     <!-- Internet Explorer (about window) -->
     <div class="desktop-icon" tabindex="0" data-window="about-window">
-      <img class="icon-img" src="assets/icons/w98_MSIE1_32x32_4.png" alt="Internet Explorer" draggable="false">
+      <img class="icon-img" src="assets/icons/internet-explorer.png" alt="Internet Explorer" draggable="false">
       <span class="icon-label">Internet Explorer</span>
     </div>
 
     <!-- Portfolio -->
     <a class="desktop-icon" tabindex="0" data-target="portfolio.html">
-      <img class="icon-img" src="assets/icons/w98_ConnectedWorld_32x32_4.png" alt="Portfolio" draggable="false">
+      <img class="icon-img" src="img/icons/world-4.png" alt="Portfolio" draggable="false">
       <span class="icon-label">Portfolio</span>
     </a>
 
@@ -297,6 +305,32 @@
     <div class="win-statusbar">
       <span class="win-statusbar-section">Gereed</span>
       <span class="win-statusbar-section">Internet</span>
+    </div>
+  </div>
+
+  <div id="nedry-window" class="win-window hidden nedry-window">
+    <div class="win-titlebar">
+      <img class="win-titlebar-icon" src="assets/icons/w98_ConsolePrompt_32x32_4.png" alt="" draggable="false">
+      <span class="win-titlebar-title">NEDRY.EXE</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <div class="win-menubar">
+      <span class="win-menubar-item">Bestand</span>
+      <span class="win-menubar-item">Bewerken</span>
+      <span class="win-menubar-item">Help</span>
+    </div>
+    <div class="win-body nedry-video-body">
+      <video id="nedry-video" class="nedry-video" controls playsinline preload="metadata" data-window-autoplay data-window-reset>
+        <source src="assets/Nedry-The-King-Jurassic-Park.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="win-statusbar">
+      <span class="win-statusbar-section">assets/Nedry-The-King-Jurassic-Park.mp4</span>
+      <span class="win-statusbar-section">MP4</span>
     </div>
   </div>
 
@@ -403,7 +437,7 @@
       <span>Portfolio</span>
     </a>
     <div class="start-menu-separator"></div>
-    <a class="start-menu-item" href="over-ons.html">
+    <a class="start-menu-item" href="portfolio.html">
       <img src="assets/icons/w98_Notepad_16x16_4.png" alt="" draggable="false">
       <span>Over MNRV</span>
     </a>
@@ -442,6 +476,11 @@
   var bootFinished = false;
   var selectedChoice = 'modern';
   var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var openRetroDirect = false;
+  try {
+    var params = new URLSearchParams(window.location.search);
+    openRetroDirect = params.get('retro') === '1' || window.location.hash === '#retro';
+  } catch (err) {}
   var hour = new Date().getHours();
   var dagdeel =
     hour >= 5 && hour < 12 ? 'morgen' :
@@ -466,6 +505,22 @@
     try {
       video.currentTime = 0;
     } catch (err) {}
+  }
+
+  if (openRetroDirect) {
+    bootStarted = true;
+    bootFinished = true;
+
+    if (landing) landing.classList.add('done');
+    if (overlay) overlay.classList.add('done');
+
+    var directDesktop = document.querySelector('.desktop');
+    var directTaskbar = document.querySelector('.taskbar');
+    var directStartMenu = document.querySelector('.start-menu');
+
+    if (directDesktop) directDesktop.classList.remove('booting');
+    if (directTaskbar) directTaskbar.classList.remove('booting');
+    if (directStartMenu) directStartMenu.classList.remove('booting');
   }
 
   if (modernChoice) {

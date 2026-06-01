@@ -40,6 +40,7 @@
     font-family: 'Roboto', sans-serif;
     background: #EEE9DF;
     min-height: 100vh;
+    overflow-x: hidden;
     color: var(--abyss);
     transition: background 0.05s linear;
   }
@@ -760,6 +761,171 @@
   }
   .contact-info a:hover { opacity: 0.7; }
 
+  /* SOCIAL FLYOUT */
+  .social-flyout {
+    position: fixed;
+    right: 18px;
+    top: 50%;
+    z-index: 190;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateY(-50%);
+  }
+
+  .social-flyout-toggle {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(238,233,223,0.34);
+    border-radius: 50%;
+    background:
+      linear-gradient(135deg, rgba(238,233,223,0.18), rgba(61,90,110,0.54)),
+      rgba(11,14,19,0.78);
+    color: var(--palladian);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.26);
+    backdrop-filter: blur(18px);
+    cursor: pointer;
+    transition: transform 0.18s, background 0.2s, border-color 0.2s;
+  }
+
+  .social-flyout-toggle:hover,
+  .social-flyout-toggle:focus-visible {
+    transform: translateX(-2px);
+    border-color: rgba(238,233,223,0.62);
+    background:
+      linear-gradient(135deg, rgba(238,233,223,0.26), rgba(61,90,110,0.72)),
+      rgba(11,14,19,0.82);
+    outline: none;
+  }
+
+  .social-flyout-toggle svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .social-flyout-panel {
+    position: absolute;
+    right: 68px;
+    top: 50%;
+    width: min(330px, calc(100vw - 104px));
+    max-height: min(520px, calc(100vh - 116px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 16px;
+    border: 1px solid rgba(238,233,223,0.18);
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(198,188,175,0.16), transparent 36%),
+      rgba(11,14,19,0.88);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.32);
+    backdrop-filter: blur(22px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(12px, -50%) scale(0.98);
+    transform-origin: right center;
+    transition: opacity 0.18s, transform 0.18s;
+    scrollbar-color: rgba(238,233,223,0.32) transparent;
+    scrollbar-width: thin;
+  }
+
+  .social-flyout.open .social-flyout-panel {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(0, -50%) scale(1);
+  }
+
+  .social-flyout-panel::-webkit-scrollbar { width: 7px; }
+  .social-flyout-panel::-webkit-scrollbar-thumb {
+    background: rgba(238,233,223,0.32);
+    border-radius: 999px;
+  }
+
+  .social-flyout-kicker {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(238,233,223,0.48);
+    margin-bottom: 6px;
+  }
+
+  .social-flyout-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    line-height: 1.08;
+    color: var(--palladian);
+    margin-bottom: 16px;
+  }
+
+  .social-links {
+    display: grid;
+    gap: 9px;
+  }
+
+  .social-link {
+    min-height: 58px;
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border: 1px solid rgba(238,233,223,0.12);
+    border-radius: 6px;
+    color: var(--palladian);
+    text-decoration: none;
+    background: rgba(238,233,223,0.06);
+    transition: transform 0.16s, border-color 0.18s, background 0.18s;
+  }
+
+  .social-link:hover,
+  .social-link:focus-visible {
+    transform: translateX(-3px);
+    border-color: rgba(238,233,223,0.32);
+    background: rgba(238,233,223,0.11);
+    outline: none;
+  }
+
+  .social-link-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--flame));
+    color: var(--palladian);
+  }
+
+  .social-link-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .social-link strong {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  .social-link-text {
+    min-width: 0;
+  }
+
+  .social-link-text span {
+    display: block;
+    margin-top: 2px;
+    color: rgba(238,233,223,0.52);
+    font-size: 12px;
+  }
+
+  .social-link-arrow {
+    color: rgba(238,233,223,0.38);
+    font-size: 18px;
+  }
+
   .chatbox-frame {
     background: rgba(238,233,223,0.06);
     border: 1px solid rgba(238,233,223,0.18);
@@ -906,6 +1072,12 @@
     transform: translateY(-1px);
   }
 
+  .chatbox-send:disabled {
+    opacity: 0.58;
+    cursor: wait;
+    transform: none;
+  }
+
   .form-group {
     display: flex;
     flex-direction: column;
@@ -996,8 +1168,9 @@
   footer {
     padding: 40px 48px;
     border-top: 1px solid rgba(238,233,223,0.08);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
     align-items: center;
   }
 
@@ -1012,6 +1185,39 @@
   .footer-copy {
     font-size: 12px;
     color: rgba(255,255,255,0.25);
+  }
+
+  .footer-socials {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-socials a {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    color: rgba(255,255,255,0.54);
+    text-decoration: none;
+    transition: color 0.16s, border-color 0.16s, transform 0.16s, background 0.16s;
+  }
+
+  .footer-socials a:hover,
+  .footer-socials a:focus-visible {
+    color: var(--palladian);
+    border-color: rgba(255,255,255,0.34);
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .footer-socials svg {
+    width: 17px;
+    height: 17px;
   }
 
   /* DECORATIVE */
@@ -1048,7 +1254,27 @@
     .chatbox-send { min-height: 48px; }
     .form-row { grid-template-columns: 1fr; }
     .hero-bg-num { display: none; }
-    footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
+    footer { padding: 32px 24px; grid-template-columns: 1fr; gap: 14px; text-align: center; }
+    .social-flyout {
+      left: 14px;
+      right: auto;
+      top: auto;
+      bottom: 92px;
+      transform: none;
+    }
+    .social-flyout-panel {
+      left: 0;
+      right: auto;
+      top: auto;
+      bottom: 66px;
+      width: min(330px, calc(100vw - 28px));
+      max-height: min(430px, calc(100vh - 118px));
+      transform: translateY(12px) scale(0.98);
+      transform-origin: left bottom;
+    }
+    .social-flyout.open .social-flyout-panel {
+      transform: translateY(0) scale(1);
+    }
     /* hero blijft horizontaal: tekst links, foto rechts */
     .hero-inner { grid-template-columns: 1.05fr 0.95fr; gap: 20px; }
     .hero-title { font-size: clamp(30px, 7.5vw, 64px); }
@@ -1058,6 +1284,9 @@
     .hero-portret svg { max-height: 70vh; }
   }
   @media (max-width: 560px) {
+    nav { gap: 12px; }
+    .nav-logo { flex: 0 0 auto; }
+    .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
     .hero { padding: 96px 16px 48px; }
     .werk { padding-left: 16px; padding-right: 16px; }
     .werk-stage { min-height: 560px; height: 74vh; }
@@ -1330,6 +1559,78 @@
   <a href="#contact" class="nav-cta">Start project</a>
 </nav>
 
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="icon-share" viewBox="0 0 24 24">
+    <circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <path d="M8.7 10.7 15.3 6.3M8.7 13.3l6.6 4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+  </symbol>
+  <symbol id="icon-instagram" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+    <circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <circle cx="17" cy="7" r="1.1" fill="currentColor"></circle>
+  </symbol>
+  <symbol id="icon-linkedin" viewBox="0 0 24 24">
+    <path d="M5 9h3.2v10H5V9Zm1.6-4.5a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8ZM10.4 9h3.1v1.4c.5-.8 1.5-1.7 3.2-1.7 3.4 0 4 2.2 4 5.1V19h-3.2v-4.6c0-1.1 0-2.5-1.6-2.5s-1.8 1.2-1.8 2.4V19h-3.2V9Z" fill="currentColor"></path>
+  </symbol>
+  <symbol id="icon-facebook" viewBox="0 0 24 24">
+    <path d="M14.2 8.4V6.8c0-.8.5-1.1 1.2-1.1h1.8V2.8c-.9-.1-1.8-.2-2.7-.2-2.7 0-4.5 1.6-4.5 4.5v1.3H7v3.3h3V21h3.7v-9.3h2.9l.5-3.3h-3Z" fill="currentColor"></path>
+  </symbol>
+  <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+    <path d="M12 3.2a8.6 8.6 0 0 0-7.3 13.2L3.6 20.8l4.5-1.1A8.6 8.6 0 1 0 12 3.2Zm0 15.4c-1.4 0-2.8-.4-3.9-1.2l-.3-.2-2.3.6.6-2.2-.2-.4a6.8 6.8 0 1 1 6.1 3.4Zm3.9-5.1c-.2-.1-1.3-.7-1.5-.7-.2-.1-.4-.1-.5.1l-.7.8c-.1.2-.3.2-.5.1a5.6 5.6 0 0 1-2.8-2.4c-.2-.3 0-.4.1-.6l.4-.5c.1-.2.1-.3 0-.5l-.7-1.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.8-.9 2s.9 2.4 1.1 2.6c.1.1 1.8 2.8 4.4 3.8.6.3 1.1.4 1.5.5.6.2 1.2.1 1.6.1.5-.1 1.3-.6 1.5-1.1.2-.6.2-1 .1-1.1-.1-.2-.2-.2-.4-.3Z" fill="currentColor"></path>
+  </symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24">
+    <path d="M6.7 4.2 9 3.7c.6-.1 1.1.2 1.3.7l1 2.4c.2.5.1 1-.3 1.3L9.7 9.3a10.9 10.9 0 0 0 5 5l1.2-1.3c.4-.4.9-.5 1.4-.3l2.3 1c.6.2.9.8.8 1.3l-.5 2.4c-.1.6-.6 1-1.2 1A14.7 14.7 0 0 1 5.6 5.4c0-.6.5-1.1 1.1-1.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+  </symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24">
+    <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+    <path d="m5.5 8 6.5 5 6.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+  </symbol>
+</svg>
+
+<aside class="social-flyout" id="social-flyout" aria-label="Social media en contact">
+  <button class="social-flyout-toggle" id="social-flyout-toggle" type="button" aria-label="Open social media" aria-expanded="false" aria-controls="social-flyout-panel">
+    <svg aria-hidden="true"><use href="#icon-share"></use></svg>
+  </button>
+  <div class="social-flyout-panel" id="social-flyout-panel" aria-hidden="true">
+    <p class="social-flyout-kicker">Connect</p>
+    <h2 class="social-flyout-title">MNRV direct bereiken.</h2>
+    <div class="social-links">
+      <a class="social-link" href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="MNRV op Instagram">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-instagram"></use></svg></span>
+        <span class="social-link-text"><strong>Instagram</strong><span>@mnrv.ai</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener" aria-label="Dave Vera op LinkedIn">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-linkedin"></use></svg></span>
+        <span class="social-link-text"><strong>LinkedIn</strong><span>Dave Vera</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener" aria-label="Meneer Vera op Facebook">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-facebook"></use></svg></span>
+        <span class="social-link-text"><strong>Facebook</strong><span>Meneer Vera</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="https://wa.me/31682456410" target="_blank" rel="noopener" aria-label="Stuur MNRV een WhatsApp bericht">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg></span>
+        <span class="social-link-text"><strong>WhatsApp</strong><span>+31 6 82 45 64 10</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="tel:+31682456410" aria-label="Bel MNRV">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-phone"></use></svg></span>
+        <span class="social-link-text"><strong>Bellen</strong><span>Direct contact</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="mailto:info@mnrv.nl" aria-label="Mail MNRV">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-mail"></use></svg></span>
+        <span class="social-link-text"><strong>E-mail</strong><span>info@mnrv.nl</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg-num">AI</div>
@@ -1412,7 +1713,7 @@
     <div id="werk-showcase" class="werk-showcase">
       <article class="werk-slide" data-title="MRS Vision" data-url="https://mrsvision.nl">
         <div class="werk-slide-media">
-          <iframe class="werk-slide-frame" src="https://mrsvision.nl" title="MRS Vision live preview" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"></iframe>
+          <iframe class="werk-slide-frame" src="https://mrsvision.nl" title="MRS Vision live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
           <div class="werk-frame-fallback"><span>Live preview</span><a href="https://mrsvision.nl" target="_blank" rel="noopener">Open site</a></div>
         </div>
         <button class="werk-slide-maximize" type="button" aria-label="MRS Vision fullscreen openen">[]</button>
@@ -1429,7 +1730,7 @@
 
       <article class="werk-slide" data-title="FAINL" data-url="https://fainl.com">
         <div class="werk-slide-media">
-          <iframe class="werk-slide-frame" src="https://fainl.com" title="FAINL live preview" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"></iframe>
+          <iframe class="werk-slide-frame" src="https://fainl.com" title="FAINL live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
           <div class="werk-frame-fallback"><span>Live preview</span><a href="https://fainl.com" target="_blank" rel="noopener">Open site</a></div>
         </div>
         <button class="werk-slide-maximize" type="button" aria-label="FAINL fullscreen openen">[]</button>
@@ -1446,7 +1747,7 @@
 
       <article class="werk-slide" data-title="Windofy" data-url="https://windofy.com">
         <div class="werk-slide-media">
-          <iframe class="werk-slide-frame" src="https://windofy.com" title="Windofy live preview" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"></iframe>
+          <iframe class="werk-slide-frame" src="https://windofy.com" title="Windofy live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
           <div class="werk-frame-fallback"><span>Live preview</span><a href="https://windofy.com" target="_blank" rel="noopener">Open site</a></div>
         </div>
         <button class="werk-slide-maximize" type="button" aria-label="Windofy fullscreen openen">[]</button>
@@ -1463,7 +1764,7 @@
 
       <article class="werk-slide" data-title="De Notenman" data-url="https://denotenman.com">
         <div class="werk-slide-media">
-          <iframe class="werk-slide-frame" src="https://denotenman.com" title="De Notenman live preview" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"></iframe>
+          <iframe class="werk-slide-frame" src="https://denotenman.com" title="De Notenman live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
           <div class="werk-frame-fallback"><span>Live preview</span><a href="https://denotenman.com" target="_blank" rel="noopener">Open site</a></div>
         </div>
         <button class="werk-slide-maximize" type="button" aria-label="De Notenman fullscreen openen">[]</button>
@@ -1480,7 +1781,7 @@
 
       <article class="werk-slide" data-title="MNRV" data-url="https://mnrv.nl">
         <div class="werk-slide-media">
-          <iframe class="werk-slide-frame" src="https://mnrv.nl" title="MNRV live preview" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"></iframe>
+          <iframe class="werk-slide-frame" src="https://mnrv.nl" title="MNRV live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
           <div class="werk-frame-fallback"><span>Live preview</span><a href="https://mnrv.nl" target="_blank" rel="noopener">Open site</a></div>
         </div>
         <button class="werk-slide-maximize" type="button" aria-label="MNRV fullscreen openen">[]</button>
@@ -1509,7 +1810,7 @@
   </div>
 
   <div id="werkFullscreen" class="werk-fullscreen" aria-hidden="true">
-    <iframe id="werkFullscreenFrame" class="werk-fullscreen-frame" title="Project fullscreen preview" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"></iframe>
+    <iframe id="werkFullscreenFrame" class="werk-fullscreen-frame" title="Project fullscreen preview" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
     <div class="werk-fullscreen-bar">
       <div id="werkFullscreenTitle" class="werk-fullscreen-title">Project</div>
       <button id="werkFullscreenClose" class="werk-fullscreen-close" type="button" aria-label="Fullscreen sluiten">×</button>
@@ -1546,7 +1847,7 @@
       <div class="chatbox-thread" id="chatbox-thread">
         <div class="chat-message agent">Hoi, vertel kort wat je wilt bouwen. Ik reageer zo snel mogelijk op je bericht.</div>
         <div class="chat-message visitor">Ik wil sparren over een website, webshop of AI-flow.</div>
-        <div class="chat-message agent">Mooi. Stuur je vraag hier, dan opent er direct een bericht naar info@mnrv.nl.</div>
+        <div class="chat-message agent">Mooi. Stuur je vraag hier, dan komt je bericht direct bij MNRV binnen.</div>
       </div>
 
       <div class="chatbox-compose">
@@ -1568,7 +1869,7 @@
       </div>
     </div>
     <div class="modal-frame-wrap">
-      <iframe id="preview-frame" src="" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+      <iframe id="preview-frame" src="" sandbox="allow-scripts allow-forms allow-popups"></iframe>
       <div class="modal-blocked" id="modal-blocked">
         <p>Deze site staat geen ingebedde weergave toe.</p>
         <a id="modal-blocked-link" href="#" target="_blank" rel="noopener" class="btn-primary">Bezoek site →</a>
@@ -1579,9 +1880,28 @@
 
 <footer>
   <span class="footer-logo">MNRV</span>
+  <div class="footer-socials" aria-label="Social media">
+    <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+    </a>
+    <a href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg aria-hidden="true"><use href="#icon-facebook"></use></svg>
+    </a>
+    <a href="https://wa.me/31682456410" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
+    </a>
+    <a href="mailto:info@mnrv.nl" aria-label="E-mail">
+      <svg aria-hidden="true"><use href="#icon-mail"></use></svg>
+    </a>
+  </div>
   <span class="footer-copy">© 2025 MNRV / Dave Vera — mnrv.nl</span>
 </footer>
 
+<script src="./supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // Scroll-driven gradient
 const stops = [
@@ -1650,6 +1970,42 @@ function updateShiftText() {
 
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+function initSocialFlyout() {
+  const flyout = document.getElementById('social-flyout');
+  const toggle = document.getElementById('social-flyout-toggle');
+  const panel = document.getElementById('social-flyout-panel');
+  if (!flyout || !toggle || !panel) return;
+
+  function setOpen(open) {
+    flyout.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    setOpen(!flyout.classList.contains('open'));
+  });
+
+  panel.addEventListener('click', e => {
+    e.stopPropagation();
+    if (e.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('click', e => {
+    if (!flyout.contains(e.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && flyout.classList.contains('open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+}
+
+initSocialFlyout();
 
 // Nav background update based on scroll
 window.addEventListener('scroll', () => {
@@ -1804,9 +2160,199 @@ function initWerkShowcase() {
 
 initWerkShowcase();
 
-function sendChatMessage() {
-  const input = document.getElementById('chatbox-message');
+let mnrvSupabaseClient = null;
+let mnrvChatUser = null;
+let mnrvChatChannel = null;
+const MNRV_CHAT_QUEUE_KEY = 'mnrv_chat_pending_messages';
+
+async function getSupabaseConfig() {
+  const config = window.MNRV_SUPABASE_CONFIG;
+  if (!config.url || !config.key) {
+    throw new Error('Supabase configuratie ontbreekt. Controleer assets/supabase-config.js.');
+  }
+  return config;
+}
+
+async function getSupabaseClient() {
+  if (mnrvSupabaseClient) return mnrvSupabaseClient;
+  if (!window.supabase || !window.supabase.createClient) {
+    throw new Error('Supabase client kon niet worden geladen.');
+  }
+
+  const config = await getSupabaseConfig();
+  mnrvSupabaseClient = window.supabase.createClient(config.url, config.key);
+  return mnrvSupabaseClient;
+}
+
+async function ensureChatUser() {
+  if (mnrvChatUser) return mnrvChatUser;
+
+  const client = await getSupabaseClient();
+  const { data: sessionData } = await client.auth.getSession();
+  if (sessionData.session && sessionData.session.user) {
+    mnrvChatUser = sessionData.session.user;
+    return mnrvChatUser;
+  }
+
+  const { data, error } = await client.auth.signInAnonymously();
+  if (error) throw error;
+  mnrvChatUser = data.user;
+  return mnrvChatUser;
+}
+
+function getQueuedChatMessages() {
+  try {
+    return JSON.parse(window.localStorage.getItem(MNRV_CHAT_QUEUE_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function setQueuedChatMessages(messages) {
+  window.localStorage.setItem(MNRV_CHAT_QUEUE_KEY, JSON.stringify(messages));
+}
+
+function queueChatMessage(message) {
+  const queue = getQueuedChatMessages();
+  queue.push({
+    conversation_id: getChatConversationId(),
+    visitor_id: mnrvChatUser ? mnrvChatUser.id : null,
+    sender: 'visitor',
+    message: message,
+    page_path: window.location.pathname,
+    user_agent: window.navigator.userAgent
+  });
+  setQueuedChatMessages(queue.slice(-25));
+}
+
+function getChatConversationId() {
+  const storageKey = 'mnrv_chat_conversation_id';
+  let id = window.localStorage.getItem(storageKey);
+  if (!id) {
+    id = window.crypto && window.crypto.randomUUID
+      ? window.crypto.randomUUID()
+      : 'chat-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+    window.localStorage.setItem(storageKey, id);
+  }
+  return id;
+}
+
+function appendChatMessage(text, type) {
   const thread = document.getElementById('chatbox-thread');
+  if (!thread) return null;
+
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-message ' + type;
+  bubble.textContent = text;
+  thread.appendChild(bubble);
+  thread.scrollTop = thread.scrollHeight;
+  return bubble;
+}
+
+async function saveChatMessage(message) {
+  const user = await ensureChatUser();
+  const client = await getSupabaseClient();
+  const { error } = await client
+    .from('chat_messages')
+    .insert({
+      conversation_id: getChatConversationId(),
+      visitor_id: user.id,
+      sender: 'visitor',
+      message: message,
+      page_path: window.location.pathname,
+      user_agent: window.navigator.userAgent
+    });
+
+  if (error) throw error;
+}
+
+async function flushQueuedChatMessages() {
+  const queue = getQueuedChatMessages();
+  if (!queue.length) return;
+
+  try {
+    const user = await ensureChatUser();
+    const client = await getSupabaseClient();
+    const rows = queue.map(row => ({
+      ...row,
+      visitor_id: row.visitor_id || user.id
+    }));
+    const { error } = await client.from('chat_messages').insert(rows);
+    if (error) return;
+    setQueuedChatMessages([]);
+  } catch {
+    // Keep queued messages for the next successful visit.
+  }
+}
+
+async function loadChatHistory() {
+  const user = await ensureChatUser();
+  const client = await getSupabaseClient();
+  const { data, error } = await client
+    .from('chat_messages')
+    .select('id,sender,message,created_at')
+    .eq('visitor_id', user.id)
+    .order('created_at', { ascending: true })
+    .limit(80);
+
+  if (error || !data || !data.length) return;
+
+  const thread = document.getElementById('chatbox-thread');
+  if (!thread) return;
+  thread.innerHTML = '';
+  data.forEach(row => appendChatMessage(row.message, row.sender));
+}
+
+async function subscribeToChatReplies() {
+  if (mnrvChatChannel) return;
+
+  const user = await ensureChatUser();
+  const client = await getSupabaseClient();
+  mnrvChatChannel = client
+    .channel('mnrv-chat-' + user.id)
+    .on(
+      'postgres_changes',
+      {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'chat_messages',
+        filter: 'visitor_id=eq.' + user.id
+      },
+      payload => {
+        if (payload.new && payload.new.sender === 'agent') {
+          appendChatMessage(payload.new.message, 'agent');
+        }
+      }
+    )
+    .subscribe();
+}
+
+async function initSupabaseChat() {
+  try {
+    await ensureChatUser();
+    await loadChatHistory();
+    await flushQueuedChatMessages();
+    await subscribeToChatReplies();
+  } catch {
+    // The chat still accepts messages and queues them until Supabase Auth/Realtime is ready.
+  }
+}
+
+function initChatboxInput() {
+  const input = document.getElementById('chatbox-message');
+  if (!input) return;
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendChatMessage();
+    }
+  });
+}
+
+async function sendChatMessage() {
+  const input = document.getElementById('chatbox-message');
+  const sendButton = document.querySelector('.chatbox-send');
   const message = input.value.trim();
 
   if (!message) {
@@ -1814,17 +2360,31 @@ function sendChatMessage() {
     return;
   }
 
-  const bubble = document.createElement('div');
-  bubble.className = 'chat-message visitor';
-  bubble.textContent = message;
-  thread.appendChild(bubble);
-  thread.scrollTop = thread.scrollHeight;
+  appendChatMessage(message, 'visitor');
   input.value = '';
 
-  const subject = encodeURIComponent('Chatbericht via MNRV.nl');
-  const body = encodeURIComponent(message);
-  window.location.href = 'mailto:info@mnrv.nl?subject=' + subject + '&body=' + body;
+  if (sendButton) {
+    sendButton.disabled = true;
+    sendButton.textContent = '...';
+  }
+
+  try {
+    await saveChatMessage(message);
+    appendChatMessage('Ontvangen. Dank je, ik pak je bericht zo snel mogelijk op.', 'agent');
+  } catch (error) {
+    queueChatMessage(message);
+    appendChatMessage('Je bericht staat klaar. De verbinding met de chat-inbox wordt opnieuw geprobeerd zodra die beschikbaar is.', 'agent');
+  } finally {
+    if (sendButton) {
+      sendButton.disabled = false;
+      sendButton.textContent = 'Chat';
+    }
+    input.focus();
+  }
 }
+
+initChatboxInput();
+initSupabaseChat();
 </script>
 <style>
   .paragraph-spacing {

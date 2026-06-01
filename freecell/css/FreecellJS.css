@@ -1,0 +1,1288 @@
+/*
+ * name: FreecellJS.css
+ * file: css/FreecellJS.css
+ *
+ * Copyright (c) 2015-2016. Brent Ely;
+ * https://github.com/gitbrent/
+ *
+ * Licences: MIT
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+
+@font-face { font-family: 'Playfair';        src: url('../fonts/PlayfairDisplay-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Open Sans Light'; src: url('../fonts/OpenSans-Light.ttf') format('truetype'); }
+@font-face { font-family: 'Roboto Thin';     src: url('../fonts/Roboto-Thin.ttf')    format('truetype'); }
+@font-face { font-family: 'Roboto';          src: url('../fonts/Roboto-Light.ttf')   format('truetype'); }
+
+body {
+    margin: 0px;
+    overflow: hidden;
+    background: url('../img/table_pattern.jpg');
+    background-size: 100% 100%;
+}
+
+/* Patterns from https://codepen.io/andrewdavid11/pen/ycqrz/ */
+.bkgd1 {
+    /* Thanks to Lea Verou, creator of 'Japanese Cube' gradient pattern from css3pie.com. Used here as original, with some color mods. */
+    background-color: #3A9C45;
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    background-image:
+        -webkit-linear-gradient( 60deg, #3A7C25 12%, transparent 12.5%, transparent 87%, #3A7C25 87.5%, #3A7C25),
+        -webkit-linear-gradient(-60deg, #3A7C25 12%, transparent 12.5%, transparent 87%, #3A7C25 87.5%, #3A7C25),
+        -webkit-linear-gradient( 60deg, #3A7C25 12%, transparent 12.5%, transparent 87%, #3A7C25 87.5%, #3A7C25),
+        -webkit-linear-gradient(-60deg, #3A7C25 12%, transparent 12.5%, transparent 87%, #3A7C25 87.5%, #3A7C25),
+        -webkit-linear-gradient( 30deg, #2A6C15 25%, transparent 25.5%, transparent 75%, #2A6C15 75.0%, #2A6C15),
+        -webkit-linear-gradient( 30deg, #2A6C15 25%, transparent 25.5%, transparent 75%, #2A6C15 75.0%, #2A6C15);
+}
+.bkgd2 {
+    /* Thanks to Nicolas Gallagher, creator of 'Steps' gradient pattern altered here from css3pie.com */
+    background-color: #6D9EE3;
+    background-size: 58px 58px;
+    background-position: 0px 2px, 4px 35px, 29px 31px, 33px 6px, 0px 36px, 4px 2px, 29px 6px, 33px 30px;
+    background-image:
+        -webkit-linear-gradient(115deg, #0F3E7F 23px, transparent 23px),
+        -webkit-linear-gradient(295deg, #0F3E7F 23px, transparent 23px),
+        -webkit-linear-gradient(115deg, #0F3E7F 23px, transparent 23px),
+        -webkit-linear-gradient(295deg, #0F3E7F 23px, transparent 23px),
+        -webkit-linear-gradient(115deg, #0F3E7F 10px, transparent 10px),
+        -webkit-linear-gradient(295deg, #0F3E7F 10px, transparent 10px),
+        -webkit-linear-gradient(115deg, #0F3E7F 10px, transparent 10px),
+        -webkit-linear-gradient(295deg, #0F3E7F 10px, transparent 10px);
+}
+
+div { box-sizing: border-box; }
+/* Remove annoying blue shadow border around buttons post-click - TODO: what to do for accessability */
+button:focus { outline:0 !important; }
+button {
+    font-family: 'Open Sans Light';
+    cursor: pointer;
+	text-decoration:none;
+    white-space: nowrap;
+}
+
+@keyframes neonGreen {
+  from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FFDD1B, 0 0 70px #FFDD1B, 0 0 80px #FFDD1B, 0 0 100px #FFDD1B, 0 0 150px #FFDD1B; }
+    to { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FFDD1B, 0 0 35px #FFDD1B, 0 0 40px #FFDD1B, 0 0 50px #FFDD1B, 0 0 75px #FFDD1B; }
+}
+@keyframes neonPurple {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de; }
+      to { text-shadow: 0 0  5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0  50px #ff00de, 0 0 75px #ff00de; }
+}
+
+/* Pulse Grow */
+@-webkit-keyframes hvr-pulse-grow { to { transform: scale(1.1); } }
+@keyframes hvr-pulse-grow { to { transform: scale(1.1); } }
+.hvr-pulse-grow {
+    display: inline-block;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+}
+.hvr-pulse-grow-hover {
+    animation-name: hvr-pulse-grow;
+    animation-duration: 0.3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+/* --- */
+
+/* --------------------------------------------------------------------------------------------- */
+
+div.tableRows { display: table; width: 100%; }
+div.tableRows > div { display: table-row; }
+div.tableRows > div > div { display: table-cell; padding: 5px; width: 99%; }
+div.tableRows > div > div:first-child { width: 1%; }
+
+/* jQuery UI Dialog */
+.ui-dialog-titlebar { display: none; }
+.ui-widget-overlay { background: rgba(0,0,0,0.9); }
+
+button.coolBtn {
+    width: 100%; height: 80px;
+    padding: 0; margin: 0;
+    vertical-align: middle;
+    font-family: 'Open Sans Light'; font-size: 1.5em; color: white; text-transform: uppercase;
+    border: 0; border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+}
+button.coolBtn:hover { transform: scale(1.05); transition: .25s ease-in; }
+button.coolBtn.small {
+    height: auto;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+/* */
+.hBtnTab { display: table; width: 100%; position: absolute; left: 0; bottom: 30px; }
+.hBtnTab > div { display: table-cell; padding:0 30px; text-align:left; vertical-align: bottom; }
+.hBtnTab > div:nth-child(1) { width:25%; }
+.hBtnTab > div:nth-child(2) { width:50%; }
+.hBtnTab > div:nth-child(3) { width:25%; }
+.hBtnTab button {
+    width: 100%; height: 80px;
+    padding: 0; margin: 0;
+    vertical-align: middle;
+    font-family: 'Open Sans Light'; font-size: 1.5em; color: white; text-transform: uppercase;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+}
+.hBtnTab button:hover { transform: scale(1.05); transition: .25s ease-in; }
+.hBtnTab > div:nth-child(1) button { background:linear-gradient(to bottom, #03BBE5 0%,#0288D4 100%); }
+.hBtnTab > div:nth-child(2) button { background:linear-gradient(to bottom, #15D418 0%,#17BC14 100%);
+    border:3px solid #e7e7e7;
+    font-size: 3em;
+    letter-spacing: 0.1em;
+}
+.hBtnTab > div:nth-child(3) button { background:linear-gradient(to bottom, #921AD3 0%,#8415C4 100%); }
+
+#dialogStart { text-align: center; }
+#dialogStart .title {
+    font-family: Playfair; font-size: 6em; color: white;
+    letter-spacing: .03em; white-space: nowrap;
+    text-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+}
+
+#dialogOptions { font-family: 'Open Sans Light'; color: white; padding:20px; }
+#dialogOptions button.coolBtn { background:linear-gradient(to bottom, #03BBE5 0%,#0288D4 100%); }
+
+#dialogOptions div.label {
+    font-size: 1.5em;
+    color: white;
+    text-align: left;
+    margin-top: 20px;
+}
+#dialogOptions div.label:first-child { margin-top: 0; }
+#dialogOptions fieldset {
+    border-color: #5b8a3c;
+    text-align: left;
+    padding: 10px;
+}
+#dialogOptions #optBkgds > div > div:first-child { vertical-align: middle; }
+
+.dialogYouWon {
+    background-color: #222222;
+    background: repeating-linear-gradient(45deg, #d7d7d7 0%, #d7d7d7 10%, #eee 0%, #eee 50%) 0 / 15px 15px;
+    border-radius: 50px;
+    border-width: 20px;
+}
+
+.dialogCool {
+    background-color: #00f700;
+    background: repeating-linear-gradient( 45deg, #2A6C15 0px, #2A6C15 20px, #3A7C25 20px, #3A7C25 40px );
+    border-radius: 30px; border-width: 15px;
+}
+.dialogCool .menuTitle {
+    text-align: center;
+    font-family: Calibri;
+    font-size: 48px;
+    color: white;
+    text-shadow:0px 1px 0px #5b8a3c;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+.bigText {
+    font-size: 10em;
+    text-align: center;
+    color: #BA01FF;
+    font-family: Roboto; font-weight: 400;
+    animation: neonPurple 1.5s ease-in-out infinite alternate;
+}
+.bigBtnBar {
+    padding: 10px;
+    text-align: center;
+}
+.bigBtnBar button {
+    width: 85%;
+    margin: 30px 0;
+    font-size:1.5em; color:white; letter-spacing: 0.1em;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+	background-color:#77b55a; background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+	border-radius:10px; border:1px solid #4b8f29;
+	padding:20px 10px;
+	text-shadow:0px 1px 0px #5b8a3c;
+}
+.bigBtnBar button:hover { transform: scale(1.05); transition: .25s ease-in; }
+.bigBtnBar button:nth-child(1) { background:linear-gradient(to bottom, #D21615 0%,#BC1317 100%); border-color: #BC1317; }
+.bigBtnBar button:nth-child(2) { background:linear-gradient(to bottom, #03BBE5 0%,#0288D4 100%); border-color: #0288D4; }
+.bigBtnBar button:nth-child(3) { background:linear-gradient(to bottom, #15D418 0%,#17BC14 100%); border-color: #17BC14; }
+.bigBtnBar button:nth-child(4) { background:linear-gradient(to bottom, #921AD3 0%,#8415C4 100%); border-color: #8415C4; }
+
+/* --------------------------------------------------------------------------------------------- */
+
+#playArea { padding:30px 60px; }
+#playArea > div { width: 100%; }
+
+/* ---------- Top Area ---------- */
+#topArea { display:table; margin-bottom:2em; }
+#topArea > div { display:table-cell; vertical-align:top; text-align:center; }
+#topArea > div:first-child { text-align: left;  }
+#topArea > div:last-child  { text-align: right; }
+
+#topArea > #cardOpen > div:last-child { margin-right: 0; }
+
+#topArea > div#gameTitle {
+    position: relative;
+    padding: 5px 10px;
+    font-family: Suit; font-size: 2.2em; font-weight: 100;
+    text-shadow: 2px 2px 3px #333;
+    color: #88dd88;
+    vertical-align: top;
+}
+#topArea > div#gameTitle > div#title { font-family: Roboto; margin: 2px 0 0 0; }
+#topArea > div#gameTitle > div > div {
+    display: inline-block; width: 50%;
+    font-size: 1em; line-height: 1em;
+    vertical-align: middle;
+    text-shadow: 0px 0px 10px #aade7c;
+}
+#topArea > div#gameTitle div.blk { color:black;   }
+#topArea > div#gameTitle div.red { color:#df0000; }
+
+#cardFoun > div > div { text-align: left; }
+#cardFoun > div > div:last-child { margin-right: 0; }
+#cardFoun .slot h1 {
+    margin: 0;
+    text-align: center;
+    font-family: 'Open Sans Light'; font-size: 15em; color:rgba(130,130,130,0.25);
+    line-height:168px; vertical-align:middle;
+}
+#cardFounCont { display:table; width:100%; }
+#cardFounCont > div { display:table-cell; width:25%; text-align:left; }
+
+#cardOpenCont { display:table; width:100%; }
+#cardOpenCont > div { display:table-cell; width:25%; text-align:right; }
+
+#btnMenu {
+    position: absolute;
+    bottom: 5px; left:10px;
+    display:inline-block;
+    cursor:pointer;
+    width: 95%; width: calc(100% - 20px);
+    margin-top: 10px; padding: 4px 24px;
+	background: linear-gradient(to bottom, #77d42a 5%, #5cb811 100%); background-color:#77d42a;
+    border:1px solid #268a16; border-radius:6px;
+    box-shadow: inset 0px 1px 0px 0px #caefab;
+    font-size: 0.5em; color: #306108; text-decoration: none; text-shadow:0px 2px 0px #aade7c;
+}
+#btnMenu:hover { background:linear-gradient(to bottom, #5cb811 5%, #77d42a 100%); background-color:#5cb811; }
+
+/* ---------- Card Casc ---------- */
+#cardCasc { display:table; width: 100%; }
+#cardCasc > div { display:table-cell; width:14%; text-align:left; vertical-align:top; }
+#cardCasc > div:last-child { width:10%; text-align:right; }
+
+/* ---------- Card/Slot ---------- */
+.card {
+    cursor: move;
+    display: inline-block;
+    background: linear-gradient(#fff,#c7c7c7);
+    width: 120px; height: 168px;
+    font-size: 7.5px; /* 7.5px = 120px */
+    margin: 0; /* for droppabel - WIP */
+    position: relative; /* so z-index works */
+    transform: translateZ(0); /* well-known perf fix for mobile browsers */
+}
+.card .corner span { font-size: 2.5em; }
+.slot {
+    position: relative;
+    display: inline-block;
+    width: 120px; height: 168px;
+    margin: 0;
+    border-radius: 0.8em;
+    background: rgba(0, 50, 0, 0.75);
+    box-shadow: inset 0px 0px 20px 0px rgba(0,0,0, 0.5);
+    border: 1px solid black;
+    font-size: 7.5px;
+}
+.slotHover { border: 1px solid #a7a7a7; opacity: 1; transform: scale(1.1); transition: .25s ease-in; }
+.cascHover { opacity: .5; transition: .25s ease-in; }
+
+/* All noselect obejcts */
+h1, .card, div#gameTitle {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Responsive Rules: 1400+=PC */
+@media only screen and (max-width: 1400px) {
+    #playArea { padding: 30px; }
+    #topArea > div#gameTitle { font-size: 1.5em; }
+    #topArea > div#gameTitle > div#title { margin: 4px 0; }
+    #topArea > div#gameTitle > div > div { font-size: 2em; }
+}
+
+/* Responsive Rules: 1280-1399=PC */
+@media only screen and (max-width: 1280px) {
+    #playArea { padding: 30px; }
+    #topArea > #cardFoun .slot h1 { line-height:133px; }
+    .card, .slot { width:95px; height:133px; font-size:8px; }
+    .card .ten { margin-left: -6px; }
+
+    #topArea > div#gameTitle { font-size: 1.5em; }
+    #topArea > div#gameTitle > div#title { margin: 3px 0; }
+    #topArea > div#gameTitle > div > div { font-size: 1.2em; }
+    #topArea > div#gameTitle #btnMenu { font-size: 0.6em; padding: 2px; }
+
+    .card .face, .card .face img, .card .suit.top_center, .card .suit.middle_center, .card .suit.bottom_center { visibility: hidden !important; }
+    .card .corner                    { font-size: 1.5em; }
+    .card .corner span               { font-size: 4.5em; }
+    .card .corner.top                { top:    1em; left:  1em; text-align: left;  }
+    .card .corner.bottom             { bottom: 1em; right: 1em; text-align: right; }
+    .card .corner.top    span        { font-family: Suit;   font-size: 3em; margin-bottom: 2.25em; transform:rotate(180deg); }
+    .card .corner.bottom span        { font-family: Suit;   font-size: 3em; margin-bottom: 2.25em; transform:rotate(180deg); text-align:center; }
+    .card .corner.top    span.number { font-family: Roboto; font-size: 2em; transform:rotate(0deg); }
+    .card .corner.bottom span.number { font-family: Roboto; font-size: 2em; text-align:left; padding-top:0em; transform:rotate(0deg); }
+}
+
+/* Responsive Rules: 1080=tablets (iPad landscape=1024) */
+@media only screen and (max-width: 1080px) {
+    #dialogStart .title { font-size: 5em; }
+    .hBtnTab > div:nth-child(2) button { font-size: 2em; }
+    .hBtnTab button { font-size: 1em; }
+
+    #playArea { padding: 20px; }
+    #topArea > #cardFoun .slot h1 { line-height:126px; }
+    .card, .slot { width:90px; height:126px; font-size:8px; }
+
+    #topArea > div#gameTitle > div#title { margin: -2px 0; }
+    #topArea > div#gameTitle > div > div { font-size: 1.5em; text-shadow:none; }
+
+    .card .corner.top    span,
+    .card .corner.bottom span { margin-bottom: 1.6em; }
+    .card .corner.top    span.number,
+    .card .corner.bottom span.number { font-size: 2.3em; }
+}
+
+@media only screen and (max-width: 1020px) {
+
+    #topArea > div#gameTitle { display: none; }
+    /* ^^^ TODO ^^^ */
+
+    #topArea > #cardFoun .slot h1 { line-height:126px; }
+    .card, .slot { width:90px; height:126px; font-size:8px; }
+}
+
+@media only screen and (max-width: 900px) {
+    #topArea > #cardFoun .slot h1 { line-height:98px; font-size: 11em; }
+    .card, .slot { height:98px; width:70px; font-size:8px; }
+
+    .card .corner        { font-size: 1.3em; }
+    .card .corner.top    span,
+    .card .corner.bottom span { margin-bottom: 1.5em; }
+    .card .corner.top    span.number,
+    .card .corner.bottom span.number { font-size: 2em; }
+}
+
+@media only screen and (max-width: 800px) {
+    #topArea { margin-bottom: 1em; }
+    #topArea > #cardFoun .slot h1 { line-height:99px; }
+    .card, .slot { width:70px; height:98px; font-size:8px; }
+
+    .card .corner        { font-size: 1.3em; }
+    .card .corner.top    span,
+    .card .corner.bottom span { margin-bottom: 1.5em; }
+    .card .corner.top    span.number,
+    .card .corner.bottom span.number { font-size: 2em; }
+}
+
+@media only screen and (max-width: 700px) {
+    #topArea > #cardFoun .slot h1 { line-height:91px; }
+    .card, .slot { width:65px; height:91px; font-size:4px; }
+
+    #playArea { padding:15px; }
+    #topArea { margin-bottom: 15px; }
+    #topArea > div#gameTitle { font-size: 1.25em; }
+    #topArea > div#gameTitle > div#title { margin: 1px 0; }
+    #topArea > div#gameTitle > div > div { font-size: 1em; text-shadow:none; }
+
+    .card .corner { font-size:1.75em; }
+    .card .face, .card .face img, .card .suit.top_center, .card .suit.middle_center, .card .suit.bottom_center { visibility: hidden; }
+    .card .corner.top    span,
+    .card .corner.bottom span { margin-bottom: 3em; }
+    .card .corner.top    span.number,
+    .card .corner.bottom span.number { font-size: 2em; }
+}
+
+@media only screen and (max-width: 600px) {
+    #topArea > #cardFoun .slot h1 { line-height:84px; }
+    .card, .slot { width:60px; height:84px; font-size:4px; }
+    .card .ten { margin-left: 0px; }
+
+    .card .corner        { font-size: 1.75em; }
+    .card .corner.top    span,
+    .card .corner.bottom span { margin-bottom: 3em; }
+    .card .corner.top    span.number,
+    .card .corner.bottom span.number { font-size: 2em; }
+}
+
+@media only screen and (max-width: 550px) {
+    #topArea > #cardFoun .slot h1 { line-height:70px; }
+    .card, .slot { width:50px; height:70px; font-size:4px; }
+}
+
+@media only screen and (max-width: 425px) {
+    #topArea > #cardFoun .slot h1 { line-height:70px; }
+    .card, .slot { width:50px; height:70px; font-size:4px; }
+}
+
+@media only screen and (max-width: 375px) {
+}
+
+/* ---------------------------------------------------------------------------------------------
+   MNRV Windows 98 shell overrides
+   --------------------------------------------------------------------------------------------- */
+:root {
+    --win-bg: #008080;
+    --win-chrome: #c0c0c0;
+    --win-titlebar: #000080;
+    --win-titlebar-text: #fff;
+    --win-btn-face: #c0c0c0;
+    --win-btn-highlight: #fff;
+    --win-btn-shadow: #808080;
+    --win-btn-dark: #404040;
+    --win-selection-bg: #000080;
+    --win-selection-text: #fff;
+    --font-main: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: var(--win-bg);
+    color: #000;
+    font-family: var(--font-main);
+}
+
+.freecell-page {
+    min-height: 100vh;
+    background: var(--win-bg);
+    display: flex;
+    flex-direction: column;
+}
+
+.fc-window {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1180px, calc(100vw - 16px));
+    height: calc(100vh - 48px);
+    background: var(--win-chrome);
+    border: 3px solid;
+    border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+    box-shadow: inset 1px 1px 0 var(--win-btn-face);
+    display: flex;
+    flex-direction: column;
+    min-height: 390px;
+    user-select: none;
+}
+
+.fc-window.fc-maximized {
+    top: 0;
+    width: 100vw;
+    height: calc(100vh - 32px);
+}
+
+.fc-window.fc-minimized {
+    display: none;
+}
+
+.fc-titlebar {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    padding: 2px 3px;
+    background: var(--win-titlebar);
+    color: var(--win-titlebar-text);
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: bold;
+    cursor: default;
+    flex-shrink: 0;
+}
+
+.fc-titlebar-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    image-rendering: pixelated;
+}
+
+.fc-titlebar-title {
+    flex: 1;
+}
+
+.fc-titlebar-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.fc-titlebar-buttons .win-titlebar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    line-height: 1;
+}
+
+.fc-menubar {
+    height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 1px 3px;
+    border-bottom: 1px solid var(--win-btn-shadow);
+    background: var(--win-chrome);
+    flex-shrink: 0;
+}
+
+.fc-menubar button {
+    height: 18px;
+    padding: 1px 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0;
+    color: #000;
+    font-family: var(--font-main);
+    font-size: 11px;
+    box-shadow: none;
+    text-transform: none;
+}
+
+.fc-menubar button:hover,
+.fc-menubar button:focus {
+    background: var(--win-selection-bg);
+    color: var(--win-selection-text);
+}
+
+.fc-game-viewport {
+    position: relative;
+    flex: 1;
+    overflow: auto;
+    margin: 4px;
+    border: 2px solid;
+    border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+    background-color: #0b6f36;
+    background-image: url('../img/table_pattern.jpg');
+    background-size: 180px 180px;
+}
+
+#playArea {
+    min-width: 720px;
+    min-height: 500px;
+    padding: 16px 18px 36px;
+}
+
+#topArea {
+    margin-bottom: 18px;
+}
+
+#topArea > div#gameTitle {
+    padding: 4px 6px;
+    background: var(--win-chrome);
+    border: 2px solid;
+    border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+    color: #000;
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+#topArea > div#gameTitle > div#title {
+    margin: 3px 0;
+    font-family: var(--font-main);
+    font-size: 12px;
+}
+
+#topArea > div#gameTitle > div > div {
+    font-size: 15px;
+    line-height: 15px;
+    text-shadow: none;
+}
+
+#btnMenu {
+    position: static;
+    width: 100%;
+    margin: 4px 0 0;
+    padding: 2px 4px;
+    background: var(--win-btn-face);
+    border: 2px solid;
+    border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+    border-radius: 0;
+    box-shadow: none;
+    color: #000;
+    font-family: var(--font-main);
+    font-size: 11px;
+    text-shadow: none;
+    text-transform: none;
+}
+
+#btnMenu:hover {
+    background: var(--win-btn-face);
+}
+
+#btnMenu:active,
+button.coolBtn:active,
+.hBtnTab button:active,
+.bigBtnBar button:active {
+    border-color: var(--win-btn-dark) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-dark);
+}
+
+.slot {
+    border-radius: 0;
+    background: rgba(0, 65, 32, 0.78);
+    border: 2px solid;
+    border-color: #004018 #59a26d #59a26d #004018;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,0.45);
+}
+
+.card {
+    border-radius: 4px;
+    border: 1px solid #202020;
+    background: #fff;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.45);
+}
+
+.cascHover,
+.slotHover,
+.hvr-pulse-grow-hover {
+    opacity: 1;
+    outline: 2px dotted #fff;
+    transform: none;
+    transition: none;
+}
+
+.ui-widget,
+.ui-dialog,
+.ui-dialog button {
+    font-family: var(--font-main);
+}
+
+.ui-widget-overlay {
+    background: rgba(0,0,0,0.25);
+}
+
+.ui-dialog.dialogCool,
+.ui-dialog.dialogYouWon,
+.ui-dialog {
+    background: var(--win-chrome);
+    border: 3px solid;
+    border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+    border-radius: 0;
+    box-shadow: none;
+    padding: 3px;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    display: none;
+}
+
+.ui-dialog .ui-dialog-content {
+    background: var(--win-chrome);
+    color: #000;
+    padding: 10px;
+}
+
+#dialogStart,
+#dialogOptions {
+    color: #000;
+    padding: 10px;
+}
+
+#dialogStart .title {
+    font-family: var(--font-main);
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
+    letter-spacing: 0;
+    text-shadow: none;
+    white-space: normal;
+}
+
+.hBtnTab {
+    position: static;
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-top: 22px;
+}
+
+.hBtnTab > div {
+    display: block;
+    padding: 0;
+    width: 33.333%;
+}
+
+button.coolBtn,
+.hBtnTab button,
+.bigBtnBar button {
+    width: 100%;
+    min-height: 24px;
+    height: auto;
+    margin: 0;
+    padding: 4px 10px;
+    background: var(--win-btn-face);
+    border: 2px solid;
+    border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+    border-radius: 0;
+    box-shadow: none;
+    color: #000;
+    font-family: var(--font-main);
+    font-size: 11px;
+    letter-spacing: 0;
+    text-shadow: none;
+    text-transform: none;
+    transform: none;
+}
+
+button.coolBtn:hover,
+.hBtnTab button:hover,
+.bigBtnBar button:hover {
+    background: var(--win-btn-face);
+    transform: none;
+    transition: none;
+}
+
+.hBtnTab > div:nth-child(1) button,
+.hBtnTab > div:nth-child(2) button,
+.hBtnTab > div:nth-child(3) button,
+.bigBtnBar button:nth-child(1),
+.bigBtnBar button:nth-child(2),
+.bigBtnBar button:nth-child(3),
+.bigBtnBar button:nth-child(4),
+#dialogOptions button.coolBtn {
+    background: var(--win-btn-face);
+    border-color: var(--win-btn-highlight) var(--win-btn-dark) var(--win-btn-dark) var(--win-btn-highlight);
+    color: #000;
+    font-size: 11px;
+}
+
+.bigBtnBar {
+    padding: 4px;
+}
+
+.bigBtnBar button {
+    margin: 6px 0;
+}
+
+.bigText {
+    font-family: var(--font-main);
+    font-size: 24px;
+    color: #000;
+    animation: none;
+}
+
+#dialogOptions div.label {
+    color: #000;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+#dialogOptions fieldset {
+    border: 2px solid;
+    border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+}
+
+.fc-help-title {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#dialogHelp p {
+    margin: 0 0 12px;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.system-tray img,
+.taskbar-window-btn img {
+    image-rendering: pixelated;
+}
+
+@media only screen and (max-width: 760px) {
+    .fc-window {
+        top: 4px;
+        width: calc(100vw - 8px);
+        height: calc(100vh - 42px);
+    }
+
+    .fc-menubar button {
+        padding: 1px 6px;
+    }
+
+    #playArea {
+        min-width: 540px;
+        padding: 12px;
+    }
+
+    .hBtnTab {
+        flex-direction: column;
+    }
+
+    .hBtnTab > div {
+        width: 100%;
+    }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Mobile-first game polish
+   --------------------------------------------------------------------------------------------- */
+:root {
+    --fc-card-w: 44px;
+    --fc-card-h: 62px;
+    --fc-gap: 6px;
+    --fc-table-pad: 10px;
+    --fc-table-min: calc((var(--fc-card-w) * 8) + (var(--fc-gap) * 7) + (var(--fc-table-pad) * 2));
+}
+
+body {
+    background:
+        linear-gradient(90deg, rgba(0,0,0,0.12) 1px, transparent 1px) 0 0 / 16px 16px,
+        linear-gradient(0deg, rgba(255,255,255,0.08) 1px, transparent 1px) 0 0 / 16px 16px,
+        #008080;
+}
+
+.fc-window {
+    top: 6px;
+    width: min(1220px, calc(100vw - 10px));
+    height: calc(100vh - 42px);
+    min-height: 0;
+}
+
+.fc-titlebar {
+    height: 24px;
+}
+
+.fc-titlebar-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.fc-titlebar-buttons .win-titlebar-btn {
+    width: 20px;
+    height: 18px;
+}
+
+.fc-menubar {
+    height: auto;
+    min-height: 36px;
+    gap: 3px;
+    padding: 3px;
+}
+
+.fc-menubar button {
+    min-width: 58px;
+    min-height: 30px;
+    height: 30px;
+    padding: 2px 10px;
+}
+
+.fc-hud {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3px;
+    padding: 4px;
+    border-top: 1px solid var(--win-btn-highlight);
+    border-bottom: 1px solid var(--win-btn-shadow);
+    background: #d4d0c8;
+}
+
+.fc-hud-card {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    min-height: 34px;
+    padding: 4px 6px;
+    border: 2px solid;
+    border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+    background: #efefef;
+}
+
+.fc-hud-label {
+    overflow: hidden;
+    color: #404040;
+    font-size: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fc-hud-card strong {
+    flex: 0 0 auto;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
+    color: #000080;
+}
+
+.fc-progress {
+    grid-column: 1 / -1;
+    position: relative;
+    height: 14px;
+    border: 2px solid;
+    border-color: var(--win-btn-shadow) var(--win-btn-highlight) var(--win-btn-highlight) var(--win-btn-shadow);
+    background: #fff;
+    overflow: hidden;
+}
+
+.fc-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.35) 0 5px, transparent 5px 10px),
+        #008000;
+    transition: width 180ms linear;
+}
+
+.fc-progress b {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 10px;
+    color: #000;
+}
+
+.fc-game-viewport {
+    margin: 0;
+    border-width: 3px;
+    background-color: #063d21;
+    background-image:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.16), transparent 20%),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(0,0,0,0.16) 1px, transparent 1px),
+        url('../img/table_felt.jpg');
+    background-size: 100% 100%, 22px 22px, 22px 22px, 220px 220px;
+    scrollbar-color: #808080 #c0c0c0;
+}
+
+#playArea {
+    width: max(100%, var(--fc-table-min));
+    min-width: var(--fc-table-min);
+    min-height: calc(100% - 2px);
+    padding: var(--fc-table-pad);
+}
+
+#topArea {
+    display: grid;
+    grid-template-columns: repeat(4, var(--fc-card-w)) minmax(74px, 1fr) repeat(4, var(--fc-card-w));
+    gap: var(--fc-gap);
+    align-items: start;
+    min-width: calc((var(--fc-card-w) * 8) + (var(--fc-gap) * 8) + 74px);
+    margin-bottom: 14px;
+}
+
+#cardFoun,
+#cardOpen,
+#gameTitle {
+    width: auto !important;
+}
+
+#cardFoun {
+    grid-column: 1 / span 4;
+}
+
+#gameTitle {
+    grid-column: 5;
+}
+
+#cardOpen {
+    grid-column: 6 / span 4;
+}
+
+#cardFounCont,
+#cardOpenCont {
+    display: grid;
+    grid-template-columns: repeat(4, var(--fc-card-w));
+    gap: var(--fc-gap);
+    width: auto;
+}
+
+#cardFounCont > div,
+#cardOpenCont > div {
+    display: block;
+    width: auto;
+    text-align: left;
+}
+
+#topArea > div#gameTitle {
+    min-height: var(--fc-card-h);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4px;
+}
+
+#topArea > div#gameTitle > div#title {
+    font-size: 10px;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+}
+
+#topArea > div#gameTitle > div > div {
+    font-size: 13px;
+}
+
+#btnMenu {
+    min-height: 24px;
+    margin-top: 4px;
+    padding: 2px;
+    font-size: 10px;
+}
+
+#cardCasc {
+    display: grid;
+    grid-template-columns: repeat(8, var(--fc-card-w));
+    gap: var(--fc-gap);
+    width: auto;
+    min-width: calc((var(--fc-card-w) * 8) + (var(--fc-gap) * 7));
+}
+
+#cardCasc > div,
+#cardCasc > div:last-child {
+    display: block;
+    width: var(--fc-card-w);
+    min-height: calc(var(--fc-card-h) + 280px);
+    text-align: left;
+}
+
+.card,
+.slot {
+    width: var(--fc-card-w);
+    height: var(--fc-card-h);
+}
+
+.card {
+    font-size: calc(var(--fc-card-w) / 16);
+    border-radius: 3px;
+    box-shadow:
+        1px 1px 0 #000,
+        inset 1px 1px 0 rgba(255,255,255,0.92);
+}
+
+.slot {
+    border-radius: 2px;
+    font-size: calc(var(--fc-card-w) / 16);
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.1), transparent 46%),
+        rgba(0, 51, 25, 0.82);
+}
+
+#cardFoun .slot h1 {
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: calc(var(--fc-card-h) * 0.78);
+    line-height: var(--fc-card-h);
+    color: rgba(255,255,255,0.14);
+}
+
+.card .face img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card .face,
+.card .face img,
+.card .suit.top_center,
+.card .suit.middle_center,
+.card .suit.bottom_center {
+    visibility: visible !important;
+}
+
+.card .corner span,
+.card .corner.top span,
+.card .corner.bottom span {
+    margin-bottom: 0;
+}
+
+.card .corner.top {
+    left: 0.62em;
+    top: 0.62em;
+}
+
+.card .corner.bottom {
+    right: 0.62em;
+    bottom: 0.62em;
+}
+
+.slotHover,
+.cascHover,
+.hvr-pulse-grow-hover {
+    outline: 2px dotted #f6e36a;
+    outline-offset: 2px;
+}
+
+.ui-dialog {
+    max-width: calc(100vw - 18px);
+}
+
+.ui-dialog .ui-dialog-content {
+    max-height: calc(100vh - 118px) !important;
+    overflow: auto;
+}
+
+#dialogStart {
+    padding: 0;
+}
+
+.fc-start-panel {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+    text-align: left;
+}
+
+.fc-start-icon {
+    width: 36px;
+    height: 36px;
+    image-rendering: pixelated;
+}
+
+#dialogStart .title {
+    margin: 0;
+    font-size: 20px;
+}
+
+.fc-start-copy {
+    margin: 5px 0 0;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #202020;
+}
+
+.hBtnTab {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 0;
+}
+
+.hBtnTab > div {
+    width: auto;
+}
+
+button.coolBtn,
+.hBtnTab button,
+.bigBtnBar button {
+    min-height: 42px;
+    padding: 8px 12px;
+    font-size: 11px;
+}
+
+.bigBtnBar {
+    display: grid;
+    gap: 8px;
+}
+
+.bigBtnBar button {
+    margin: 0;
+}
+
+#dialogHelp p {
+    font-size: 12px;
+}
+
+@media only screen and (min-width: 560px) {
+    :root {
+        --fc-card-w: 50px;
+        --fc-card-h: 70px;
+        --fc-gap: 7px;
+        --fc-table-pad: 12px;
+    }
+
+    .fc-hud {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .fc-progress {
+        grid-column: 1 / -1;
+        align-self: auto;
+        height: 16px;
+        min-height: 34px;
+    }
+
+    .hBtnTab {
+        grid-template-columns: 1fr 1.35fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 760px) {
+    :root {
+        --fc-card-w: 72px;
+        --fc-card-h: 101px;
+        --fc-gap: 12px;
+        --fc-table-pad: 18px;
+    }
+
+    .fc-window {
+        top: 8px;
+        height: calc(100vh - 48px);
+    }
+
+    .fc-hud {
+        grid-template-columns: repeat(4, 112px) 1fr;
+        gap: 4px;
+    }
+
+    .fc-progress {
+        grid-column: auto;
+        align-self: stretch;
+        height: auto;
+    }
+
+    .fc-hud-card strong {
+        font-size: 13px;
+    }
+
+    #topArea {
+        grid-template-columns: repeat(4, var(--fc-card-w)) minmax(88px, 1fr) repeat(4, var(--fc-card-w));
+        min-width: calc((var(--fc-card-w) * 8) + (var(--fc-gap) * 8) + 88px);
+        margin-bottom: 20px;
+    }
+
+    #topArea > div#gameTitle > div#title {
+        font-size: 12px;
+    }
+
+    #btnMenu {
+        min-height: 28px;
+        font-size: 11px;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    :root {
+        --fc-card-w: 92px;
+        --fc-card-h: 129px;
+        --fc-gap: 16px;
+        --fc-table-pad: 20px;
+    }
+
+    .fc-window {
+        width: min(1220px, calc(100vw - 16px));
+    }
+
+    #cardCasc > div,
+    #cardCasc > div:last-child {
+        min-height: calc(var(--fc-card-h) + 330px);
+    }
+}
