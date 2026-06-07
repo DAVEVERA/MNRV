@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Permissions-Policy",
+          "value": "microphone=(self \"https://omnicontent.nl\"), camera=(self \"https://omnicontent.nl\"), clipboard-read=(self \"https://omnicontent.nl\"), clipboard-write=(self \"https://omnicontent.nl\"), geolocation=(self \"https://omnicontent.nl\"), fullscreen=(self \"https://omnicontent.nl\"), display-capture=(self \"https://omnicontent.nl\"), autoplay=(self \"https://omnicontent.nl\")"
+        }
+      ]
+    }
+  ]
+}
