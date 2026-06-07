@@ -261,6 +261,12 @@
       <span class="icon-label">Portfolio</span>
     </a>
 
+    <!-- My LAVA -->
+    <div class="desktop-icon" tabindex="0" data-window="lava-window">
+      <img class="icon-img" src="assets/icons/Computer_32x32_4.png" alt="My LAVA" draggable="false">
+      <span class="icon-label">My LAVA</span>
+    </div>
+
   </div>
 
   
@@ -331,6 +337,32 @@
     <div class="win-statusbar">
       <span class="win-statusbar-section">assets/Nedry-The-King-Jurassic-Park.mp4</span>
       <span class="win-statusbar-section">MP4</span>
+    </div>
+  </div>
+
+  <!-- ============================================
+       MY LAVA WINDOW (IE-style)
+       ============================================ -->
+  <div id="lava-window" class="win-window hidden lava-window">
+    <div class="win-titlebar">
+      <img class="win-titlebar-icon" src="assets/icons/Computer_16x16_4.png" alt="My LAVA" draggable="false">
+      <span class="win-titlebar-title">My LAVA - Internet Explorer</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <div class="win-addressbar">
+      <label>Adres:</label>
+      <input type="text" value="https://omnicontent.nl" readonly class="win-input" title="My LAVA adres" placeholder="Adres">
+    </div>
+    <div class="win-body lava-window-body">
+      <iframe class="lava-frame" src="https://omnicontent.nl" title="My LAVA - omnicontent.nl" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"></iframe>
+    </div>
+    <div class="win-statusbar">
+      <span class="win-statusbar-section">Gereed</span>
+      <span class="win-statusbar-section">Internet</span>
     </div>
   </div>
 
