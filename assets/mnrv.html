@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MNRV — AI-webshops, websites &amp; agents | Dave Vera</title>
-<meta name="description" content="MNRV bouwt webshops en websites met AI naadloos ingebouwd — chatbots, agents en automatisering. Eén maker voor development, design en AI. Bekijk het werk.">
+<title>MNRV — AI-websites, apps &amp; agents | Dave Vera</title>
+<meta name="description" content="MNRV bouwt websites, apps en AI-flows met AI naadloos ingebouwd — chatbots, agents en automatisering. Eén maker voor development, design en AI. Bekijk het werk.">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mnrv.nl/">
-<meta property="og:title" content="MNRV — AI-webshops, websites & agents">
-<meta property="og:description" content="Webshops en websites met AI naadloos ingebouwd. Eén maker voor development, design en AI. Mens én machine — digitale ervaringen die converteren, verrassen en binden.">
+<meta property="og:title" content="MNRV — AI-websites, apps & agents">
+<meta property="og:description" content="Websites, apps en AI-flows met AI naadloos ingebouwd. Eén maker voor development, design en AI. Mens én machine — digitale ervaringen die converteren, verrassen en binden.">
 <meta property="og:image" content="https://mnrv.nl/og-image.jpg">
 <meta property="og:site_name" content="MNRV">
 <meta property="og:locale" content="nl_NL">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MNRV — AI-webshops, websites & agents">
-<meta name="twitter:description" content="Webshops en websites met AI naadloos ingebouwd. Eén maker voor development, design en AI.">
+<meta name="twitter:title" content="MNRV — AI-websites, apps & agents">
+<meta name="twitter:description" content="Websites, apps en AI-flows met AI naadloos ingebouwd. Eén maker voor development, design en AI.">
 <meta name="twitter:image" content="https://mnrv.nl/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -731,10 +731,7 @@
   .contact .section-eyebrow { color: var(--palladian); }
 
   .contact-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
+    max-width: 620px;
   }
 
   .contact-text p {
@@ -926,158 +923,6 @@
     font-size: 18px;
   }
 
-  .chatbox-frame {
-    background: rgba(238,233,223,0.06);
-    border: 1px solid rgba(238,233,223,0.18);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 28px 70px rgba(0,0,0,0.22);
-  }
-
-  .chatbox-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 16px 18px;
-    background: rgba(238,233,223,0.08);
-    border-bottom: 1px solid rgba(238,233,223,0.12);
-  }
-
-  .chatbox-agent {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .chatbox-avatar {
-    width: 38px;
-    height: 38px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--flame);
-    color: var(--abyss);
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-  }
-
-  .chatbox-agent strong {
-    display: block;
-    color: var(--palladian);
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    line-height: 1.2;
-  }
-
-  .chatbox-agent span,
-  .chatbox-status {
-    color: var(--oatmeal);
-    font-size: 12px;
-  }
-
-  .chatbox-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    white-space: nowrap;
-  }
-
-  .chatbox-status::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #00d084;
-    box-shadow: 0 0 14px rgba(0,208,132,0.75);
-  }
-
-  .chatbox-thread {
-    min-height: 280px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    background:
-      radial-gradient(circle at 20% 10%, rgba(255,177,98,0.08), transparent 32%),
-      rgba(11,14,19,0.24);
-  }
-
-  .chat-message {
-    max-width: 82%;
-    padding: 14px 16px;
-    border-radius: 16px;
-    font-size: 14px;
-    line-height: 1.55;
-  }
-
-  .chat-message.agent {
-    align-self: flex-start;
-    background: rgba(238,233,223,0.12);
-    color: var(--palladian);
-    border-bottom-left-radius: 4px;
-  }
-
-  .chat-message.visitor {
-    align-self: flex-end;
-    background: var(--blue);
-    color: var(--palladian);
-    border-bottom-right-radius: 4px;
-  }
-
-  .chatbox-compose {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 10px;
-    padding: 14px;
-    background: rgba(238,233,223,0.08);
-    border-top: 1px solid rgba(238,233,223,0.12);
-  }
-
-  .chatbox-compose textarea {
-    min-height: 54px;
-    max-height: 150px;
-    resize: vertical;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(238,233,223,0.18);
-    border-radius: 6px;
-    color: var(--palladian);
-    padding: 14px 16px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    outline: none;
-  }
-
-  .chatbox-compose textarea::placeholder { color: rgba(201,193,177,0.45); }
-  .chatbox-compose textarea:focus { border-color: var(--flame); }
-
-  .chatbox-send {
-    min-width: 118px;
-    border: none;
-    border-radius: 6px;
-    background: var(--flame);
-    color: var(--abyss);
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 0.15s, background 0.2s;
-  }
-
-  .chatbox-send:hover {
-    background: var(--palladian);
-    transform: translateY(-1px);
-  }
-
-  .chatbox-send:disabled {
-    opacity: 0.58;
-    cursor: wait;
-    transform: none;
-  }
-
   .form-group {
     display: flex;
     flex-direction: column;
@@ -1249,9 +1094,6 @@
     .werk-slide-meta { max-width: 72%; flex-wrap: wrap; gap: 10px; }
     .werk-slider-ui { left: 24px; right: 24px; bottom: 20px; }
     .werk-progress-area { min-width: min(360px, 58vw); }
-    .contact-layout { grid-template-columns: 1fr; gap: 48px; }
-    .chatbox-compose { grid-template-columns: 1fr; }
-    .chatbox-send { min-height: 48px; }
     .form-row { grid-template-columns: 1fr; }
     .hero-bg-num { display: none; }
     footer { padding: 32px 24px; grid-template-columns: 1fr; gap: 14px; text-align: center; }
@@ -1643,7 +1485,7 @@
         Eén platform.
       </h1>
       <p class="hero-sub">
-        MNRV bouwt webshops en websites met AI naadloos ingebouwd — van slimme chatbots tot agents die het werk doen. Digitale ervaringen die converteren, verrassen en binden.
+        MNRV bouwt websites, apps en AI-flows met AI naadloos ingebouwd — van slimme chatbots tot agents die het werk doen. Digitale ervaringen die converteren, verrassen en binden.
       </p>
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary">Start een project</a>
@@ -1664,8 +1506,8 @@
   <div class="diensten-grid">
     <div class="dienst-card">
       <p class="dienst-num">01 / Web</p>
-      <h3>Webshops &amp; websites</h3>
-      <p>Schaalbare e-commerce en marketingsites met slimme UX, gebouwd op een moderne stack. Snel, toegankelijk en ontworpen om te converteren.</p>
+      <h3>Websites &amp; apps</h3>
+      <p>Schaalbare websites, apps en marketingsites met slimme UX, gebouwd op een moderne stack. Snel, toegankelijk en ontworpen om te converteren.</p>
     </div>
     <div class="dienst-card">
       <p class="dienst-num">02 / AI</p>
@@ -1693,7 +1535,7 @@
       </p>
       <p class="shift-text spacing" data-shift="2">
         Mijn werk leeft op het snijvlak van <strong>mens en machine</strong>:
-        webshops en websites met AI naadloos ingebouwd, agents die processen overnemen
+        websites, apps en AI-flows met AI naadloos ingebouwd, agents die processen overnemen
         en interfaces die converteren. Strategie, architectuur en uitvoering — van eerste
         schets tot productie. Geen losse onderdelen, maar één doordacht geheel.
       </p>
@@ -1770,7 +1612,7 @@
         <button class="werk-slide-maximize" type="button" aria-label="De Notenman fullscreen openen">[]</button>
         <div class="werk-slide-inner">
           <div class="werk-slide-top">
-            <div class="werk-slide-meta"><span>04</span><span class="werk-meta-divider"></span><span>Webshop</span></div>
+            <div class="werk-slide-meta"><span>04</span><span class="werk-meta-divider"></span><span>Website</span></div>
           </div>
           <div class="werk-slide-content">
             <h3 class="werk-slide-title">De Notenman</h3>
@@ -1832,29 +1674,6 @@
         <a href="https://mnrv.nl" target="_blank">mnrv.nl</a>
       </div>
     </div>
-    <div class="chatbox-frame" aria-label="Chat met MNRV">
-      <div class="chatbox-bar">
-        <div class="chatbox-agent">
-          <span class="chatbox-avatar">DV</span>
-          <div>
-            <strong>Dave van MNRV</strong>
-            <span>Chat over je project</span>
-          </div>
-        </div>
-        <span class="chatbox-status">Online</span>
-      </div>
-
-      <div class="chatbox-thread" id="chatbox-thread">
-        <div class="chat-message agent">Hoi, vertel kort wat je wilt bouwen. Ik reageer zo snel mogelijk op je bericht.</div>
-        <div class="chat-message visitor">Ik wil sparren over een website, webshop of AI-flow.</div>
-        <div class="chat-message agent">Mooi. Stuur je vraag hier, dan komt je bericht direct bij MNRV binnen.</div>
-      </div>
-
-      <div class="chatbox-compose">
-        <textarea id="chatbox-message" placeholder="Typ je bericht..."></textarea>
-        <button class="chatbox-send" type="button" onclick="sendChatMessage()">Chat</button>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1900,8 +1719,6 @@
   <span class="footer-copy">© 2025 MNRV / Dave Vera — mnrv.nl</span>
 </footer>
 
-<script src="./supabase-config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // Scroll-driven gradient
 const stops = [
@@ -2160,231 +1977,6 @@ function initWerkShowcase() {
 
 initWerkShowcase();
 
-let mnrvSupabaseClient = null;
-let mnrvChatUser = null;
-let mnrvChatChannel = null;
-const MNRV_CHAT_QUEUE_KEY = 'mnrv_chat_pending_messages';
-
-async function getSupabaseConfig() {
-  const config = window.MNRV_SUPABASE_CONFIG;
-  if (!config.url || !config.key) {
-    throw new Error('Supabase configuratie ontbreekt. Controleer assets/supabase-config.js.');
-  }
-  return config;
-}
-
-async function getSupabaseClient() {
-  if (mnrvSupabaseClient) return mnrvSupabaseClient;
-  if (!window.supabase || !window.supabase.createClient) {
-    throw new Error('Supabase client kon niet worden geladen.');
-  }
-
-  const config = await getSupabaseConfig();
-  mnrvSupabaseClient = window.supabase.createClient(config.url, config.key);
-  return mnrvSupabaseClient;
-}
-
-async function ensureChatUser() {
-  if (mnrvChatUser) return mnrvChatUser;
-
-  const client = await getSupabaseClient();
-  const { data: sessionData } = await client.auth.getSession();
-  if (sessionData.session && sessionData.session.user) {
-    mnrvChatUser = sessionData.session.user;
-    return mnrvChatUser;
-  }
-
-  const { data, error } = await client.auth.signInAnonymously();
-  if (error) throw error;
-  mnrvChatUser = data.user;
-  return mnrvChatUser;
-}
-
-function getQueuedChatMessages() {
-  try {
-    return JSON.parse(window.localStorage.getItem(MNRV_CHAT_QUEUE_KEY) || '[]');
-  } catch {
-    return [];
-  }
-}
-
-function setQueuedChatMessages(messages) {
-  window.localStorage.setItem(MNRV_CHAT_QUEUE_KEY, JSON.stringify(messages));
-}
-
-function queueChatMessage(message) {
-  const queue = getQueuedChatMessages();
-  queue.push({
-    conversation_id: getChatConversationId(),
-    visitor_id: mnrvChatUser ? mnrvChatUser.id : null,
-    sender: 'visitor',
-    message: message,
-    page_path: window.location.pathname,
-    user_agent: window.navigator.userAgent
-  });
-  setQueuedChatMessages(queue.slice(-25));
-}
-
-function getChatConversationId() {
-  const storageKey = 'mnrv_chat_conversation_id';
-  let id = window.localStorage.getItem(storageKey);
-  if (!id) {
-    id = window.crypto && window.crypto.randomUUID
-      ? window.crypto.randomUUID()
-      : 'chat-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
-    window.localStorage.setItem(storageKey, id);
-  }
-  return id;
-}
-
-function appendChatMessage(text, type) {
-  const thread = document.getElementById('chatbox-thread');
-  if (!thread) return null;
-
-  const bubble = document.createElement('div');
-  bubble.className = 'chat-message ' + type;
-  bubble.textContent = text;
-  thread.appendChild(bubble);
-  thread.scrollTop = thread.scrollHeight;
-  return bubble;
-}
-
-async function saveChatMessage(message) {
-  const user = await ensureChatUser();
-  const client = await getSupabaseClient();
-  const { error } = await client
-    .from('chat_messages')
-    .insert({
-      conversation_id: getChatConversationId(),
-      visitor_id: user.id,
-      sender: 'visitor',
-      message: message,
-      page_path: window.location.pathname,
-      user_agent: window.navigator.userAgent
-    });
-
-  if (error) throw error;
-}
-
-async function flushQueuedChatMessages() {
-  const queue = getQueuedChatMessages();
-  if (!queue.length) return;
-
-  try {
-    const user = await ensureChatUser();
-    const client = await getSupabaseClient();
-    const rows = queue.map(row => ({
-      ...row,
-      visitor_id: row.visitor_id || user.id
-    }));
-    const { error } = await client.from('chat_messages').insert(rows);
-    if (error) return;
-    setQueuedChatMessages([]);
-  } catch {
-    // Keep queued messages for the next successful visit.
-  }
-}
-
-async function loadChatHistory() {
-  const user = await ensureChatUser();
-  const client = await getSupabaseClient();
-  const { data, error } = await client
-    .from('chat_messages')
-    .select('id,sender,message,created_at')
-    .eq('visitor_id', user.id)
-    .order('created_at', { ascending: true })
-    .limit(80);
-
-  if (error || !data || !data.length) return;
-
-  const thread = document.getElementById('chatbox-thread');
-  if (!thread) return;
-  thread.innerHTML = '';
-  data.forEach(row => appendChatMessage(row.message, row.sender));
-}
-
-async function subscribeToChatReplies() {
-  if (mnrvChatChannel) return;
-
-  const user = await ensureChatUser();
-  const client = await getSupabaseClient();
-  mnrvChatChannel = client
-    .channel('mnrv-chat-' + user.id)
-    .on(
-      'postgres_changes',
-      {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'chat_messages',
-        filter: 'visitor_id=eq.' + user.id
-      },
-      payload => {
-        if (payload.new && payload.new.sender === 'agent') {
-          appendChatMessage(payload.new.message, 'agent');
-        }
-      }
-    )
-    .subscribe();
-}
-
-async function initSupabaseChat() {
-  try {
-    await ensureChatUser();
-    await loadChatHistory();
-    await flushQueuedChatMessages();
-    await subscribeToChatReplies();
-  } catch {
-    // The chat still accepts messages and queues them until Supabase Auth/Realtime is ready.
-  }
-}
-
-function initChatboxInput() {
-  const input = document.getElementById('chatbox-message');
-  if (!input) return;
-
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendChatMessage();
-    }
-  });
-}
-
-async function sendChatMessage() {
-  const input = document.getElementById('chatbox-message');
-  const sendButton = document.querySelector('.chatbox-send');
-  const message = input.value.trim();
-
-  if (!message) {
-    input.focus();
-    return;
-  }
-
-  appendChatMessage(message, 'visitor');
-  input.value = '';
-
-  if (sendButton) {
-    sendButton.disabled = true;
-    sendButton.textContent = '...';
-  }
-
-  try {
-    await saveChatMessage(message);
-    appendChatMessage('Ontvangen. Dank je, ik pak je bericht zo snel mogelijk op.', 'agent');
-  } catch (error) {
-    queueChatMessage(message);
-    appendChatMessage('Je bericht staat klaar. De verbinding met de chat-inbox wordt opnieuw geprobeerd zodra die beschikbaar is.', 'agent');
-  } finally {
-    if (sendButton) {
-      sendButton.disabled = false;
-      sendButton.textContent = 'Chat';
-    }
-    input.focus();
-  }
-}
-
-initChatboxInput();
-initSupabaseChat();
 </script>
 <style>
   .paragraph-spacing {

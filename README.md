@@ -1,2 +1,2 @@
 # MNRV
-WIN95 Themed shop
+WIN95 Themed MNRV site
