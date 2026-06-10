@@ -825,7 +825,7 @@ form.addEventListener("submit", async (e) => {
 
     statusEl.textContent = "Bevestigingsmail versturen...";
 
-    await fetch("/api/send-intake-mail.php", {
+    const mailResponse = await fetch("/api/send-intake-mail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -839,6 +839,11 @@ form.addEventListener("submit", async (e) => {
         uploads
       })
     });
+
+    if (!mailResponse.ok) {
+      const mailError = await mailResponse.json().catch(() => ({}));
+      throw new Error(mailError.error || "Bevestigingsmail kon niet worden verstuurd.");
+    }
 
     localStorage.removeItem(STORAGE_KEY);
     form.reset();
