@@ -15,12 +15,7 @@ create policy "Public can create website intakes"
 on public.website_intakes
 for insert
 to anon, authenticated
-with check (
-  client_name is not null
-  and btrim(client_name) <> ''
-  and client_email is not null
-  and btrim(client_email) <> ''
-);
+with check (true);
 
 -- Storage upload policies for the optional intake file fields.
 -- These expect existing public/private buckets named:
