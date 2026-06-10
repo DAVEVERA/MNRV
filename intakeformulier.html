@@ -794,46 +794,34 @@ form.addEventListener("submit", async (e) => {
 
     const answers = formToObject();
 
-    const basePayload = {
-      client_email: answers.client_email,
-      client_name: answers.client_name,
-      company_name: answers.company_name,
-      answers: {
-        ...answers,
-        uploads: []
-      }
-    };
-
-    statusEl.textContent = "Intake opslaan...";
-
-    const { data, error } = await supabaseClient
-      .from("website_intakes")
-      .insert(basePayload)
-      .select()
-      .single();
-
-    if (error) throw error;
+    const submissionId = crypto.randomUUID();
 
     statusEl.textContent = "Bestanden uploaden...";
 
-    const contextUploads = await uploadFiles("intake-context", "context_files", data.id);
-    const contentUploads = await uploadFiles("intake-content", "content_files", data.id);
+    const contextUploads = await uploadFiles("intake-context", "context_files", submissionId);
+    const contentUploads = await uploadFiles("intake-content", "content_files", submissionId);
     const uploads = [...contextUploads, ...contentUploads];
 
     const finalAnswers = {
       ...answers,
+      submission_id: submissionId,
       uploads
     };
 
-    const { error: updateError } = await supabaseClient
-      .from("website_intakes")
-      .update({
-        answers: finalAnswers,
-        updated_at: new Date().toISOString()
-      })
-      .eq("id", data.id);
+    const payload = {
+      client_email: answers.client_email,
+      client_name: answers.client_name,
+      company_name: answers.company_name,
+      answers: finalAnswers
+    };
 
-    if (updateError) throw updateError;
+    statusEl.textContent = "Intake opslaan...";
+
+    const { error } = await supabaseClient
+      .from("website_intakes")
+      .insert(payload);
+
+    if (error) throw error;
 
     statusEl.textContent = "Bevestigingsmail versturen...";
 
@@ -843,7 +831,7 @@ form.addEventListener("submit", async (e) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        intake_id: data.id,
+        intake_id: submissionId,
         client_email: answers.client_email,
         client_name: answers.client_name,
         company_name: answers.company_name,
