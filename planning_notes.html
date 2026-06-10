@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MNRV Intakeformulier Website</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/clippyjs@latest/build/clippy.css">
+  <script src="https://unpkg.com/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/clippyjs@latest/build/clippy.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#f7f3ec;
+      --card:#ffffff;
+      --ink:#17211d;
+      --muted:#66736d;
+      --line:#dfe5df;
+      --accent:#2f4f4f;
+      --accent2:#658c6e;
+      --soft:#edf3ee;
+      --danger:#9b1c1c;
+      --success:#1f6b3a;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(101,140,110,.2),transparent 34rem),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.55;
+    }
+
+    main{
+      max-width:1040px;
+      margin:0 auto;
+      padding:28px 16px 90px;
+    }
+
+    header,
+    .card{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+      margin-bottom:18px;
+      box-shadow:0 18px 45px rgba(23,33,29,.07);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:20px;
+    }
+
+    .mnrv-logo{
+      width:144px;
+      max-width:45vw;
+      height:auto;
+      display:block;
+      mix-blend-mode:multiply;
+      filter:contrast(1.05);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(30px,6vw,54px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    h2{
+      margin:0 0 16px;
+      font-size:24px;
+      letter-spacing:-.02em;
+    }
+
+    h3{
+      margin:24px 0 8px;
+    }
+
+    p{
+      color:var(--muted);
+      margin:0 0 14px;
+    }
+
+    a{
+      color:var(--accent);
+      font-weight:700;
+    }
+
+    label{
+      display:block;
+      font-weight:800;
+      margin:16px 0 7px;
+    }
+
+    input,
+    textarea,
+    select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:13px 14px;
+      font:inherit;
+      background:#fff;
+      color:var(--ink);
+      outline:none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus{
+      border-color:var(--accent2);
+      box-shadow:0 0 0 4px rgba(101,140,110,.16);
+    }
+
+    textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+
+    input[type="file"]{
+      padding:16px;
+      background:#fbfcfb;
+      border-style:dashed;
+    }
+
+    .grid{
+      display:grid;
+      gap:14px;
+    }
+
+    @media(min-width:760px){
+      .grid.two{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    .options{
+      display:grid;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .option{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+      cursor:pointer;
+    }
+
+    .option input{
+      width:auto;
+      margin-top:5px;
+    }
+
+    .hint{
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .note{
+      background:var(--soft);
+      border-radius:18px;
+      padding:16px;
+      border:1px solid #dce7dd;
+      margin-bottom:14px;
+    }
+
+    .examples{
+      background:#fbfcfb;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      margin-top:14px;
+    }
+
+    .examples ul,
+    .tips-list{
+      margin:8px 0 0;
+      padding-left:20px;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    button{
+      border:0;
+      border-radius:999px;
+      padding:14px 22px;
+      font-weight:900;
+      cursor:pointer;
+      font:inherit;
+    }
+
+    .primary{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .secondary{
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--ink);
+    }
+
+    .autosave{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      z-index:90;
+      background:#17211d;
+      color:#fff;
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:13px;
+      box-shadow:0 10px 25px rgba(0,0,0,.18);
+    }
+
+    .success,
+    .error{
+      display:none;
+      border-radius:18px;
+      padding:18px;
+      margin-top:18px;
+      font-weight:700;
+    }
+
+    .success{
+      background:#ecf8ef;
+      border:1px solid #b9dfc1;
+      color:var(--success);
+    }
+
+    .error{
+      background:#fff1f1;
+      border:1px solid #efb7b7;
+      color:var(--danger);
+    }
+
+    .clippy-ctx-menu{
+      position:fixed;
+      z-index:999999;
+      min-width:190px;
+      background:#fff;
+      border:1px solid #b8b8b8;
+      border-radius:12px;
+      box-shadow:0 16px 35px rgba(0,0,0,.18);
+      padding:8px;
+      display:none;
+    }
+
+    .clippy-ctx-menu.show{
+      display:block;
+    }
+
+    .clippy-ctx-item{
+      width:100%;
+      display:block;
+      background:transparent;
+      border:0;
+      border-radius:8px;
+      padding:10px 12px;
+      text-align:left;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .clippy-ctx-item:hover{
+      background:#edf3ee;
+    }
+
+    #clippy-tray{
+      position:fixed;
+      left:16px;
+      bottom:16px;
+      z-index:999998;
+      display:none;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:900;
+      box-shadow:0 10px 25px rgba(0,0,0,.16);
+      cursor:pointer;
+    }
+
+    #clippy-tray.show{
+      display:block;
+    }
+
+    .upload-list{
+      margin-top:10px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .required{
+      color:var(--danger);
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <img src="mnrv-logo2-transparent.png" alt="MNRV" class="mnrv-logo">
+    </div>
+    <h1>Website intakeformulier</h1>
+    <p>
+      Met dit formulier verzamelen we de inhoud, stijl, doelen, beelden en praktische wensen voor jouw nieuwe website.
+      Je antwoorden worden automatisch tussentijds opgeslagen in deze browser, zodat je input niet verloren gaat bij een refresh of langere invultijd.
+    </p>
+  </header>
+
+  <form id="intakeForm">
+    <section class="card">
+      <h2>1. Contactgegevens</h2>
+
+      <div class="grid two">
+        <div>
+          <label>Naam <span class="required">*</span></label>
+          <input name="client_name" required>
+        </div>
+
+        <div>
+          <label>Bedrijfsnaam</label>
+          <input name="company_name">
+        </div>
+
+        <div>
+          <label>E-mailadres <span class="required">*</span></label>
+          <input type="email" name="client_email" required>
+        </div>
+
+        <div>
+          <label>Telefoonnummer</label>
+          <input name="phone">
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Type website</h2>
+
+      <label>Wat wil je laten bouwen? <span class="required">*</span></label>
+      <div class="options">
+        <label class="option"><input type="radio" name="website_type" value="Nieuwe website" required> Nieuwe website</label>
+        <label class="option"><input type="radio" name="website_type" value="Bestaande website vernieuwen"> Bestaande website vernieuwen</label>
+        <label class="option"><input type="radio" name="website_type" value="Landingspagina"> Landingspagina</label>
+        <label class="option"><input type="radio" name="website_type" value="Webshop"> Webshop</label>
+        <label class="option"><input type="radio" name="website_type" value="Community / platform"> Community / platform</label>
+        <label class="option"><input type="radio" name="website_type" value="Nog niet zeker"> Nog niet zeker</label>
+      </div>
+
+      <label>Wat is het belangrijkste doel van de website?</label>
+      <select name="main_goal">
+        <option value="">Maak een keuze</option>
+        <option>Meer aanvragen of leads</option>
+        <option>Meer online verkopen</option>
+        <option>Professionelere uitstraling</option>
+        <option>Beter vindbaar worden in Google en AI zoekmachines</option>
+        <option>Informatie duidelijker presenteren</option>
+        <option>Community of platform bouwen</option>
+        <option>Processen automatiseren</option>
+        <option>Anders</option>
+      </select>
+
+      <label>Beschrijf het doel van de website in je eigen woorden</label>
+      <textarea name="goal_description" placeholder="Bijvoorbeeld: De website moet vertrouwen wekken, duidelijk uitleggen wat wij doen en bezoekers laagdrempelig contact laten opnemen."></textarea>
+    </section>
+
+    <section class="card">
+      <h2>3. Doelgroep en uitstraling</h2>
+
+      <label>Voor wie is de website bedoeld?</label>
+      <textarea name="target_audience" placeholder="Bijvoorbeeld: particuliere klanten, ondernemers, ouders, zorgprofessionals, lokale bezoekers, B2B-klanten..."></textarea>
+
+      <label>Welke uitstraling past het beste?</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="style" value="Zakelijk"> Zakelijk</label>
+        <label class="option"><input type="checkbox" name="style" value="Premium"> Premium</label>
+        <label class="option"><input type="checkbox" name="style" value="Warm en persoonlijk"> Warm en persoonlijk</label>
+        <label class="option"><input type="checkbox" name="style" value="Modern en strak"> Modern en strak</label>
+        <label class="option"><input type="checkbox" name="style" value="Speels en creatief"> Speels en creatief</label>
+        <label class="option"><input type="checkbox" name="style" value="Rustig en minimalistisch"> Rustig en minimalistisch</label>
+      </div>
+
+      <label>Wat moet de website vooral NIET worden?</label>
+      <textarea name="not_wanted" placeholder="Bijvoorbeeld: niet te druk, niet standaard, niet schreeuwerig, niet afstandelijk, niet corporate..."></textarea>
+    </section>
+
+    <section class="card">
+      <h2>4. Inhoud en teksten</h2>
+
+      <div class="note">
+        <strong>Wat is een elevator pitch?</strong>
+        <p>
+          Een elevator pitch is een korte, scherpe uitleg van wie je bent, wat je doet, voor wie je dat doet
+          en waarom iemand voor jou moet kiezen. Denk aan 3 tot 6 zinnen.
+        </p>
+      </div>
+
+      <label>Jouw elevator pitch</label>
+      <textarea name="elevator_pitch" placeholder="Voorbeeld: Wij helpen ondernemers met een duidelijke, professionele website die vertrouwen wekt en bezoekers omzet in aanvragen. Geen losse onderdelen, maar strategie, ontwerp en techniek in één geheel."></textarea>
+
+      <label>Persoonlijke tekst / over jou of over het bedrijf</label>
+      <textarea name="personal_text" placeholder="Vertel wie je bent, waarom je dit doet, waar je voor staat en wat klanten aan jou hebben."></textarea>
+
+      <label>Welke pagina’s moeten er komen?</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="pages" value="Home"> Home</label>
+        <label class="option"><input type="checkbox" name="pages" value="Over ons"> Over ons</label>
+        <label class="option"><input type="checkbox" name="pages" value="Diensten"> Diensten</label>
+        <label class="option"><input type="checkbox" name="pages" value="Portfolio"> Portfolio</label>
+        <label class="option"><input type="checkbox" name="pages" value="Reviews"> Reviews</label>
+        <label class="option"><input type="checkbox" name="pages" value="Contact"> Contact</label>
+        <label class="option"><input type="checkbox" name="pages" value="Blog / kennisbank"> Blog / kennisbank</label>
+        <label class="option"><input type="checkbox" name="pages" value="Veelgestelde vragen"> Veelgestelde vragen</label>
+      </div>
+
+      <label>Zijn er bestaande teksten die gebruikt mogen worden?</label>
+      <textarea name="existing_texts"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>5. Beeldmateriaal, kleuren en lettertypes</h2>
+
+      <p>
+        Lever bij voorkeur deze foto’s aan: profielfoto, professionele foto, foto van top tot teen,
+        sfeerbeelden, productfoto’s, teamfoto’s en eventueel klantcases.
+      </p>
+
+      <label>Link naar foto’s / Google Drive / WeTransfer</label>
+      <input name="photo_link" placeholder="Plak hier een link naar je beelden">
+
+      <label>Welke foto’s kun je aanleveren?</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="photos_available" value="Profielfoto"> Profielfoto</label>
+        <label class="option"><input type="checkbox" name="photos_available" value="Professionele foto"> Professionele foto</label>
+        <label class="option"><input type="checkbox" name="photos_available" value="Foto top tot teen"> Foto top tot teen</label>
+        <label class="option"><input type="checkbox" name="photos_available" value="Sfeerbeelden"> Sfeerbeelden</label>
+        <label class="option"><input type="checkbox" name="photos_available" value="Productfoto’s"> Productfoto’s</label>
+        <label class="option"><input type="checkbox" name="photos_available" value="Nog geen beeldmateriaal"> Nog geen beeldmateriaal</label>
+      </div>
+
+      <label>Gewenste kleuren / HEX-codes</label>
+      <textarea name="colors" placeholder="Tip: gebruik https://www.colourpalettegenerator.com/ om kleuren uit een afbeelding te halen."></textarea>
+
+      <label>Gewenst lettertype</label>
+      <input name="font_preference" placeholder="Tip: kijk op https://fonts.google.com/">
+
+      <label>Websites die je mooi vindt</label>
+      <textarea name="inspiration_sites" placeholder="Plak 2 tot 5 links en geef kort aan wat je mooi vindt."></textarea>
+    </section>
+
+    <section class="card">
+      <h2>5b. Upload context en content</h2>
+
+      <label>Context uploaden</label>
+      <p class="hint">
+        Upload bestaande teksten, briefing, PDF, Word-document of andere context.
+        Maximaal 10MB per bestand. Toegestaan: txt, doc, docx, pdf, odt.
+      </p>
+      <input
+        type="file"
+        name="context_files"
+        id="context_files"
+        multiple
+        accept=".txt,.doc,.docx,.pdf,.odt"
+      >
+      <div class="upload-list" id="contextFileList"></div>
+
+      <label>Foto’s / content uploaden</label>
+      <p class="hint">
+        Upload foto’s, sfeerbeelden, profielfoto’s of visuele content.
+        Maximaal 10MB per bestand. Toegestaan: jpg, jpeg, png, webp.
+      </p>
+      <input
+        type="file"
+        name="content_files"
+        id="content_files"
+        multiple
+        accept=".jpg,.jpeg,.png,.webp"
+      >
+      <div class="upload-list" id="contentFileList"></div>
+    </section>
+
+    <section class="card">
+      <h2>6. Functionaliteiten</h2>
+
+      <label>Welke onderdelen zijn nodig?</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="features" value="Contactformulier"> Contactformulier</label>
+        <label class="option"><input type="checkbox" name="features" value="Afspraakmodule"> Afspraakmodule</label>
+        <label class="option"><input type="checkbox" name="features" value="Nieuwsbrief"> Nieuwsbrief</label>
+        <label class="option"><input type="checkbox" name="features" value="Blog"> Blog</label>
+        <label class="option"><input type="checkbox" name="features" value="Webshop"> Webshop</label>
+        <label class="option"><input type="checkbox" name="features" value="Betaalsysteem"> Betaalsysteem</label>
+        <label class="option"><input type="checkbox" name="features" value="Inloggen / accountomgeving"> Inloggen / accountomgeving</label>
+        <label class="option"><input type="checkbox" name="features" value="AI of automatisering"> AI of automatisering</label>
+      </div>
+
+      <label>Zijn er koppelingen nodig?</label>
+      <textarea name="integrations" placeholder="Bijvoorbeeld Mollie, Stripe, Mailchimp, HubSpot, Google Analytics, Meta Pixel, boekhoudpakket, CRM..."></textarea>
+    </section>
+
+    <section class="card">
+      <h2>7. Planning en budget</h2>
+
+      <div class="grid two">
+        <div>
+          <label>Wanneer moet de website live?</label>
+          <input name="deadline">
+        </div>
+
+        <div>
+          <label>Indicatie budget</label>
+          <select name="budget">
+            <option value="">Maak een keuze</option>
+            <option>Tot €1.000</option>
+            <option>€1.000 - €2.500</option>
+            <option>€2.500 - €5.000</option>
+            <option>€5.000 - €10.000</option>
+            <option>€10.000+</option>
+            <option>Nog niet zeker</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Zijn er belangrijke deadlines, campagnes of lanceringen?</label>
+      <textarea name="planning_notes"></textarea>
+    </section>
+
+    <section class="card" id="help-section">
+      <h2>8. Als invullen stroef gaat: 5 helptips</h2>
+
+      <p>
+        Clippy geeft je tijdens het invullen korte tips. Je kunt ook rechtsklikken op Clippy en kiezen voor
+        “Geef invultip”.
+      </p>
+
+      <ol class="tips-list">
+        <li>Denk om: wat moet de website vooral niet worden?</li>
+        <li>Maak deze zin af: “Als ik over een jaar naar mijn onderneming kijk, wil ik niet hoeven zeggen dat…”</li>
+        <li>Noem 3 websites die je mooi vindt en 3 websites die je juist lelijk vindt.</li>
+        <li>Beschrijf je ideale klant alsof het één echte persoon is.</li>
+        <li>Schrijf eerst rommelig. MNRV maakt het later scherp, helder en professioneel.</li>
+      </ol>
+
+      <label>Extra opmerkingen</label>
+      <textarea name="extra_notes"></textarea>
+
+      <div class="actions">
+        <button class="primary" type="submit">Intake verzenden</button>
+        <button class="secondary" type="button" id="clearDraft">Tussentijdse opslag wissen</button>
+      </div>
+
+      <div class="success" id="successBox">
+        Bedankt. Je intake is succesvol verzonden. MNRV gaat ermee aan de slag. Je ontvangt een kopie van je antwoorden per mail.
+      </div>
+
+      <div class="error" id="errorBox">
+        Er ging iets mis. Je antwoorden zijn lokaal bewaard. Probeer het opnieuw of neem contact op met MNRV.
+      </div>
+    </section>
+  </form>
+</main>
+
+<div class="autosave" id="autosaveStatus">Autosave actief</div>
+
+<div id="clippy-tray">📎 Clippy</div>
+
+<div id="clippy-ctx-menu" class="clippy-ctx-menu">
+  <button class="clippy-ctx-item" data-action="tip">Geef invultip</button>
+  <button class="clippy-ctx-item" data-action="about">Over MNRV</button>
+  <button class="clippy-ctx-item" data-action="services">Diensten</button>
+  <button class="clippy-ctx-item" data-action="contact">Contact</button>
+  <button class="clippy-ctx-item" data-action="animate">Animatie</button>
+  <button class="clippy-ctx-item" data-action="hide">Verbergen</button>
+</div>
+
+<script>
+const SUPABASE_URL = "https://tulvzbzjbwxtjnaengwa.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1bHZ6YnpqYnd4dGpuYWVuZ3dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MzA2OTIsImV4cCI6MjA4NzAwNjY5Mn0.v9X9L1SpFQl98lKIEzx0ZVXVDB6va4_4MVWxSX0lEK8";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const form = document.getElementById("intakeForm");
+const statusEl = document.getElementById("autosaveStatus");
+const successBox = document.getElementById("successBox");
+const errorBox = document.getElementById("errorBox");
+const STORAGE_KEY = "mnrv_website_intake_draft_v2";
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+const allowedContextExtensions = ["txt", "doc", "docx", "pdf", "odt"];
+const allowedContentExtensions = ["jpg", "jpeg", "png", "webp"];
+
+function getExtension(filename) {
+  return filename.split(".").pop().toLowerCase();
+}
+
+function validateFiles(inputId, allowedExtensions) {
+  const input = document.getElementById(inputId);
+  const files = Array.from(input.files || []);
+
+  for (const file of files) {
+    const ext = getExtension(file.name);
+
+    if (!allowedExtensions.includes(ext)) {
+      throw new Error(`${file.name} heeft een ongeldig bestandstype.`);
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      throw new Error(`${file.name} is groter dan 10MB.`);
+    }
+  }
+
+  return files;
+}
+
+function renderFileList(inputId, outputId) {
+  const input = document.getElementById(inputId);
+  const output = document.getElementById(outputId);
+  const files = Array.from(input.files || []);
+
+  if (!files.length) {
+    output.textContent = "";
+    return;
+  }
+
+  output.innerHTML = files
+    .map(file => `${file.name} — ${(file.size / 1024 / 1024).toFixed(2)}MB`)
+    .join("<br>");
+}
+
+document.getElementById("context_files").addEventListener("change", function () {
+  try {
+    validateFiles("context_files", allowedContextExtensions);
+    renderFileList("context_files", "contextFileList");
+  } catch (error) {
+    alert(error.message);
+    this.value = "";
+    renderFileList("context_files", "contextFileList");
+  }
+});
+
+document.getElementById("content_files").addEventListener("change", function () {
+  try {
+    validateFiles("content_files", allowedContentExtensions);
+    renderFileList("content_files", "contentFileList");
+  } catch (error) {
+    alert(error.message);
+    this.value = "";
+    renderFileList("content_files", "contentFileList");
+  }
+});
+
+function formToObject() {
+  const data = {};
+  const fd = new FormData(form);
+
+  for (const [key, value] of fd.entries()) {
+    if (value instanceof File) continue;
+
+    if (data[key]) {
+      if (!Array.isArray(data[key])) data[key] = [data[key]];
+      data[key].push(value);
+    } else {
+      data[key] = value;
+    }
+  }
+
+  form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    if (!data[cb.name]) data[cb.name] = [];
+  });
+
+  return data;
+}
+
+function restoreDraft() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+
+  try {
+    const data = JSON.parse(raw);
+
+    Object.entries(data).forEach(([key, value]) => {
+      const fields = form.querySelectorAll(`[name="${CSS.escape(key)}"]`);
+
+      fields.forEach(field => {
+        if (field.type === "checkbox") {
+          field.checked = Array.isArray(value) && value.includes(field.value);
+        } else if (field.type === "radio") {
+          field.checked = field.value === value;
+        } else if (field.type !== "file") {
+          field.value = value || "";
+        }
+      });
+    });
+
+    statusEl.textContent = "Concept hersteld";
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function saveDraft() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formToObject()));
+  statusEl.textContent = "Laatst opgeslagen: " + new Date().toLocaleTimeString("nl-NL");
+}
+
+let saveTimer;
+form.addEventListener("input", () => {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveDraft, 350);
+});
+
+form.addEventListener("change", () => {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveDraft, 350);
+});
+
+document.getElementById("clearDraft").addEventListener("click", () => {
+  localStorage.removeItem(STORAGE_KEY);
+  statusEl.textContent = "Tussentijdse opslag gewist";
+});
+
+async function uploadFiles(bucket, inputId, intakeId) {
+  const input = document.getElementById(inputId);
+  const files = Array.from(input.files || []);
+  const uploaded = [];
+
+  for (const file of files) {
+    if (file.size > MAX_FILE_SIZE) {
+      throw new Error(`${file.name} is groter dan 10MB.`);
+    }
+
+    const safeName = file.name
+      .toLowerCase()
+      .replace(/[^a-z0-9._-]/g, "-");
+
+    const path = `${intakeId}/${Date.now()}-${safeName}`;
+
+    const { error } = await supabaseClient.storage
+      .from(bucket)
+      .upload(path, file, {
+        cacheControl: "3600",
+        upsert: false
+      });
+
+    if (error) throw error;
+
+    uploaded.push({
+      bucket,
+      path,
+      name: file.name,
+      type: file.type,
+      size: file.size
+    });
+  }
+
+  return uploaded;
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  successBox.style.display = "none";
+  errorBox.style.display = "none";
+
+  saveDraft();
+
+  try {
+    validateFiles("context_files", allowedContextExtensions);
+    validateFiles("content_files", allowedContentExtensions);
+
+    const answers = formToObject();
+
+    const basePayload = {
+      client_email: answers.client_email,
+      client_name: answers.client_name,
+      company_name: answers.company_name,
+      answers: {
+        ...answers,
+        uploads: []
+      }
+    };
+
+    statusEl.textContent = "Intake opslaan...";
+
+    const { data, error } = await supabaseClient
+      .from("website_intakes")
+      .insert(basePayload)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    statusEl.textContent = "Bestanden uploaden...";
+
+    const contextUploads = await uploadFiles("intake-context", "context_files", data.id);
+    const contentUploads = await uploadFiles("intake-content", "content_files", data.id);
+    const uploads = [...contextUploads, ...contentUploads];
+
+    const finalAnswers = {
+      ...answers,
+      uploads
+    };
+
+    const { error: updateError } = await supabaseClient
+      .from("website_intakes")
+      .update({
+        answers: finalAnswers,
+        updated_at: new Date().toISOString()
+      })
+      .eq("id", data.id);
+
+    if (updateError) throw updateError;
+
+    statusEl.textContent = "Bevestigingsmail versturen...";
+
+    await fetch("/api/send-intake-mail.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        intake_id: data.id,
+        client_email: answers.client_email,
+        client_name: answers.client_name,
+        company_name: answers.company_name,
+        answers: finalAnswers,
+        uploads
+      })
+    });
+
+    localStorage.removeItem(STORAGE_KEY);
+    form.reset();
+    renderFileList("context_files", "contextFileList");
+    renderFileList("content_files", "contentFileList");
+
+    successBox.style.display = "block";
+    statusEl.textContent = "Verzonden";
+
+    if (window.MNRV && window.MNRV.clippyShowTip) {
+      window.MNRV.clippyShowTip("Gelukt! Je intake is verzonden. MNRV gaat ermee aan de slag.");
+    }
+  } catch (error) {
+    console.error(error);
+    errorBox.style.display = "block";
+    errorBox.textContent = error.message || "Er ging iets mis. Je antwoorden zijn lokaal bewaard.";
+    statusEl.textContent = "Niet verzonden, concept bewaard";
+
+    if (window.MNRV && window.MNRV.clippyShowTip) {
+      window.MNRV.clippyShowTip("Oeps, er ging iets mis. Geen paniek: je antwoorden zijn lokaal bewaard.");
+    }
+  }
+});
+
+restoreDraft();
+</script>
+
+<script>
+window.MNRV = window.MNRV || {};
+</script>
+
+<script>
+/* ============================================
+   CLIPPY ASSISTANT — MNRV INTAKEFORMULIER
+   ============================================ */
+(function() {
+  var agent = null;
+  var clippyHidden = false;
+  var tray = document.getElementById('clippy-tray');
+  var ctxMenu = document.getElementById('clippy-ctx-menu');
+
+  var generalTips = [
+    'Hallo! Ik ben Clippy, je MNRV intake-assistent. Ik help je als je vastloopt.',
+    'Tip 1: Denk om. Wat moet deze website vooral NIET worden?',
+    'Tip 2: Maak deze zin af: als ik over een jaar naar mijn onderneming kijk, wil ik niet hoeven zeggen dat...',
+    'Tip 3: Noem 3 websites die je mooi vindt en 3 websites die je juist lelijk vindt.',
+    'Tip 4: Beschrijf je ideale klant alsof het één echte persoon is.',
+    'Tip 5: Schrijf eerst rommelig. MNRV maakt het later scherp, helder en professioneel.',
+    'Een elevator pitch is kort: wie ben je, wat doe je, voor wie, en waarom moet iemand jou kiezen?',
+    'Geen stress. Liever eerlijke ruwe input dan lege perfecte velden.',
+    'Kleuren kiezen? Gebruik colourpalettegenerator.com om kleuren uit een afbeelding te halen.',
+    'Lettertype kiezen? Kijk op fonts.google.com en noteer de naam van het font.'
+  ];
+
+  var contextTips = {
+    'help-section': [
+      'Als invullen stroef gaat: begin met wat je absoluut niet wilt.',
+      'Je hoeft nog geen perfecte marketingtekst te schrijven. Ruwe input is genoeg.',
+      'Een goede website begint niet met design, maar met duidelijkheid.'
+    ]
+  };
+
+  var funAnimations = [
+    'Wave', 'Greeting', 'Congratulate', 'LookRight', 'LookLeft',
+    'LookUp', 'LookDown', 'Thinking', 'GetAttention', 'IdleHeadScratch',
+    'IdleFingerTap', 'IdleEyeBrowRaise', 'IdleSideToSide', 'IdleAtom',
+    'IdleRopePile', 'IdleSnooze', 'GetArtsy', 'GetTechy', 'GetWizardy',
+    'CheckingSomething', 'Writing', 'Searching', 'Processing'
+  ];
+
+  function loadClippy() {
+    if (typeof clippy === 'undefined') return;
+
+    clippy.load('Clippy', function(a) {
+      agent = a;
+
+      agent.show();
+      agent.play('Greeting');
+      agent.speak(generalTips[0]);
+
+      var el = document.querySelector('.clippy');
+
+      if (el) {
+        el.style.pointerEvents = 'auto';
+
+        try {
+          if (window.jQuery) {
+            $(el).draggable('disable');
+          }
+        } catch(e) {}
+
+        el.addEventListener('mousedown', function(e) {
+          e.stopPropagation();
+        }, true);
+
+        el.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          showCtxMenu(e.clientX, e.clientY);
+        });
+
+        el.addEventListener('click', function(e) {
+          e.stopPropagation();
+          hideCtxMenu();
+          playRandomAnimation();
+        });
+      }
+
+      scheduleTip();
+      scheduleIdleAnimation();
+
+      window.MNRV.clippyAgent = agent;
+
+      window.MNRV.clippyShowTip = function(text) {
+        if (agent && !clippyHidden) {
+          agent.speak(text);
+        }
+      };
+
+      window.MNRV.clippyDismissBubble = function() {
+        if (agent) {
+          agent.stopCurrent();
+        }
+      };
+    });
+  }
+
+  function playRandomAnimation() {
+    if (!agent || clippyHidden) return;
+    var anim = funAnimations[Math.floor(Math.random() * funAnimations.length)];
+    agent.play(anim);
+  }
+
+  function scheduleIdleAnimation() {
+    setTimeout(function() {
+      if (!clippyHidden && agent) {
+        if (Math.random() < 0.4) {
+          playRandomAnimation();
+        }
+      }
+      scheduleIdleAnimation();
+    }, 8000 + Math.random() * 7000);
+  }
+
+  function getRandomTip() {
+    var helpSection = document.getElementById('help-section');
+    if (helpSection) {
+      var rect = helpSection.getBoundingClientRect();
+      var visible = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (visible && Math.random() < 0.55) {
+        var tips = contextTips['help-section'];
+        return tips[Math.floor(Math.random() * tips.length)];
+      }
+    }
+
+    return generalTips[Math.floor(Math.random() * generalTips.length)];
+  }
+
+  function scheduleTip() {
+    setTimeout(function() {
+      if (!clippyHidden && agent) {
+        agent.speak(getRandomTip());
+        var tipAnims = ['Thinking', 'LookUp', 'CheckingSomething', 'IdleEyeBrowRaise'];
+        agent.play(tipAnims[Math.floor(Math.random() * tipAnims.length)]);
+      }
+      scheduleTip();
+    }, 20000 + Math.random() * 10000);
+  }
+
+  function showCtxMenu(x, y) {
+    if (!ctxMenu) return;
+
+    ctxMenu.style.left = Math.min(x, window.innerWidth - 210) + 'px';
+    ctxMenu.style.top = Math.max(10, y - 170) + 'px';
+    ctxMenu.classList.add('show');
+  }
+
+  function hideCtxMenu() {
+    if (ctxMenu) {
+      ctxMenu.classList.remove('show');
+    }
+  }
+
+  document.addEventListener('click', hideCtxMenu);
+
+  if (ctxMenu) {
+    ctxMenu.addEventListener('click', function(e) {
+      e.stopPropagation();
+
+      var item = e.target.closest('.clippy-ctx-item');
+      if (!item) return;
+
+      var action = item.getAttribute('data-action');
+      hideCtxMenu();
+
+      if (!agent) return;
+
+      switch (action) {
+        case 'tip':
+          agent.play('Thinking');
+          agent.speak(getRandomTip());
+          break;
+
+        case 'animate':
+          playRandomAnimation();
+          break;
+
+        case 'about':
+          agent.play('Explain');
+          agent.speak('MNRV bouwt websites, webshops, AI-oplossingen en slimme digitale workflows.');
+          break;
+
+        case 'services':
+          agent.play('GetTechy');
+          agent.speak('Denk aan websites, webshops, AI-agents, automatisering, UX en technische optimalisatie.');
+          break;
+
+        case 'contact':
+          agent.play('Writing');
+          agent.speak('Bij vragen kan MNRV contact opnemen na het verzenden van deze intake.');
+          break;
+
+        case 'hide':
+          hideClippy();
+          break;
+      }
+    });
+  }
+
+  function hideClippy() {
+    if (!agent) return;
+
+    clippyHidden = true;
+    agent.play('GoodBye');
+
+    setTimeout(function() {
+      agent.hide();
+      if (tray) tray.classList.add('show');
+    }, 1500);
+  }
+
+  function restoreClippy() {
+    if (!agent) return;
+
+    clippyHidden = false;
+    if (tray) tray.classList.remove('show');
+
+    agent.show();
+    agent.play('Greeting');
+    agent.speak('Ik ben terug. Vastgelopen? Rechtsklik op mij voor een invultip.');
+  }
+
+  if (tray) {
+    tray.addEventListener('click', function(e) {
+      e.stopPropagation();
+      restoreClippy();
+    });
+  }
+
+  setTimeout(loadClippy, 1200);
+})();
+</script>
+
+</body>
+</html>
