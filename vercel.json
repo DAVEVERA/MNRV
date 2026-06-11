@@ -1,5 +1,4 @@
 {
-  "outputDirectory": ".",
   "headers": [
     {
       "source": "/(.*)",
