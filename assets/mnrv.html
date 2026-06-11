@@ -241,24 +241,25 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 16px 30px;
+    gap: 18px 36px;
     margin-top: 36px;
-    width: min(540px, 100%);
+    width: min(560px, 100%);
   }
 
   .client-logos-grid img {
     display: block;
-    height: 28px;
+    height: 36px;
     width: auto;
-    max-width: 108px;
+    max-width: 120px;
     object-fit: contain;
-    opacity: 0.45;
-    filter: brightness(0) invert(1);
-    transition: opacity 0.2s;
+    opacity: 0.55;
+    filter: grayscale(1);
+    transition: opacity 0.2s, filter 0.2s;
   }
 
   .client-logos-grid img:hover {
-    opacity: 0.9;
+    opacity: 1;
+    filter: grayscale(0);
   }
 
   /* DIENSTEN */
