@@ -237,66 +237,28 @@
   }
   .btn-secondary:hover { background: var(--abyss); color: var(--palladian); }
 
-  .client-logo-marquee {
-    width: min(620px, 100%);
-    margin-top: 34px;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-  }
-
-  .client-logo-track {
+  .client-logos-grid {
     display: flex;
-    width: max-content;
-    gap: 14px;
-    animation: clientLogoMarquee 28s linear infinite;
-  }
-
-  .client-logo-group {
-    display: flex;
-    gap: 14px;
-    padding-right: 14px;
-  }
-
-  .client-logo-slot {
-    display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    min-width: 148px;
-    height: 54px;
-    padding: 0 22px;
-    border: 1px solid rgba(44,59,77,0.16);
-    background: rgba(238,233,223,0.38);
-    color: rgba(27,42,58,0.72);
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    white-space: nowrap;
+    gap: 16px 30px;
+    margin-top: 36px;
+    width: min(540px, 100%);
   }
 
-  .client-logo-slot img {
+  .client-logos-grid img {
     display: block;
-    max-width: 118px;
-    max-height: 28px;
+    height: 28px;
+    width: auto;
+    max-width: 108px;
     object-fit: contain;
+    opacity: 0.45;
+    filter: brightness(0) invert(1);
+    transition: opacity 0.2s;
   }
 
-  .client-logo-marquee:hover .client-logo-track {
-    animation-play-state: paused;
-  }
-
-  @keyframes clientLogoMarquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .client-logo-track {
-      animation: none;
-      transform: none;
-    }
+  .client-logos-grid img:hover {
+    opacity: 0.9;
   }
 
   /* DIENSTEN */
@@ -1633,26 +1595,13 @@
         <a href="#contact" class="btn-primary">Start een project</a>
         <a href="#werk" class="btn-secondary">Bekijk werk</a>
       </div>
-      <div class="client-logo-marquee" aria-label="Opdrachtgevers">
-        <div class="client-logo-track">
-          <div class="client-logo-group">
-            <!-- Vervang een span makkelijk door: <span class="client-logo-slot"><img src="pad/naar/logo.svg" alt="Naam opdrachtgever"></span> -->
-            <span class="client-logo-slot">MRS Vision</span>
-            <span class="client-logo-slot">FAINL</span>
-            <span class="client-logo-slot">Windofy</span>
-            <span class="client-logo-slot">Client 04</span>
-            <span class="client-logo-slot">Client 05</span>
-            <span class="client-logo-slot">Client 06</span>
-          </div>
-          <div class="client-logo-group" aria-hidden="true">
-            <span class="client-logo-slot">MRS Vision</span>
-            <span class="client-logo-slot">FAINL</span>
-            <span class="client-logo-slot">Windofy</span>
-            <span class="client-logo-slot">Client 04</span>
-            <span class="client-logo-slot">Client 05</span>
-            <span class="client-logo-slot">Client 06</span>
-          </div>
-        </div>
+      <div class="client-logos-grid" aria-label="Opdrachtgevers">
+        <img src="../public/logo_clients/FAINL.png" alt="FAINL" loading="lazy">
+        <img src="../public/logo_clients/windofy-logo.png" alt="Windofy" loading="lazy">
+        <img src="../public/logo_clients/Notenman_logo.png" alt="Notenman" loading="lazy">
+        <img src="../public/logo_clients/mrjvoluit.png" alt="MRJ Voluit" loading="lazy">
+        <img src="../public/logo_clients/oostendorpauto.png" alt="Oostendorp Auto" loading="lazy">
+        <img src="../public/logo_clients/sverdriet_logo.webp" alt="S. Verdriet" loading="lazy">
       </div>
     </div>
     <div class="hero-portret">
