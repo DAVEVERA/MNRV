@@ -1,6 +1,7 @@
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const FROM_EMAIL = process.env.INTAKE_FROM_EMAIL || "MNRV <onboarding@resend.dev>";
+const FROM_EMAIL = process.env.INTAKE_FROM_EMAIL || "MNRV <intake@mnrv.nl>";
 const ADMIN_EMAIL = process.env.INTAKE_ADMIN_EMAIL || "info@mnrv.nl";
+const SEND_CLIENT_COPY = process.env.INTAKE_SEND_CLIENT_COPY !== "false";
 
 function sendJson(res, statusCode, payload) {
   res.statusCode = statusCode;
@@ -115,27 +116,31 @@ module.exports = async function handler(req, res) {
       <table style="border-collapse:collapse;width:100%;">${answersTable}</table>
     `;
 
-    const [adminResult, clientResult] = await Promise.all([
-      sendEmail({
-        from: FROM_EMAIL,
-        to: [ADMIN_EMAIL],
-        reply_to: [clientEmail],
-        subject,
-        html: adminHtml
-      }),
-      sendEmail({
+    const adminResult = await sendEmail({
+      from: FROM_EMAIL,
+      to: [ADMIN_EMAIL],
+      reply_to: [clientEmail],
+      subject,
+      html: adminHtml
+    });
+
+    let clientResult = null;
+
+    if (SEND_CLIENT_COPY) {
+      clientResult = await sendEmail({
         from: FROM_EMAIL,
         to: [clientEmail],
         reply_to: [ADMIN_EMAIL],
         subject: "Kopie van je MNRV website intake",
         html: clientHtml
-      })
-    ]);
+      });
+    }
 
     return sendJson(res, 200, {
       ok: true,
       admin: adminResult,
-      client: clientResult
+      client: clientResult,
+      client_copy_enabled: SEND_CLIENT_COPY
     });
   } catch (error) {
     return sendJson(res, 500, { error: error.message || "Mail sending failed" });

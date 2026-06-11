@@ -574,7 +574,7 @@
       </div>
 
       <div class="success" id="successBox">
-        Bedankt. Je intake is succesvol verzonden. MNRV gaat ermee aan de slag. Je ontvangt een kopie van je antwoorden per mail.
+        Bedankt. Je intake is succesvol ingezonden. MNRV gaat ermee aan de slag.
       </div>
 
       <div class="error" id="errorBox">
@@ -823,7 +823,7 @@ form.addEventListener("submit", async (e) => {
 
     if (error) throw error;
 
-    statusEl.textContent = "Bevestigingsmail versturen...";
+    statusEl.textContent = "Ontvangstmelding versturen...";
 
     const mailResponse = await fetch("/api/send-intake-mail", {
       method: "POST",
@@ -851,16 +851,16 @@ form.addEventListener("submit", async (e) => {
     renderFileList("content_files", "contentFileList");
 
     successBox.style.display = "block";
-    statusEl.textContent = "Verzonden";
+    statusEl.textContent = "Ingezonden";
 
     if (window.MNRV && window.MNRV.clippyShowTip) {
-      window.MNRV.clippyShowTip("Gelukt! Je intake is verzonden. MNRV gaat ermee aan de slag.");
+      window.MNRV.clippyShowTip("Gelukt! Je intake is ingezonden. MNRV gaat ermee aan de slag.");
     }
   } catch (error) {
     console.error(error);
     errorBox.style.display = "block";
     errorBox.textContent = error.message || "Er ging iets mis. Je antwoorden zijn lokaal bewaard.";
-    statusEl.textContent = "Niet verzonden, concept bewaard";
+    statusEl.textContent = "Niet ingezonden, concept bewaard";
 
     if (window.MNRV && window.MNRV.clippyShowTip) {
       window.MNRV.clippyShowTip("Oeps, er ging iets mis. Geen paniek: je antwoorden zijn lokaal bewaard.");

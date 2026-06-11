@@ -216,6 +216,10 @@
     border: 1px solid rgba(198,188,175,0.15);
   }
   .btn-primary:hover { background: var(--blue); transform: translateY(-2px); }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--palladian);
+    outline-offset: 4px;
+  }
 
   .btn-secondary {
     font-family: 'Poppins', sans-serif;
@@ -758,6 +762,18 @@
   }
   .contact-info a:hover { opacity: 0.7; }
 
+  .contact-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .contact-intake-button {
+    cursor: pointer;
+  }
+
   /* SOCIAL FLYOUT */
   .social-flyout {
     position: fixed;
@@ -1167,6 +1183,8 @@
     .hero-ctas { gap: 10px; }
     .btn-primary { padding: 12px 18px; font-size: 11px; }
     .btn-secondary { padding: 10px 16px; font-size: 11px; }
+    .contact-actions { margin-bottom: 24px; }
+    .intake-modal-inner { height: 90vh; }
     .hero-portret { align-items: center; }
     .hero-portret svg { max-height: 62vh; }
     /* foto staat gecentreerd (niet op de bodem): alleen zachte diffusie, geen harde contactkern */
@@ -1299,7 +1317,8 @@
   }
 
   /* MODAL */
-  #preview-modal {
+  #preview-modal,
+  #intake-modal {
     display: none;
     position: fixed;
     inset: 0;
@@ -1310,7 +1329,8 @@
     justify-content: center;
     padding: 24px;
   }
-  #preview-modal.open { display: flex; }
+  #preview-modal.open,
+  #intake-modal.open { display: flex; }
 
   .modal-inner {
     width: 100%;
@@ -1324,6 +1344,11 @@
     overflow: hidden;
     box-shadow: 0 40px 100px rgba(0,0,0,0.6);
     animation: modalIn 0.25s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .intake-modal-inner {
+    max-width: 980px;
+    height: min(88vh, 920px);
   }
   @keyframes modalIn {
     from { opacity: 0; transform: scale(0.96) translateY(16px); }
@@ -1339,7 +1364,8 @@
     background: #0b0e13;
     flex-shrink: 0;
   }
-  #modal-title {
+  #modal-title,
+  #intake-modal-title {
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     font-weight: 600;
@@ -1372,7 +1398,8 @@
     position: relative;
     overflow: hidden;
   }
-  #preview-frame {
+  #preview-frame,
+  #intake-frame {
     width: 100%;
     height: 100%;
     border: none;
@@ -1667,8 +1694,11 @@
   <div class="contact-layout">
     <div class="contact-text">
       <p>
-        Heb je een idee, een vraag of wil je direct weten wat ik voor jouw bedrijf kan betekenen? Stuur een bericht en ik neem binnen 24 uur contact op.
+        Heb je een idee, een vraag of wil je direct weten wat ik voor jouw bedrijf kan betekenen? Vul de korte intake in, dan kan ik gericht met je meekijken.
       </p>
+      <div class="contact-actions">
+        <button class="btn-primary contact-intake-button" type="button" id="open-intake-modal">Start intakeformulier</button>
+      </div>
       <div class="contact-info">
         <a href="mailto:info@mnrv.nl">info@mnrv.nl</a>
         <a href="https://mnrv.nl" target="_blank">mnrv.nl</a>
@@ -1676,6 +1706,22 @@
     </div>
   </div>
 </section>
+
+<!-- INTAKE MODAL -->
+<div id="intake-modal" aria-hidden="true">
+  <div class="modal-inner intake-modal-inner" role="dialog" aria-modal="true" aria-labelledby="intake-modal-title">
+    <div class="modal-bar">
+      <span id="intake-modal-title">Website intakeformulier</span>
+      <div class="modal-actions">
+        <a href="../intakeformulier.html" target="_blank" rel="noopener" class="modal-ext" title="Open in nieuw tabblad">â†—</a>
+        <button class="modal-close" type="button" id="close-intake-modal" aria-label="Intakeformulier sluiten">âœ•</button>
+      </div>
+    </div>
+    <div class="modal-frame-wrap">
+      <iframe id="intake-frame" title="MNRV website intakeformulier" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+    </div>
+  </div>
+</div>
 
 <!-- PREVIEW MODAL -->
 <div id="preview-modal" onclick="closePreview(event)">
@@ -1838,6 +1884,43 @@ window.addEventListener('scroll', () => {
     nav.querySelector('.nav-logo').style.color = '#1B2632';
   }
 }, { passive: true });
+
+function initIntakeModal() {
+  const openButton = document.getElementById('open-intake-modal');
+  const closeButton = document.getElementById('close-intake-modal');
+  const modal = document.getElementById('intake-modal');
+  const frame = document.getElementById('intake-frame');
+  if (!openButton || !closeButton || !modal || !frame) return;
+
+  const intakeUrl = '../intakeformulier.html';
+
+  function openIntake() {
+    frame.src = intakeUrl;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeButton.focus();
+  }
+
+  function closeIntake() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    frame.src = '';
+    document.body.style.overflow = '';
+    openButton.focus();
+  }
+
+  openButton.addEventListener('click', openIntake);
+  closeButton.addEventListener('click', closeIntake);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeIntake();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeIntake();
+  });
+}
+
+initIntakeModal();
 
 function openPreview(url, title) {
   const modal = document.getElementById('preview-modal');
