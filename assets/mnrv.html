@@ -163,31 +163,28 @@
   .hero-portret-wrap {
     position: relative;
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    max-height: 78vh;
+    overflow: hidden;
   }
 
-  .hero-portret-img {
+  /* Aspect ratio slot: 2300×4094 → hoogte = 178% van breedte */
+  .hero-portret-wrap::before {
+    content: '';
     display: block;
+    padding-top: 178%;
+  }
+
+  .hero-portret-img,
+  .hero-portret-digital {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    max-height: 78vh;
+    height: 100%;
     object-fit: contain;
     object-position: bottom center;
-    mix-blend-mode: multiply;
   }
 
   .hero-portret-digital {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    max-height: 78vh;
-    object-fit: contain;
-    object-position: bottom center;
     opacity: 0;
   }
 
@@ -323,7 +320,7 @@
 
   /* DIENSTEN */
   .diensten {
-    padding: 120px 48px;
+    padding: 64px 48px;
   }
 
   .section-eyebrow {
@@ -1266,8 +1263,7 @@
     .hero-label { font-size: 9px; margin-bottom: 16px; }
     .hero-portret { align-items: center; }
     .hero-portret svg { max-height: 70vh; }
-    .hero-portret-img { max-height: 70vh; }
-    .hero-portret-digital { max-height: 70vh; }
+    .hero-portret-wrap { max-height: 70vh; }
   }
   @media (max-width: 560px) {
     nav { gap: 12px; }
@@ -1313,8 +1309,7 @@
     .btn-secondary { padding: 8px 12px; font-size: 10px; }
     .logo-marquee { margin-top: 20px; }
     .logo-marquee-group img { height: 22px; }
-    .hero-portret-img { max-height: 55vh; }
-    .hero-portret-digital { max-height: 55vh; }
+    .hero-portret-wrap { max-height: 55vh; }
     .contact-actions { margin-bottom: 24px; }
     .contact-cta-wrap { width: 100%; }
     .contact-intake-button { width: 100%; max-width: 280px; text-align: center; }
@@ -1334,8 +1329,7 @@
     .intake-modal-inner { height: 90vh; }
     .hero-portret { align-items: center; }
     .hero-portret svg { max-height: 62vh; }
-    .hero-portret-img { max-height: 62vh; }
-    .hero-portret-digital { max-height: 62vh; }
+    .hero-portret-wrap { max-height: 62vh; }
     /* foto staat gecentreerd (niet op de bodem): alleen zachte diffusie, geen harde contactkern */
     .hero-portret::before { display: none; }
     .hero-portret::after {
@@ -1686,7 +1680,7 @@
     </div>
     <div class="hero-portret">
       <div class="hero-portret-wrap">
-        <img src="PortretDaveHeel.png" alt="Dave Vera" class="hero-portret-img">
+        <img src="DaveHeel.PNG" alt="Dave Vera" class="hero-portret-img">
         <img src="PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true">
       </div>
     </div>
@@ -2260,23 +2254,26 @@ initWerkShowcase();
   if (!digital) return;
 
   function flicker() {
-    var flashes = 2 + Math.floor(Math.random() * 2); // 2 of 3 flitsen
+    var flashes = 1 + Math.floor(Math.random() * 2); // 1 of 2 flitsen
     var i = 0;
 
     function doFlash() {
       if (i >= flashes) {
+        digital.style.transition = 'opacity 0.06s ease-out';
         digital.style.opacity = '0';
         scheduleNext();
         return;
       }
-      digital.style.opacity = '1';
+      digital.style.transition = 'opacity 0.03s ease-in';
+      digital.style.opacity = '0.88';
       setTimeout(function() {
+        digital.style.transition = 'opacity 0.05s ease-out';
         digital.style.opacity = '0';
         setTimeout(function() {
           i++;
           doFlash();
-        }, 60 + Math.floor(Math.random() * 80)); // 60-140ms uit
-      }, 40 + Math.floor(Math.random() * 60)); // 40-100ms aan
+        }, 90 + Math.floor(Math.random() * 110)); // 90-200ms uit
+      }, 100 + Math.floor(Math.random() * 80)); // 100-180ms aan
     }
 
     doFlash();
