@@ -109,9 +109,9 @@
 
   .hero-portret {
     position: relative;
-    align-self: stretch;
+    align-self: flex-start;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: center;
     min-width: 0;
   }
@@ -268,29 +268,57 @@
   }
   .btn-secondary:hover { background: var(--abyss); color: var(--palladian); }
 
-  .client-logos-grid {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 18px 36px;
+  .logo-marquee {
+    overflow: hidden;
     margin-top: 36px;
-    width: min(560px, 100%);
+    width: 100%;
+    max-width: 560px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   }
 
-  .client-logos-grid img {
+  .logo-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: logoMarquee 22s linear infinite;
+  }
+
+  .logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .logo-marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-right: 40px;
+    flex-shrink: 0;
+  }
+
+  .logo-marquee-group img {
     display: block;
-    height: 36px;
+    height: 30px;
     width: auto;
-    max-width: 120px;
+    max-width: 110px;
     object-fit: contain;
     opacity: 0.55;
     filter: grayscale(1);
+    flex-shrink: 0;
     transition: opacity 0.2s, filter 0.2s;
   }
 
-  .client-logos-grid img:hover {
+  .logo-marquee-group img:hover {
     opacity: 1;
     filter: grayscale(0);
+  }
+
+  @keyframes logoMarquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 560px) {
+    .logo-marquee { max-width: 100%; }
   }
 
   /* DIENSTEN */
@@ -1277,12 +1305,16 @@
       height: 44px;
     }
     .werk-slide-maximize { top: 18px; right: 18px; }
-    .hero-inner { grid-template-columns: 1fr 0.9fr; gap: 10px; }
-    .hero-title { font-size: clamp(26px, 8.5vw, 44px); line-height: 0.95; }
-    .hero-sub { font-size: 12px; line-height: 1.45; margin: 14px 0 20px; }
-    .hero-ctas { gap: 10px; }
-    .btn-primary { padding: 12px 18px; font-size: 11px; }
-    .btn-secondary { padding: 10px 16px; font-size: 11px; }
+    .hero-inner { grid-template-columns: 1fr 0.85fr; gap: 8px; }
+    .hero-title { font-size: clamp(22px, 8vw, 44px); line-height: 0.95; }
+    .hero-sub { font-size: 11px; line-height: 1.45; margin: 10px 0 16px; }
+    .hero-ctas { gap: 8px; }
+    .btn-primary { padding: 10px 14px; font-size: 10px; }
+    .btn-secondary { padding: 8px 12px; font-size: 10px; }
+    .logo-marquee { margin-top: 20px; }
+    .logo-marquee-group img { height: 22px; }
+    .hero-portret-img { max-height: 55vh; }
+    .hero-portret-digital { max-height: 55vh; }
     .contact-actions { margin-bottom: 24px; }
     .contact-cta-wrap { width: 100%; }
     .contact-intake-button { width: 100%; max-width: 280px; text-align: center; }
@@ -1631,13 +1663,25 @@
         <a href="#contact" class="btn-primary">Start een project</a>
         <a href="#werk" class="btn-secondary">Bekijk werk</a>
       </div>
-      <div class="client-logos-grid" aria-label="Opdrachtgevers">
-        <img src="logo_clients/FAINL.png" alt="FAINL" loading="lazy">
-        <img src="logo_clients/windofy-logo.png" alt="Windofy" loading="lazy">
-        <img src="logo_clients/Notenman_logo.png" alt="Notenman" loading="lazy">
-        <img src="logo_clients/mrjvoluit.png" alt="MRJ Voluit" loading="lazy">
-        <img src="logo_clients/oostendorpauto.png" alt="Oostendorp Auto" loading="lazy">
-        <img src="logo_clients/sverdriet_logo.webp" alt="S. Verdriet" loading="lazy">
+      <div class="logo-marquee" aria-label="Opdrachtgevers">
+        <div class="logo-marquee-track">
+          <div class="logo-marquee-group">
+            <img src="logo_clients/FAINL.png" alt="FAINL" loading="lazy">
+            <img src="logo_clients/windofy-logo.png" alt="Windofy" loading="lazy">
+            <img src="logo_clients/Notenman_logo.png" alt="Notenman" loading="lazy">
+            <img src="logo_clients/mrjvoluit.png" alt="MRJ Voluit" loading="lazy">
+            <img src="logo_clients/oostendorpauto.png" alt="Oostendorp Auto" loading="lazy">
+            <img src="logo_clients/sverdriet_logo.webp" alt="S. Verdriet" loading="lazy">
+          </div>
+          <div class="logo-marquee-group" aria-hidden="true">
+            <img src="logo_clients/FAINL.png" alt="" loading="lazy">
+            <img src="logo_clients/windofy-logo.png" alt="" loading="lazy">
+            <img src="logo_clients/Notenman_logo.png" alt="" loading="lazy">
+            <img src="logo_clients/mrjvoluit.png" alt="" loading="lazy">
+            <img src="logo_clients/oostendorpauto.png" alt="" loading="lazy">
+            <img src="logo_clients/sverdriet_logo.webp" alt="" loading="lazy">
+          </div>
+        </div>
       </div>
     </div>
     <div class="hero-portret">
