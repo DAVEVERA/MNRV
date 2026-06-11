@@ -1,0 +1,169 @@
+/* MNRV Cookie Banner — modern + retro dual theme */
+
+#mnrv-cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+/* ── MODERN ────────────────────────────────────────────── */
+.cb-modern {
+  pointer-events: all;
+  max-width: 620px;
+  margin: 0 auto 24px;
+  background: rgba(255, 252, 248, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(61, 90, 110, 0.18);
+  border-radius: 18px;
+  padding: 22px 26px 18px;
+  box-shadow: 0 16px 48px rgba(11, 14, 19, 0.18);
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+.cb-modern .cb-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #11161D;
+  margin: 0 0 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cb-modern .cb-body {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #4a5568;
+  margin: 0 0 14px;
+}
+
+.cb-modern .cb-toggles {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.cb-modern .cb-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #11161D;
+  cursor: pointer;
+}
+
+.cb-modern .cb-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cb-modern .cb-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+}
+
+.cb-modern .cb-accept-all {
+  background: #11161D;
+  color: #EEE9DF;
+}
+.cb-modern .cb-accept-all:hover { background: #3D5A6E; }
+
+.cb-modern .cb-save {
+  background: transparent;
+  color: #11161D;
+  border: 1.5px solid #11161D;
+}
+.cb-modern .cb-save:hover { background: #EEE9DF; }
+
+.cb-modern .cb-deny {
+  background: transparent;
+  color: #888;
+  border: 1.5px solid #ccc;
+}
+.cb-modern .cb-deny:hover { color: #11161D; border-color: #11161D; }
+
+/* ── RETRO Win95 ───────────────────────────────────────── */
+.cb-retro {
+  pointer-events: all;
+  max-width: 400px;
+  margin: 0 auto 16px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 2px 2px 0 #000000;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+}
+
+.cb-retro-titlebar {
+  background: linear-gradient(to right, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.cb-retro-body {
+  padding: 12px 14px 8px;
+  color: #000;
+}
+
+.cb-retro-body p { margin: 0 0 6px; }
+
+.cb-retro-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cb-retro-body li {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cb-retro-body label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.cb-retro-actions {
+  padding: 8px 14px 12px;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  border-top: 1px solid #808080;
+}
+
+/* ── Mobile ────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .cb-modern {
+    margin: 0 12px 12px;
+    padding: 16px 18px 14px;
+    border-radius: 14px;
+  }
+
+  .cb-modern .cb-toggles { flex-direction: column; gap: 8px; }
+  .cb-modern .cb-actions { flex-direction: column; }
+  .cb-modern .cb-btn { width: 100%; text-align: center; }
+
+  .cb-retro { max-width: calc(100% - 24px); margin: 0 12px 12px; }
+}
