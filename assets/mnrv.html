@@ -764,14 +764,71 @@
 
   .contact-actions {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
     flex-wrap: wrap;
     margin-bottom: 30px;
   }
 
+  .contact-cta-wrap {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
   .contact-intake-button {
     cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    position: relative;
+    z-index: 2;
+  }
+
+  .contact-popout-gif {
+    position: absolute;
+    left: calc(100% + 14px);
+    top: 50%;
+    width: 92px;
+    max-width: 28vw;
+    border-radius: 8px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-8px, -50%) scale(0.92);
+    transform-origin: left center;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 3;
+  }
+
+  .contact-cta-wrap:hover .contact-popout-gif,
+  .contact-cta-wrap:focus-within .contact-popout-gif {
+    opacity: 1;
+    transform: translate(0, -50%) scale(1);
+  }
+
+  .contact-intake-note {
+    max-width: 360px;
+    color: rgba(40,56,61,0.64);
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .contact-popout-gif {
+      position: static;
+      width: 76px;
+      max-width: 30vw;
+      opacity: 1;
+      transform: none;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+    .contact-cta-wrap:hover .contact-popout-gif,
+    .contact-cta-wrap:focus-within .contact-popout-gif {
+      transform: none;
+    }
   }
 
   /* SOCIAL FLYOUT */
@@ -1184,6 +1241,21 @@
     .btn-primary { padding: 12px 18px; font-size: 11px; }
     .btn-secondary { padding: 10px 16px; font-size: 11px; }
     .contact-actions { margin-bottom: 24px; }
+    .contact-cta-wrap { width: 100%; }
+    .contact-intake-button { width: 100%; max-width: 280px; text-align: center; }
+    .contact-popout-gif {
+      position: static;
+      width: 72px;
+      max-width: 30vw;
+      opacity: 1;
+      transform: none;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+    .contact-cta-wrap:hover .contact-popout-gif,
+    .contact-cta-wrap:focus-within .contact-popout-gif {
+      transform: none;
+    }
+    .contact-intake-note { max-width: 280px; font-size: 11px; }
     .intake-modal-inner { height: 90vh; }
     .hero-portret { align-items: center; }
     .hero-portret svg { max-height: 62vh; }
@@ -1697,7 +1769,11 @@
         Heb je een idee, een vraag of wil je direct weten wat ik voor jouw bedrijf kan betekenen? Vul de korte intake in, dan kan ik gericht met je meekijken.
       </p>
       <div class="contact-actions">
-        <button class="btn-primary contact-intake-button" type="button" id="open-intake-modal">Start intakeformulier</button>
+        <div class="contact-cta-wrap">
+          <button class="btn-primary contact-intake-button" type="button" id="open-intake-modal">Okaayy, let's go!</button>
+          <img class="contact-popout-gif" src="img/okay%20lets%20go.gif" alt="" loading="lazy" aria-hidden="true">
+          <span class="contact-intake-note">(*Een kan koffie en gebruik van laptop, tablet of PC worden aanbevolen)</span>
+        </div>
       </div>
       <div class="contact-info">
         <a href="mailto:info@mnrv.nl">info@mnrv.nl</a>
