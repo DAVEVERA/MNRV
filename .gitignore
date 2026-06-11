@@ -2,6 +2,7 @@
 node_modules/
 .claude/
 assets/windows-95-ui-kit/
+TheDaveGame/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
