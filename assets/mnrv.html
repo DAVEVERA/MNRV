@@ -2280,11 +2280,12 @@ initWerkShowcase();
   }
 
   function scheduleNext() {
-    var delay = 11000 + Math.floor(Math.random() * 2000); // 11-13 seconden
+    var delay = 5000 + Math.floor(Math.random() * 3000); // 5-8 seconden
     setTimeout(flicker, delay);
   }
 
-  scheduleNext();
+  // Eerste flikkering na 2-3 seconden
+  setTimeout(flicker, 2000 + Math.floor(Math.random() * 1000));
 })();
 </script>
 </body>
