@@ -1523,10 +1523,10 @@
   /* HERO BAND */
   .over-hero {
     display: grid;
-    grid-template-columns: 55% 45%;
-    gap: 56px;
-    align-items: center;
-    margin-bottom: 72px;
+    grid-template-columns: 1fr 34%;
+    gap: 52px;
+    align-items: start;
+    margin-bottom: 64px;
   }
   .over-hero-text {
     padding-top: 0;
@@ -1548,32 +1548,24 @@
     line-height: 1.72;
     color: rgba(255,255,255,0.62);
     font-weight: 300;
-    max-width: 560px;
+    margin: 0 0 18px;
+  }
+  .over-hero-body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.48);
+    font-weight: 300;
     margin: 0;
   }
   .over-hero-image {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
   .over-hero-image img {
     width: 100%;
     height: auto;
     display: block;
   }
-
-  /* INTRO BLOCK */
-  .over-intro {
-    max-width: 780px;
-    margin-bottom: 64px;
-  }
-  .over-intro p {
-    font-size: 16px;
-    line-height: 1.78;
-    color: rgba(255,255,255,0.65);
-    font-weight: 300;
-    margin: 0 0 16px;
-  }
-  .over-intro p:last-child { margin-bottom: 0; }
 
   /* SECTION LABEL */
   .over-section-label {
@@ -1777,8 +1769,8 @@
 
   @media (max-width: 900px) {
     .over { padding: 80px 24px; }
-    .over-hero { grid-template-columns: 1fr; gap: 36px; }
-    .over-hero-image { max-width: 100%; }
+    .over-hero { grid-template-columns: 1fr; gap: 32px; }
+    .over-hero-image { max-width: 380px; }
     .over-builds { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
     .over-ai-gov { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
   }
@@ -2081,15 +2073,11 @@
       <p class="section-eyebrow">Over MNRV</p>
       <h2 class="over-headline">De kracht van design, development en AI onder één dak.</h2>
       <p class="over-hero-lead">MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten. Wij zijn een compact en slagvaardig team van specialisten die operations, design, development en AI samenbrengen in één geïntegreerde aanpak.</p>
+      <p class="over-hero-body">Wat ons onderscheidt, is dat we niet denken vanuit losse disciplines, maar vanuit het geheel. De beste digitale oplossingen ontstaan namelijk niet wanneer strategie, processen, design en techniek afzonderlijk van elkaar worden ontwikkeld, maar wanneer ze vanaf het begin als één ecosysteem worden ontworpen.</p>
     </div>
     <div class="over-hero-image">
       <img src="Andrew%20Dave.png" alt="Andrew en Dave, MNRV" loading="lazy">
     </div>
-  </div>
-
-  <!-- INTRO -->
-  <div class="over-intro">
-    <p>Wat ons onderscheidt, is dat we niet denken vanuit losse disciplines, maar vanuit het geheel. De beste digitale oplossingen ontstaan namelijk niet wanneer strategie, processen, design en techniek afzonderlijk van elkaar worden ontwikkeld, maar wanneer ze vanaf het begin als één ecosysteem worden ontworpen.</p>
   </div>
 
   <!-- TEAM -->
