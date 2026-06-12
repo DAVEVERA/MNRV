@@ -88,12 +88,15 @@
   }
 
   .nav-logo {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    letter-spacing: 0.12em;
-    color: var(--abyss);
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
+  }
+
+  .nav-logo img {
+    display: block;
+    width: 92px;
+    height: auto;
   }
 
   .nav-cta {
@@ -442,6 +445,24 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
+  }
+
+  .diensten-intro {
+    max-width: 900px;
+    margin: -34px 0 56px;
+    color: #fff;
+  }
+
+  .diensten-intro p {
+    font-size: 17px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .diensten-intro strong {
+    font-weight: 500;
+    color: #fff;
   }
 
   .dienst-card {
@@ -1248,11 +1269,15 @@
   }
 
   .footer-logo {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.35);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-logo img {
+    display: block;
+    width: 76px;
+    height: auto;
+    opacity: 0.42;
   }
 
   .footer-copy {
@@ -1682,7 +1707,9 @@
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">MNRV</a>
+  <a href="#" class="nav-logo" aria-label="MNRV">
+    <img src="MNRVLOGO.png" alt="MNRV">
+  </a>
   <a href="#contact" class="nav-cta">Start project</a>
 </nav>
 
@@ -1806,6 +1833,43 @@
 <section class="diensten" id="diensten">
   <p class="section-eyebrow">Wat ik bouw</p>
   <h2 class="section-title">Case<br>Studies.</h2>
+  <div class="diensten-intro">
+    <p>
+      MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten.
+      MNRV is een compact en slagvaardig team van makers, bouwers en denkers die
+      design, development en AI samenbrengen in één geïntegreerde aanpak.
+    </p>
+    <p>
+      Als <strong>oprichter van MNRV</strong> ben ik nauw betrokken bij elk project.
+      Niet vanaf de zijlijn, maar inhoudelijk: van strategie en concept tot architectuur,
+      uitvoering en doorontwikkeling. Samen met Andrew, Arpit, Rick en Stefan bouwen we
+      digitale oplossingen waarin techniek, ontwerp en kunstmatige intelligentie elkaar versterken.
+    </p>
+    <p>
+      Wij ontwikkelen websites, apps, webshops en AI-oplossingen waarin technologie niet
+      achteraf wordt toegevoegd, maar vanaf de basis slim wordt ingebouwd. Denk aan
+      converterende interfaces, schaalbare digitale platforms, AI-flows, automatiseringen
+      en agents die processen versnellen, werk uit handen nemen en klantinteractie slimmer maken.
+    </p>
+    <p>
+      Ons werk beweegt op het snijvlak van <strong>mens en machine</strong>. We ontwerpen
+      digitale ervaringen die logisch, helder en overtuigend voelen voor gebruikers, terwijl
+      onder de motorkap slimme technologie het verschil maakt. Websites die niet alleen mooi
+      zijn, maar converteren. Apps die niet alleen functioneren, maar processen vereenvoudigen.
+      AI-agents die niet alleen antwoorden geven, maar daadwerkelijk taken uitvoeren.
+    </p>
+    <p>
+      Waar traditionele trajecten vaak bestaan uit losse afdelingen voor strategie, design,
+      development en automatisering, brengt MNRV die disciplines samen in één duidelijke lijn.
+      We denken mee over de kern van de oplossing, vertalen die naar een sterke
+      gebruikerservaring, bouwen een solide technische basis en integreren AI waar het waarde toevoegt.
+    </p>
+    <p>
+      Geen losse onderdelen. Geen onnodige tussenlagen. Geen standaardoplossing met een
+      AI-label erop geplakt. Wel één samenhangend digitaal geheel, gebouwd door een team
+      dat begrijpt hoe strategie, design, development en AI elkaar moeten versterken.
+    </p>
+  </div>
   <div class="diensten-grid">
     <div class="dienst-card">
       <p class="dienst-num">01 / Web</p>
@@ -2039,7 +2103,9 @@
 </div>
 
 <footer>
-  <span class="footer-logo">MNRV</span>
+  <span class="footer-logo">
+    <img src="MNRVLOGO.png" alt="MNRV">
+  </span>
   <div class="footer-socials" aria-label="Social media">
     <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="Instagram">
       <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>

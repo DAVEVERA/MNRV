@@ -1795,8 +1795,8 @@ a {
       left: 50%;
       top: calc(50% + 18px);
       z-index: 100002;
-      width: clamp(98px, 11vw, 138px);
-      aspect-ratio: 1;
+      width: clamp(118px, 13vw, 158px);
+      aspect-ratio: 3 / 2;
       padding: 14px;
       transform: translate(-50%, -50%);
       display: flex;
@@ -1806,7 +1806,7 @@ a {
       gap: 8px;
       background: rgba(21,21,21,0.84);
       border: 1px solid rgba(255,250,242,0.22);
-      border-radius: 999px;
+      border-radius: 18px;
       box-shadow: 0 24px 80px rgba(20,18,15,0.28);
       pointer-events: none;
     }
@@ -1818,7 +1818,7 @@ a {
       transform: rotate(-18deg) scaleX(1.18);
     }
     .landing-center-mark img {
-      width: min(58px, 42vw);
+      width: min(86px, 58vw);
       height: auto;
       image-rendering: auto;
       filter: drop-shadow(0 8px 18px rgba(0,0,0,0.34));
