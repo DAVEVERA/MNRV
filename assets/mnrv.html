@@ -81,6 +81,8 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    opacity: 0.18;
+    will-change: transform;
   }
 
   /* NAV */
@@ -2207,7 +2209,10 @@ function updateShiftText() {
   });
 }
 
-window.addEventListener('scroll', onScroll, { passive: true });
+let _sTick = false;
+window.addEventListener('scroll', () => {
+  if (!_sTick) { requestAnimationFrame(() => { onScroll(); _sTick = false; }); _sTick = true; }
+}, { passive: true });
 onScroll();
 
 function initSocialFlyout() {
@@ -2513,8 +2518,15 @@ const canvas = document.getElementById('liquid-bg');
 const app = LiquidBackground(canvas);
 app.liquidPlane.material.metalness = 0.72;
 app.liquidPlane.material.roughness = 0.28;
-app.liquidPlane.uniforms.displacementScale.value = 3.5;
+app.liquidPlane.uniforms.displacementScale.value = 1.2;
 app.setRain(false);
+// Cap device pixel ratio to 1 — biggest single GPU win (4× less work on retina)
+if (app.renderer) app.renderer.setPixelRatio(1);
+// Pause WebGL loop when tab hidden, resume on return
+document.addEventListener('visibilitychange', () => {
+  if (!app.renderer) return;
+  app.renderer.setAnimationLoop(document.hidden ? null : () => app.renderer.render(app.scene, app.camera));
+});
 </script>
 
 </body>
