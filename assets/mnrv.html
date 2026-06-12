@@ -1553,27 +1553,11 @@
   }
   .over-hero-image {
     position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.10);
-    box-shadow:
-      0 32px 80px rgba(0,0,0,0.48),
-      0 0 0 1px rgba(255,255,255,0.06) inset;
   }
   .over-hero-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
+    height: auto;
     display: block;
-    aspect-ratio: 4 / 3;
-  }
-  .over-hero-image::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, rgba(8,12,18,0.55) 100%);
-    pointer-events: none;
   }
 
   /* INTRO BLOCK */
