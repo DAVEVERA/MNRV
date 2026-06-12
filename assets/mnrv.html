@@ -104,12 +104,31 @@
     display: inline-flex;
     align-items: center;
     text-decoration: none;
+    gap: 2px;
   }
 
-  .nav-logo img {
-    display: block;
-    width: 136px;
-    height: auto;
+  .logo-letter {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 1;
+    display: inline-block;
+    background: linear-gradient(175deg, #F8CC48 0%, #E88B08 28%, #BC5008 60%, #D4840A 80%, #F5BE2A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .logo-letter:nth-child(1) { transition-delay: 0ms; }
+  .logo-letter:nth-child(2) { transition-delay: 35ms; }
+  .logo-letter:nth-child(3) { transition-delay: 70ms; }
+  .logo-letter:nth-child(4) { transition-delay: 105ms; }
+
+  .nav-logo:hover .logo-letter {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 5px 10px rgba(210,120,8,0.6));
   }
 
   .nav-cta {
@@ -1403,7 +1422,7 @@
   @media (max-width: 560px) {
     body > nav { gap: 12px; }
     .nav-logo { flex: 0 0 auto; }
-    .nav-logo img { width: 108px; }
+    .logo-letter { font-size: 36px; }
     .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
     .hero { padding: 96px 16px 48px; }
     .werk { padding-left: 16px; padding-right: 16px; }
@@ -1706,7 +1725,10 @@
 
 <nav>
   <a href="#" class="nav-logo" aria-label="MNRV">
-    <img src="MNRVLOGO.png" alt="MNRV">
+    <span class="logo-letter">M</span>
+    <span class="logo-letter">N</span>
+    <span class="logo-letter">R</span>
+    <span class="logo-letter">V</span>
   </a>
   <a href="#contact" class="nav-cta">Start project</a>
 </nav>
