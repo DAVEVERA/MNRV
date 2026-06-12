@@ -1503,110 +1503,309 @@
 
   /* OVER */
   .over {
-    padding: 120px 48px;
-  }
-  .over-layout {
-    display: block;
-    max-width: 720px;
-  }
-  .over-portret {
+    padding: 100px 48px 120px;
     position: relative;
-    overflow: visible;
-    background: transparent;
-    aspect-ratio: 450 / 576;
+    isolation: isolate;
+    color: #fff;
   }
-  .over-portret svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: relative;
-    z-index: 1;
-    /* diepte: gelaagde slagschaduw zodat de foto loskomt van de gradient */
-    filter:
-      drop-shadow(0 2px 4px rgba(11,14,19,0.22))
-      drop-shadow(0 12px 28px rgba(11,14,19,0.30))
-      drop-shadow(0 30px 60px rgba(11,14,19,0.28));
-  }
-  /* zachte grondschaduw / contactvlak onder de foto */
-  .over-portret::after {
+  .over::before {
     content: '';
     position: absolute;
-    left: 12%;
-    right: 12%;
-    bottom: -2%;
-    height: 7%;
-    background: radial-gradient(ellipse at center, rgba(11,14,19,0.40) 0%, rgba(11,14,19,0) 70%);
-    filter: blur(6px);
-    z-index: 0;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(165deg,
+      rgba(8,12,18,0.82) 0%,
+      rgba(14,22,32,0.88) 40%,
+      rgba(10,16,24,0.84) 100%);
     pointer-events: none;
   }
-  .over-text .section-eyebrow { color: var(--abyss); opacity: 0.5; }
-  .over-text .section-title { margin-bottom: 32px; }
-  .over-text p {
-    font-size: 17px;
-    line-height: 1.7;
+
+  /* HERO BAND */
+  .over-hero {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 56px;
+    align-items: end;
+    margin-bottom: 72px;
+  }
+  .over-hero-text {
+    padding-top: 16px;
+  }
+  .over-hero-text .section-eyebrow {
+    color: rgba(255,255,255,0.45);
+  }
+  .over-headline {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(30px, 4vw, 58px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
     color: #fff;
+    margin: 8px 0 28px;
+  }
+  .over-hero-lead {
+    font-size: 16px;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.62);
     font-weight: 300;
-    margin-bottom: 20px;
-    max-width: 900px;
+    max-width: 560px;
+    margin: 0;
   }
-  .over-text p strong { font-weight: 500; color: #fff; }
-  /* tekst die meebeweegt met de scroll: marineblauw -> wit */
-  .shift-text {
-    color: var(--shift-color, #1B2A3A);
-    transition: color 0.2s linear;
+  .over-hero-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow:
+      0 32px 80px rgba(0,0,0,0.48),
+      0 0 0 1px rgba(255,255,255,0.06) inset;
   }
-  .over-sign {
+  .over-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    aspect-ratio: 4 / 3;
+  }
+  .over-hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(8,12,18,0.55) 100%);
+    pointer-events: none;
+  }
+
+  /* INTRO BLOCK */
+  .over-intro {
+    max-width: 780px;
+    margin-bottom: 64px;
+  }
+  .over-intro p {
+    font-size: 16px;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    margin: 0 0 16px;
+  }
+  .over-intro p:last-child { margin-bottom: 0; }
+
+  /* SECTION LABEL */
+  .over-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #FFB162;
+    margin: 0 0 28px;
+  }
+
+  /* TEAM GRID */
+  .over-team { margin-bottom: 64px; }
+  .over-team-primary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .over-team-secondary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .over-person-card {
+    padding: 36px 32px;
+    background: rgba(255,255,255,0.033);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 0;
+    transition: background 0.22s;
+  }
+  .over-person-card:first-child { border-radius: 10px 0 0 0; }
+  .over-person-card:nth-child(2) { border-radius: 0 10px 0 0; }
+  .over-team-secondary .over-person-card:first-child { border-radius: 0 0 0 10px; }
+  .over-team-secondary .over-person-card:last-child { border-radius: 0 0 10px 0; }
+  .over-person-card:hover { background: rgba(255,255,255,0.058); }
+
+  .over-person-role {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #FFB162;
+    margin: 0 0 12px;
+  }
+  .over-person-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 14px;
+    line-height: 1.1;
+  }
+  .over-team-secondary .over-person-name { font-size: 18px; }
+  .over-person-desc {
+    font-size: 14px;
+    line-height: 1.68;
+    color: rgba(255,255,255,0.52);
+    font-weight: 300;
+    margin: 0;
+  }
+  .over-team-secondary .over-person-desc { font-size: 13px; }
+  .over-person-strength {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.38);
+    font-style: italic;
+    font-weight: 300;
+    border-left: 2px solid rgba(255,177,98,0.35);
+    padding-left: 14px;
+  }
+  .over-team-secondary .over-person-strength { display: none; }
+
+  /* BUILDS BLOCK */
+  .over-builds {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-bottom: 64px;
+    padding: 48px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+  }
+  .over-builds-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .over-builds-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .over-builds-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .over-builds-grid li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.70);
+    font-weight: 400;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 6px;
+  }
+  .over-builds-grid li::before {
+    content: '→';
+    color: #FFB162;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* AI GOVERNANCE BLOCK */
+  .over-ai-gov {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 52px 48px;
+    background: rgba(61,90,110,0.15);
+    border: 1px solid rgba(61,90,110,0.28);
+    border-radius: 10px;
+    margin-bottom: 64px;
+  }
+  .over-ai-gov-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+  }
+  .over-ai-gov p {
+    font-size: 14px;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.58);
+    font-weight: 300;
+    margin: 0 0 14px;
+  }
+  .over-ai-gov p:last-child { margin-bottom: 0; }
+  .over-ai-gov strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+  .over-ai-gov-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin: 0 0 14px;
+  }
+  .over-ai-why-heading {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--shift-color, #1B2A3A);
-    margin-top: 28px;
-    transition: color 0.2s linear;
+    color: #fff;
+    margin: 0 0 12px;
   }
-  .over-sign span {
-    display: block;
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
+
+  /* CLOSING LINE */
+  .over-closing {
+    text-align: center;
+    padding: 48px 0 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .over-closing p {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 800;
+    color: rgba(255,255,255,0.72);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .over-closing small {
+    font-size: 11px;
+    color: rgba(255,255,255,0.30);
     font-weight: 400;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--shift-color, #1B2A3A);
-    opacity: 0.75;
-    margin-top: 4px;
-    transition: color 0.2s linear;
   }
+
+  /* shift-text kept for JS compatibility */
+  .shift-text { color: #fff; }
+
   @media (max-width: 900px) {
     .over { padding: 80px 24px; }
-    .over-layout { grid-template-columns: 1fr; gap: 32px; }
-    /* foto niet langer standalone: bijgesneden band zodat er tekst naast/onder past */
-    .over-portret {
-      aspect-ratio: auto;
-      height: 240px;
-      max-width: none;
-      margin: 0;
-      overflow: hidden;
-      -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
-      mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
-    }
-    .over-portret svg {
-      width: 70%;
-      height: auto;
-      /* toon ongeveer de bovenste helft (gezicht/torso), rest valt buiten de band */
-      position: absolute;
-      top: -6%;
-      left: 0;
-      filter:
-        drop-shadow(0 2px 4px rgba(11,14,19,0.22))
-        drop-shadow(0 10px 24px rgba(11,14,19,0.30));
-    }
-    .over-portret::after { display: none; }
-    .over-text { margin-top: -8px; }
+    .over-hero { grid-template-columns: 1fr; gap: 36px; }
+    .over-hero-image { max-width: 420px; }
+    .over-builds { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
+    .over-ai-gov { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
   }
   @media (max-width: 560px) {
-    .over-portret { height: 200px; }
-    .over-portret svg { width: 58%; }
+    .over-team-primary, .over-team-secondary { grid-template-columns: 1fr; }
+    .over-person-card:first-child { border-radius: 10px 10px 0 0; }
+    .over-person-card:nth-child(2) { border-radius: 0; }
+    .over-team-secondary .over-person-card:first-child { border-radius: 0; }
+    .over-team-secondary .over-person-card:last-child { border-radius: 0 0 10px 10px; }
+    .over-builds-grid { grid-template-columns: 1fr; }
+    .over-hero { gap: 24px; }
+    .over-headline { margin-bottom: 18px; }
   }
 
   /* MODAL */
@@ -1890,51 +2089,92 @@
 
 <!-- OVER -->
 <section class="over" id="over">
-  <div class="over-layout">
-    <div class="over-text">
+
+  <!-- HERO: headline + team image -->
+  <div class="over-hero">
+    <div class="over-hero-text">
       <p class="section-eyebrow">Over MNRV</p>
-      <h2 class="section-title">Eén maker voor design, development en AI.</h2>
-      <p>
-        MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten.
-        MNRV is een compact en slagvaardig team van makers, bouwers en denkers die
-        design, development en AI samenbrengen in één geïntegreerde aanpak.
-      </p>
-      <p>
-        Als <strong>oprichter van MNRV</strong> ben ik nauw betrokken bij elk project.
-        Niet vanaf de zijlijn, maar inhoudelijk: van strategie en concept tot architectuur,
-        uitvoering en doorontwikkeling. Samen met Andrew, Arpit, Rick en Stefan bouwen we
-        digitale oplossingen waarin techniek, ontwerp en kunstmatige intelligentie elkaar versterken.
-      </p>
-      <p>
-        Wij ontwikkelen websites, apps, webshops en AI-oplossingen waarin technologie niet
-        achteraf wordt toegevoegd, maar vanaf de basis slim wordt ingebouwd. Denk aan
-        converterende interfaces, schaalbare digitale platforms, AI-flows, automatiseringen
-        en agents die processen versnellen, werk uit handen nemen en klantinteractie slimmer maken.
-      </p>
-      <p>
-        Ons werk beweegt op het snijvlak van <strong>mens en machine</strong>. We ontwerpen
-        digitale ervaringen die logisch, helder en overtuigend voelen voor gebruikers, terwijl
-        onder de motorkap slimme technologie het verschil maakt. Websites die niet alleen mooi
-        zijn, maar converteren. Apps die niet alleen functioneren, maar processen vereenvoudigen.
-        AI-agents die niet alleen antwoorden geven, maar daadwerkelijk taken uitvoeren.
-      </p>
-      <p>
-        Waar traditionele trajecten vaak bestaan uit losse afdelingen voor strategie, design,
-        development en automatisering, brengt MNRV die disciplines samen in één duidelijke lijn.
-        We denken mee over de kern van de oplossing, vertalen die naar een sterke
-        gebruikerservaring, bouwen een solide technische basis en integreren AI waar het waarde toevoegt.
-      </p>
-      <p>
-        Geen losse onderdelen. Geen onnodige tussenlagen. Geen standaardoplossing met een
-        AI-label erop geplakt. Wel één samenhangend digitaal geheel, gebouwd door een team
-        dat begrijpt hoe strategie, design, development en AI elkaar moeten versterken.
-      </p>
-      <p class="over-sign">
-        Dit is de toegevoegde waarde.
-        <span>Dave Vera · Founder, MNRV</span>
-      </p>
+      <h2 class="over-headline">De kracht van design, development en AI onder één dak.</h2>
+      <p class="over-hero-lead">MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten. Wij zijn een compact en slagvaardig team van specialisten die operations, design, development en AI samenbrengen in één geïntegreerde aanpak.</p>
+    </div>
+    <div class="over-hero-image">
+      <img src="Andrew%20Dave.png" alt="Andrew en Dave, MNRV" loading="lazy">
     </div>
   </div>
+
+  <!-- INTRO -->
+  <div class="over-intro">
+    <p>Wat ons onderscheidt, is dat we niet denken vanuit losse disciplines, maar vanuit het geheel. De beste digitale oplossingen ontstaan namelijk niet wanneer strategie, processen, design en techniek afzonderlijk van elkaar worden ontwikkeld, maar wanneer ze vanaf het begin als één ecosysteem worden ontworpen.</p>
+  </div>
+
+  <!-- TEAM -->
+  <div class="over-team">
+    <p class="over-section-label">De mensen achter MNRV</p>
+    <div class="over-team-primary">
+      <div class="over-person-card">
+        <p class="over-person-role">Chef Speciale</p>
+        <h3 class="over-person-name">Andrew</h3>
+        <p class="over-person-desc">Specialist in supply chain automation, operations en customer excellence. Hij kijkt naar processen, klantreizen, efficiëntie en schaalbaarheid. Waar anderen complexiteit zien, ziet hij kansen om processen slimmer, sneller en beter te organiseren.</p>
+        <p class="over-person-strength">Zijn kracht ligt in het verbinden van operatie, automatisering en klantbeleving tot één samenwerkend geheel.</p>
+      </div>
+      <div class="over-person-card">
+        <p class="over-person-role">AI Architect &amp; Mid-Stack Developer</p>
+        <h3 class="over-person-name">Dave</h3>
+        <p class="over-person-desc">Waar strategie en processen vorm krijgen, zorgt hij ervoor dat ideeën daadwerkelijk werkelijkheid worden. Van architectuur en softwareontwikkeling tot AI-integraties en automatisering: Dave bouwt de oplossingen die gebruikers zien én de technologie die daarachter draait.</p>
+        <p class="over-person-strength">Niet alleen op papier, maar werkend, schaalbaar en klaar voor de praktijk.</p>
+      </div>
+    </div>
+    <div class="over-team-secondary">
+      <div class="over-person-card">
+        <p class="over-person-role">Development Partner</p>
+        <h3 class="over-person-name">Arpit</h3>
+        <p class="over-person-desc">Bij grotere projecten schakelen we graag de expertise van Arpit in. Als ervaren developer vormt hij een waardevolle uitbreiding van het team en helpt hij complexe oplossingen sneller en efficiënter realiseren.</p>
+      </div>
+      <div class="over-person-card">
+        <p class="over-person-role">Grafisch Vormgever</p>
+        <h3 class="over-person-name">Rick</h3>
+        <p class="over-person-desc">Rick vertaalt complexe ideeën, AI-modellen en technische functionaliteiten naar intuïtieve, gebruiksvriendelijke interfaces. Hij helpt ons om configurators, dashboards en digitale ervaringen niet alleen slim te maken, maar ook begrijpelijk en toegankelijk.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAT WE BOUWEN -->
+  <div class="over-builds">
+    <div>
+      <h3 class="over-builds-heading">Wat we bouwen</h3>
+      <p class="over-builds-sub">Technologie die niet achteraf wordt toegevoegd, maar vanaf de basis slim wordt geïntegreerd.</p>
+    </div>
+    <ul class="over-builds-grid">
+      <li>Intelligente configurators</li>
+      <li>AI-agents &amp; automatiseringen</li>
+      <li>Websites &amp; webshops</li>
+      <li>Maatwerkplatformen</li>
+      <li>Geautomatiseerde bedrijfsprocessen</li>
+      <li>Digitale ervaringen voor groei</li>
+    </ul>
+  </div>
+
+  <!-- AI GOVERNANCE -->
+  <div class="over-ai-gov">
+    <div>
+      <p class="over-ai-gov-label">AI Governance &amp; Private AI</p>
+      <h3 class="over-ai-gov-heading">Mens en machine in balans</h3>
+      <p>Ons werk bevindt zich op het snijvlak van mens en machine. We bouwen oplossingen die logisch voelen voor gebruikers, terwijl onder de motorkap geavanceerde technologie het zware werk doet.</p>
+      <p>Geen AI om de AI, geen standaardoplossingen met een modern label, maar technologie die aantoonbaar waarde toevoegt.</p>
+    </div>
+    <div>
+      <h4 class="over-ai-why-heading">Waarom AI Governance belangrijk is</h4>
+      <p>Met de komst van de AI Act, strengere eisen rondom governance en GDPR wordt het steeds belangrijker om grip te houden op data, modellen en processen. Daarom ontwikkelen en implementeren wij waar mogelijk lokale AI-oplossingen en private LLM's die draaien binnen de eigen infrastructuur van een organisatie.</p>
+      <p><strong>Faciliteren kun je leren:</strong> door de juiste technologie, processen en begeleiding samen te brengen zorgen we ervoor dat AI niet alleen voldoet aan wet- en regelgeving, maar ook daadwerkelijk waarde toevoegt voor de mensen die ermee werken.</p>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="over-closing">
+    <p>Eén geïntegreerd ecosysteem.</p>
+    <small>Strategie · Operations · Design · Development · AI</small>
+  </div>
+
 </section>
 
 <!-- WERK -->
