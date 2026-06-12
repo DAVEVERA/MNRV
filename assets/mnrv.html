@@ -72,6 +72,17 @@
     transition: background 0.05s linear;
   }
 
+  /* LIQUID BACKGROUND */
+  #liquid-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.25;
+  }
+
   /* NAV */
   body > nav {
     position: fixed;
@@ -1710,6 +1721,8 @@
 </head>
 <body>
 
+<canvas id="liquid-bg"></canvas>
+
 <nav>
   <a href="#" class="nav-logo" aria-label="MNRV">
     <span class="logo-letter">M</span>
@@ -2493,5 +2506,16 @@ initWerkShowcase();
   setTimeout(flicker, 2000 + Math.floor(Math.random() * 1000));
 })();
 </script>
+
+<script type="module">
+import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.27/build/backgrounds/liquid1.min.js';
+const canvas = document.getElementById('liquid-bg');
+const app = LiquidBackground(canvas);
+app.liquidPlane.material.metalness = 0.72;
+app.liquidPlane.material.roughness = 0.28;
+app.liquidPlane.uniforms.displacementScale.value = 3.5;
+app.setRain(false);
+</script>
+
 </body>
 </html>
