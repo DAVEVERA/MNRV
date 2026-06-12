@@ -81,7 +81,7 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.18;
+    opacity: 0.10;
     will-change: transform;
   }
 
@@ -1279,9 +1279,14 @@
     padding: 40px 48px;
     border-top: 1px solid rgba(238,233,223,0.08);
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     gap: 24px;
     align-items: center;
+  }
+
+  .footer-trustpilot {
+    align-self: center;
+    min-width: 160px;
   }
 
   .footer-logo {
@@ -1389,6 +1394,7 @@
     .form-row { grid-template-columns: 1fr; }
     .hero-bg-num { display: none; }
     footer { padding: 32px 24px; grid-template-columns: 1fr; gap: 14px; text-align: center; }
+    .footer-trustpilot { margin: 0 auto; }
     .footer-legal { gap: 8px 14px; padding-top: 2px; }
     .social-flyout {
       left: 14px;
@@ -1720,6 +1726,9 @@
 </style>
   <link rel="stylesheet" href="../components/cookie-banner.css">
   <script src="../components/cookie-banner.js" defer></script>
+  <!-- TrustBox script -->
+  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+  <!-- End TrustBox script -->
 </head>
 <body>
 
@@ -2133,6 +2142,17 @@
       <svg aria-hidden="true"><use href="#icon-mail"></use></svg>
     </a>
   </div>
+  <!-- TrustBox widget - Review Collector -->
+  <div class="footer-trustpilot trustpilot-widget"
+    data-locale="nl-NL"
+    data-template-id="56278e9abfbbba0bdcd568bc"
+    data-businessunit-id="6a2c2e3fbd8ef9bede041276"
+    data-style-height="40px"
+    data-style-width="100%"
+    data-token="e6acc674-401c-40e7-a158-29c7e5882af0">
+    <a href="https://nl.trustpilot.com/review/mnrv.nl" target="_blank" rel="noopener">Trustpilot</a>
+  </div>
+  <!-- End TrustBox widget -->
   <span class="footer-copy">© 2025 MNRV / Dave Vera — mnrv.nl</span>
   <nav class="footer-legal" aria-label="Juridische documenten MNRV">
     <a href="Documenten/MNRV_Privacyverklaring_12-06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">Privacyverklaring</a>
