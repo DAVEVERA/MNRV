@@ -72,6 +72,20 @@
     transition: background 0.05s linear;
   }
 
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url('wolkeninlengte.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.12;
+    mix-blend-mode: luminosity;
+    pointer-events: none;
+  }
+
   /* NAV */
   body > nav {
     position: fixed;
@@ -95,7 +109,7 @@
 
   .nav-logo img {
     display: block;
-    width: 92px;
+    width: 136px;
     height: auto;
   }
 
@@ -1390,6 +1404,7 @@
   @media (max-width: 560px) {
     body > nav { gap: 12px; }
     .nav-logo { flex: 0 0 auto; }
+    .nav-logo img { width: 108px; }
     .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
     .hero { padding: 96px 16px 48px; }
     .werk { padding-left: 16px; padding-right: 16px; }
