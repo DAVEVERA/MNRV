@@ -1520,46 +1520,37 @@
     pointer-events: none;
   }
 
-  /* HERO BAND */
+  /* HERO */
   .over-hero {
     display: grid;
-    grid-template-columns: 1fr 34%;
-    gap: 52px;
+    grid-template-columns: 1fr 300px;
+    gap: 64px;
     align-items: start;
-    margin-bottom: 64px;
+    margin-bottom: 88px;
   }
-  .over-hero-text {
-    padding-top: 0;
-  }
-  .over-hero-text .section-eyebrow {
-    color: rgba(255,255,255,0.45);
-  }
+  .over-hero-text .section-eyebrow { color: rgba(255,255,255,0.38); }
   .over-headline {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(30px, 4vw, 58px);
+    font-size: clamp(26px, 3.2vw, 48px);
     font-weight: 800;
-    line-height: 1.04;
+    line-height: 1.06;
     letter-spacing: -0.02em;
     color: #fff;
-    margin: 8px 0 28px;
+    margin: 8px 0 22px;
   }
   .over-hero-lead {
     font-size: 16px;
-    line-height: 1.72;
-    color: rgba(255,255,255,0.62);
+    line-height: 1.78;
+    color: rgba(255,255,255,0.58);
     font-weight: 300;
-    margin: 0 0 18px;
+    margin: 0 0 16px;
   }
   .over-hero-body {
     font-size: 15px;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.48);
+    line-height: 1.78;
+    color: rgba(255,255,255,0.38);
     font-weight: 300;
     margin: 0;
-  }
-  .over-hero-image {
-    display: flex;
-    align-items: flex-start;
   }
   .over-hero-image img {
     width: 100%;
@@ -1567,222 +1558,185 @@
     display: block;
   }
 
-  /* SECTION LABEL */
+  /* TEAM — editorial rows */
+  .over-team { margin-bottom: 72px; }
   .over-section-label {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #FFB162;
-    margin: 0 0 28px;
+    margin: 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
   }
-
-  /* TEAM GRID */
-  .over-team { margin-bottom: 64px; }
-  .over-team-primary {
+  .over-team-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-bottom: 2px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .over-team-secondary {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
+  .over-person {
+    padding: 40px 48px 40px 0;
   }
-
-  .over-person-card {
-    padding: 36px 32px;
-    background: rgba(255,255,255,0.033);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 0;
-    transition: background 0.22s;
+  .over-team-row .over-person:last-child {
+    padding: 40px 0 40px 48px;
+    border-left: 1px solid rgba(255,255,255,0.06);
   }
-  .over-person-card:first-child { border-radius: 10px 0 0 0; }
-  .over-person-card:nth-child(2) { border-radius: 0 10px 0 0; }
-  .over-team-secondary .over-person-card:first-child { border-radius: 0 0 0 10px; }
-  .over-team-secondary .over-person-card:last-child { border-radius: 0 0 10px 0; }
-  .over-person-card:hover { background: rgba(255,255,255,0.058); }
-
   .over-person-role {
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #FFB162;
-    margin: 0 0 12px;
+    margin: 0 0 10px;
   }
   .over-person-name {
     font-family: 'Poppins', sans-serif;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 800;
     color: #fff;
     margin: 0 0 14px;
-    line-height: 1.1;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
   }
-  .over-team-secondary .over-person-name { font-size: 18px; }
+  .over-team-secondary .over-person-name { font-size: 22px; }
   .over-person-desc {
     font-size: 14px;
-    line-height: 1.68;
-    color: rgba(255,255,255,0.52);
+    line-height: 1.72;
+    color: rgba(255,255,255,0.48);
     font-weight: 300;
     margin: 0;
   }
-  .over-team-secondary .over-person-desc { font-size: 13px; }
   .over-person-strength {
-    margin-top: 14px;
+    margin-top: 16px;
     font-size: 13px;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.38);
+    line-height: 1.65;
+    color: rgba(255,255,255,0.28);
     font-style: italic;
     font-weight: 300;
-    border-left: 2px solid rgba(255,177,98,0.35);
-    padding-left: 14px;
   }
   .over-team-secondary .over-person-strength { display: none; }
 
-  /* BUILDS BLOCK */
+  /* BUILDS */
   .over-builds {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 56px;
-    align-items: start;
-    margin-bottom: 64px;
-    padding: 48px;
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 10px;
+    margin-bottom: 72px;
+    padding-top: 52px;
+    border-top: 1px solid rgba(255,255,255,0.07);
   }
   .over-builds-heading {
     font-family: 'Poppins', sans-serif;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 800;
     color: #fff;
-    line-height: 1.12;
+    margin: 0 0 6px;
     letter-spacing: -0.01em;
-    margin: 0 0 12px;
   }
   .over-builds-sub {
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
     font-weight: 300;
-    line-height: 1.6;
-    margin: 0;
+    margin: 0 0 28px;
   }
-  .over-builds-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 24px;
+  .over-builds-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .over-builds-grid li {
-    font-size: 14px;
-    color: rgba(255,255,255,0.70);
+  .over-builds-tags li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.58);
     font-weight: 400;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    line-height: 1.5;
-    padding: 12px 14px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 6px;
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    transition: border-color 0.18s, color 0.18s;
+    cursor: default;
   }
-  .over-builds-grid li::before {
-    content: '→';
+  .over-builds-tags li:hover {
+    border-color: rgba(255,177,98,0.4);
     color: #FFB162;
-    font-size: 12px;
-    flex-shrink: 0;
-    margin-top: 2px;
   }
 
-  /* AI GOVERNANCE BLOCK */
+  /* AI GOVERNANCE */
   .over-ai-gov {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    padding: 52px 48px;
-    background: rgba(61,90,110,0.15);
-    border: 1px solid rgba(61,90,110,0.28);
-    border-radius: 10px;
-    margin-bottom: 64px;
+    max-width: 680px;
+    margin-bottom: 72px;
+    padding-top: 52px;
+    border-top: 1px solid rgba(255,255,255,0.07);
   }
-  .over-ai-gov-heading {
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    font-weight: 800;
-    color: #fff;
-    margin: 0 0 16px;
-    letter-spacing: -0.01em;
-  }
-  .over-ai-gov p {
-    font-size: 14px;
-    line-height: 1.72;
-    color: rgba(255,255,255,0.58);
-    font-weight: 300;
-    margin: 0 0 14px;
-  }
-  .over-ai-gov p:last-child { margin-bottom: 0; }
-  .over-ai-gov strong { color: rgba(255,255,255,0.85); font-weight: 500; }
   .over-ai-gov-label {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--blue);
+    margin: 0 0 12px;
+  }
+  .over-ai-gov-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  .over-ai-gov p {
+    font-size: 15px;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
     margin: 0 0 14px;
   }
+  .over-ai-gov p:last-child { margin-bottom: 0; }
+  .over-ai-gov strong { color: rgba(255,255,255,0.78); font-weight: 500; }
   .over-ai-why-heading {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 700;
-    color: #fff;
-    margin: 0 0 12px;
+    color: rgba(255,255,255,0.75);
+    margin: 28px 0 10px;
   }
 
-  /* CLOSING LINE */
+  /* CLOSING */
   .over-closing {
-    text-align: center;
-    padding: 48px 0 0;
+    padding-top: 52px;
     border-top: 1px solid rgba(255,255,255,0.07);
   }
   .over-closing p {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(18px, 2.5vw, 28px);
+    font-size: clamp(20px, 2.8vw, 36px);
     font-weight: 800;
-    color: rgba(255,255,255,0.72);
-    margin: 0 0 6px;
+    color: rgba(255,255,255,0.6);
+    margin: 0 0 8px;
     letter-spacing: -0.01em;
   }
   .over-closing small {
     font-size: 11px;
-    color: rgba(255,255,255,0.30);
+    color: rgba(255,255,255,0.22);
     font-weight: 400;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
   }
 
-  /* shift-text kept for JS compatibility */
   .shift-text { color: #fff; }
 
   @media (max-width: 900px) {
-    .over { padding: 80px 24px; }
+    .over { padding: 72px 24px 96px; }
     .over-hero { grid-template-columns: 1fr; gap: 32px; }
-    .over-hero-image { max-width: 380px; }
-    .over-builds { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
-    .over-ai-gov { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
+    .over-hero-image { max-width: 320px; }
+    .over-team-row { grid-template-columns: 1fr; }
+    .over-person { padding: 32px 0; }
+    .over-team-row .over-person:last-child { padding: 32px 0; border-left: none; border-top: 1px solid rgba(255,255,255,0.05); }
   }
   @media (max-width: 560px) {
-    .over-team-primary, .over-team-secondary { grid-template-columns: 1fr; }
-    .over-person-card:first-child { border-radius: 10px 10px 0 0; }
-    .over-person-card:nth-child(2) { border-radius: 0; }
-    .over-team-secondary .over-person-card:first-child { border-radius: 0; }
-    .over-team-secondary .over-person-card:last-child { border-radius: 0 0 10px 10px; }
-    .over-builds-grid { grid-template-columns: 1fr; }
-    .over-hero { gap: 24px; }
-    .over-headline { margin-bottom: 18px; }
+    .over { padding: 56px 16px 72px; }
+    .over-headline { font-size: clamp(22px, 7vw, 36px); }
+    .over-person-name { font-size: 24px; }
+    .over-hero-image { max-width: 100%; }
+    .over-builds-tags li { font-size: 12px; padding: 7px 14px; }
   }
 
   /* MODAL */
@@ -2083,41 +2037,41 @@
   <!-- TEAM -->
   <div class="over-team">
     <p class="over-section-label">De mensen achter MNRV</p>
-    <div class="over-team-primary">
-      <div class="over-person-card">
+
+    <div class="over-team-row">
+      <div class="over-person">
         <p class="over-person-role">Chef Speciale</p>
         <h3 class="over-person-name">Andrew</h3>
-        <p class="over-person-desc">Specialist in supply chain automation, operations en customer excellence. Hij kijkt naar processen, klantreizen, efficiëntie en schaalbaarheid. Waar anderen complexiteit zien, ziet hij kansen om processen slimmer, sneller en beter te organiseren.</p>
+        <p class="over-person-desc">Specialist in supply chain automation, operations en customer excellence. Waar anderen complexiteit zien, ziet hij kansen om processen slimmer, sneller en beter te organiseren.</p>
         <p class="over-person-strength">Zijn kracht ligt in het verbinden van operatie, automatisering en klantbeleving tot één samenwerkend geheel.</p>
       </div>
-      <div class="over-person-card">
+      <div class="over-person">
         <p class="over-person-role">AI Architect &amp; Mid-Stack Developer</p>
         <h3 class="over-person-name">Dave</h3>
-        <p class="over-person-desc">Waar strategie en processen vorm krijgen, zorgt hij ervoor dat ideeën daadwerkelijk werkelijkheid worden. Van architectuur en softwareontwikkeling tot AI-integraties en automatisering: Dave bouwt de oplossingen die gebruikers zien én de technologie die daarachter draait.</p>
+        <p class="over-person-desc">Van architectuur en softwareontwikkeling tot AI-integraties en automatisering: Dave bouwt de oplossingen die gebruikers zien én de technologie die daarachter draait.</p>
         <p class="over-person-strength">Niet alleen op papier, maar werkend, schaalbaar en klaar voor de praktijk.</p>
       </div>
     </div>
-    <div class="over-team-secondary">
-      <div class="over-person-card">
+
+    <div class="over-team-row over-team-secondary">
+      <div class="over-person">
         <p class="over-person-role">Development Partner</p>
         <h3 class="over-person-name">Arpit</h3>
-        <p class="over-person-desc">Bij grotere projecten schakelen we graag de expertise van Arpit in. Als ervaren developer vormt hij een waardevolle uitbreiding van het team en helpt hij complexe oplossingen sneller en efficiënter realiseren.</p>
+        <p class="over-person-desc">Bij grotere projecten schakelen we graag de expertise van Arpit in — een waardevolle uitbreiding die complexe oplossingen sneller en efficiënter realiseert.</p>
       </div>
-      <div class="over-person-card">
+      <div class="over-person">
         <p class="over-person-role">Grafisch Vormgever</p>
         <h3 class="over-person-name">Rick</h3>
-        <p class="over-person-desc">Rick vertaalt complexe ideeën, AI-modellen en technische functionaliteiten naar intuïtieve, gebruiksvriendelijke interfaces. Hij helpt ons om configurators, dashboards en digitale ervaringen niet alleen slim te maken, maar ook begrijpelijk en toegankelijk.</p>
+        <p class="over-person-desc">Rick vertaalt complexe ideeën en AI-modellen naar intuïtieve interfaces. Hij maakt configurators en dashboards niet alleen slim, maar ook begrijpelijk en toegankelijk.</p>
       </div>
     </div>
   </div>
 
   <!-- WAT WE BOUWEN -->
   <div class="over-builds">
-    <div>
-      <h3 class="over-builds-heading">Wat we bouwen</h3>
-      <p class="over-builds-sub">Technologie die niet achteraf wordt toegevoegd, maar vanaf de basis slim wordt geïntegreerd.</p>
-    </div>
-    <ul class="over-builds-grid">
+    <h3 class="over-builds-heading">Wat we bouwen</h3>
+    <p class="over-builds-sub">Technologie die niet achteraf wordt toegevoegd, maar vanaf de basis slim wordt geïntegreerd.</p>
+    <ul class="over-builds-tags">
       <li>Intelligente configurators</li>
       <li>AI-agents &amp; automatiseringen</li>
       <li>Websites &amp; webshops</li>
@@ -2129,17 +2083,12 @@
 
   <!-- AI GOVERNANCE -->
   <div class="over-ai-gov">
-    <div>
-      <p class="over-ai-gov-label">AI Governance &amp; Private AI</p>
-      <h3 class="over-ai-gov-heading">Mens en machine in balans</h3>
-      <p>Ons werk bevindt zich op het snijvlak van mens en machine. We bouwen oplossingen die logisch voelen voor gebruikers, terwijl onder de motorkap geavanceerde technologie het zware werk doet.</p>
-      <p>Geen AI om de AI, geen standaardoplossingen met een modern label, maar technologie die aantoonbaar waarde toevoegt.</p>
-    </div>
-    <div>
-      <h4 class="over-ai-why-heading">Waarom AI Governance belangrijk is</h4>
-      <p>Met de komst van de AI Act, strengere eisen rondom governance en GDPR wordt het steeds belangrijker om grip te houden op data, modellen en processen. Daarom ontwikkelen en implementeren wij waar mogelijk lokale AI-oplossingen en private LLM's die draaien binnen de eigen infrastructuur van een organisatie.</p>
-      <p><strong>Faciliteren kun je leren:</strong> door de juiste technologie, processen en begeleiding samen te brengen zorgen we ervoor dat AI niet alleen voldoet aan wet- en regelgeving, maar ook daadwerkelijk waarde toevoegt voor de mensen die ermee werken.</p>
-    </div>
+    <p class="over-ai-gov-label">AI Governance &amp; Private AI</p>
+    <h3 class="over-ai-gov-heading">Mens en machine in balans</h3>
+    <p>Ons werk bevindt zich op het snijvlak van mens en machine. We bouwen oplossingen die logisch voelen voor gebruikers, terwijl onder de motorkap geavanceerde technologie het zware werk doet. Geen AI om de AI — maar technologie die aantoonbaar waarde toevoegt.</p>
+    <h4 class="over-ai-why-heading">Waarom AI Governance belangrijk is</h4>
+    <p>Met de komst van de AI Act en strengere GDPR-eisen wordt het steeds belangrijker om grip te houden op data, modellen en processen. Daarom implementeren wij waar mogelijk lokale AI-oplossingen en private LLM's die draaien binnen de eigen infrastructuur van een organisatie.</p>
+    <p><strong>Faciliteren kun je leren:</strong> door de juiste technologie, processen en begeleiding samen te brengen zorgen we ervoor dat AI niet alleen voldoet aan wet- en regelgeving, maar ook daadwerkelijk waarde toevoegt voor de mensen die ermee werken.</p>
   </div>
 
   <!-- CLOSING -->
