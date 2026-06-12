@@ -73,7 +73,7 @@
   }
 
   /* NAV */
-  nav {
+  body > nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
@@ -1334,7 +1334,7 @@
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    nav { padding: 18px 24px; }
+    body > nav { padding: 18px 24px; }
     .hero { padding: 110px 20px 60px; }
     .diensten, .werk, .contact { padding: 80px 24px; }
     .diensten-grid, .werk-grid { grid-template-columns: 1fr; }
@@ -1379,7 +1379,7 @@
     .hero-portret-wrap { max-height: 70vh; }
   }
   @media (max-width: 560px) {
-    nav { gap: 12px; }
+    body > nav { gap: 12px; }
     .nav-logo { flex: 0 0 auto; }
     .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
     .hero { padding: 96px 16px 48px; }
