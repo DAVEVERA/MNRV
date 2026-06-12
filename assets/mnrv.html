@@ -260,7 +260,8 @@
   }
 
   .hero-portret-img,
-  .hero-portret-digital {
+  .hero-portret-digital,
+  .hero-portret-lizard {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -276,7 +277,8 @@
       drop-shadow(6px 18px 30px rgba(11,14,19,0.18));
   }
 
-  .hero-portret-digital {
+  .hero-portret-digital,
+  .hero-portret-lizard {
     opacity: 0;
   }
 
@@ -445,24 +447,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
-  }
-
-  .diensten-intro {
-    max-width: 900px;
-    margin: -34px 0 56px;
-    color: #fff;
-  }
-
-  .diensten-intro p {
-    font-size: 17px;
-    line-height: 1.7;
-    font-weight: 300;
-    margin-bottom: 20px;
-  }
-
-  .diensten-intro strong {
-    font-weight: 500;
-    color: #fff;
   }
 
   .dienst-card {
@@ -1533,12 +1517,12 @@
   .over-text p {
     font-size: 17px;
     line-height: 1.7;
-    color: #1B2A3A;
+    color: #fff;
     font-weight: 300;
     margin-bottom: 20px;
-    max-width: 540px;
+    max-width: 900px;
   }
-  .over-text p strong { font-weight: 500; color: var(--abyss); }
+  .over-text p strong { font-weight: 500; color: #fff; }
   /* tekst die meebeweegt met de scroll: marineblauw -> wit */
   .shift-text {
     color: var(--shift-color, #1B2A3A);
@@ -1824,6 +1808,7 @@
       <div class="hero-portret-wrap">
         <img src="DaveHeel.PNG" alt="Dave Vera" class="hero-portret-img">
         <img src="PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true">
+        <img src="davelizard.png" alt="" class="hero-portret-lizard" aria-hidden="true">
       </div>
     </div>
   </div>
@@ -1833,43 +1818,6 @@
 <section class="diensten" id="diensten">
   <p class="section-eyebrow">Wat ik bouw</p>
   <h2 class="section-title">Case<br>Studies.</h2>
-  <div class="diensten-intro">
-    <p>
-      MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten.
-      MNRV is een compact en slagvaardig team van makers, bouwers en denkers die
-      design, development en AI samenbrengen in één geïntegreerde aanpak.
-    </p>
-    <p>
-      Als <strong>oprichter van MNRV</strong> ben ik nauw betrokken bij elk project.
-      Niet vanaf de zijlijn, maar inhoudelijk: van strategie en concept tot architectuur,
-      uitvoering en doorontwikkeling. Samen met Andrew, Arpit, Rick en Stefan bouwen we
-      digitale oplossingen waarin techniek, ontwerp en kunstmatige intelligentie elkaar versterken.
-    </p>
-    <p>
-      Wij ontwikkelen websites, apps, webshops en AI-oplossingen waarin technologie niet
-      achteraf wordt toegevoegd, maar vanaf de basis slim wordt ingebouwd. Denk aan
-      converterende interfaces, schaalbare digitale platforms, AI-flows, automatiseringen
-      en agents die processen versnellen, werk uit handen nemen en klantinteractie slimmer maken.
-    </p>
-    <p>
-      Ons werk beweegt op het snijvlak van <strong>mens en machine</strong>. We ontwerpen
-      digitale ervaringen die logisch, helder en overtuigend voelen voor gebruikers, terwijl
-      onder de motorkap slimme technologie het verschil maakt. Websites die niet alleen mooi
-      zijn, maar converteren. Apps die niet alleen functioneren, maar processen vereenvoudigen.
-      AI-agents die niet alleen antwoorden geven, maar daadwerkelijk taken uitvoeren.
-    </p>
-    <p>
-      Waar traditionele trajecten vaak bestaan uit losse afdelingen voor strategie, design,
-      development en automatisering, brengt MNRV die disciplines samen in één duidelijke lijn.
-      We denken mee over de kern van de oplossing, vertalen die naar een sterke
-      gebruikerservaring, bouwen een solide technische basis en integreren AI waar het waarde toevoegt.
-    </p>
-    <p>
-      Geen losse onderdelen. Geen onnodige tussenlagen. Geen standaardoplossing met een
-      AI-label erop geplakt. Wel één samenhangend digitaal geheel, gebouwd door een team
-      dat begrijpt hoe strategie, design, development en AI elkaar moeten versterken.
-    </p>
-  </div>
   <div class="diensten-grid">
     <div class="dienst-card">
       <p class="dienst-num">01 / Web</p>
@@ -1911,15 +1859,39 @@
       <p class="section-eyebrow">Over MNRV</p>
       <h2 class="section-title">Eén maker voor design, development en AI.</h2>
       <p>
-        Als <strong>oprichter van MNRV</strong> ben ik de maker achter elk project.
-        Ik combineer development, design en AI in één hand, zodat je niet met een bureau
-        vol tussenlagen praat, maar direct met degene die bouwt.
+        MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten.
+        MNRV is een compact en slagvaardig team van makers, bouwers en denkers die
+        design, development en AI samenbrengen in één geïntegreerde aanpak.
       </p>
-      <p class="shift-text spacing" data-shift="2">
-        Mijn werk leeft op het snijvlak van <strong>mens en machine</strong>:
-        websites, apps en AI-flows met AI naadloos ingebouwd, agents die processen overnemen
-        en interfaces die converteren. Strategie, architectuur en uitvoering — van eerste
-        schets tot productie. Geen losse onderdelen, maar één doordacht geheel.
+      <p>
+        Als <strong>oprichter van MNRV</strong> ben ik nauw betrokken bij elk project.
+        Niet vanaf de zijlijn, maar inhoudelijk: van strategie en concept tot architectuur,
+        uitvoering en doorontwikkeling. Samen met Andrew, Arpit, Rick en Stefan bouwen we
+        digitale oplossingen waarin techniek, ontwerp en kunstmatige intelligentie elkaar versterken.
+      </p>
+      <p>
+        Wij ontwikkelen websites, apps, webshops en AI-oplossingen waarin technologie niet
+        achteraf wordt toegevoegd, maar vanaf de basis slim wordt ingebouwd. Denk aan
+        converterende interfaces, schaalbare digitale platforms, AI-flows, automatiseringen
+        en agents die processen versnellen, werk uit handen nemen en klantinteractie slimmer maken.
+      </p>
+      <p>
+        Ons werk beweegt op het snijvlak van <strong>mens en machine</strong>. We ontwerpen
+        digitale ervaringen die logisch, helder en overtuigend voelen voor gebruikers, terwijl
+        onder de motorkap slimme technologie het verschil maakt. Websites die niet alleen mooi
+        zijn, maar converteren. Apps die niet alleen functioneren, maar processen vereenvoudigen.
+        AI-agents die niet alleen antwoorden geven, maar daadwerkelijk taken uitvoeren.
+      </p>
+      <p>
+        Waar traditionele trajecten vaak bestaan uit losse afdelingen voor strategie, design,
+        development en automatisering, brengt MNRV die disciplines samen in één duidelijke lijn.
+        We denken mee over de kern van de oplossing, vertalen die naar een sterke
+        gebruikerservaring, bouwen een solide technische basis en integreren AI waar het waarde toevoegt.
+      </p>
+      <p>
+        Geen losse onderdelen. Geen onnodige tussenlagen. Geen standaardoplossing met een
+        AI-label erop geplakt. Wel één samenhangend digitaal geheel, gebouwd door een team
+        dat begrijpt hoe strategie, design, development en AI elkaar moeten versterken.
       </p>
       <p class="over-sign">
         Dit is de toegevoegde waarde.
@@ -2439,9 +2411,17 @@ initWerkShowcase();
 /* TL-buis flikkering: hero portret digitaal */
 (function() {
   var digital = document.querySelector('.hero-portret-digital');
-  if (!digital) return;
+  var lizard = document.querySelector('.hero-portret-lizard');
+  var glitchLayers = [digital, lizard].filter(Boolean);
+  if (!glitchLayers.length) return;
 
   var wrap = document.querySelector('.hero-portret-wrap');
+
+  function hideGlitchLayers() {
+    glitchLayers.forEach(function(layer) {
+      layer.style.opacity = '0';
+    });
+  }
 
   function triggerGlitch(ms) {
     if (!wrap) return;
@@ -2458,18 +2438,19 @@ initWerkShowcase();
 
     function doFlash() {
       if (i >= flashes) {
-        digital.style.transition = 'opacity 0.06s ease-out';
-        digital.style.opacity = '0';
+        hideGlitchLayers();
         // Post-flicker glitch
         setTimeout(function() { triggerGlitch(160); }, 40);
         scheduleNext();
         return;
       }
-      digital.style.transition = 'opacity 0.03s ease-in';
-      digital.style.opacity = '0.88';
+      var layer = glitchLayers[Math.floor(Math.random() * glitchLayers.length)];
+      hideGlitchLayers();
+      layer.style.transition = 'opacity 0.03s ease-in';
+      layer.style.opacity = '0.88';
       setTimeout(function() {
-        digital.style.transition = 'opacity 0.05s ease-out';
-        digital.style.opacity = '0';
+        layer.style.transition = 'opacity 0.05s ease-out';
+        layer.style.opacity = '0';
         setTimeout(function() {
           i++;
           doFlash();
