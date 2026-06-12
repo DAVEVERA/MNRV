@@ -1239,64 +1239,83 @@
 
   /* FOOTER */
   footer {
-    padding: 40px 48px 32px;
+    padding: 56px 48px 40px;
     border-top: 1px solid rgba(238,233,223,0.08);
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 20px 24px;
-    align-items: center;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 0 48px;
+    align-items: start;
   }
 
-  .footer-docs {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px 18px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(238,233,223,0.06);
-  }
-
-  .footer-docs a {
-    font-size: 11px;
-    color: rgba(255,255,255,0.22);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: color 0.15s;
-  }
-
-  .footer-docs a:hover {
-    color: rgba(255,255,255,0.55);
-  }
+  .footer-brand { display: flex; flex-direction: column; gap: 10px; }
 
   .footer-logo {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    font-size: 18px;
+    font-size: 20px;
     letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.35);
+    color: var(--palladian);
+    display: block;
   }
+
+  .footer-tagline {
+    font-size: 12px;
+    color: rgba(255,255,255,0.42);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 240px;
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-style: normal;
+    margin-top: 4px;
+  }
+
+  .footer-contact a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-contact a:hover { color: rgba(255,255,255,0.7); }
 
   .footer-copy {
-    font-size: 12px;
-    color: rgba(255,255,255,0.25);
+    font-size: 11px;
+    color: rgba(255,255,255,0.18);
+    margin-top: 12px;
   }
 
+  .footer-section { display: flex; flex-direction: column; gap: 14px; }
+
+  .footer-section-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    margin: 0;
+  }
+
+  /* Social icons */
   .footer-socials {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
   }
 
   .footer-socials a {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     display: grid;
     place-items: center;
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 50%;
-    color: rgba(255,255,255,0.54);
+    color: rgba(255,255,255,0.50);
     text-decoration: none;
     transition: color 0.16s, border-color 0.16s, transform 0.16s, background 0.16s;
   }
@@ -1304,15 +1323,34 @@
   .footer-socials a:hover,
   .footer-socials a:focus-visible {
     color: var(--palladian);
-    border-color: rgba(255,255,255,0.34);
+    border-color: rgba(255,255,255,0.30);
     background: rgba(255,255,255,0.06);
     transform: translateY(-2px);
     outline: none;
   }
 
-  .footer-socials svg {
-    width: 17px;
-    height: 17px;
+  .footer-socials svg { width: 16px; height: 16px; }
+
+  /* Legal document links — stacked */
+  .footer-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-legal a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.32);
+    text-decoration: none;
+    transition: color 0.15s;
+    line-height: 1.4;
+  }
+
+  .footer-legal a:hover { color: rgba(255,255,255,0.68); }
+  .footer-legal a::before {
+    content: '↗ ';
+    font-size: 10px;
+    opacity: 0.5;
   }
 
   /* DECORATIVE */
@@ -1346,8 +1384,13 @@
     .werk-progress-area { min-width: min(360px, 58vw); }
     .form-row { grid-template-columns: 1fr; }
     .hero-bg-num { display: none; }
-    footer { padding: 32px 24px 24px; grid-template-columns: 1fr; gap: 14px; text-align: center; }
-    .footer-docs { gap: 8px 14px; }
+    footer { padding: 40px 24px 32px; grid-template-columns: 1fr; gap: 32px; }
+    .footer-brand { align-items: center; text-align: center; }
+    .footer-tagline { max-width: 100%; }
+    .footer-contact { align-items: center; }
+    .footer-section { align-items: center; text-align: center; }
+    .footer-socials { justify-content: center; }
+    .footer-legal { align-items: center; }
     .social-flyout {
       left: 14px;
       right: auto;
@@ -2037,33 +2080,58 @@
   </div>
 </div>
 
-<footer>
-  <span class="footer-logo">MNRV</span>
-  <div class="footer-socials" aria-label="Social media">
-    <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
-    </a>
-    <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener" aria-label="LinkedIn">
-      <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
-    </a>
-    <a href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener" aria-label="Facebook">
-      <svg aria-hidden="true"><use href="#icon-facebook"></use></svg>
-    </a>
-    <a href="https://wa.me/31682456410" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
-    </a>
-    <a href="mailto:info@mnrv.nl" aria-label="E-mail">
-      <svg aria-hidden="true"><use href="#icon-mail"></use></svg>
-    </a>
+<footer itemscope itemtype="https://schema.org/Organization">
+
+  <!-- Kolom 1: Merk & contact -->
+  <div class="footer-brand">
+    <strong class="footer-logo" itemprop="name">MNRV</strong>
+    <p class="footer-tagline" itemprop="description">
+      Webontwikkeling, AI-integraties en digitale strategie voor bedrijven die sneller en slimmer willen werken.
+    </p>
+    <address class="footer-contact">
+      <a href="mailto:info@mnrv.nl" itemprop="email" aria-label="E-mail MNRV">info@mnrv.nl</a>
+      <a href="tel:+31682456410" itemprop="telephone" aria-label="Bel MNRV">+31 6 82 45 64 10</a>
+      <a href="https://mnrv.nl" itemprop="url" aria-label="Website MNRV">mnrv.nl</a>
+    </address>
+    <p class="footer-copy">
+      <small>© 2026 MNRV — <span itemprop="founder">Dave Vera</span></small>
+    </p>
   </div>
-  <span class="footer-copy">© 2026 MNRV / Dave Vera — mnrv.nl</span>
-  <div class="footer-docs" aria-label="Juridische documenten">
-    <a href="Documenten/MNRV_Privacyverklaring_12-06-2026.pdf" target="_blank" rel="noopener">Privacyverklaring</a>
-    <a href="Documenten/MNRV_Cookieverklaring_12-06-2026.pdf" target="_blank" rel="noopener">Cookieverklaring</a>
-    <a href="Documenten/MNRV_Algemene_Voorwaarden_12-06-2026.pdf" target="_blank" rel="noopener">Algemene Voorwaarden</a>
-    <a href="Documenten/MNRV_Verwerkersovereenkomst_12-06-2026.pdf" target="_blank" rel="noopener">Verwerkersovereenkomst</a>
-    <a href="Documenten/MNRV_SLA_06-2026.pdf" target="_blank" rel="noopener">SLA</a>
+
+  <!-- Kolom 2: Sociale media -->
+  <div class="footer-section">
+    <p class="footer-section-label">Volg ons</p>
+    <nav class="footer-socials" aria-label="MNRV op social media">
+      <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener noreferrer" aria-label="MNRV op Instagram" itemprop="sameAs">
+        <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener noreferrer" aria-label="Dave Vera op LinkedIn" itemprop="sameAs">
+        <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+      </a>
+      <a href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener noreferrer" aria-label="MNRV op Facebook" itemprop="sameAs">
+        <svg aria-hidden="true"><use href="#icon-facebook"></use></svg>
+      </a>
+      <a href="https://wa.me/31682456410" target="_blank" rel="noopener noreferrer" aria-label="App MNRV via WhatsApp">
+        <svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
+      </a>
+      <a href="mailto:info@mnrv.nl" aria-label="Stuur MNRV een e-mail">
+        <svg aria-hidden="true"><use href="#icon-mail"></use></svg>
+      </a>
+    </nav>
   </div>
+
+  <!-- Kolom 3: Juridische documenten -->
+  <div class="footer-section">
+    <p class="footer-section-label">Juridisch</p>
+    <nav class="footer-legal" aria-label="Juridische documenten MNRV">
+      <a href="Documenten/MNRV_Privacyverklaring_12-06-2026.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" title="Privacyverklaring MNRV (PDF)">Privacyverklaring</a>
+      <a href="Documenten/MNRV_Cookieverklaring_12-06-2026.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" title="Cookieverklaring MNRV (PDF)">Cookieverklaring</a>
+      <a href="Documenten/MNRV_Algemene_Voorwaarden_12-06-2026.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" title="Algemene Voorwaarden MNRV (PDF)">Algemene Voorwaarden</a>
+      <a href="Documenten/MNRV_Verwerkersovereenkomst_12-06-2026.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" title="Verwerkersovereenkomst MNRV (PDF)">Verwerkersovereenkomst</a>
+      <a href="Documenten/MNRV_SLA_06-2026.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" title="Service Level Agreement MNRV (PDF)">SLA</a>
+    </nav>
+  </div>
+
 </footer>
 
 <script>
