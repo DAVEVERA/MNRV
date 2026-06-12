@@ -65,7 +65,7 @@
 
   body {
     font-family: 'Roboto', sans-serif;
-    background: #EEE9DF;
+    background: transparent;
     min-height: 100vh;
     overflow-x: hidden;
     color: var(--abyss);
@@ -73,14 +73,14 @@
   }
 
   /* LIQUID BACKGROUND */
+  html { background: #0B0E13; }
   #liquid-bg {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 0;
     pointer-events: none;
-    opacity: 0.25;
   }
 
   /* NAV */
@@ -2160,7 +2160,7 @@ function getColor(progress) {
   const i = Math.min(Math.floor(scaled), n - 1);
   const t = scaled - i;
   const a = stops[i], b = stops[i + 1];
-  return `rgb(${Math.round(lerp(a.r,b.r,t))},${Math.round(lerp(a.g,b.g,t))},${Math.round(lerp(a.b,b.b,t))})`;
+  return `rgba(${Math.round(lerp(a.r,b.r,t))},${Math.round(lerp(a.g,b.g,t))},${Math.round(lerp(a.b,b.b,t))},0.80)`;
 }
 
 function getGradient(progress) {
