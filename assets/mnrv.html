@@ -1523,13 +1523,13 @@
   /* HERO BAND */
   .over-hero {
     display: grid;
-    grid-template-columns: 1fr 420px;
+    grid-template-columns: 55% 45%;
     gap: 56px;
-    align-items: end;
+    align-items: center;
     margin-bottom: 72px;
   }
   .over-hero-text {
-    padding-top: 16px;
+    padding-top: 0;
   }
   .over-hero-text .section-eyebrow {
     color: rgba(255,255,255,0.45);
@@ -1552,7 +1552,8 @@
     margin: 0;
   }
   .over-hero-image {
-    position: relative;
+    display: flex;
+    align-items: center;
   }
   .over-hero-image img {
     width: 100%;
@@ -1777,7 +1778,7 @@
   @media (max-width: 900px) {
     .over { padding: 80px 24px; }
     .over-hero { grid-template-columns: 1fr; gap: 36px; }
-    .over-hero-image { max-width: 420px; }
+    .over-hero-image { max-width: 100%; }
     .over-builds { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
     .over-ai-gov { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
   }
