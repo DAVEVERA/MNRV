@@ -85,15 +85,15 @@ body {
 	border-radius: 20px;
 	overflow: hidden;
 	z-index: 0;
-	opacity: 0.9;
-	filter: blur(2px);
+	opacity: 0.5;
+	filter: blur(4px);
 }
 .gooey-blob {
 	position: absolute;
 	border-radius: 50%;
-	filter: blur(12px);
-	animation: float-blob 15s infinite ease-in-out;
-	opacity: 0.9;
+	filter: blur(18px);
+	animation: float-blob 30s infinite ease-in-out;
+	opacity: 0.45;
 }
 .gooey-blob:nth-child(1) {
 	width: 250px;
@@ -102,10 +102,10 @@ body {
 	top: 100px;
 	background: radial-gradient(
 		circle,
-		rgba(0, 255, 170, 0.7) 0%,
+		rgba(0, 255, 170, 0.5) 0%,
 		rgba(0, 255, 170, 0) 70%
 	);
-	animation-duration: 8s;
+	animation-duration: 22s;
 }
 
 .gooey-blob:nth-child(2) {
@@ -115,11 +115,11 @@ body {
 	top: 50px;
 	background: radial-gradient(
 		circle,
-		rgba(0, 179, 255, 0.7) 0%,
+		rgba(0, 179, 255, 0.5) 0%,
 		rgba(0, 179, 255, 0) 70%
 	);
-	animation-duration: 8s;
-	animation-delay: -3s;
+	animation-duration: 26s;
+	animation-delay: -8s;
 }
 .gooey-blob:nth-child(3) {
 	width: 180px;
@@ -128,11 +128,11 @@ body {
 	bottom: 100px;
 	background: radial-gradient(
 		circle,
-		rgba(0, 255, 170, 0.7) 0%,
+		rgba(0, 255, 170, 0.5) 0%,
 		rgba(0, 255, 170, 0) 70%
 	);
-	animation-duration: 10s;
-	animation-delay: -4s;
+	animation-duration: 30s;
+	animation-delay: -12s;
 }
 .gooey-blob:nth-child(4) {
 	width: 220px;
@@ -141,11 +141,11 @@ body {
 	bottom: 30px;
 	background: radial-gradient(
 		circle,
-		rgba(0, 179, 255, 0.7) 0%,
+		rgba(0, 179, 255, 0.5) 0%,
 		rgba(0, 179, 255, 0) 70%
 	);
-	animation-duration: 10s;
-	animation-delay: -4s;
+	animation-duration: 24s;
+	animation-delay: -6s;
 }
 @keyframes float-blob {
 	0%,
@@ -153,16 +153,16 @@ body {
 		transform: translate(0, 0) scale(1);
 	}
 	20% {
-		transform: translate(30px, 20px) scale(1.05);
+		transform: translate(12px, 8px) scale(1.02);
 	}
 	40% {
-		transform: translate(20px, 40px) scale(0.95);
+		transform: translate(8px, 16px) scale(0.98);
 	}
 	60% {
-		transform: translate(-20px, 30px) scale(1.1);
+		transform: translate(-8px, 12px) scale(1.03);
 	}
 	80% {
-		transform: translate(-30px, -20px) scale(0.9);
+		transform: translate(-12px, -8px) scale(0.97);
 	}
 }
 
