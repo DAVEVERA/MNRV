@@ -1,0 +1,158 @@
+Je bent een senior full-stack AI voice engineer en frontend animation specialist.
+
+We hebben al een bestaande “marble frontend”: een visuele bol/marble component die onderdeel is van een groter platform. Deze marble moet worden geüpgraded naar een volwaardige AI voice agent.
+
+Doel:
+Maak van de marble een interactieve voice agent die:
+- luistert naar de gebruiker via microfoon
+- automatisch de taal van de gebruiker detecteert
+- antwoordt in dezelfde taal als de gebruiker
+- zichtbaar verschillende statussen toont:
+  - idle
+  - listening
+  - thinking
+  - generating
+  - speaking
+  - error / unavailable
+- volledig eigen bouw blijft
+- geen betaalde diensten gebruikt
+- geen commerciële third-party API’s gebruikt
+- geen vendor lock-in introduceert
+
+Belangrijk:
+Gebruik géén OpenAI API, ElevenLabs, Azure Speech, Google Speech, paid STT/TTS of cloud voice services. De architectuur moet lokaal/self-hostable zijn. Als er modellen nodig zijn, werk dan met open-source/self-hosted opties en maak deze optioneel configureerbaar.
+
+Technische richting:
+Frontend:
+- Behoud de bestaande marble als kern van de interface.
+- Bouw een duidelijke state-machine rond de marble.
+- Maak animaties per status:
+  - idle: rustige ademende glow / subtiele rotatie
+  - listening: pulserende ring, audio-reactieve beweging op basis van volume/input
+  - thinking: langzame interne swirl, zachte morphing, donkere/verdiepte kern
+  - generating: snellere interne beweging, particle-like shimmer of lichtgolven
+  - speaking: audio-reactieve schaal/mesh/glow synchroon met TTS-output
+  - error: korte rode/oranje pulse, daarna terug naar idle
+- Gebruik requestAnimationFrame voor vloeiende animaties.
+- Houd performance hoog: mobile-first, GPU-friendly CSS/Canvas/WebGL.
+- Respecteer prefers-reduced-motion.
+- Maak de voice-agent component herbruikbaar en los gekoppeld van de rest van de app.
+
+Voice pipeline:
+- Microfoon permissie aanvragen via browser APIs.
+- Audio capture via MediaRecorder/Web Audio API.
+- Voice Activity Detection toevoegen:
+  - detecteer wanneer gebruiker spreekt
+  - stop opname automatisch na stilte
+  - voorkom dubbele requests
+- Audio level analyser gebruiken om listening-animatie live te sturen.
+- STT-laag abstract maken:
+  - standaard adapter/interface voorzien
+  - lokale/self-hosted implementatie voorbereid, bijvoorbeeld Whisper.cpp server, Vosk, Coqui STT of andere open-source optie
+  - geen hard dependency op betaalde externe diensten
+- LLM-laag abstract maken:
+  - adapter/interface voorzien
+  - lokaal/self-hosted model ondersteunen via bijvoorbeeld Ollama-compatible endpoint
+  - model/provider via environment config instelbaar
+- TTS-laag abstract maken:
+  - browser SpeechSynthesis als gratis fallback
+  - optionele self-hosted TTS-adapter voorbereiden, bijvoorbeeld Piper/Coqui TTS
+  - antwoord in dezelfde taal als gedetecteerde input
+- De frontend mag nooit direct vendor-specifieke logica bevatten. Werk met adapters.
+
+Architectuur:
+Maak duidelijke modules:
+- VoiceAgentMarble component
+- useVoiceAgent hook
+- voiceAgentState machine
+- audioInput service
+- vad service
+- stt adapter
+- llm adapter
+- tts adapter
+- language detection helper
+- animation controller
+
+Gewenste states:
+```ts
+type VoiceAgentState =
+  | "idle"
+  | "permission-request"
+  | "listening"
+  | "processing-audio"
+  | "thinking"
+  | "generating"
+  | "speaking"
+  | "error";
+
+Functionele flow:
+
+User klikt/tapt op marble.
+Microfoon permissie wordt gevraagd.
+Marble gaat naar listening.
+Audio-level stuurt live puls/glow.
+Na stilte stopt opname automatisch.
+Audio wordt naar lokale/self-hosted STT endpoint gestuurd.
+Taal wordt bepaald uit transcript of STT metadata.
+Transcript gaat naar LLM endpoint.
+LLM genereert antwoord in dezelfde taal.
+TTS spreekt antwoord uit.
+Marble animeert tijdens speaking audio-reactief.
+Daarna terug naar idle.
+
+UI/UX eisen:
+
+Mobile-first.
+Tap target minimaal 44px.
+Duidelijke visuele feedback zonder drukke interface.
+Geen grote chat-interface nodig, maar optioneel transcript tonen in compacte debug/dev mode.
+Marble moet premium, levend en intelligent voelen.
+Geen goedkope robot-assistent uitstraling.
+De marble is het centrale gezicht van de agent.
+
+Privacy/security:
+
+Toon duidelijke microfoonstatus.
+Geen opname zonder actieve user-actie.
+Geen permanente opslag van audio tenzij expliciet geconfigureerd.
+Maak logging optioneel en standaard veilig.
+API endpoints via env/config.
+Geen secrets in frontend.
+
+Config voorbeeld:
+
+const voiceAgentConfig = {
+  sttEndpoint: import.meta.env.VITE_STT_ENDPOINT,
+  llmEndpoint: import.meta.env.VITE_LLM_ENDPOINT,
+  ttsEndpoint: import.meta.env.VITE_TTS_ENDPOINT,
+  useBrowserTTSFallback: true,
+  defaultLanguage: "nl-NL",
+  autoDetectLanguage: true,
+  debug: false,
+};
+
+Deliverables:
+
+Werkende componenten en hooks.
+Schone TypeScript types.
+Adapter-based voice pipeline.
+Marble animaties gekoppeld aan agent state.
+Fallbacks wanneer microfoon/STT/LLM/TTS niet beschikbaar zijn.
+Heldere TODO’s voor lokale modelservers.
+Geen betaalde derde partij integraties.
+Geen onnodige dependencies.
+Code moet productie-waardig, onderhoudbaar en schaalbaar zijn.
+
+Werk iteratief:
+
+Inspecteer eerst de bestaande marble/frontend structuur.
+Bepaal waar de marble component zit.
+Voeg state-machine toe zonder bestaande styling te slopen.
+Voeg audio capture + analyser toe.
+Voeg statusanimaties toe.
+Voeg adapters toe voor STT/LLM/TTS.
+Verbind de volledige flow.
+Test happy path, permission denied, no speech, endpoint error en reduced motion.
+
+Belangrijk:
+Breek de bestaande marble look niet. Upgrade hem naar een levende AI voice interface.

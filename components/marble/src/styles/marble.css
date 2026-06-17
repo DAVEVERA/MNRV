@@ -1,0 +1,122 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	--color-text: #ffffff;
+	font-size: 15px;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	color: var(--color-text);
+	font-family: filson-pro, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	min-height: 100vh;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+#marble-scene {
+	--marble-bg-start: rgb(217, 38, 38);
+	--marble-bg-end: rgb(36, 15, 15);
+	position: fixed;
+	inset: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background: radial-gradient(var(--marble-bg-start), var(--marble-bg-end));
+	transition: transform 0.15s ease;
+}
+
+#marble-scene canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.artifact-popout {
+	position: fixed;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	background: rgba(0, 0, 0, 0.34);
+	backdrop-filter: blur(12px);
+	z-index: 10;
+}
+
+.artifact-popout__panel {
+	width: min(92vw, 920px);
+	max-height: min(86vh, 760px);
+	display: grid;
+	grid-template-rows: minmax(220px, 1fr) auto;
+	gap: 14px;
+}
+
+.artifact-popout__preview {
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 8px;
+	background: rgba(8, 8, 12, 0.86);
+	box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+}
+
+.artifact-popout__preview img,
+.artifact-popout__preview iframe {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 420px;
+	border: 0;
+	object-fit: contain;
+}
+
+.artifact-popout__actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.artifact-popout__button {
+	min-height: 44px;
+	padding: 11px 16px;
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	border-radius: 6px;
+	background: #ffffff;
+	color: #111111;
+	font: inherit;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.artifact-popout__button--ghost {
+	background: rgba(0, 0, 0, 0.45);
+	color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#marble-scene {
+		transition: none;
+	}
+}

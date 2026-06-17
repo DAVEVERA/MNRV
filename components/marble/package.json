@@ -1,0 +1,21 @@
+{
+	"name": "magical-marble",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"description": "Standalone interactieve Three.js-marmer voor gebruik als frontend visual module.",
+	"scripts": {
+		"dev": "vite --host 127.0.0.1 --port 8080",
+		"start": "node server/gateway.mjs",
+		"build": "vite build",
+		"preview": "vite preview --host 127.0.0.1 --port 8080",
+		"check": "tsc --noEmit && node --check server/gateway.mjs"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/three": "^0.184.1",
+		"three": "^0.131.3",
+		"typescript": "^5.9.3",
+		"vite": "^8.0.16"
+	}
+}
