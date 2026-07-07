@@ -528,6 +528,13 @@
     flex-shrink: 0;
   }
   .werk-project-mark > * { grid-area: 1 / 1; }
+  .werk-logo-ring {
+    display: block;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    justify-self: center;
+  }
   .werk-project-mark picture {
     width: 62%;
     height: 62%;
@@ -730,12 +737,15 @@
 
   .werk-static-preview {
     position: relative;
-    display: block;
+    display: none;
     width: 100%;
     height: 100%;
     min-height: 220px;
     flex: 1 1 auto;
     text-decoration: none;
+  }
+  .werk-project-asset--static .werk-static-preview {
+    display: block;
   }
   .werk-static-preview-img {
     position: absolute;
@@ -1493,10 +1503,32 @@
     .hero { padding: 96px 16px 48px; }
     .werk { padding-left: 16px; padding-right: 16px; }
     .werk-project-panel { padding: 28px 20px; gap: 14px; }
-    /* Live iframe previews zijn zwaar op kleine telefoons: toon alleen tekst + "Open site" link */
+    /* Live iframe previews zijn zwaar op kleine telefoons: toon een lichte statische screenshot i.p.v. de iframe */
     .werk-project-asset { display: none; }
-    /* Statische screenshot-preview (Stuk Verdriet) is licht genoeg om ook op mobiel te tonen */
-    .werk-project-asset--static { display: block; min-height: 200px; }
+    .werk-project-asset--static,
+    .werk-project-asset:has(.werk-static-preview) {
+      display: block;
+      min-height: 200px;
+    }
+    .werk-project-asset:has(.werk-static-preview) .werk-static-preview {
+      display: block;
+    }
+    .werk-project-asset:has(.werk-static-preview) .werk-project-frame,
+    .werk-project-asset:has(.werk-static-preview) .werk-iframe-fallback,
+    .werk-project-asset:has(.werk-static-preview) .werk-project-maximize {
+      display: none;
+    }
+    /* MRSVision: de voor/na-slider is licht genoeg om ook op mobiel te tonen, alleen de live iframe verbergen */
+    .werk-project--split .werk-project-asset {
+      display: flex;
+      min-height: 220px;
+    }
+    .werk-project--split .werk-project-frame {
+      display: none;
+    }
+    .werk-project--split .werk-before-after {
+      flex: 1 1 100%;
+    }
     .hero-inner { grid-template-columns: 1fr 0.85fr; gap: 8px; }
     .hero-title { font-size: clamp(22px, 8vw, 44px); line-height: 0.95; }
     .hero-sub { font-size: 11px; line-height: 1.45; margin: 10px 0 16px; }
@@ -2118,6 +2150,11 @@
         <button class="werk-project-maximize" type="button" aria-label="FAINL fullscreen openen">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <a class="werk-static-preview" href="https://fainl.com" target="_blank" rel="noopener" aria-label="FAINL bekijken (opent in nieuw tabblad)">
+          <img class="werk-static-preview-img" src="img/fainl-preview.jpg" alt="Schermafbeelding van fainl.com" loading="lazy">
+          <span class="werk-static-preview-overlay"></span>
+          <span class="werk-static-preview-cta">Open site ↗</span>
+        </a>
       </div>
     </li>
 
@@ -2152,6 +2189,11 @@
         <button class="werk-project-maximize" type="button" aria-label="Windofy fullscreen openen">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <a class="werk-static-preview" href="https://windofy.com" target="_blank" rel="noopener" aria-label="Windofy bekijken (opent in nieuw tabblad)">
+          <img class="werk-static-preview-img" src="img/windofy-preview.jpg" alt="Schermafbeelding van windofy.com" loading="lazy">
+          <span class="werk-static-preview-overlay"></span>
+          <span class="werk-static-preview-cta">Open site ↗</span>
+        </a>
       </div>
     </li>
 
@@ -2194,6 +2236,11 @@
         <button class="werk-project-maximize" type="button" aria-label="De Notenman fullscreen openen">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <a class="werk-static-preview" href="https://denotenman.com" target="_blank" rel="noopener" aria-label="De Notenman bekijken (opent in nieuw tabblad)">
+          <img class="werk-static-preview-img" src="img/denotenman-preview.jpg" alt="Schermafbeelding van denotenman.com" loading="lazy">
+          <span class="werk-static-preview-overlay"></span>
+          <span class="werk-static-preview-cta">Open site ↗</span>
+        </a>
       </div>
     </li>
 
@@ -2257,6 +2304,11 @@
           <p class="werk-fallback-note">Preview niet beschikbaar</p>
           <a class="werk-fallback-cta" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
         </div>
+        <a class="werk-static-preview" href="https://mnrv.nl" target="_blank" rel="noopener" aria-label="MNRV bekijken (opent in nieuw tabblad)">
+          <img class="werk-static-preview-img" src="img/mnrv-preview.jpg" alt="Schermafbeelding van mnrv.nl" loading="lazy">
+          <span class="werk-static-preview-overlay"></span>
+          <span class="werk-static-preview-cta">Open site ↗</span>
+        </a>
         <button class="werk-project-maximize" type="button" aria-label="MNRV fullscreen openen">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
