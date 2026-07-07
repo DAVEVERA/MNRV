@@ -1,0 +1,35 @@
+- generic [active] [ref=e1]:
+  - generic "Kies je MNRV ervaring" [ref=e2]:
+    - generic [ref=e4]:
+      - text: Goede nach
+      - generic [ref=e5]: █
+    - button "Modern route Directe route naar informatie en contact." [ref=e6] [cursor=pointer]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Modern route
+        - generic [ref=e9]: Directe route naar informatie en contact.
+    - generic:
+      - img
+    - button "Retro route The lighter \"site\" of life." [ref=e10] [cursor=pointer]:
+      - generic [ref=e11]:
+        - generic [ref=e12]: Retro route
+        - generic [ref=e13]: The lighter "site" of life.
+  - dialog "Cookiemelding":
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: 🍪
+        - text: MNRV — Cookiemelding
+      - generic [ref=e17]:
+        - paragraph [ref=e18]: "Deze website maakt gebruik van:"
+        - list [ref=e19]:
+          - listitem [ref=e20]:
+            - generic [ref=e21] [cursor=pointer]:
+              - checkbox "Analytische cookies (Google Analytics)" [checked] [ref=e22]
+              - text: Analytische cookies (Google Analytics)
+          - listitem [ref=e23]:
+            - generic [ref=e24] [cursor=pointer]:
+              - checkbox "Functionele cookies (Supabase formulier)" [checked] [ref=e25]
+              - text: Functionele cookies (Supabase formulier)
+      - generic [ref=e26]:
+        - button "OK" [ref=e27] [cursor=pointer]
+        - button "Opslaan" [ref=e28] [cursor=pointer]
+        - button "Weigeren" [ref=e29] [cursor=pointer]

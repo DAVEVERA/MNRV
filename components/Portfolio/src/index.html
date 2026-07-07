@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MNRV Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500&family=Roboto:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Shared SVG sprite: decorative rotating ring + Windofy logo mark -->
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="logo-ring-outer" viewBox="0 0 72 71" fill="white">
+      <path d="M40 71C38.5 71 37 70.8 35.5 70.4L18.5 65.7C13.7 64.4 9.8 61 7.8 56.5L0.8 40.5C-1.1 36-0.9 30.9 1.4 26.6L9.7 11.4C12 7.1 16.2 4.1 21.1 3.3L38.4 0.3C43.3-.6 48.3 0.8 52 4L65.3 15.5C69.1 18.7 71.1 23.4 70.9 28.3L70.2 45.6C70 50.5 67.6 55 63.6 57.9L49.4 67.9C46.6 69.9 43.3 71 40 71Z" fill="currentColor" fill-opacity="0.12"/>
+      <path d="M38.5 1L21.3 4C16.6 4.8 12.6 7.6 10.4 11.7L2.1 26.9C-.1 31-.3 35.8 1.6 40.1L8.6 56C10.5 60.3 14.2 63.5 18.8 64.8L35.8 69.5C40.4 70.8 45.2 70 49 67.2L63.2 57.1C67 54.4 69.3 50.1 69.5 45.5L70.2 28.2C70.4 23.5 68.4 19.1 64.8 16L51.6 4.6L38.5 1Z" stroke="currentColor" stroke-opacity="0.35" stroke-width="0.8"/>
+    </symbol>
+    <symbol id="logo-ring-inner" viewBox="0 0 74 72" fill="none">
+      <path d="M45.6 71H27.8C22.8 71 18.1 68.8 14.9 64.9L3.8 51.2L4.5 50.7L15.6 64.4C18.6 68.1 23 70.2 27.8 70.2H45.6C50.4 70.2 54.9 68.1 57.9 64.4L68.9 50.7L72.2 38.3C72.1 38 72.1 37.8 72 37.6L71.9 37.2L68.1 20.5C67 15.8 63.9 12 59.5 10L43.5 2.4C39.2 0.3 34.2 0.3 29.9 2.4L13.9 10C9.5 12 6.4 15.9 5.4 20.5L1.4 37.6C0.3 42.2 1.4 47 4.4 50.6" stroke="currentColor" stroke-opacity="0.5" stroke-width="0.8"/>
+    </symbol>
+    <symbol id="logo-mark-windofy" viewBox="4 3 40 40">
+      <rect x="2" y="3" width="40" height="34" stroke="currentColor" stroke-width="0"/>
+      <path d="M6.5 9 L33.5 9 L24 13.5 L6.5 13.5 Z" fill="currentColor"/>
+      <path d="M6.5 16 L33.5 16 L24 20.5 L6.5 20.5 Z" fill="currentColor"/>
+      <path d="M6.5 23 L33.5 23 L24 27.5 L6.5 27.5 Z" fill="currentColor"/>
+      <path d="M6.5 30 L33.5 30 L24 34 L6.5 34 Z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <div class="wrapper">
+    <article class="projects" id="projects">
+      <ul>
+
+        <li class="project">
+          <article class="container">
+            <h3 class="sec-s">Stuk Verdriet <br>De Podcast</h3>
+            <figure class="spinning-logo">
+              <svg class="logo-ring" width="72" height="71"><use href="#logo-ring-outer"></use></svg>
+              <svg class="logo-ring" width="74" height="72"><use href="#logo-ring-inner"></use></svg>
+              <picture class="client-logo">
+                <img src="https://www.stukverdriet.com/_next/image?url=%2Fbrand%2Fsverdriet_logo.webp&w=384&q=75" alt="Stuk Verdriet logo">
+              </picture>
+            </figure>
+            <p class="description">
+              Sommige projecten ontstaan uit strategie, maar de meest betekenisvolle bouw je vanuit overtuiging en gevoel. Stuk Verdriet is voor mij zo'n project dat raakt, verbindt en ertoe doet.
+              <br><br>
+              Achter dit platform schuilt een initiatief dat mensen verbindt op momenten waarop woorden vaak tekortschieten. Een plek waar verhalen, herkenning en steun samenkomen voor mensen die leven met verlies, rouw en afscheid. Juist omdat de maatschappelijke waarde van dit initiatief zo groot is, hebben wij ervoor gekozen om de volledige ontwikkeling van het platform belangeloos op ons te nemen. Als bijdrage aan een samenleving waarin technologie niet alleen processen versnelt, maar ook mensen dichter bij elkaar kan brengen.
+              <br><br>
+              Van strategie, UX en design tot de complete technische realisatie van de website, het podcastplatform, het beheersysteem en de online community: ieder onderdeel is vanaf de basis ontwikkeld met één doel voor ogen. Niet om de meest indrukwekkende techniek neer te zetten, maar om een veilige, toegankelijke en duurzame omgeving te creëren waarin bezoekers zich gezien, gehoord en gesteund voelen. Dat is voor ons de essentie van maatschappelijk verantwoord ondernemen: onze kennis en expertise inzetten waar die daadwerkelijk maatschappelijke impact kunnen maken. Want niet iedere investering wordt uitgedrukt in euro's. Soms wordt de grootste waarde gemeten in de mensen die je ermee kunt helpen.
+            </p>
+          </article>
+          <iframe class="project-asset center" src="https://stukverdriet.com/start" style="background:#1a1008" title="Stuk Verdriet preview"></iframe>
+        </li>
+
+        <li class="project">
+          <article class="container">
+            <h3 class="sec-s">WINDOFY</h3>
+            <figure class="spinning-logo">
+              <svg class="logo-ring" width="72" height="71"><use href="#logo-ring-outer"></use></svg>
+              <svg class="logo-ring" width="74" height="72"><use href="#logo-ring-inner"></use></svg>
+              <picture class="client-logo">
+                <svg class="logo-mark" viewBox="4 3 40 40" style="width:30px;height:44px"><use href="#logo-mark-windofy"></use></svg>
+              </picture>
+            </figure>
+            <p class="description">
+              Slimme raamdecoratievisualisatie voor Windofy
+              <br><br>
+              Voor Windofy ontwikkelde MNRV een visuele configuratie-oplossing waarmee klanten raamdecoratie direct in hun eigen interieur kunnen bekijken. Door foto-upload, productconfiguratie en realistische visualisatie samen te brengen, wordt de keuze voor raamdecoratie eenvoudiger, persoonlijker en overtuigender. De oplossing verlaagt twijfel in het aankoopproces, ondersteunt betere klantbeslissingen en legt de basis voor minder retouren en hogere conversie.
+            </p>
+          </article>
+          <iframe class="project-asset center" src="https://windofy.com" style="background:#1a1008" title="Windofy preview"></iframe>
+        </li>
+
+        <li class="project" style="--clip:1.5rem">
+          <article class="container">
+            <h3 class="sec-s">FAINL</h3>
+            <figure class="spinning-logo">
+              <svg class="logo-ring" width="72" height="71"><use href="#logo-ring-outer"></use></svg>
+              <svg class="logo-ring" width="74" height="72"><use href="#logo-ring-inner"></use></svg>
+              <picture class="client-logo">
+                <img src="https://mnrv.nl/assets/logo_clients/FAINL.png" alt="FAINL logo">
+              </picture>
+            </figure>
+            <p class="description">
+              Zeven AI-modellen debatteren en leveren één gefundeerde conclusie. Niet één mening, maar een echt antwoord. FAINL is een consensus-orkestratielaag — je vraag wordt gelijktijdig door meerdere AI-modellen verwerkt (Gemini, GPT-4, Claude, Grok en meer) en er wordt één gezaghebbend antwoord gesynthetiseerd. Dit elimineert de bias van een enkel model en brengt meningsverschillen aan het licht, zodat je een evenwichtiger en betrouwbaarder perspectief krijgt.
+            </p>
+          </article>
+          <iframe class="project-asset center" src="https://fainl.com" style="background:#1a1008" title="FAINL preview"></iframe>
+        </li>
+
+        <li class="project project--denotenman">
+          <article class="container">
+            <h3 class="sec-s">DENOTENMAN.COM</h3>
+            <figure class="spinning-logo">
+              <svg class="logo-ring" width="72" height="71"><use href="#logo-ring-outer"></use></svg>
+              <svg class="logo-ring" width="74" height="72"><use href="#logo-ring-inner"></use></svg>
+              <picture class="client-logo">
+                <img src="https://notenman.nl/_next/image?url=https%3A%2F%2Fmhzmithddcdnouvlklev.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2FIcons%2520and%2520Logo%27s%2FNotenman_2020_logo-300x72.png&w=256&q=75" alt="De Notenman logo">
+              </picture>
+            </figure>
+            <div class="description case-copy">
+              <p class="case-kicker">Bespoke e-commerce · AI-indexering · Backend automation</p>
+              <h4 class="case-title">Van ambachtelijke speciaalzaak naar intelligent e-commerceplatform</h4>
+              <p class="case-lead">
+                Voor denotenman.com ontwikkelt MNRV geen standaard webshop, maar een volledig maatwerk e-commerceplatform waarin productbeleving, bestelgemak, SEO, AI-indexering, marketing automation en backendbeheer samenkomen.
+              </p>
+              <p>
+                De frontend wordt volledig zelf ontwikkeld, inclusief configurator en een mobile-first gebruikerservaring die klanten snel en intuïtief door het assortiment leidt. Aan de achterkant bouwen we een maatwerkbeheeromgeving voor productbeheer, prijs- en voorraadbeheer, reviewmanagement, contentstructuur en operationele workflows.
+              </p>
+              <ul class="case-features">
+                <li>Zelfontwikkelde storefront en admin portal</li>
+                <li>Productbeheer, prijsbeheer en voorraadbeheer</li>
+                <li>Reviewmanagement en marketing automation</li>
+                <li>Social media automation en contentverwerking</li>
+                <li>SEO-structuur en AI-indexering vanaf de basis</li>
+                <li>Ambitieuze crawl- en spiderfuncties</li>
+                <li>Proactief auto-updating systeem</li>
+              </ul>
+              <p>
+                Een digitaal fundament dat ambachtelijke kwaliteit vertaalt naar moderne e-commercekracht: schaalbaar, slim beheersbaar en volledig toegespitst op denotenman.com.
+              </p>
+            </div>
+          </article>
+          <iframe class="project-asset center" src="https://denotenman.com" style="background:#1a1008" title="De Notenman preview"></iframe>
+        </li>
+
+        <li class="project project--mrsvision">
+          <article class="container">
+            <h3 class="sec-s">MRSVision</h3>
+            <figure class="spinning-logo">
+              <svg class="logo-ring" width="72" height="71"><use href="#logo-ring-outer"></use></svg>
+              <svg class="logo-ring" width="74" height="72"><use href="#logo-ring-inner"></use></svg>
+              <picture class="client-logo">
+                <svg class="logo-mark" viewBox="4 3 40 40" style="width:30px;height:44px"><use href="#logo-mark-windofy"></use></svg>
+              </picture>
+            </figure>
+            <p class="description">
+              <strong>mrsvision.nl</strong> is een interactieve, AI-gestuurde B2B-visualisatietool, ontwikkeld voor en gelieerd aan <strong>Mr. Jealousy</strong>.
+              <br><br>
+              <strong>Het doel van MRSVision</strong><br>
+              Het platform neemt de online drempel voor het kopen van maatwerk raambekleding weg. Consumenten zien vooraf hoe jaloezieën in hun eigen ruimte staan en worden visueel geholpen bij het juist inmeten.
+              <br><br>
+              <strong>Wat de tool precies doet</strong><br>
+              Gebruikers uploaden een foto van hun raam of ruimte, waarna de AI-engine superrealistische maatwerk jaloezieën in de foto rendert. Binnen de configurator kunnen zij direct wisselen tussen materialen, lamelbreedtes, ladderband of koord en verschillende kleuren.
+              <br><br>
+              Daarnaast biedt MRSVision een voor-en-na-slider, simulatie van lichtinval per dagdeel en een geïntegreerde meet- en bestelhulp voor <em>in de dag</em> en <em>op de dag</em>. De tool linkt direct door naar de meetgarantie van Mr. Jealousy, zodat de klant met meer zekerheid en minder twijfel kan bestellen.
+            </p>
+
+          </article>
+                    <div class="project-asset project-asset--split center">
+                                <iframe class="project-asset__frame" src="https://mrj526-635857755618.europe-west4.run.app/" style="background:#1a1008" title="MRSVision preview"></iframe>
+                              <div class="before-after" data-before-after>
+                                          <p class="before-after__title am-xs">Voor &amp; na</p>
+                                          <div class="before-after__frame">
+                                                        <!-- ↓ Replace this src with your own "before" photo -->
+                                                        <img class="before-after__img before-after__img--before" src="REPLACE-WITH-BEFORE-IMAGE.jpg" alt="Situatie voor MRSVision">
+                                                        <!-- ↓ Replace this src with your own "after" photo -->
+                                                        <img class="before-after__img before-after__img--after" src="REPLACE-WITH-AFTER-IMAGE.jpg" alt="Situatie na MRSVision">
+                                                        <span class="before-after__label before-after__label--before">Voor</span>
+                                                        <span class="before-after__label before-after__label--after">Na</span>
+                                                        <div class="before-after__handle"></div>
+                                                        <input type="range" class="before-after__slider" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
+                                          </div>
+                              </div>
+                    </div>
+      </div>
+        </li>
+
+      </ul>
+    </article>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

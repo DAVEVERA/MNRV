@@ -532,123 +532,168 @@
   }
 
   .werk {
-    padding: 120px 48px;
+    padding: 120px 24px;
   }
 
   .werk .section-eyebrow { color: rgba(255,255,255,0.45); }
   .werk .section-title { color: #fff; }
 
-  .werk-stage {
+  /* ---------- Spinning client-logo ring ---------- */
+  .werk-project-mark {
+    display: inline-grid;
     position: relative;
-    height: min(78vh, 760px);
-    min-height: 520px;
-    margin-top: 46px;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .werk-project-mark > * { grid-area: 1 / 1; }
+  .werk-project-mark picture {
+    width: 62%;
+    height: 62%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 50%;
     overflow: hidden;
+  }
+  .werk-project-mark picture img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  @media (min-width: 48em) {
+    .werk-project-mark { width: 64px; height: 64px; }
+  }
+
+  /* ---------- Project list (sticky reveal) ---------- */
+  .werk-projects {
+    list-style: none;
+    margin: 46px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .werk-project {
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100svh - 40px);
+    padding: 28px 22px;
     border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 12px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0B0E13 0%, #1B2632 46%, #11161D 100%);
     box-shadow: 0 40px 100px rgba(0,0,0,0.40);
   }
 
-  .werk-showcase {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-  }
-  .werk-showcase::-webkit-scrollbar { display: none; }
-
-  .werk-slide {
-    flex: 0 0 100%;
-    min-width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 40% 60%;
-    scroll-snap-align: start;
-    overflow: hidden;
-    background: linear-gradient(135deg, #0B0E13 0%, #1B2632 46%, #11161D 100%);
-  }
-
-  /* NARRATIVE PANEL */
-  .werk-narrative {
+  .werk-project-panel {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 48px 44px;
-    background: rgba(11,14,19,0.78);
-    border-right: 1px solid rgba(255,255,255,0.07);
-    gap: 20px;
+    gap: 14px;
     min-width: 0;
-    position: relative;
-    z-index: 1;
+    min-height: 0;
+    overflow-y: auto;
   }
 
-  .werk-slide-meta {
+  .werk-project-meta {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
   }
-  .werk-slide-num {
+  .werk-project-num {
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.18em;
     color: #FFB162;
   }
-  .werk-meta-sep {
-    width: 28px;
-    height: 1px;
-    background: rgba(255,255,255,0.28);
-    flex-shrink: 0;
-  }
-  .werk-slide-cat {
+  .werk-project-sep { width: 28px; height: 1px; background: rgba(255,255,255,0.28); flex-shrink: 0; }
+  .werk-project-cat {
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-  }
-  .werk-slide-year {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    color: rgba(255,255,255,0.28);
-    margin-left: auto;
+    color: rgba(255,255,255,0.6);
   }
 
-  .werk-slide-title {
+  .werk-project-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .werk-project-title {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(36px, 4.5vw, 72px);
+    font-size: clamp(28px, 6vw, 48px);
     font-weight: 800;
-    line-height: 0.94;
+    line-height: 1;
     color: #fff;
     letter-spacing: -0.02em;
     margin: 0;
   }
 
-  .werk-slide-desc {
+  .werk-project-kicker {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,177,98,0.85);
+    margin: 0;
+  }
+
+  .werk-project-case-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #fff;
+    margin: 0;
+  }
+
+  .werk-project-desc {
     font-size: 14px;
     line-height: 1.65;
     color: rgba(255,255,255,0.62);
     font-weight: 300;
     margin: 0;
-    max-width: 340px;
+    max-width: 60ch;
   }
+  .werk-project-desc strong { color: rgba(255,255,255,0.85); font-weight: 600; }
 
-  .werk-slide-tags {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+  .werk-project-features {
     margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .werk-project-features li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.55);
+    padding-left: 16px;
+    position: relative;
+  }
+  .werk-project-features li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFB162;
   }
 
-  .werk-slide-link {
+  .werk-project-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -667,99 +712,81 @@
     align-self: flex-start;
     margin-top: 4px;
   }
-  .werk-slide-link:hover {
+  .werk-project-link:hover {
     background: rgba(255,177,98,0.18);
     border-color: rgba(255,177,98,0.72);
     transform: translateY(-2px);
   }
 
   /* PREVIEW PANEL */
-  .werk-preview {
+  .werk-project-asset {
     position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 28px 28px 28px 16px;
-    background: rgba(17,22,29,0.55);
-    cursor: pointer;
-  }
-
-  .werk-browser-chrome {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 240px;
     border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
     background: #0D1117;
     box-shadow: 0 20px 60px rgba(0,0,0,0.55);
-  }
-
-  .werk-browser-bar {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
-    padding: 0 14px;
-    height: 38px;
-    background: rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    flex-shrink: 0;
   }
 
-  .werk-browser-dots {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .werk-browser-dots span {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  .werk-browser-dots span:nth-child(1) { background: #FF5F57; }
-  .werk-browser-dots span:nth-child(2) { background: #FFBD2E; }
-  .werk-browser-dots span:nth-child(3) { background: #28C840; }
-
-  .werk-browser-url {
-    flex: 1;
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .werk-slide-maximize {
-    width: 32px;
-    height: 32px;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 6px;
-    background: rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.55);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    transition: background 0.18s, color 0.18s;
-  }
-  .werk-slide-maximize:hover { background: rgba(255,255,255,0.14); color: #fff; }
-
-  .werk-browser-content {
-    position: relative;
-    flex: 1;
-    overflow: hidden;
-  }
-
-  .werk-slide-frame {
+  .werk-project-frame {
     width: 100%;
     height: 100%;
+    min-height: 220px;
+    flex: 1 1 auto;
     border: 0;
     background: #fff;
     pointer-events: none;
   }
+
+  .werk-project--split .werk-project-asset { padding: 10px; gap: 10px; }
+  .werk-project--split .werk-project-frame { flex: 1 1 55%; border-radius: 8px; min-height: 160px; }
+  .werk-project--split .werk-before-after { flex: 1 1 45%; min-height: 160px; }
+
+  @media (min-width: 48em) {
+    .werk-project {
+      flex-direction: row;
+      align-items: stretch;
+      padding: 0;
+      gap: 0;
+    }
+    .werk-project-panel {
+      flex: 0 0 40%;
+      padding: 44px 40px;
+      justify-content: flex-start;
+      background: rgba(11,14,19,0.78);
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .werk-project-asset {
+      flex: 1 1 60%;
+      border: 0;
+      border-radius: 0;
+      margin: 16px 16px 16px 0;
+    }
+  }
+
+  .werk-project-maximize {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 6px;
+    background: rgba(11,14,19,0.65);
+    color: rgba(255,255,255,0.75);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(6px);
+    transition: background 0.18s, color 0.18s;
+  }
+  .werk-project-maximize:hover { background: rgba(255,255,255,0.14); color: #fff; }
 
   .werk-iframe-fallback {
     display: none;
@@ -781,7 +808,7 @@
     color: #fff;
     margin: 0;
   }
-  .werk-fallback-note { font-size: 12px; color: rgba(255,255,255,0.4); margin: 0; }
+  .werk-fallback-note { font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; }
   .werk-fallback-cta {
     display: inline-flex;
     align-items: center;
@@ -800,79 +827,77 @@
   }
   .werk-fallback-cta:hover { background: rgba(255,177,98,0.12); }
 
-  /* SLIDER UI — outside stage */
-  .werk-slider-ui {
+  /* ---------- Before / after slider (MRSVision) ---------- */
+  .werk-before-after {
     display: flex;
-    align-items: center;
-    gap: 24px;
-    margin-top: 20px;
-    padding: 0 4px;
+    flex-direction: column;
+    gap: 8px;
   }
-
-  .werk-progress-area {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex: 1;
-  }
-
-  .werk-counter {
-    display: flex;
-    gap: 6px;
-    color: rgba(255,255,255,0.45);
+  .werk-before-after-title {
+    margin: 0;
     font-size: 11px;
     font-weight: 700;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.08em;
-    flex-shrink: 0;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
   }
-  .werk-counter-current { color: #fff; }
-
-  .werk-progress-track {
-    flex: 1;
-    height: 2px;
-    background: rgba(255,255,255,0.14);
-    border-radius: 2px;
+  .werk-before-after-frame {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 160px;
     overflow: hidden;
+    border-radius: 8px;
+    background: #0D1117;
+    --reveal: 50%;
   }
-  .werk-progress-fill {
-    width: 20%;
+  .werk-before-after-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
     height: 100%;
-    background: #FFB162;
-    border-radius: 2px;
-    transition: width 0.30s ease;
+    object-fit: cover;
   }
-
-  .werk-nav-buttons { display: flex; gap: 8px; flex-shrink: 0; }
-  .werk-nav-button {
-    width: 44px;
-    height: 44px;
-    border: 1px solid rgba(255,255,255,0.22);
-    border-radius: 50%;
-    background: rgba(11,14,19,0.55);
-    color: rgba(255,255,255,0.75);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    font-size: 16px;
-    backdrop-filter: blur(8px);
-    transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.15s;
-  }
-  .werk-nav-button:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.45);
+  .werk-before-after-img--before { clip-path: inset(0 calc(100% - var(--reveal)) 0 0); }
+  .werk-before-after-img--after  { clip-path: inset(0 0 0 var(--reveal)); }
+  .werk-before-after-label {
+    position: absolute;
+    top: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.55);
     color: #fff;
-    transform: translateY(-1px);
+    z-index: 2;
+  }
+  .werk-before-after-label--before { left: 10px; }
+  .werk-before-after-label--after { right: 10px; }
+  .werk-before-after-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--reveal);
+    width: 2px;
+    background: #fff;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .werk-before-after-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 3;
   }
 
-  .werk-nav-button:focus-visible,
-  .werk-slide-link:focus-visible,
-  .werk-slide-maximize:focus-visible,
-  .werk-fullscreen-close:focus-visible {
-    outline: 2px solid #FFB162;
-    outline-offset: 4px;
-  }
-
+  /* FULLSCREEN VIEWER (shared) */
   .werk-fullscreen {
     position: fixed;
     inset: 0;
@@ -882,19 +907,8 @@
     opacity: 0;
     transition: opacity 0.2s ease;
   }
-
-  .werk-fullscreen.active {
-    display: block;
-    opacity: 1;
-  }
-
-  .werk-fullscreen-frame {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: #fff;
-  }
-
+  .werk-fullscreen.active { display: block; opacity: 1; }
+  .werk-fullscreen-frame { width: 100%; height: 100%; border: 0; background: #fff; }
   .werk-fullscreen-bar {
     position: absolute;
     top: 18px;
@@ -907,7 +921,6 @@
     gap: 16px;
     pointer-events: none;
   }
-
   .werk-fullscreen-title,
   .werk-fullscreen-close {
     min-height: 44px;
@@ -917,7 +930,6 @@
     color: #fff;
     backdrop-filter: blur(14px);
   }
-
   .werk-fullscreen-title {
     display: inline-flex;
     align-items: center;
@@ -927,11 +939,13 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
+  .werk-fullscreen-close { width: 46px; cursor: pointer; pointer-events: auto; }
 
-  .werk-fullscreen-close {
-    width: 46px;
-    cursor: pointer;
-    pointer-events: auto;
+  .werk-project-maximize:focus-visible,
+  .werk-project-link:focus-visible,
+  .werk-fullscreen-close:focus-visible {
+    outline: 2px solid #FFB162;
+    outline-offset: 4px;
   }
 
   /* CONTACT */
@@ -1400,12 +1414,7 @@
     .hero { padding: 110px 20px 60px; }
     .diensten, .werk, .contact { padding: 80px 24px; }
     .diensten-grid { grid-template-columns: 1fr; }
-    .werk-stage { height: auto; min-height: 0; margin-top: 34px; border-radius: 10px; }
-    .werk-slide { grid-template-columns: 1fr; grid-template-rows: auto 260px; }
-    .werk-narrative { padding: 36px 28px; }
-    .werk-slide-title { font-size: clamp(28px, 6vw, 56px); }
-    .werk-preview { padding: 16px; }
-    .werk-progress-area { flex: 1; }
+    .werk-project-panel { padding: 36px 28px; }
     .form-row { grid-template-columns: 1fr; }
     .hero-bg-num { display: none; }
     footer { padding: 32px 24px; grid-template-columns: 1fr; gap: 14px; text-align: center; }
@@ -1447,11 +1456,9 @@
     .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
     .hero { padding: 96px 16px 48px; }
     .werk { padding-left: 16px; padding-right: 16px; }
-    .werk-slide { grid-template-rows: auto; }
-    .werk-narrative { padding: 28px 20px; gap: 14px; }
-    .werk-slide-title { font-size: clamp(26px, 8vw, 48px); }
-    .werk-preview { display: none; }
-    .werk-slider-ui { gap: 16px; }
+    .werk-project-panel { padding: 28px 20px; gap: 14px; }
+    /* Live iframe previews zijn zwaar op kleine telefoons: toon alleen tekst + "Open site" link */
+    .werk-project-asset { display: none; }
     .hero-inner { grid-template-columns: 1fr 0.85fr; gap: 8px; }
     .hero-title { font-size: clamp(22px, 8vw, 44px); line-height: 0.95; }
     .hero-sub { font-size: 11px; line-height: 1.45; margin: 10px 0 16px; }
@@ -2103,199 +2110,249 @@
 <section class="werk" id="werk">
   <p class="section-eyebrow">Eerder werk</p>
   <h2 class="section-title">Wat er<br>gebouwd is.</h2>
-  <p id="werkAnnouncer" class="sr-only" aria-live="polite"></p>
 
-  <div class="werk-stage" aria-label="Projecten slider" role="region">
-    <div id="werk-showcase" class="werk-showcase">
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="logo-ring-outer" viewBox="0 0 72 71" fill="white">
+      <path d="M40 71C38.5 71 37 70.8 35.5 70.4L18.5 65.7C13.7 64.4 9.8 61 7.8 56.5L0.8 40.5C-1.1 36-0.9 30.9 1.4 26.6L9.7 11.4C12 7.1 16.2 4.1 21.1 3.3L38.4 0.3C43.3-.6 48.3 0.8 52 4L65.3 15.5C69.1 18.7 71.1 23.4 70.9 28.3L70.2 45.6C70 50.5 67.6 55 63.6 57.9L49.4 67.9C46.6 69.9 43.3 71 40 71Z" fill="currentColor" fill-opacity="0.12"/>
+      <path d="M38.5 1L21.3 4C16.6 4.8 12.6 7.6 10.4 11.7L2.1 26.9C-.1 31-.3 35.8 1.6 40.1L8.6 56C10.5 60.3 14.2 63.5 18.8 64.8L35.8 69.5C40.4 70.8 45.2 70 49 67.2L63.2 57.1C67 54.4 69.3 50.1 69.5 45.5L70.2 28.2C70.4 23.5 68.4 19.1 64.8 16L51.6 4.6L38.5 1Z" stroke="currentColor" stroke-opacity="0.35" stroke-width="0.8"/>
+    </symbol>
+    <symbol id="logo-ring-inner" viewBox="0 0 74 72" fill="none">
+      <path d="M45.6 71H27.8C22.8 71 18.1 68.8 14.9 64.9L3.8 51.2L4.5 50.7L15.6 64.4C18.6 68.1 23 70.2 27.8 70.2H45.6C50.4 70.2 54.9 68.1 57.9 64.4L68.9 50.7L72.2 38.3C72.1 38 72.1 37.8 72 37.6L71.9 37.2L68.1 20.5C67 15.8 63.9 12 59.5 10L43.5 2.4C39.2 0.3 34.2 0.3 29.9 2.4L13.9 10C9.5 12 6.4 15.9 5.4 20.5L1.4 37.6C0.3 42.2 1.4 47 4.4 50.6" stroke="currentColor" stroke-opacity="0.5" stroke-width="0.8"/>
+    </symbol>
+  </svg>
 
-      <!-- SLIDE 1: MRS Vision -->
-      <article class="werk-slide" data-title="MRS Vision" data-url="https://mrsvision.nl">
-        <div class="werk-narrative">
-          <div class="werk-slide-meta">
-            <span class="werk-slide-num">01</span>
-            <span class="werk-meta-sep"></span>
-            <span class="werk-slide-cat">Website</span>
-            <span class="werk-slide-year">2024</span>
-          </div>
-          <h3 class="werk-slide-title">MRS<br>Vision</h3>
-          <p class="werk-slide-desc">Een scherp positioneerde corporate site voor een gespecialiseerd adviesbureau op het gebied van veiligheid en organisatieontwikkeling.</p>
-          <p class="werk-slide-tags">Strategie &middot; Design &middot; Development</p>
-          <a class="werk-slide-link" href="https://mrsvision.nl" target="_blank" rel="noopener">Open site ↗</a>
-        </div>
-        <div class="werk-preview" aria-label="Preview MRS Vision">
-          <div class="werk-browser-chrome">
-            <div class="werk-browser-bar">
-              <div class="werk-browser-dots"><span></span><span></span><span></span></div>
-              <span class="werk-browser-url">mrsvision.nl</span>
-              <button class="werk-slide-maximize" type="button" aria-label="MRS Vision fullscreen openen">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-            </div>
-            <div class="werk-browser-content">
-              <iframe class="werk-slide-frame" src="https://mrsvision.nl" title="MRS Vision live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
-              <div class="werk-iframe-fallback">
-                <p class="werk-fallback-name">MRS Vision</p>
-                <p class="werk-fallback-note">Preview niet beschikbaar</p>
-                <a class="werk-fallback-cta" href="https://mrsvision.nl" target="_blank" rel="noopener">Open site ↗</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+  <ul class="werk-projects" id="werk-projects">
 
-      <!-- SLIDE 2: FAINL -->
-      <article class="werk-slide" data-title="FAINL" data-url="https://fainl.com">
-        <div class="werk-narrative">
-          <div class="werk-slide-meta">
-            <span class="werk-slide-num">02</span>
-            <span class="werk-meta-sep"></span>
-            <span class="werk-slide-cat">AI Platform</span>
-            <span class="werk-slide-year">2024</span>
-          </div>
-          <h3 class="werk-slide-title">FAINL</h3>
-          <p class="werk-slide-desc">Platform voor AI-gedreven zakelijke besluitvorming. Van branding tot volledige front-end implementatie — snel, schaalbaar en doelgericht.</p>
-          <p class="werk-slide-tags">Branding &middot; UX &middot; AI &middot; Development</p>
-          <a class="werk-slide-link" href="https://fainl.com" target="_blank" rel="noopener">Open site ↗</a>
+    <!-- 01: MRS Vision -->
+    <li class="werk-project werk-project--split" data-title="MRSVision" data-url="https://mrsvision.nl">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">01</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">AI-visualisatie &middot; B2B</span>
         </div>
-        <div class="werk-preview" aria-label="Preview FAINL">
-          <div class="werk-browser-chrome">
-            <div class="werk-browser-bar">
-              <div class="werk-browser-dots"><span></span><span></span><span></span></div>
-              <span class="werk-browser-url">fainl.com</span>
-              <button class="werk-slide-maximize" type="button" aria-label="FAINL fullscreen openen">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-            </div>
-            <div class="werk-browser-content">
-              <iframe class="werk-slide-frame" src="https://fainl.com" title="FAINL live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
-              <div class="werk-iframe-fallback">
-                <p class="werk-fallback-name">FAINL</p>
-                <p class="werk-fallback-note">Preview niet beschikbaar</p>
-                <a class="werk-fallback-cta" href="https://fainl.com" target="_blank" rel="noopener">Open site ↗</a>
-              </div>
-            </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/mrjvoluit.png" alt="Mr. Jealousy logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">MRSVision</h3>
+        </div>
+        <p class="werk-project-desc">
+          <strong>mrsvision.nl</strong> is een interactieve, AI-gestuurde B2B-visualisatietool, ontwikkeld voor en gelieerd aan <strong>Mr. Jealousy</strong>. Het platform neemt de online drempel voor het kopen van maatwerk raambekleding weg: consumenten zien vooraf hoe jaloezieën in hun eigen ruimte staan en worden visueel geholpen bij het juist inmeten.
+          <br><br>
+          Gebruikers uploaden een foto van hun raam of ruimte, waarna de AI-engine superrealistische maatwerk jaloezieën in de foto rendert — direct schakelen tussen materialen, lamelbreedtes, ladderband of koord en kleuren. Een voor-en-na-slider en simulatie van lichtinval per dagdeel ondersteunen de meet- en bestelhulp, gekoppeld aan de meetgarantie van Mr. Jealousy.
+        </p>
+        <a class="werk-project-link" href="https://mrsvision.nl" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://mrj526-635857755618.europe-west4.run.app/" title="MRSVision live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-before-after" data-before-after>
+          <p class="werk-before-after-title">Voor &amp; na</p>
+          <div class="werk-before-after-frame">
+            <!-- TODO: vervang door de echte "voor"-foto -->
+            <img class="werk-before-after-img werk-before-after-img--before" src="img/mrsvision-before.jpg" alt="Situatie voor MRSVision" loading="lazy">
+            <!-- TODO: vervang door de echte "na"-foto -->
+            <img class="werk-before-after-img werk-before-after-img--after" src="img/mrsvision-after.jpg" alt="Situatie na MRSVision" loading="lazy">
+            <span class="werk-before-after-label werk-before-after-label--before">Voor</span>
+            <span class="werk-before-after-label werk-before-after-label--after">Na</span>
+            <div class="werk-before-after-handle"></div>
+            <input type="range" class="werk-before-after-slider" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
           </div>
         </div>
-      </article>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">MRSVision</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://mrsvision.nl" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="MRSVision fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
 
-      <!-- SLIDE 3: Windofy -->
-      <article class="werk-slide" data-title="Windofy" data-url="https://windofy.com">
-        <div class="werk-narrative">
-          <div class="werk-slide-meta">
-            <span class="werk-slide-num">03</span>
-            <span class="werk-meta-sep"></span>
-            <span class="werk-slide-cat">AI Visualisatie</span>
-            <span class="werk-slide-year">2024</span>
-          </div>
-          <h3 class="werk-slide-title">Windofy</h3>
-          <p class="werk-slide-desc">AI-tool die klanten in seconden laat zien hoe hun nieuwe ramen eruitzien. Van conversie-probleem naar overtuigend digitaal verkoopargument.</p>
-          <p class="werk-slide-tags">Product &middot; AI &middot; UX &middot; Conversie</p>
-          <a class="werk-slide-link" href="https://windofy.com" target="_blank" rel="noopener">Open site ↗</a>
+    <!-- 02: FAINL -->
+    <li class="werk-project" data-title="FAINL" data-url="https://fainl.com">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">02</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">AI Platform</span>
         </div>
-        <div class="werk-preview" aria-label="Preview Windofy">
-          <div class="werk-browser-chrome">
-            <div class="werk-browser-bar">
-              <div class="werk-browser-dots"><span></span><span></span><span></span></div>
-              <span class="werk-browser-url">windofy.com</span>
-              <button class="werk-slide-maximize" type="button" aria-label="Windofy fullscreen openen">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-            </div>
-            <div class="werk-browser-content">
-              <iframe class="werk-slide-frame" src="https://windofy.com" title="Windofy live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
-              <div class="werk-iframe-fallback">
-                <p class="werk-fallback-name">Windofy</p>
-                <p class="werk-fallback-note">Preview niet beschikbaar</p>
-                <a class="werk-fallback-cta" href="https://windofy.com" target="_blank" rel="noopener">Open site ↗</a>
-              </div>
-            </div>
-          </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/FAINL.png" alt="FAINL logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">FAINL</h3>
         </div>
-      </article>
+        <p class="werk-project-desc">
+          Zeven AI-modellen debatteren en leveren één gefundeerde conclusie. Niet één mening, maar een echt antwoord. FAINL is een consensus-orkestratielaag — je vraag wordt gelijktijdig door meerdere AI-modellen verwerkt (Gemini, GPT-4, Claude, Grok en meer) en er wordt één gezaghebbend antwoord gesynthetiseerd. Dit elimineert de bias van een enkel model en brengt meningsverschillen aan het licht, voor een evenwichtiger en betrouwbaarder perspectief.
+        </p>
+        <a class="werk-project-link" href="https://fainl.com" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://fainl.com" title="FAINL live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">FAINL</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://fainl.com" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="FAINL fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
 
-      <!-- SLIDE 4: De Notenman -->
-      <article class="werk-slide" data-title="De Notenman" data-url="https://denotenman.com">
-        <div class="werk-narrative">
-          <div class="werk-slide-meta">
-            <span class="werk-slide-num">04</span>
-            <span class="werk-meta-sep"></span>
-            <span class="werk-slide-cat">E-commerce</span>
-            <span class="werk-slide-year">2023</span>
-          </div>
-          <h3 class="werk-slide-title">De<br>Notenman</h3>
-          <p class="werk-slide-desc">Ambachtelijke noten, zaden en gedroogde vruchten online. Warme branding, snelle shopervaring en hogere conversie voor een gevestigde lokale naam.</p>
-          <p class="werk-slide-tags">Branding &middot; E-commerce &middot; Design</p>
-          <a class="werk-slide-link" href="https://denotenman.com" target="_blank" rel="noopener">Open site ↗</a>
+    <!-- 03: Windofy -->
+    <li class="werk-project" data-title="Windofy" data-url="https://windofy.com">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">03</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">AI Visualisatie</span>
         </div>
-        <div class="werk-preview" aria-label="Preview De Notenman">
-          <div class="werk-browser-chrome">
-            <div class="werk-browser-bar">
-              <div class="werk-browser-dots"><span></span><span></span><span></span></div>
-              <span class="werk-browser-url">denotenman.com</span>
-              <button class="werk-slide-maximize" type="button" aria-label="De Notenman fullscreen openen">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-            </div>
-            <div class="werk-browser-content">
-              <iframe class="werk-slide-frame" src="https://denotenman.com" title="De Notenman live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
-              <div class="werk-iframe-fallback">
-                <p class="werk-fallback-name">De Notenman</p>
-                <p class="werk-fallback-note">Preview niet beschikbaar</p>
-                <a class="werk-fallback-cta" href="https://denotenman.com" target="_blank" rel="noopener">Open site ↗</a>
-              </div>
-            </div>
-          </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/windofy-logo.png" alt="Windofy logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">Windofy</h3>
         </div>
-      </article>
+        <p class="werk-project-desc">
+          Slimme raamdecoratievisualisatie voor Windofy. MNRV ontwikkelde een visuele configuratie-oplossing waarmee klanten raamdecoratie direct in hun eigen interieur kunnen bekijken. Door foto-upload, productconfiguratie en realistische visualisatie samen te brengen wordt de keuze eenvoudiger, persoonlijker en overtuigender — minder twijfel, betere klantbeslissingen, minder retouren en hogere conversie.
+        </p>
+        <a class="werk-project-link" href="https://windofy.com" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://windofy.com" title="Windofy live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">Windofy</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://windofy.com" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="Windofy fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
 
-      <!-- SLIDE 5: MNRV -->
-      <article class="werk-slide" data-title="MNRV" data-url="https://mnrv.nl">
-        <div class="werk-narrative">
-          <div class="werk-slide-meta">
-            <span class="werk-slide-num">05</span>
-            <span class="werk-meta-sep"></span>
-            <span class="werk-slide-cat">Studio</span>
-            <span class="werk-slide-year">2025</span>
-          </div>
-          <h3 class="werk-slide-title">MNRV</h3>
-          <p class="werk-slide-desc">Onze eigen digitale identiteit — gebouwd op dezelfde principes waarmee we klanten bedienen: strak, snel, met karakter en vol intentie.</p>
-          <p class="werk-slide-tags">Identiteit &middot; Design &middot; Development</p>
-          <a class="werk-slide-link" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
+    <!-- 04: De Notenman -->
+    <li class="werk-project" data-title="De Notenman" data-url="https://denotenman.com">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">04</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">E-commerce</span>
         </div>
-        <div class="werk-preview" aria-label="Preview MNRV">
-          <div class="werk-browser-chrome">
-            <div class="werk-browser-bar">
-              <div class="werk-browser-dots"><span></span><span></span><span></span></div>
-              <span class="werk-browser-url">mnrv.nl</span>
-              <button class="werk-slide-maximize" type="button" aria-label="MNRV fullscreen openen">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-            </div>
-            <div class="werk-browser-content">
-              <iframe class="werk-slide-frame" src="https://mnrv.nl" title="MNRV live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
-              <div class="werk-iframe-fallback">
-                <p class="werk-fallback-name">MNRV</p>
-                <p class="werk-fallback-note">Preview niet beschikbaar</p>
-                <a class="werk-fallback-cta" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
-              </div>
-            </div>
-          </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/Notenman_logo.png" alt="De Notenman logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">De<br>Notenman</h3>
         </div>
-      </article>
+        <p class="werk-project-kicker">Bespoke e-commerce &middot; AI-indexering &middot; Backend automation</p>
+        <p class="werk-project-case-title">Van ambachtelijke speciaalzaak naar intelligent e-commerceplatform</p>
+        <p class="werk-project-desc">
+          Voor denotenman.com ontwikkelt MNRV geen standaard webshop, maar een volledig maatwerk e-commerceplatform waarin productbeleving, bestelgemak, SEO, AI-indexering, marketing automation en backendbeheer samenkomen. De frontend wordt volledig zelf ontwikkeld, inclusief configurator en een mobile-first gebruikerservaring die klanten snel en intuïtief door het assortiment leidt.
+        </p>
+        <ul class="werk-project-features">
+          <li>Zelfontwikkelde storefront en admin portal</li>
+          <li>Productbeheer, prijsbeheer en voorraadbeheer</li>
+          <li>Reviewmanagement en marketing automation</li>
+          <li>SEO-structuur en AI-indexering vanaf de basis</li>
+        </ul>
+        <a class="werk-project-link" href="https://denotenman.com" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://denotenman.com" title="De Notenman live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">De Notenman</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://denotenman.com" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="De Notenman fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
 
-    </div>
-  </div>
+    <!-- 05: Stuk Verdriet -->
+    <li class="werk-project" data-title="Stuk Verdriet" data-url="https://stukverdriet.com/start">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">05</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">Maatschappelijk &middot; Podcastplatform</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/sverdriet_logo.webp" alt="Stuk Verdriet logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">Stuk Verdriet<br>De Podcast</h3>
+        </div>
+        <p class="werk-project-desc">
+          Sommige projecten ontstaan uit strategie, maar de meest betekenisvolle bouw je vanuit overtuiging en gevoel. Achter dit platform schuilt een initiatief dat mensen verbindt op momenten waarop woorden vaak tekortschieten — een plek waar verhalen, herkenning en steun samenkomen rond verlies, rouw en afscheid.
+          <br><br>
+          Van strategie, UX en design tot de complete technische realisatie van de website, het podcastplatform, het beheersysteem en de online community: volledig belangeloos ontwikkeld, als bijdrage aan een samenleving waarin technologie mensen dichter bij elkaar kan brengen.
+        </p>
+        <a class="werk-project-link" href="https://stukverdriet.com/start" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://stukverdriet.com/start" title="Stuk Verdriet live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">Stuk Verdriet</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://stukverdriet.com/start" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="Stuk Verdriet fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
 
-  <div class="werk-slider-ui">
-    <div class="werk-progress-area">
-      <div class="werk-counter"><span id="werkCurrentIndex" class="werk-counter-current">01</span><span>/</span><span>05</span></div>
-      <div class="werk-progress-track"><div id="werkProgressFill" class="werk-progress-fill"></div></div>
-    </div>
-    <div class="werk-nav-buttons">
-      <button id="werkPrevBtn" class="werk-nav-button" type="button" aria-label="Vorig project">←</button>
-      <button id="werkNextBtn" class="werk-nav-button" type="button" aria-label="Volgend project">→</button>
-    </div>
-  </div>
+    <!-- 06: MNRV -->
+    <li class="werk-project" data-title="MNRV" data-url="https://mnrv.nl">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">06</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">Studio</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="MNRV_LOGO.png" alt="MNRV logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">MNRV</h3>
+        </div>
+        <p class="werk-project-desc">
+          Onze eigen digitale identiteit — gebouwd op dezelfde principes waarmee we klanten bedienen: strak, snel, met karakter en vol intentie.
+        </p>
+        <a class="werk-project-link" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://mnrv.nl" title="MNRV live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">MNRV</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="MNRV fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+  </ul>
 
   <div id="werkFullscreen" class="werk-fullscreen" aria-hidden="true">
     <iframe id="werkFullscreenFrame" class="werk-fullscreen-frame" title="Project fullscreen preview" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
@@ -2368,7 +2425,7 @@
 
 <footer>
   <span class="footer-logo">
-    <img src="MNRVLOGO.png" alt="MNRV">
+    <img src="MNRV_LOGO.png" alt="MNRV">
   </span>
   <div class="footer-socials" aria-label="Social media">
     <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="Instagram">
@@ -2598,67 +2655,17 @@ function closePreview(e, force) {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview(null, true); });
 
-function initWerkShowcase() {
-  const showcase = document.getElementById('werk-showcase');
-  if (!showcase) return;
-
-  const slides = Array.from(showcase.querySelectorAll('.werk-slide'));
-  const progressFill = document.getElementById('werkProgressFill');
-  const counterEl = document.getElementById('werkCurrentIndex');
-  const prevBtn = document.getElementById('werkPrevBtn');
-  const nextBtn = document.getElementById('werkNextBtn');
+function initWerkProjects() {
+  const projects = Array.from(document.querySelectorAll('.werk-project'));
   const fullscreen = document.getElementById('werkFullscreen');
   const fullscreenFrame = document.getElementById('werkFullscreenFrame');
   const fullscreenTitle = document.getElementById('werkFullscreenTitle');
   const fullscreenClose = document.getElementById('werkFullscreenClose');
-  const announcer = document.getElementById('werkAnnouncer');
+  if (!projects.length || !fullscreen) return;
 
-  let activeIndex = 0;
-  let ticking = false;
-
-  /* iframe fallback — show overlay if iframe fails to load in 4s */
-  slides.forEach(slide => {
-    const frame = slide.querySelector('.werk-slide-frame');
-    const fallback = slide.querySelector('.werk-iframe-fallback');
-    if (!frame || !fallback) return;
-    const timer = setTimeout(() => fallback.classList.add('visible'), 4000);
-    frame.addEventListener('load', () => clearTimeout(timer), { once: true });
-    frame.addEventListener('error', () => {
-      clearTimeout(timer);
-      fallback.classList.add('visible');
-    }, { once: true });
-  });
-
-  function getActiveIndex() {
-    const sw = showcase.scrollLeft;
-    let closest = 0, minD = Infinity;
-    slides.forEach((s, i) => {
-      const d = Math.abs(s.offsetLeft - sw);
-      if (d < minD) { minD = d; closest = i; }
-    });
-    return closest;
-  }
-
-  function updateUI() {
-    activeIndex = getActiveIndex();
-    counterEl.textContent = String(activeIndex + 1).padStart(2, '0');
-    progressFill.style.width = (((activeIndex + 1) / slides.length) * 100) + '%';
-    ticking = false;
-  }
-
-  function requestTick() {
-    if (!ticking) { requestAnimationFrame(updateUI); ticking = true; }
-  }
-
-  function scrollToSlide(index) {
-    const i = Math.max(0, Math.min(slides.length - 1, index));
-    slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-    if (announcer) announcer.textContent = slides[i].dataset.title || '';
-  }
-
-  function openFullscreen(slide) {
-    const url = slide.dataset.url;
-    const title = slide.dataset.title || 'Project';
+  function openFullscreen(project) {
+    const url = project.dataset.url;
+    const title = project.dataset.title || 'Project';
     if (!url) return;
     fullscreenTitle.textContent = title;
     fullscreenFrame.src = url;
@@ -2675,39 +2682,98 @@ function initWerkShowcase() {
     document.body.style.overflow = '';
   }
 
-  showcase.addEventListener('scroll', requestTick, { passive: true });
-  window.addEventListener('resize', requestTick);
-  prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
-  nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
-
-  slides.forEach(slide => {
-    const btn = slide.querySelector('.werk-slide-maximize');
-    if (btn) btn.addEventListener('click', e => { e.stopPropagation(); openFullscreen(slide); });
-    const preview = slide.querySelector('.werk-preview');
-    if (preview) preview.addEventListener('click', () => openFullscreen(slide));
+  projects.forEach(project => {
+    const frame = project.querySelector('.werk-project-frame');
+    const fallback = project.querySelector('.werk-iframe-fallback');
+    if (frame && fallback) {
+      const timer = setTimeout(() => fallback.classList.add('visible'), 4000);
+      frame.addEventListener('load', () => clearTimeout(timer), { once: true });
+      frame.addEventListener('error', () => {
+        clearTimeout(timer);
+        fallback.classList.add('visible');
+      }, { once: true });
+    }
+    const btn = project.querySelector('.werk-project-maximize');
+    if (btn) btn.addEventListener('click', () => openFullscreen(project));
   });
 
   fullscreenClose.addEventListener('click', closeFullscreen);
   fullscreen.addEventListener('click', e => { if (e.target === fullscreen) closeFullscreen(); });
-
   document.addEventListener('keydown', e => {
-    if (fullscreen.classList.contains('active')) {
-      if (e.key === 'Escape') closeFullscreen();
-      return;
-    }
-    const werkSection = document.getElementById('werk');
-    if (!werkSection) return;
-    const r = werkSection.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); scrollToSlide(activeIndex + 1); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollToSlide(activeIndex - 1); }
+    if (fullscreen.classList.contains('active') && e.key === 'Escape') closeFullscreen();
+  });
+  /* Focus trap: while open, don't let Tab escape to controls hidden behind the overlay */
+  document.addEventListener('focusin', e => {
+    if (fullscreen.classList.contains('active') && !fullscreen.contains(e.target)) {
+      fullscreenClose.focus();
     }
   });
-
-  updateUI();
 }
 
-initWerkShowcase();
+function initWerkSpinningLogos() {
+  const ROTATION_SPEED = 0.05;
+  const COUNTER_ROTATION_MULTIPLIER = -1.8;
+  const SMOOTHING = 0.1;
+
+  const marks = Array.from(document.querySelectorAll('.werk-project-mark')).map(mark => {
+    const [outer, inner] = mark.querySelectorAll('svg');
+    return { outer, inner };
+  });
+  if (!marks.length) return;
+
+  marks.forEach(({ outer, inner }) => {
+    if (outer) outer.style.willChange = 'transform';
+    if (inner) inner.style.willChange = 'transform';
+  });
+
+  let currentScroll = window.scrollY;
+  let targetScroll = currentScroll;
+  let rafId = null;
+
+  function lerp(start, end, t) { return start + (end - start) * t; }
+
+  function animate() {
+    currentScroll = lerp(currentScroll, targetScroll, SMOOTHING);
+    marks.forEach(({ outer, inner }) => {
+      const rotation = currentScroll * ROTATION_SPEED;
+      if (outer) outer.style.transform = `rotate(${rotation}deg)`;
+      if (inner) inner.style.transform = `rotate(${rotation * COUNTER_ROTATION_MULTIPLIER}deg)`;
+    });
+    rafId = requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('scroll', () => { targetScroll = window.scrollY; }, { passive: true });
+
+  const werkSection = document.getElementById('werk');
+  if ('IntersectionObserver' in window && werkSection) {
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && rafId === null) {
+        animate();
+      } else if (!entry.isIntersecting && rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    });
+    io.observe(werkSection);
+  } else {
+    animate();
+  }
+}
+
+function initWerkBeforeAfterSliders() {
+  document.querySelectorAll('[data-before-after]').forEach(wrapper => {
+    const frame = wrapper.querySelector('.werk-before-after-frame');
+    const range = wrapper.querySelector('.werk-before-after-slider');
+    if (!frame || !range) return;
+    const updateReveal = () => frame.style.setProperty('--reveal', `${range.value}%`);
+    range.addEventListener('input', updateReveal);
+    updateReveal();
+  });
+}
+
+initWerkProjects();
+initWerkSpinningLogos();
+initWerkBeforeAfterSliders();
 
 </script>
 <style>

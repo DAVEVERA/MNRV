@@ -1,0 +1,2867 @@
+<!DOCTYPE html>
+<html lang="nl" class="mnrv-modern">
+<head>
+  <!-- Google Consent Mode v2 (AVG/GDPR) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage:     'denied',
+      functionality_storage: 'denied',
+      security_storage:      'granted',
+      wait_for_update: 500
+    });
+    gtag('set', { ads_data_redaction: true });
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LTWVDY8K85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LTWVDY8K85');
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LTWVDY8K85');
+  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MNRV — AI-websites, apps &amp; agents | Dave Vera</title>
+<meta name="description" content="MNRV bouwt websites, apps en AI-flows met AI naadloos ingebouwd — chatbots, agents en automatisering. Eén maker voor development, design en AI. Bekijk het werk.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mnrv.nl/">
+<meta property="og:title" content="MNRV — AI-websites, apps & agents">
+<meta property="og:description" content="Websites, apps en AI-flows met AI naadloos ingebouwd. Eén maker voor development, design en AI. Mens én machine — digitale ervaringen die converteren, verrassen en binden.">
+<meta property="og:image" content="https://mnrv.nl/og-image.jpg">
+<meta property="og:site_name" content="MNRV">
+<meta property="og:locale" content="nl_NL">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MNRV — AI-websites, apps & agents">
+<meta name="twitter:description" content="Websites, apps en AI-flows met AI naadloos ingebouwd. Eén maker voor development, design en AI.">
+<meta name="twitter:image" content="https://mnrv.nl/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --palladian: #F6F4F0;
+    --oatmeal: #C6BCAF;
+    --blue: #3D5A6E;
+    --flame: #6B776E;
+    --truffle: #3D5A6E;
+    --abyss: #11161D;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: transparent;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--abyss);
+    transition: background 0.05s linear;
+  }
+
+  /* LIQUID BACKGROUND */
+  html { background: #0B0E13; }
+  #liquid-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.10;
+    will-change: transform;
+  }
+
+  /* NAV */
+  body > nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    background: rgba(238,233,223,0.6);
+    border-bottom: 1px solid rgba(44,59,77,0.08);
+    transition: background 0.3s;
+  }
+
+  .nav-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 2px;
+  }
+
+  .logo-letter {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 1;
+    display: inline-block;
+    background: linear-gradient(175deg, #F8CC48 0%, #E88B08 28%, #BC5008 60%, #D4840A 80%, #F5BE2A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .logo-letter:nth-child(1) { transition-delay: 0ms; }
+  .logo-letter:nth-child(2) { transition-delay: 35ms; }
+  .logo-letter:nth-child(3) { transition-delay: 70ms; }
+  .logo-letter:nth-child(4) { transition-delay: 105ms; }
+
+  .nav-logo:hover .logo-letter {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 5px 10px rgba(210,120,8,0.6));
+  }
+
+  .nav-cta {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--palladian);
+    background: var(--abyss);
+    padding: 10px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    border: 1px solid rgba(198,188,175,0.2);
+  }
+  .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 140px 48px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-text {
+    min-width: 0;
+  }
+
+  .hero-portret {
+    position: relative;
+    align-self: flex-start;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 0;
+  }
+  .hero-portret svg {
+    width: 100%;
+    height: auto;
+    max-height: 78vh;
+    display: block;
+    position: relative;
+    z-index: 1;
+    /* gericht licht van linksboven -> schaduw valt naar rechtsonder.
+       gelaagd: scherpe nabije ambient + zachte verre ambient zodat de
+       figuur volume krijgt i.p.v. een vlakke uitsnede te lijken. */
+    filter:
+      drop-shadow(2px 3px 3px rgba(11,14,19,0.20))
+      drop-shadow(6px 10px 14px rgba(11,14,19,0.22))
+      drop-shadow(14px 26px 40px rgba(11,14,19,0.20));
+  }
+  /* contactschaduw op de grond: harde kern onder de voeten (gewicht)
+     + bredere zachte diffusie eromheen, licht naar rechts verschoven
+     conform de lichtrichting. */
+  .hero-portret::before,
+  .hero-portret::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* zachte, brede omgevingsschaduw — pool of shadow */
+  .hero-portret::after {
+    left: 8%;
+    right: 6%;
+    bottom: 0%;
+    height: 9%;
+    background: radial-gradient(
+      ellipse 70% 55% at 48% 65%,
+      rgba(11,14,19,0.30) 0%,
+      rgba(11,14,19,0.14) 42%,
+      rgba(11,14,19,0.04) 68%,
+      rgba(11,14,19,0) 100%
+    );
+    filter: blur(14px);
+    transform: scaleX(1.08);
+  }
+  /* scherpe contactkern direct onder de zolen */
+  .hero-portret::before {
+    left: 24%;
+    right: 20%;
+    bottom: 0.8%;
+    height: 3.2%;
+    background: radial-gradient(
+      ellipse 60% 50% at 50% 50%,
+      rgba(8,10,14,0.70) 0%,
+      rgba(8,10,14,0.40) 40%,
+      rgba(8,10,14,0.12) 65%,
+      rgba(8,10,14,0) 85%
+    );
+    filter: blur(3px);
+    z-index: 0;
+  }
+
+  /* GLITCH EFFECT */
+  @keyframes glitchShift {
+    0%   { transform: translateX(0)     skewX(0deg);     filter: none; }
+    12%  { transform: translateX(-6px)  skewX(-1.2deg);  filter: hue-rotate(155deg) saturate(3) brightness(1.1); }
+    24%  { transform: translateX(4px)   skewX(0.6deg);   filter: hue-rotate(30deg)  saturate(2); }
+    36%  { transform: translateX(-3px)  skewX(0deg);     filter: none; }
+    50%  { transform: translateX(5px)   skewX(0.8deg);   filter: hue-rotate(210deg) saturate(2.5) brightness(1.05); }
+    66%  { transform: translateX(-2px)  skewX(-0.4deg);  filter: none; }
+    80%  { transform: translateX(2px)   skewX(0deg);     filter: hue-rotate(60deg)  saturate(1.5); }
+    100% { transform: translateX(0)     skewX(0deg);     filter: none; }
+  }
+
+  .hero-portret-wrap.is-glitching {
+    animation: glitchShift 0.22s steps(1, end) both;
+  }
+
+  /* Scanline overlay tijdens glitch */
+  .hero-portret-wrap.is-glitching::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 230, 200, 0.05) 0px,
+      rgba(0, 230, 200, 0.05) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    mix-blend-mode: screen;
+    animation: glitchFade 0.22s steps(1, end) both;
+  }
+
+  @keyframes glitchFade {
+    0%   { opacity: 0; }
+    15%  { opacity: 1; }
+    60%  { opacity: 0.7; }
+    85%  { opacity: 0.3; }
+    100% { opacity: 0; }
+  }
+
+  .hero-portret-wrap {
+    position: relative;
+    width: 100%;
+    max-height: 78vh;
+    overflow: hidden;
+  }
+
+  /* Aspect ratio slot: 2300×4094 → hoogte = 178% van breedte */
+  .hero-portret-wrap::before {
+    content: '';
+    display: block;
+    padding-top: 178%;
+  }
+
+  .hero-portret-img,
+  .hero-portret-digital,
+  .hero-portret-lizard {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+  }
+
+  /* Figuurschaduw via drop-shadow — volgt silhouet transparante PNG */
+  .hero-portret-img {
+    filter:
+      drop-shadow(2px 6px 8px rgba(11,14,19,0.22))
+      drop-shadow(6px 18px 30px rgba(11,14,19,0.18));
+  }
+
+  .hero-portret-digital,
+  .hero-portret-lizard {
+    opacity: 0;
+  }
+
+  .hero-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--flame);
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(56px, 9vw, 100px);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--abyss);
+    margin-bottom: 12px;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 500;
+    color: var(--blue);
+    max-width: 520px;
+    line-height: 1.6;
+    margin: 32px 0 48px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--abyss);
+    color: var(--palladian);
+    padding: 16px 36px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+    border: 1px solid rgba(198,188,175,0.15);
+  }
+  .btn-primary:hover { background: var(--blue); transform: translateY(-2px); }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--palladian);
+    outline-offset: 4px;
+  }
+
+  .btn-secondary {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 2px solid var(--abyss);
+    color: var(--abyss);
+    padding: 14px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { background: var(--abyss); color: var(--palladian); }
+
+  .logo-marquee {
+    overflow: hidden;
+    margin-top: 36px;
+    width: 100%;
+    max-width: 560px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .logo-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: logoMarquee 22s linear infinite;
+  }
+
+  .logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .logo-marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-right: 40px;
+    flex-shrink: 0;
+  }
+
+  .logo-marquee-group img {
+    display: block;
+    height: 40px;
+    width: auto;
+    max-width: 110px;
+    object-fit: contain;
+    opacity: 0.55;
+    filter: grayscale(1);
+    flex-shrink: 0;
+    transition: opacity 0.2s, filter 0.2s;
+  }
+
+  .logo-marquee-group img:hover {
+    opacity: 1;
+    filter: grayscale(0);
+  }
+
+  @keyframes logoMarquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 560px) {
+    .logo-marquee { max-width: 100%; }
+  }
+
+  /* DIENSTEN */
+  .diensten {
+    padding: 64px 48px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--abyss);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+
+  .hero-label,
+  .section-eyebrow {
+    display: none;
+  }
+
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--abyss);
+    margin-bottom: 64px;
+  }
+
+  .diensten-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .dienst-card {
+    background: rgba(238,233,223,0.55);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(44,59,77,0.1);
+    padding: 48px 36px;
+    transition: transform 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .dienst-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .dienst-card:hover { transform: translateY(-4px); background: rgba(238,233,223,0.85); }
+  .dienst-card:hover::before { transform: scaleX(1); }
+
+  .dienst-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--blue);
+    margin-bottom: 24px;
+  }
+  .dienst-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--abyss);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .dienst-card p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--blue);
+    font-weight: 300;
+  }
+
+  /* WERK + alles eronder = wit */
+  .werk, .contact, footer {
+    color: #fff;
+  }
+
+  .werk {
+    padding: 120px 24px;
+  }
+
+  .werk .section-eyebrow { color: rgba(255,255,255,0.45); }
+  .werk .section-title { color: #fff; }
+
+  /* ---------- Spinning client-logo ring ---------- */
+  .werk-project-mark {
+    display: inline-grid;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .werk-project-mark > * { grid-area: 1 / 1; }
+  .werk-project-mark picture {
+    width: 62%;
+    height: 62%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .werk-project-mark picture img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  @media (min-width: 48em) {
+    .werk-project-mark { width: 64px; height: 64px; }
+  }
+
+  /* ---------- Project list (sticky reveal) ---------- */
+  .werk-projects {
+    list-style: none;
+    margin: 46px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .werk-project {
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100svh - 40px);
+    padding: 28px 22px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0B0E13 0%, #1B2632 46%, #11161D 100%);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.40);
+  }
+
+  .werk-project-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .werk-project-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .werk-project-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #FFB162;
+  }
+  .werk-project-sep { width: 28px; height: 1px; background: rgba(255,255,255,0.28); flex-shrink: 0; }
+  .werk-project-cat {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .werk-project-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .werk-project-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .werk-project-kicker {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,177,98,0.85);
+    margin: 0;
+  }
+
+  .werk-project-case-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #fff;
+    margin: 0;
+  }
+
+  .werk-project-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.62);
+    font-weight: 300;
+    margin: 0;
+    max-width: 60ch;
+  }
+  .werk-project-desc strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  .werk-project-features {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .werk-project-features li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.55);
+    padding-left: 16px;
+    position: relative;
+  }
+  .werk-project-features li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFB162;
+  }
+
+  .werk-project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 22px;
+    border: 1px solid rgba(255,177,98,0.45);
+    border-radius: 4px;
+    background: rgba(255,177,98,0.08);
+    color: #FFB162;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  .werk-project-link:hover {
+    background: rgba(255,177,98,0.18);
+    border-color: rgba(255,177,98,0.72);
+    transform: translateY(-2px);
+  }
+
+  /* PREVIEW PANEL */
+  .werk-project-asset {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 240px;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0D1117;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .werk-project-frame {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    flex: 1 1 auto;
+    border: 0;
+    background: #fff;
+    pointer-events: none;
+  }
+
+  .werk-project--split .werk-project-asset { padding: 10px; gap: 10px; }
+  .werk-project--split .werk-project-frame { flex: 1 1 55%; border-radius: 8px; min-height: 160px; }
+  .werk-project--split .werk-before-after { flex: 1 1 45%; min-height: 160px; }
+
+  @media (min-width: 48em) {
+    .werk-project {
+      flex-direction: row;
+      align-items: stretch;
+      padding: 0;
+      gap: 0;
+    }
+    .werk-project-panel {
+      flex: 0 0 40%;
+      padding: 44px 40px;
+      justify-content: flex-start;
+      background: rgba(11,14,19,0.78);
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .werk-project-asset {
+      flex: 1 1 60%;
+      border: 0;
+      border-radius: 0;
+      margin: 16px 16px 16px 0;
+    }
+  }
+
+  .werk-project-maximize {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 6px;
+    background: rgba(11,14,19,0.65);
+    color: rgba(255,255,255,0.75);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(6px);
+    transition: background 0.18s, color 0.18s;
+  }
+  .werk-project-maximize:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+  .werk-iframe-fallback {
+    display: none;
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #0D1117 0%, #1B2632 100%);
+    text-align: center;
+    padding: 24px;
+  }
+  .werk-iframe-fallback.visible { display: flex; }
+  .werk-fallback-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+  }
+  .werk-fallback-note { font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; }
+  .werk-fallback-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255,177,98,0.5);
+    border-radius: 4px;
+    color: #FFB162;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.18s;
+    margin-top: 4px;
+  }
+  .werk-fallback-cta:hover { background: rgba(255,177,98,0.12); }
+
+  /* ---------- Before / after slider (MRSVision) ---------- */
+  .werk-before-after {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .werk-before-after-title {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+  .werk-before-after-frame {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 160px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #0D1117;
+    --reveal: 50%;
+  }
+  .werk-before-after-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .werk-before-after-img--before { clip-path: inset(0 calc(100% - var(--reveal)) 0 0); }
+  .werk-before-after-img--after  { clip-path: inset(0 0 0 var(--reveal)); }
+  .werk-before-after-label {
+    position: absolute;
+    top: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    z-index: 2;
+  }
+  .werk-before-after-label--before { left: 10px; }
+  .werk-before-after-label--after { right: 10px; }
+  .werk-before-after-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--reveal);
+    width: 2px;
+    background: #fff;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .werk-before-after-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 3;
+  }
+
+  /* FULLSCREEN VIEWER (shared) */
+  .werk-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: none;
+    background: #050607;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .werk-fullscreen.active { display: block; opacity: 1; }
+  .werk-fullscreen-frame { width: 100%; height: 100%; border: 0; background: #fff; }
+  .werk-fullscreen-bar {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    right: 18px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    pointer-events: none;
+  }
+  .werk-fullscreen-title,
+  .werk-fullscreen-close {
+    min-height: 44px;
+    border: 1px solid rgba(255,255,255,0.24);
+    border-radius: 999px;
+    background: rgba(11,14,19,0.72);
+    color: #fff;
+    backdrop-filter: blur(14px);
+  }
+  .werk-fullscreen-title {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .werk-fullscreen-close { width: 46px; cursor: pointer; pointer-events: auto; }
+
+  .werk-project-maximize:focus-visible,
+  .werk-project-link:focus-visible,
+  .werk-fullscreen-close:focus-visible {
+    outline: 2px solid #FFB162;
+    outline-offset: 4px;
+  }
+
+  /* CONTACT */
+  .contact {
+    padding: 120px 48px 80px;
+  }
+
+  .contact .section-title { color: var(--palladian); }
+  .contact .section-eyebrow { color: var(--palladian); }
+
+  .contact-layout {
+    max-width: 620px;
+  }
+
+  .contact-text p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--oatmeal);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .contact-info a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--oatmeal);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+  }
+  .contact-info a:hover { opacity: 0.7; }
+
+  .contact-actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .contact-cta-wrap {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .contact-intake-button {
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    position: relative;
+    z-index: 2;
+  }
+
+  .contact-popout-gif {
+    position: absolute;
+    left: calc(100% + 14px);
+    top: 50%;
+    width: 92px;
+    max-width: 28vw;
+    border-radius: 8px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-8px, -50%) scale(0.92);
+    transform-origin: left center;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 3;
+  }
+
+  .contact-cta-wrap:hover .contact-popout-gif,
+  .contact-cta-wrap:focus-within .contact-popout-gif {
+    opacity: 1;
+    transform: translate(0, -50%) scale(1);
+  }
+
+  .contact-intake-note {
+    max-width: 360px;
+    color: rgba(40,56,61,0.64);
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .contact-popout-gif {
+      position: static;
+      width: 76px;
+      max-width: 30vw;
+      opacity: 1;
+      transform: none;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+    .contact-cta-wrap:hover .contact-popout-gif,
+    .contact-cta-wrap:focus-within .contact-popout-gif {
+      transform: none;
+    }
+  }
+
+  /* SOCIAL FLYOUT */
+  .social-flyout {
+    position: fixed;
+    right: 18px;
+    top: 50%;
+    z-index: 190;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateY(-50%);
+  }
+
+  .social-flyout-toggle {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(238,233,223,0.34);
+    border-radius: 50%;
+    background:
+      linear-gradient(135deg, rgba(238,233,223,0.18), rgba(61,90,110,0.54)),
+      rgba(11,14,19,0.78);
+    color: var(--palladian);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.26);
+    backdrop-filter: blur(18px);
+    cursor: pointer;
+    transition: transform 0.18s, background 0.2s, border-color 0.2s;
+  }
+
+  .social-flyout-toggle:hover,
+  .social-flyout-toggle:focus-visible {
+    transform: translateX(-2px);
+    border-color: rgba(238,233,223,0.62);
+    background:
+      linear-gradient(135deg, rgba(238,233,223,0.26), rgba(61,90,110,0.72)),
+      rgba(11,14,19,0.82);
+    outline: none;
+  }
+
+  .social-flyout-toggle svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .social-flyout-panel {
+    position: absolute;
+    right: 68px;
+    top: 50%;
+    width: min(330px, calc(100vw - 104px));
+    max-height: min(520px, calc(100vh - 116px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 16px;
+    border: 1px solid rgba(238,233,223,0.18);
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(198,188,175,0.16), transparent 36%),
+      rgba(11,14,19,0.88);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.32);
+    backdrop-filter: blur(22px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(12px, -50%) scale(0.98);
+    transform-origin: right center;
+    transition: opacity 0.18s, transform 0.18s;
+    scrollbar-color: rgba(238,233,223,0.32) transparent;
+    scrollbar-width: thin;
+  }
+
+  .social-flyout.open .social-flyout-panel {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(0, -50%) scale(1);
+  }
+
+  .social-flyout-panel::-webkit-scrollbar { width: 7px; }
+  .social-flyout-panel::-webkit-scrollbar-thumb {
+    background: rgba(238,233,223,0.32);
+    border-radius: 999px;
+  }
+
+  .social-flyout-kicker {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(238,233,223,0.48);
+    margin-bottom: 6px;
+  }
+
+  .social-flyout-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    line-height: 1.08;
+    color: var(--palladian);
+    margin-bottom: 16px;
+  }
+
+  .social-links {
+    display: grid;
+    gap: 9px;
+  }
+
+  .social-link {
+    min-height: 58px;
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border: 1px solid rgba(238,233,223,0.12);
+    border-radius: 6px;
+    color: var(--palladian);
+    text-decoration: none;
+    background: rgba(238,233,223,0.06);
+    transition: transform 0.16s, border-color 0.18s, background 0.18s;
+  }
+
+  .social-link:hover,
+  .social-link:focus-visible {
+    transform: translateX(-3px);
+    border-color: rgba(238,233,223,0.32);
+    background: rgba(238,233,223,0.11);
+    outline: none;
+  }
+
+  .social-link-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--flame));
+    color: var(--palladian);
+  }
+
+  .social-link-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .social-link strong {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  .social-link-text {
+    min-width: 0;
+  }
+
+  .social-link-text span {
+    display: block;
+    margin-top: 2px;
+    color: rgba(238,233,223,0.52);
+    font-size: 12px;
+  }
+
+  .social-link-arrow {
+    color: rgba(238,233,223,0.38);
+    font-size: 18px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-field label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oatmeal);
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(238,233,223,0.15);
+    color: var(--palladian);
+    padding: 14px 16px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    outline: none;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: rgba(201,193,177,0.35); }
+  .form-field select { color: var(--oatmeal); cursor: pointer; }
+  .form-field select option { background: var(--abyss); color: var(--palladian); }
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--flame);
+  }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+
+  .btn-submit {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--blue);
+    color: var(--palladian);
+    border: none;
+    padding: 18px 40px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    width: 100%;
+  }
+  .btn-submit:hover { background: var(--flame); transform: translateY(-2px); }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 40px;
+    background: rgba(61,90,110,0.15);
+    border: 1px solid rgba(61,90,110,0.3);
+    border-radius: 2px;
+  }
+  .form-success h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--oatmeal);
+    margin-bottom: 8px;
+  }
+  .form-success p { color: var(--oatmeal); font-size: 15px; }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 48px;
+    border-top: 1px solid rgba(238,233,223,0.08);
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .footer-trustpilot {
+    align-self: center;
+    min-width: 160px;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-logo img {
+    display: block;
+    width: 76px;
+    height: auto;
+    opacity: 0.42;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-socials {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-socials a {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    color: rgba(255,255,255,0.54);
+    text-decoration: none;
+    transition: color 0.16s, border-color 0.16s, transform 0.16s, background 0.16s;
+  }
+
+  .footer-socials a:hover,
+  .footer-socials a:focus-visible {
+    color: var(--palladian);
+    border-color: rgba(255,255,255,0.34);
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .footer-socials svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .footer-legal {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding-top: 4px;
+  }
+
+  .footer-legal a {
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.36);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-legal a:hover,
+  .footer-legal a:focus-visible {
+    color: rgba(255,255,255,0.72);
+    outline: none;
+  }
+
+  /* DECORATIVE */
+  .hero-bg-num {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(160px, 22vw, 300px);
+    font-weight: 800;
+    color: rgba(44,59,77,0.06);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    body > nav { padding: 18px 24px; }
+    .hero { padding: 110px 20px 60px; }
+    .diensten, .werk, .contact { padding: 80px 24px; }
+    .diensten-grid { grid-template-columns: 1fr; }
+    .werk-project-panel { padding: 36px 28px; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-bg-num { display: none; }
+    footer { padding: 32px 24px; grid-template-columns: 1fr; gap: 14px; text-align: center; }
+    .footer-trustpilot { margin: 0 auto; }
+    .footer-legal { gap: 8px 14px; padding-top: 2px; }
+    .social-flyout {
+      left: 14px;
+      right: auto;
+      top: auto;
+      bottom: 92px;
+      transform: none;
+    }
+    .social-flyout-panel {
+      left: 0;
+      right: auto;
+      top: auto;
+      bottom: 66px;
+      width: min(330px, calc(100vw - 28px));
+      max-height: min(430px, calc(100vh - 118px));
+      transform: translateY(12px) scale(0.98);
+      transform-origin: left bottom;
+    }
+    .social-flyout.open .social-flyout-panel {
+      transform: translateY(0) scale(1);
+    }
+    /* hero blijft horizontaal: tekst links, foto rechts */
+    .hero-inner { grid-template-columns: 1.05fr 0.95fr; gap: 20px; }
+    .hero-title { font-size: clamp(30px, 7.5vw, 64px); }
+    .hero-sub { font-size: clamp(12px, 2.6vw, 18px); margin: 18px 0 26px; }
+    .hero-label { font-size: 9px; margin-bottom: 16px; }
+    .hero-portret { align-items: center; }
+    .hero-portret svg { max-height: 70vh; }
+    .hero-portret-wrap { max-height: 70vh; }
+  }
+  @media (max-width: 560px) {
+    body > nav { gap: 12px; }
+    .nav-logo { flex: 0 0 auto; }
+    .logo-letter { font-size: 36px; }
+    .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
+    .hero { padding: 96px 16px 48px; }
+    .werk { padding-left: 16px; padding-right: 16px; }
+    .werk-project-panel { padding: 28px 20px; gap: 14px; }
+    /* Live iframe previews zijn zwaar op kleine telefoons: toon alleen tekst + "Open site" link */
+    .werk-project-asset { display: none; }
+    .hero-inner { grid-template-columns: 1fr 0.85fr; gap: 8px; }
+    .hero-title { font-size: clamp(22px, 8vw, 44px); line-height: 0.95; }
+    .hero-sub { font-size: 11px; line-height: 1.45; margin: 10px 0 16px; }
+    .hero-ctas { gap: 8px; }
+    .btn-primary { padding: 10px 14px; font-size: 10px; }
+    .btn-secondary { padding: 8px 12px; font-size: 10px; }
+    .logo-marquee { margin-top: 20px; }
+    .logo-marquee-group img { height: 22px; }
+    .hero-portret-wrap { max-height: 55vh; }
+    .contact-actions { margin-bottom: 24px; }
+    .contact-cta-wrap { width: 100%; }
+    .contact-intake-button { width: 100%; max-width: 280px; text-align: center; }
+    .contact-popout-gif {
+      position: static;
+      width: 72px;
+      max-width: 30vw;
+      opacity: 1;
+      transform: none;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+    .contact-cta-wrap:hover .contact-popout-gif,
+    .contact-cta-wrap:focus-within .contact-popout-gif {
+      transform: none;
+    }
+    .contact-intake-note { max-width: 280px; font-size: 11px; }
+    .intake-modal-inner { height: 90vh; }
+    .hero-portret { align-items: center; }
+    .hero-portret svg { max-height: 62vh; }
+    .hero-portret-wrap { max-height: 62vh; }
+    /* foto staat gecentreerd (niet op de bodem): alleen zachte diffusie, geen harde contactkern */
+    .hero-portret::before { display: none; }
+    .hero-portret::after {
+      left: 14%; right: 10%; bottom: 6%; height: 4%;
+      filter: blur(11px);
+    }
+  }
+
+  /* ANIMATE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-label { animation: fadeUp 0.6s ease both; }
+  .hero-title { animation: fadeUp 0.7s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-ctas { animation: fadeUp 0.7s 0.3s ease both; }
+
+
+  /* OVER */
+  .over {
+    padding: 100px 48px 120px;
+    position: relative;
+    isolation: isolate;
+    color: #fff;
+  }
+  .over::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(165deg,
+      rgba(8,12,18,0.82) 0%,
+      rgba(14,22,32,0.88) 40%,
+      rgba(10,16,24,0.84) 100%);
+    pointer-events: none;
+  }
+
+  /* HERO */
+  .over-hero {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 64px;
+    align-items: start;
+    margin-bottom: 88px;
+  }
+  .over-hero-text .section-eyebrow { color: rgba(255,255,255,0.38); }
+  .over-headline {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(26px, 3.2vw, 48px);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 8px 0 22px;
+  }
+  .over-hero-lead {
+    font-size: 16px;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.58);
+    font-weight: 300;
+    margin: 0 0 16px;
+  }
+  .over-hero-body {
+    font-size: 15px;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.38);
+    font-weight: 300;
+    margin: 0;
+  }
+  .over-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* TEAM — editorial rows */
+  .over-team { margin-bottom: 72px; }
+  .over-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #FFB162;
+    margin: 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .over-team-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .over-person {
+    padding: 40px 48px 40px 0;
+  }
+  .over-team-row .over-person:last-child {
+    padding: 40px 0 40px 48px;
+    border-left: 1px solid rgba(255,255,255,0.06);
+  }
+  .over-person-role {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #FFB162;
+    margin: 0 0 10px;
+  }
+  .over-person-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 14px;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+  }
+  .over-team-secondary .over-person-name { font-size: 22px; }
+  .over-person-desc {
+    font-size: 14px;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.48);
+    font-weight: 300;
+    margin: 0;
+  }
+  .over-person-strength {
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.28);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .over-team-secondary .over-person-strength { display: none; }
+
+  /* BUILDS */
+  .over-builds {
+    margin-bottom: 72px;
+    padding-top: 52px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .over-builds-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .over-builds-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 300;
+    margin: 0 0 28px;
+  }
+  .over-builds-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .over-builds-tags li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.58);
+    font-weight: 400;
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    transition: border-color 0.18s, color 0.18s;
+    cursor: default;
+  }
+  .over-builds-tags li:hover {
+    border-color: rgba(255,177,98,0.4);
+    color: #FFB162;
+  }
+
+  /* AI GOVERNANCE */
+  .over-ai-gov {
+    max-width: 680px;
+    margin-bottom: 72px;
+    padding-top: 52px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .over-ai-gov-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin: 0 0 12px;
+  }
+  .over-ai-gov-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  .over-ai-gov p {
+    font-size: 15px;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    margin: 0 0 14px;
+  }
+  .over-ai-gov p:last-child { margin-bottom: 0; }
+  .over-ai-gov strong { color: rgba(255,255,255,0.78); font-weight: 500; }
+  .over-ai-why-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    margin: 28px 0 10px;
+  }
+
+  /* CLOSING */
+  .over-closing {
+    padding-top: 52px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .over-closing p {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(20px, 2.8vw, 36px);
+    font-weight: 800;
+    color: rgba(255,255,255,0.6);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .over-closing small {
+    font-size: 11px;
+    color: rgba(255,255,255,0.22);
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .shift-text { color: #fff; }
+
+  @media (max-width: 900px) {
+    .over { padding: 72px 24px 96px; }
+    .over-hero { grid-template-columns: 1fr; gap: 32px; }
+    .over-hero-image { max-width: 320px; }
+    .over-team-row { grid-template-columns: 1fr; }
+    .over-person { padding: 32px 0; }
+    .over-team-row .over-person:last-child { padding: 32px 0; border-left: none; border-top: 1px solid rgba(255,255,255,0.05); }
+  }
+  @media (max-width: 560px) {
+    .over { padding: 56px 16px 72px; }
+    .over-headline { font-size: clamp(22px, 7vw, 36px); }
+    .over-person-name { font-size: 24px; }
+    .over-hero-image { max-width: 100%; }
+    .over-builds-tags li { font-size: 12px; padding: 7px 14px; }
+  }
+
+  /* MODAL */
+  #preview-modal,
+  #intake-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(11,14,19,0.85);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  #preview-modal.open,
+  #intake-modal.open { display: flex; }
+
+  .modal-inner {
+    width: 100%;
+    max-width: 1200px;
+    height: 85vh;
+    background: #11161D;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    animation: modalIn 0.25s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .intake-modal-inner {
+    max-width: 980px;
+    height: min(88vh, 920px);
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.96) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    background: #0b0e13;
+    flex-shrink: 0;
+  }
+  #modal-title,
+  #intake-modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.06em;
+  }
+  .modal-actions { display: flex; align-items: center; gap: 12px; }
+  .modal-ext {
+    font-size: 16px;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+    line-height: 1;
+  }
+  .modal-ext:hover { color: #fff; }
+  .modal-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.35);
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+    padding: 0;
+  }
+  .modal-close:hover { color: #fff; }
+
+  .modal-frame-wrap {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  #preview-frame,
+  #intake-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .modal-blocked {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: #11161D;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: rgba(255,255,255,0.5);
+    font-size: 15px;
+    text-align: center;
+  }
+  .modal-blocked.visible { display: flex; }
+</style>
+  <link rel="stylesheet" href="../components/cookie-banner.css">
+  <script src="../components/cookie-banner.js" defer></script>
+  <!-- TrustBox script -->
+  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+  <!-- End TrustBox script -->
+</head>
+<body>
+
+<canvas id="liquid-bg"></canvas>
+
+<nav>
+  <a href="#" class="nav-logo" aria-label="MNRV">
+    <span class="logo-letter">M</span>
+    <span class="logo-letter">N</span>
+    <span class="logo-letter">R</span>
+    <span class="logo-letter">V</span>
+  </a>
+  <a href="#contact" class="nav-cta">Start project</a>
+</nav>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="icon-share" viewBox="0 0 24 24">
+    <circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <path d="M8.7 10.7 15.3 6.3M8.7 13.3l6.6 4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+  </symbol>
+  <symbol id="icon-instagram" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+    <circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <circle cx="17" cy="7" r="1.1" fill="currentColor"></circle>
+  </symbol>
+  <symbol id="icon-linkedin" viewBox="0 0 24 24">
+    <path d="M5 9h3.2v10H5V9Zm1.6-4.5a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8ZM10.4 9h3.1v1.4c.5-.8 1.5-1.7 3.2-1.7 3.4 0 4 2.2 4 5.1V19h-3.2v-4.6c0-1.1 0-2.5-1.6-2.5s-1.8 1.2-1.8 2.4V19h-3.2V9Z" fill="currentColor"></path>
+  </symbol>
+  <symbol id="icon-facebook" viewBox="0 0 24 24">
+    <path d="M14.2 8.4V6.8c0-.8.5-1.1 1.2-1.1h1.8V2.8c-.9-.1-1.8-.2-2.7-.2-2.7 0-4.5 1.6-4.5 4.5v1.3H7v3.3h3V21h3.7v-9.3h2.9l.5-3.3h-3Z" fill="currentColor"></path>
+  </symbol>
+  <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+    <path d="M12 3.2a8.6 8.6 0 0 0-7.3 13.2L3.6 20.8l4.5-1.1A8.6 8.6 0 1 0 12 3.2Zm0 15.4c-1.4 0-2.8-.4-3.9-1.2l-.3-.2-2.3.6.6-2.2-.2-.4a6.8 6.8 0 1 1 6.1 3.4Zm3.9-5.1c-.2-.1-1.3-.7-1.5-.7-.2-.1-.4-.1-.5.1l-.7.8c-.1.2-.3.2-.5.1a5.6 5.6 0 0 1-2.8-2.4c-.2-.3 0-.4.1-.6l.4-.5c.1-.2.1-.3 0-.5l-.7-1.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.8-.9 2s.9 2.4 1.1 2.6c.1.1 1.8 2.8 4.4 3.8.6.3 1.1.4 1.5.5.6.2 1.2.1 1.6.1.5-.1 1.3-.6 1.5-1.1.2-.6.2-1 .1-1.1-.1-.2-.2-.2-.4-.3Z" fill="currentColor"></path>
+  </symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24">
+    <path d="M6.7 4.2 9 3.7c.6-.1 1.1.2 1.3.7l1 2.4c.2.5.1 1-.3 1.3L9.7 9.3a10.9 10.9 0 0 0 5 5l1.2-1.3c.4-.4.9-.5 1.4-.3l2.3 1c.6.2.9.8.8 1.3l-.5 2.4c-.1.6-.6 1-1.2 1A14.7 14.7 0 0 1 5.6 5.4c0-.6.5-1.1 1.1-1.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+  </symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24">
+    <rect x="4" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+    <path d="m5.5 8 6.5 5 6.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+  </symbol>
+</svg>
+
+<aside class="social-flyout" id="social-flyout" aria-label="Social media en contact">
+  <button class="social-flyout-toggle" id="social-flyout-toggle" type="button" aria-label="Open social media" aria-expanded="false" aria-controls="social-flyout-panel">
+    <svg aria-hidden="true"><use href="#icon-share"></use></svg>
+  </button>
+  <div class="social-flyout-panel" id="social-flyout-panel" aria-hidden="true">
+    <p class="social-flyout-kicker">Connect</p>
+    <h2 class="social-flyout-title">MNRV direct bereiken.</h2>
+    <div class="social-links">
+      <a class="social-link" href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="MNRV op Instagram">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-instagram"></use></svg></span>
+        <span class="social-link-text"><strong>Instagram</strong><span>@mnrv.ai</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener" aria-label="Dave Vera op LinkedIn">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-linkedin"></use></svg></span>
+        <span class="social-link-text"><strong>LinkedIn</strong><span>Dave Vera</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener" aria-label="Meneer Vera op Facebook">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-facebook"></use></svg></span>
+        <span class="social-link-text"><strong>Facebook</strong><span>Meneer Vera</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="https://wa.me/31682456410" target="_blank" rel="noopener" aria-label="Stuur MNRV een WhatsApp bericht">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg></span>
+        <span class="social-link-text"><strong>WhatsApp</strong><span>+31 6 82 45 64 10</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="tel:+31682456410" aria-label="Bel MNRV">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-phone"></use></svg></span>
+        <span class="social-link-text"><strong>Bellen</strong><span>Direct contact</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="social-link" href="mailto:info@mnrv.nl" aria-label="Mail MNRV">
+        <span class="social-link-icon"><svg aria-hidden="true"><use href="#icon-mail"></use></svg></span>
+        <span class="social-link-text"><strong>E-mail</strong><span>info@mnrv.nl</span></span>
+        <span class="social-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-num">AI</div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-label">mnrv.nl — Dave Vera</p>
+      <h1 class="hero-title">Verbinden doet versnellen.</h1>
+      <p class="hero-sub">
+        Orkestratie van technologie. Synthese van systemen. Versnelling van resultaat.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Start een project</a>
+        <a href="#werk" class="btn-secondary">Bekijk werk</a>
+      </div>
+      <div class="logo-marquee" aria-label="Opdrachtgevers">
+        <div class="logo-marquee-track">
+          <div class="logo-marquee-group">
+            <img src="logo_clients/FAINL.png" alt="FAINL" loading="lazy">
+            <img src="logo_clients/windofy-logo.png" alt="Windofy" loading="lazy">
+            <img src="logo_clients/Notenman_logo.png" alt="Notenman" loading="lazy">
+            <img src="logo_clients/mrjvoluit.png" alt="MRJ Voluit" loading="lazy">
+            <img src="logo_clients/oostendorpauto.png" alt="Oostendorp Auto" loading="lazy">
+            <img src="logo_clients/sverdriet_logo.webp" alt="S. Verdriet" loading="lazy">
+          </div>
+          <div class="logo-marquee-group" aria-hidden="true">
+            <img src="logo_clients/FAINL.png" alt="" loading="lazy">
+            <img src="logo_clients/windofy-logo.png" alt="" loading="lazy">
+            <img src="logo_clients/Notenman_logo.png" alt="" loading="lazy">
+            <img src="logo_clients/mrjvoluit.png" alt="" loading="lazy">
+            <img src="logo_clients/oostendorpauto.png" alt="" loading="lazy">
+            <img src="logo_clients/sverdriet_logo.webp" alt="" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-portret">
+      <div class="hero-portret-wrap">
+        <img src="DaveHeel.PNG" alt="Dave Vera" class="hero-portret-img">
+        <img src="PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true">
+        <img src="davelizard.png" alt="" class="hero-portret-lizard" aria-hidden="true">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIENSTEN -->
+<section class="diensten" id="diensten">
+  <p class="section-eyebrow">Wat ik bouw</p>
+  <h2 class="section-title">Case<br>Studies.</h2>
+  <div class="diensten-grid">
+    <div class="dienst-card">
+      <p class="dienst-num">01 / Web</p>
+      <h3>Websites &amp; apps</h3>
+      <p>Schaalbare websites, apps en marketingsites met slimme UX, gebouwd op een moderne stack. Snel, toegankelijk en ontworpen om te converteren.</p>
+    </div>
+    <div class="dienst-card">
+      <p class="dienst-num">02 / AI</p>
+      <h3>AI-agents &amp; chatbots</h3>
+      <p>Intelligente assistenten, productaanbevelingen en automatisering die naadloos in je platform leven — AI die vandaag al werk uit handen neemt.</p>
+    </div>
+    <div class="dienst-card">
+      <p class="dienst-num">03 / Tools</p>
+      <h3>Maatwerk &amp; integraties</h3>
+      <p>Interne tools, koppelingen en workflows die systemen verbinden en processen versnellen. Gebouwd rond jouw manier van werken.</p>
+    </div>
+    <div class="dienst-card">
+      <p class="dienst-num">04 / Workforce</p>
+      <h3>Workforce management tools</h3>
+      <p>Planning, bezetting, taakverdeling en operationele dashboards die teams grip geven op capaciteit, beschikbaarheid en dagelijkse uitvoering.</p>
+    </div>
+    <div class="dienst-card">
+      <p class="dienst-num">05 / Reviews</p>
+      <h3>Review management</h3>
+      <p>Flows voor het verzamelen, monitoren en opvolgen van reviews, met slimme signalering en acties die reputatie en klantrelaties versterken.</p>
+    </div>
+    <div class="dienst-card">
+      <p class="dienst-num">06 / Knowledge</p>
+      <h3>Lokale kennisbanken</h3>
+      <p>Kennisbanken op maat waarin bedrijfskennis, processen en antwoorden centraal staan, klaar voor medewerkers, klanten en AI-assistenten.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OVER -->
+<section class="over" id="over">
+
+  <!-- HERO: headline + team image -->
+  <div class="over-hero">
+    <div class="over-hero-text">
+      <p class="section-eyebrow">Over MNRV</p>
+      <h2 class="over-headline">De kracht van design, development en AI onder één dak.</h2>
+      <p class="over-hero-lead">MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten. Wij zijn een compact en slagvaardig team van specialisten die operations, design, development en AI samenbrengen in één geïntegreerde aanpak.</p>
+      <p class="over-hero-body">Wat ons onderscheidt, is dat we niet denken vanuit losse disciplines, maar vanuit het geheel. De beste digitale oplossingen ontstaan namelijk niet wanneer strategie, processen, design en techniek afzonderlijk van elkaar worden ontwikkeld, maar wanneer ze vanaf het begin als één ecosysteem worden ontworpen.</p>
+    </div>
+    <div class="over-hero-image">
+      <img src="Andrew%20Dave.png" alt="Andrew en Dave, MNRV" loading="lazy">
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="over-team">
+    <p class="over-section-label">De mensen achter MNRV</p>
+
+    <div class="over-team-row">
+      <div class="over-person">
+        <p class="over-person-role">Chef Speciale</p>
+        <h3 class="over-person-name">Andrew</h3>
+        <p class="over-person-desc">Specialist in supply chain automation, operations en customer excellence. Waar anderen complexiteit zien, ziet hij kansen om processen slimmer, sneller en beter te organiseren.</p>
+        <p class="over-person-strength">Zijn kracht ligt in het verbinden van operatie, automatisering en klantbeleving tot één samenwerkend geheel.</p>
+      </div>
+      <div class="over-person">
+        <p class="over-person-role">AI Architect &amp; Mid-Stack Developer</p>
+        <h3 class="over-person-name">Dave</h3>
+        <p class="over-person-desc">Van architectuur en softwareontwikkeling tot AI-integraties en automatisering: Dave bouwt de oplossingen die gebruikers zien én de technologie die daarachter draait.</p>
+        <p class="over-person-strength">Niet alleen op papier, maar werkend, schaalbaar en klaar voor de praktijk.</p>
+      </div>
+    </div>
+
+    <div class="over-team-row over-team-secondary">
+      <div class="over-person">
+        <p class="over-person-role">Development Partner</p>
+        <h3 class="over-person-name">Arpit</h3>
+        <p class="over-person-desc">Bij grotere projecten schakelen we graag de expertise van Arpit in — een waardevolle uitbreiding die complexe oplossingen sneller en efficiënter realiseert.</p>
+      </div>
+      <div class="over-person">
+        <p class="over-person-role">Grafisch Vormgever</p>
+        <h3 class="over-person-name">Rick</h3>
+        <p class="over-person-desc">Rick vertaalt complexe ideeën en AI-modellen naar intuïtieve interfaces. Hij maakt configurators en dashboards niet alleen slim, maar ook begrijpelijk en toegankelijk.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAT WE BOUWEN -->
+  <div class="over-builds">
+    <h3 class="over-builds-heading">Wat we bouwen</h3>
+    <p class="over-builds-sub">Technologie die niet achteraf wordt toegevoegd, maar vanaf de basis slim wordt geïntegreerd.</p>
+    <ul class="over-builds-tags">
+      <li>Intelligente configurators</li>
+      <li>AI-agents &amp; automatiseringen</li>
+      <li>Websites &amp; webshops</li>
+      <li>Maatwerkplatformen</li>
+      <li>Geautomatiseerde bedrijfsprocessen</li>
+      <li>Digitale ervaringen voor groei</li>
+    </ul>
+  </div>
+
+  <!-- AI GOVERNANCE -->
+  <div class="over-ai-gov">
+    <p class="over-ai-gov-label">AI Governance &amp; Private AI</p>
+    <h3 class="over-ai-gov-heading">Mens en machine in balans</h3>
+    <p>Ons werk bevindt zich op het snijvlak van mens en machine. We bouwen oplossingen die logisch voelen voor gebruikers, terwijl onder de motorkap geavanceerde technologie het zware werk doet. Geen AI om de AI — maar technologie die aantoonbaar waarde toevoegt.</p>
+    <h4 class="over-ai-why-heading">Waarom AI Governance belangrijk is</h4>
+    <p>Met de komst van de AI Act en strengere GDPR-eisen wordt het steeds belangrijker om grip te houden op data, modellen en processen. Daarom implementeren wij waar mogelijk lokale AI-oplossingen en private LLM's die draaien binnen de eigen infrastructuur van een organisatie.</p>
+    <p><strong>Faciliteren kun je leren:</strong> door de juiste technologie, processen en begeleiding samen te brengen zorgen we ervoor dat AI niet alleen voldoet aan wet- en regelgeving, maar ook daadwerkelijk waarde toevoegt voor de mensen die ermee werken.</p>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="over-closing">
+    <p>Eén geïntegreerd ecosysteem.</p>
+    <small>Strategie · Operations · Design · Development · AI</small>
+  </div>
+
+</section>
+
+<!-- WERK -->
+<section class="werk" id="werk">
+  <p class="section-eyebrow">Eerder werk</p>
+  <h2 class="section-title">Wat er<br>gebouwd is.</h2>
+
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="logo-ring-outer" viewBox="0 0 72 71" fill="white">
+      <path d="M40 71C38.5 71 37 70.8 35.5 70.4L18.5 65.7C13.7 64.4 9.8 61 7.8 56.5L0.8 40.5C-1.1 36-0.9 30.9 1.4 26.6L9.7 11.4C12 7.1 16.2 4.1 21.1 3.3L38.4 0.3C43.3-.6 48.3 0.8 52 4L65.3 15.5C69.1 18.7 71.1 23.4 70.9 28.3L70.2 45.6C70 50.5 67.6 55 63.6 57.9L49.4 67.9C46.6 69.9 43.3 71 40 71Z" fill="currentColor" fill-opacity="0.12"/>
+      <path d="M38.5 1L21.3 4C16.6 4.8 12.6 7.6 10.4 11.7L2.1 26.9C-.1 31-.3 35.8 1.6 40.1L8.6 56C10.5 60.3 14.2 63.5 18.8 64.8L35.8 69.5C40.4 70.8 45.2 70 49 67.2L63.2 57.1C67 54.4 69.3 50.1 69.5 45.5L70.2 28.2C70.4 23.5 68.4 19.1 64.8 16L51.6 4.6L38.5 1Z" stroke="currentColor" stroke-opacity="0.35" stroke-width="0.8"/>
+    </symbol>
+    <symbol id="logo-ring-inner" viewBox="0 0 74 72" fill="none">
+      <path d="M45.6 71H27.8C22.8 71 18.1 68.8 14.9 64.9L3.8 51.2L4.5 50.7L15.6 64.4C18.6 68.1 23 70.2 27.8 70.2H45.6C50.4 70.2 54.9 68.1 57.9 64.4L68.9 50.7L72.2 38.3C72.1 38 72.1 37.8 72 37.6L71.9 37.2L68.1 20.5C67 15.8 63.9 12 59.5 10L43.5 2.4C39.2 0.3 34.2 0.3 29.9 2.4L13.9 10C9.5 12 6.4 15.9 5.4 20.5L1.4 37.6C0.3 42.2 1.4 47 4.4 50.6" stroke="currentColor" stroke-opacity="0.5" stroke-width="0.8"/>
+    </symbol>
+  </svg>
+
+  <ul class="werk-projects" id="werk-projects">
+
+    <!-- 01: MRS Vision -->
+    <li class="werk-project werk-project--split" data-title="MRSVision" data-url="https://mrsvision.nl">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">01</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">AI-visualisatie &middot; B2B</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/mrjvoluit.png" alt="Mr. Jealousy logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">MRSVision</h3>
+        </div>
+        <p class="werk-project-desc">
+          <strong>mrsvision.nl</strong> is een interactieve, AI-gestuurde B2B-visualisatietool, ontwikkeld voor en gelieerd aan <strong>Mr. Jealousy</strong>. Het platform neemt de online drempel voor het kopen van maatwerk raambekleding weg: consumenten zien vooraf hoe jaloezieën in hun eigen ruimte staan en worden visueel geholpen bij het juist inmeten.
+          <br><br>
+          Gebruikers uploaden een foto van hun raam of ruimte, waarna de AI-engine superrealistische maatwerk jaloezieën in de foto rendert — direct schakelen tussen materialen, lamelbreedtes, ladderband of koord en kleuren. Een voor-en-na-slider en simulatie van lichtinval per dagdeel ondersteunen de meet- en bestelhulp, gekoppeld aan de meetgarantie van Mr. Jealousy.
+        </p>
+        <a class="werk-project-link" href="https://mrsvision.nl" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://mrj526-635857755618.europe-west4.run.app/" title="MRSVision live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-before-after" data-before-after>
+          <p class="werk-before-after-title">Voor &amp; na</p>
+          <div class="werk-before-after-frame">
+            <!-- TODO: vervang door de echte "voor"-foto -->
+            <img class="werk-before-after-img werk-before-after-img--before" src="img/mrsvision-before.jpg" alt="Situatie voor MRSVision" loading="lazy">
+            <!-- TODO: vervang door de echte "na"-foto -->
+            <img class="werk-before-after-img werk-before-after-img--after" src="img/mrsvision-after.jpg" alt="Situatie na MRSVision" loading="lazy">
+            <span class="werk-before-after-label werk-before-after-label--before">Voor</span>
+            <span class="werk-before-after-label werk-before-after-label--after">Na</span>
+            <div class="werk-before-after-handle"></div>
+            <input type="range" class="werk-before-after-slider" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
+          </div>
+        </div>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">MRSVision</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://mrsvision.nl" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="MRSVision fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+    <!-- 02: FAINL -->
+    <li class="werk-project" data-title="FAINL" data-url="https://fainl.com">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">02</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">AI Platform</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/FAINL.png" alt="FAINL logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">FAINL</h3>
+        </div>
+        <p class="werk-project-desc">
+          Zeven AI-modellen debatteren en leveren één gefundeerde conclusie. Niet één mening, maar een echt antwoord. FAINL is een consensus-orkestratielaag — je vraag wordt gelijktijdig door meerdere AI-modellen verwerkt (Gemini, GPT-4, Claude, Grok en meer) en er wordt één gezaghebbend antwoord gesynthetiseerd. Dit elimineert de bias van een enkel model en brengt meningsverschillen aan het licht, voor een evenwichtiger en betrouwbaarder perspectief.
+        </p>
+        <a class="werk-project-link" href="https://fainl.com" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://fainl.com" title="FAINL live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">FAINL</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://fainl.com" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="FAINL fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+    <!-- 03: Windofy -->
+    <li class="werk-project" data-title="Windofy" data-url="https://windofy.com">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">03</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">AI Visualisatie</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/windofy-logo.png" alt="Windofy logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">Windofy</h3>
+        </div>
+        <p class="werk-project-desc">
+          Slimme raamdecoratievisualisatie voor Windofy. MNRV ontwikkelde een visuele configuratie-oplossing waarmee klanten raamdecoratie direct in hun eigen interieur kunnen bekijken. Door foto-upload, productconfiguratie en realistische visualisatie samen te brengen wordt de keuze eenvoudiger, persoonlijker en overtuigender — minder twijfel, betere klantbeslissingen, minder retouren en hogere conversie.
+        </p>
+        <a class="werk-project-link" href="https://windofy.com" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://windofy.com" title="Windofy live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">Windofy</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://windofy.com" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="Windofy fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+    <!-- 04: De Notenman -->
+    <li class="werk-project" data-title="De Notenman" data-url="https://denotenman.com">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">04</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">E-commerce</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/Notenman_logo.png" alt="De Notenman logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">De<br>Notenman</h3>
+        </div>
+        <p class="werk-project-kicker">Bespoke e-commerce &middot; AI-indexering &middot; Backend automation</p>
+        <p class="werk-project-case-title">Van ambachtelijke speciaalzaak naar intelligent e-commerceplatform</p>
+        <p class="werk-project-desc">
+          Voor denotenman.com ontwikkelt MNRV geen standaard webshop, maar een volledig maatwerk e-commerceplatform waarin productbeleving, bestelgemak, SEO, AI-indexering, marketing automation en backendbeheer samenkomen. De frontend wordt volledig zelf ontwikkeld, inclusief configurator en een mobile-first gebruikerservaring die klanten snel en intuïtief door het assortiment leidt.
+        </p>
+        <ul class="werk-project-features">
+          <li>Zelfontwikkelde storefront en admin portal</li>
+          <li>Productbeheer, prijsbeheer en voorraadbeheer</li>
+          <li>Reviewmanagement en marketing automation</li>
+          <li>SEO-structuur en AI-indexering vanaf de basis</li>
+        </ul>
+        <a class="werk-project-link" href="https://denotenman.com" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://denotenman.com" title="De Notenman live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">De Notenman</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://denotenman.com" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="De Notenman fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+    <!-- 05: Stuk Verdriet -->
+    <li class="werk-project" data-title="Stuk Verdriet" data-url="https://stukverdriet.com/start">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">05</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">Maatschappelijk &middot; Podcastplatform</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="logo_clients/sverdriet_logo.webp" alt="Stuk Verdriet logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">Stuk Verdriet<br>De Podcast</h3>
+        </div>
+        <p class="werk-project-desc">
+          Sommige projecten ontstaan uit strategie, maar de meest betekenisvolle bouw je vanuit overtuiging en gevoel. Achter dit platform schuilt een initiatief dat mensen verbindt op momenten waarop woorden vaak tekortschieten — een plek waar verhalen, herkenning en steun samenkomen rond verlies, rouw en afscheid.
+          <br><br>
+          Van strategie, UX en design tot de complete technische realisatie van de website, het podcastplatform, het beheersysteem en de online community: volledig belangeloos ontwikkeld, als bijdrage aan een samenleving waarin technologie mensen dichter bij elkaar kan brengen.
+        </p>
+        <a class="werk-project-link" href="https://stukverdriet.com/start" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://stukverdriet.com/start" title="Stuk Verdriet live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">Stuk Verdriet</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://stukverdriet.com/start" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="Stuk Verdriet fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+    <!-- 06: MNRV -->
+    <li class="werk-project" data-title="MNRV" data-url="https://mnrv.nl">
+      <div class="werk-project-panel">
+        <div class="werk-project-meta">
+          <span class="werk-project-num">06</span>
+          <span class="werk-project-sep"></span>
+          <span class="werk-project-cat">Studio</span>
+        </div>
+        <div class="werk-project-head">
+          <figure class="werk-project-mark">
+            <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
+            <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
+            <picture><img src="../mnrv-logo2-transparent.png" alt="MNRV logo" loading="lazy"></picture>
+          </figure>
+          <h3 class="werk-project-title">MNRV</h3>
+        </div>
+        <p class="werk-project-desc">
+          Onze eigen digitale identiteit — gebouwd op dezelfde principes waarmee we klanten bedienen: strak, snel, met karakter en vol intentie.
+        </p>
+        <a class="werk-project-link" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
+      </div>
+      <div class="werk-project-asset">
+        <iframe class="werk-project-frame" tabindex="-1" src="https://mnrv.nl" title="MNRV live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <div class="werk-iframe-fallback">
+          <p class="werk-fallback-name">MNRV</p>
+          <p class="werk-fallback-note">Preview niet beschikbaar</p>
+          <a class="werk-fallback-cta" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
+        </div>
+        <button class="werk-project-maximize" type="button" aria-label="MNRV fullscreen openen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+  </ul>
+
+  <div id="werkFullscreen" class="werk-fullscreen" aria-hidden="true">
+    <iframe id="werkFullscreenFrame" class="werk-fullscreen-frame" title="Project fullscreen preview" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+    <div class="werk-fullscreen-bar">
+      <div id="werkFullscreenTitle" class="werk-fullscreen-title">Project</div>
+      <button id="werkFullscreenClose" class="werk-fullscreen-close" type="button" aria-label="Fullscreen sluiten">×</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-eyebrow">Contact</p>
+  <h2 class="section-title">Laten we<br>praten.</h2>
+  <div class="contact-layout">
+    <div class="contact-text">
+      <p>
+        Heb je een idee, een vraag of wil je direct weten wat ik voor jouw bedrijf kan betekenen? Vul de korte intake in, dan kan ik gericht met je meekijken.
+      </p>
+      <div class="contact-actions">
+        <div class="contact-cta-wrap">
+          <button class="btn-primary contact-intake-button" type="button" id="open-intake-modal">Okaayy, let's go!</button>
+          <img class="contact-popout-gif" src="img/okay%20lets%20go.gif" alt="" loading="lazy" aria-hidden="true">
+          <span class="contact-intake-note">(*Een kan koffie en gebruik van laptop, tablet of PC worden aanbevolen)</span>
+        </div>
+      </div>
+      <div class="contact-info">
+        <a href="mailto:info@mnrv.nl">info@mnrv.nl</a>
+        <a href="https://mnrv.nl" target="_blank">mnrv.nl</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTAKE MODAL -->
+<div id="intake-modal" aria-hidden="true">
+  <div class="modal-inner intake-modal-inner" role="dialog" aria-modal="true" aria-labelledby="intake-modal-title">
+    <div class="modal-bar">
+      <span id="intake-modal-title">Website intakeformulier</span>
+      <div class="modal-actions">
+        <a href="../intakeformulier.html" target="_blank" rel="noopener" class="modal-ext" title="Open in nieuw tabblad" aria-label="Open intakeformulier in nieuw tabblad">&#8599;</a>
+        <button class="modal-close" type="button" id="close-intake-modal" aria-label="Intakeformulier sluiten">&times;</button>
+      </div>
+    </div>
+    <div class="modal-frame-wrap">
+      <iframe id="intake-frame" title="MNRV website intakeformulier" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div id="preview-modal" onclick="closePreview(event)">
+  <div class="modal-inner">
+    <div class="modal-bar">
+      <span id="modal-title"></span>
+      <div class="modal-actions">
+        <a id="modal-link" href="#" target="_blank" rel="noopener" class="modal-ext" title="Open in nieuw tabblad">↗</a>
+        <button class="modal-close" onclick="closePreview(null, true)">✕</button>
+      </div>
+    </div>
+    <div class="modal-frame-wrap">
+      <iframe id="preview-frame" src="" sandbox="allow-scripts allow-forms allow-popups"></iframe>
+      <div class="modal-blocked" id="modal-blocked">
+        <p>Deze site staat geen ingebedde weergave toe.</p>
+        <a id="modal-blocked-link" href="#" target="_blank" rel="noopener" class="btn-primary">Bezoek site →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">
+    <img src="MNRVLOGO.png" alt="MNRV">
+  </span>
+  <div class="footer-socials" aria-label="Social media">
+    <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg aria-hidden="true"><use href="#icon-instagram"></use></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+    </a>
+    <a href="https://www.facebook.com/meneervera/" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg aria-hidden="true"><use href="#icon-facebook"></use></svg>
+    </a>
+    <a href="https://wa.me/31682456410" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
+    </a>
+    <a href="mailto:info@mnrv.nl" aria-label="E-mail">
+      <svg aria-hidden="true"><use href="#icon-mail"></use></svg>
+    </a>
+  </div>
+  <!-- TrustBox widget - Review Collector -->
+  <div class="footer-trustpilot trustpilot-widget"
+    data-locale="nl-NL"
+    data-template-id="56278e9abfbbba0bdcd568bc"
+    data-businessunit-id="6a2c2e3fbd8ef9bede041276"
+    data-style-height="40px"
+    data-style-width="100%"
+    data-token="e6acc674-401c-40e7-a158-29c7e5882af0">
+    <a href="https://nl.trustpilot.com/review/mnrv.nl" target="_blank" rel="noopener">Trustpilot</a>
+  </div>
+  <!-- End TrustBox widget -->
+  <span class="footer-copy">© 2025 MNRV / Dave Vera — mnrv.nl</span>
+  <nav class="footer-legal" aria-label="Juridische documenten MNRV">
+    <a href="Documenten/MNRV_Privacyverklaring_12-06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">Privacyverklaring</a>
+    <a href="Documenten/MNRV_Cookieverklaring_12-06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">Cookieverklaring</a>
+    <a href="Documenten/MNRV_Algemene_Voorwaarden_12-06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">Algemene Voorwaarden</a>
+    <a href="Documenten/MNRV_Verwerkersovereenkomst_12-06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">Verwerkersovereenkomst</a>
+    <a href="Documenten/MNRV_SLA_06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">SLA</a>
+  </nav>
+</footer>
+
+<script>
+// Scroll-driven gradient
+const stops = [
+  { r: 246, g: 244, b: 240 }, // #F6F4F0 warm white
+  { r: 198, g: 188, b: 175 }, // #C6BCAF greige
+  { r: 107, g: 119, b: 110 }, // #6B776E forest mist
+  { r:  61, g:  90, b: 110 }, // #3D5A6E steel blue
+  { r:  17, g:  22, b:  29 }, // #11161D deep ink
+  { r:  11, g:  14, b:  19 }, // darker deep ink
+];
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function getColor(progress) {
+  const n = stops.length - 1;
+  const scaled = progress * n;
+  const i = Math.min(Math.floor(scaled), n - 1);
+  const t = scaled - i;
+  const a = stops[i], b = stops[i + 1];
+  return `rgba(${Math.round(lerp(a.r,b.r,t))},${Math.round(lerp(a.g,b.g,t))},${Math.round(lerp(a.b,b.b,t))},0.80)`;
+}
+
+function getGradient(progress) {
+  const shift = 0.12;
+  const p0 = Math.max(0, progress - shift);
+  const p1 = Math.min(1, progress + shift);
+  const c0 = getColor(p0);
+  const c1 = getColor(progress);
+  const c2 = getColor(p1);
+  return `linear-gradient(to bottom, ${c0} 0%, ${c1} 50%, ${c2} 100%)`;
+}
+
+function onScroll() {
+  const scrollTop = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+  document.body.style.background = getGradient(progress);
+  updateShiftText();
+}
+
+// Tekstovergang: marineblauw (#1B2A3A) -> wit, gedreven door scrollpositie.
+// Elk .shift-text element kantelt rond het midden van het scherm, met een
+// kleine stagger (data-shift) zodat de overgang vloeiend over de tekst rolt.
+const NAVY = [27, 42, 58]; // #1B2A3A
+function updateShiftText() {
+  const els = document.querySelectorAll('.shift-text');
+  if (!els.length) return;
+  const vh = window.innerHeight;
+  els.forEach(el => {
+    const order = parseFloat(el.dataset.shift || 0);
+    const rect = el.getBoundingClientRect();
+    const center = rect.top + rect.height / 2;
+    // latere elementen kantelen iets later -> natuurlijke, rollende overgang
+    const start = vh * (0.68 + order * 0.015); // begint te shiften onder het midden
+    const end   = vh * (0.40 + order * 0.015); // volledig wit boven het midden
+    let t = (start - center) / (start - end);
+    t = Math.max(0, Math.min(1, t));
+    // ease-in-out voor een zachtere overgang
+    const e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    const r = Math.round(NAVY[0] + (255 - NAVY[0]) * e);
+    const g = Math.round(NAVY[1] + (255 - NAVY[1]) * e);
+    const b = Math.round(NAVY[2] + (255 - NAVY[2]) * e);
+    el.style.setProperty('--shift-color', `rgb(${r},${g},${b})`);
+  });
+}
+
+let _sTick = false;
+window.addEventListener('scroll', () => {
+  if (!_sTick) { requestAnimationFrame(() => { onScroll(); _sTick = false; }); _sTick = true; }
+}, { passive: true });
+onScroll();
+
+function initSocialFlyout() {
+  const flyout = document.getElementById('social-flyout');
+  const toggle = document.getElementById('social-flyout-toggle');
+  const panel = document.getElementById('social-flyout-panel');
+  if (!flyout || !toggle || !panel) return;
+
+  function setOpen(open) {
+    flyout.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    setOpen(!flyout.classList.contains('open'));
+  });
+
+  panel.addEventListener('click', e => {
+    e.stopPropagation();
+    if (e.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('click', e => {
+    if (!flyout.contains(e.target)) setOpen(false);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && flyout.classList.contains('open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+}
+
+initSocialFlyout();
+
+// Nav background update based on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  const p = Math.min(window.scrollY / 400, 1);
+  if (p > 0.5) {
+    nav.style.background = 'rgba(27,38,50,0.75)';
+    nav.style.borderBottomColor = 'rgba(255,177,98,0.12)';
+    nav.querySelector('.nav-logo').style.color = '#EEE9DF';
+  } else {
+    nav.style.background = 'rgba(238,233,223,0.6)';
+    nav.style.borderBottomColor = 'rgba(44,59,77,0.08)';
+    nav.querySelector('.nav-logo').style.color = '#1B2632';
+  }
+}, { passive: true });
+
+function initIntakeModal() {
+  const openButton = document.getElementById('open-intake-modal');
+  const closeButton = document.getElementById('close-intake-modal');
+  const modal = document.getElementById('intake-modal');
+  const frame = document.getElementById('intake-frame');
+  if (!openButton || !closeButton || !modal || !frame) return;
+
+  const intakeUrl = '../intakeformulier.html';
+
+  function openIntake() {
+    frame.src = intakeUrl;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeButton.focus();
+  }
+
+  function closeIntake() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    frame.src = '';
+    document.body.style.overflow = '';
+    openButton.focus();
+  }
+
+  openButton.addEventListener('click', openIntake);
+  closeButton.addEventListener('click', closeIntake);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeIntake();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeIntake();
+  });
+}
+
+initIntakeModal();
+
+function openPreview(url, title) {
+  const modal = document.getElementById('preview-modal');
+  const frame = document.getElementById('preview-frame');
+  const blocked = document.getElementById('modal-blocked');
+  const modalTitle = document.getElementById('modal-title');
+  const modalLink = document.getElementById('modal-link');
+  const blockedLink = document.getElementById('modal-blocked-link');
+
+  modalTitle.textContent = title;
+  modalLink.href = url;
+  blockedLink.href = url;
+  blocked.classList.remove('visible');
+  frame.style.display = 'block';
+  frame.src = url;
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePreview(e, force) {
+  if (!force && e && e.target !== document.getElementById('preview-modal')) return;
+  const modal = document.getElementById('preview-modal');
+  const frame = document.getElementById('preview-frame');
+  modal.classList.remove('open');
+  frame.src = '';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview(null, true); });
+
+function initWerkProjects() {
+  const projects = Array.from(document.querySelectorAll('.werk-project'));
+  const fullscreen = document.getElementById('werkFullscreen');
+  const fullscreenFrame = document.getElementById('werkFullscreenFrame');
+  const fullscreenTitle = document.getElementById('werkFullscreenTitle');
+  const fullscreenClose = document.getElementById('werkFullscreenClose');
+  if (!projects.length || !fullscreen) return;
+
+  function openFullscreen(project) {
+    const url = project.dataset.url;
+    const title = project.dataset.title || 'Project';
+    if (!url) return;
+    fullscreenTitle.textContent = title;
+    fullscreenFrame.src = url;
+    fullscreen.classList.add('active');
+    fullscreen.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    fullscreenClose.focus();
+  }
+
+  function closeFullscreen() {
+    fullscreen.classList.remove('active');
+    fullscreen.setAttribute('aria-hidden', 'true');
+    fullscreenFrame.src = '';
+    document.body.style.overflow = '';
+  }
+
+  projects.forEach(project => {
+    const frame = project.querySelector('.werk-project-frame');
+    const fallback = project.querySelector('.werk-iframe-fallback');
+    if (frame && fallback) {
+      const timer = setTimeout(() => fallback.classList.add('visible'), 4000);
+      frame.addEventListener('load', () => clearTimeout(timer), { once: true });
+      frame.addEventListener('error', () => {
+        clearTimeout(timer);
+        fallback.classList.add('visible');
+      }, { once: true });
+    }
+    const btn = project.querySelector('.werk-project-maximize');
+    if (btn) btn.addEventListener('click', () => openFullscreen(project));
+  });
+
+  fullscreenClose.addEventListener('click', closeFullscreen);
+  fullscreen.addEventListener('click', e => { if (e.target === fullscreen) closeFullscreen(); });
+  document.addEventListener('keydown', e => {
+    if (fullscreen.classList.contains('active') && e.key === 'Escape') closeFullscreen();
+  });
+  /* Focus trap: while open, don't let Tab escape to controls hidden behind the overlay */
+  document.addEventListener('focusin', e => {
+    if (fullscreen.classList.contains('active') && !fullscreen.contains(e.target)) {
+      fullscreenClose.focus();
+    }
+  });
+}
+
+function initWerkSpinningLogos() {
+  const ROTATION_SPEED = 0.05;
+  const COUNTER_ROTATION_MULTIPLIER = -1.8;
+  const SMOOTHING = 0.1;
+
+  const marks = Array.from(document.querySelectorAll('.werk-project-mark')).map(mark => {
+    const [outer, inner] = mark.querySelectorAll('svg');
+    return { outer, inner };
+  });
+  if (!marks.length) return;
+
+  marks.forEach(({ outer, inner }) => {
+    if (outer) outer.style.willChange = 'transform';
+    if (inner) inner.style.willChange = 'transform';
+  });
+
+  let currentScroll = window.scrollY;
+  let targetScroll = currentScroll;
+  let rafId = null;
+
+  function lerp(start, end, t) { return start + (end - start) * t; }
+
+  function animate() {
+    currentScroll = lerp(currentScroll, targetScroll, SMOOTHING);
+    marks.forEach(({ outer, inner }) => {
+      const rotation = currentScroll * ROTATION_SPEED;
+      if (outer) outer.style.transform = `rotate(${rotation}deg)`;
+      if (inner) inner.style.transform = `rotate(${rotation * COUNTER_ROTATION_MULTIPLIER}deg)`;
+    });
+    rafId = requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('scroll', () => { targetScroll = window.scrollY; }, { passive: true });
+
+  const werkSection = document.getElementById('werk');
+  if ('IntersectionObserver' in window && werkSection) {
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && rafId === null) {
+        animate();
+      } else if (!entry.isIntersecting && rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    });
+    io.observe(werkSection);
+  } else {
+    animate();
+  }
+}
+
+function initWerkBeforeAfterSliders() {
+  document.querySelectorAll('[data-before-after]').forEach(wrapper => {
+    const frame = wrapper.querySelector('.werk-before-after-frame');
+    const range = wrapper.querySelector('.werk-before-after-slider');
+    if (!frame || !range) return;
+    const updateReveal = () => frame.style.setProperty('--reveal', `${range.value}%`);
+    range.addEventListener('input', updateReveal);
+    updateReveal();
+  });
+}
+
+initWerkProjects();
+initWerkSpinningLogos();
+initWerkBeforeAfterSliders();
+
+</script>
+<style>
+  .paragraph-spacing {
+    display: block;
+    height: 1.5em;
+  }
+</style>
+<script>
+/* TL-buis flikkering: hero portret digitaal */
+(function() {
+  var digital = document.querySelector('.hero-portret-digital');
+  var lizard = document.querySelector('.hero-portret-lizard');
+  var glitchLayers = [digital, lizard].filter(Boolean);
+  if (!glitchLayers.length) return;
+
+  var wrap = document.querySelector('.hero-portret-wrap');
+
+  function hideGlitchLayers() {
+    glitchLayers.forEach(function(layer) {
+      layer.style.opacity = '0';
+    });
+  }
+
+  function triggerGlitch(ms) {
+    if (!wrap) return;
+    wrap.classList.add('is-glitching');
+    setTimeout(function() { wrap.classList.remove('is-glitching'); }, ms || 220);
+  }
+
+  function flicker() {
+    var flashes = 1 + Math.floor(Math.random() * 2); // 1 of 2 flitsen
+    var i = 0;
+
+    // Pre-flicker glitch
+    triggerGlitch(180);
+
+    function doFlash() {
+      if (i >= flashes) {
+        hideGlitchLayers();
+        // Post-flicker glitch
+        setTimeout(function() { triggerGlitch(160); }, 40);
+        scheduleNext();
+        return;
+      }
+      var layer = glitchLayers[Math.floor(Math.random() * glitchLayers.length)];
+      hideGlitchLayers();
+      layer.style.transition = 'opacity 0.03s ease-in';
+      layer.style.opacity = '0.88';
+      setTimeout(function() {
+        layer.style.transition = 'opacity 0.05s ease-out';
+        layer.style.opacity = '0';
+        setTimeout(function() {
+          i++;
+          doFlash();
+        }, 90 + Math.floor(Math.random() * 110)); // 90-200ms uit
+      }, 100 + Math.floor(Math.random() * 80)); // 100-180ms aan
+    }
+
+    setTimeout(doFlash, 80); // kort wachten zodat pre-glitch eerst zichtbaar is
+  }
+
+  function scheduleNext() {
+    var delay = 5000 + Math.floor(Math.random() * 3000); // 5-8 seconden
+    setTimeout(flicker, delay);
+  }
+
+  // Eerste flikkering na 2-3 seconden
+  setTimeout(flicker, 2000 + Math.floor(Math.random() * 1000));
+})();
+</script>
+
+<script type="module">
+import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.27/build/backgrounds/liquid1.min.js';
+const canvas = document.getElementById('liquid-bg');
+const app = LiquidBackground(canvas);
+app.liquidPlane.material.metalness = 0.72;
+app.liquidPlane.material.roughness = 0.28;
+app.liquidPlane.uniforms.displacementScale.value = 1.2;
+app.setRain(false);
+// Cap device pixel ratio to 1 — biggest single GPU win (4× less work on retina)
+if (app.renderer) app.renderer.setPixelRatio(1);
+// Pause WebGL loop when tab hidden, resume on return
+document.addEventListener('visibilitychange', () => {
+  if (!app.renderer) return;
+  app.renderer.setAnimationLoop(document.hidden ? null : () => app.renderer.render(app.scene, app.camera));
+});
+</script>
+
+</body>
+</html>

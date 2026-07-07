@@ -1,0 +1,337 @@
+- generic [active] [ref=f3e1]:
+  - navigation [ref=f3e2]:
+    - link "MNRV" [ref=f3e3] [cursor=pointer]:
+      - /url: "#"
+      - generic [ref=f3e4]: M
+      - generic [ref=f3e5]: "N"
+      - generic [ref=f3e6]: R
+      - generic [ref=f3e7]: V
+    - link "Start project" [ref=f3e8] [cursor=pointer]:
+      - /url: "#contact"
+  - complementary "Social media en contact" [ref=f3e9]:
+    - button "Open social media" [ref=f3e10] [cursor=pointer]:
+      - img [ref=f3e11]
+    - generic:
+      - paragraph: Connect
+      - heading [level=2]: MNRV direct bereiken.
+      - generic:
+        - link:
+          - /url: https://www.instagram.com/mnrv.ai/
+          - generic:
+            - img
+          - generic:
+            - strong: Instagram
+            - generic: "@mnrv.ai"
+          - generic: →
+        - link:
+          - /url: https://www.linkedin.com/in/davevera/
+          - generic:
+            - img
+          - generic:
+            - strong: LinkedIn
+            - generic: Dave Vera
+          - generic: →
+        - link:
+          - /url: https://www.facebook.com/meneervera/
+          - generic:
+            - img
+          - generic:
+            - strong: Facebook
+            - generic: Meneer Vera
+          - generic: →
+        - link:
+          - /url: https://wa.me/31682456410
+          - generic:
+            - img
+          - generic:
+            - strong: WhatsApp
+            - generic: +31 6 82 45 64 10
+          - generic: →
+        - link:
+          - /url: tel:+31682456410
+          - generic:
+            - img
+          - generic:
+            - strong: Bellen
+            - generic: Direct contact
+          - generic: →
+        - link:
+          - /url: mailto:info@mnrv.nl
+          - generic:
+            - img
+          - generic:
+            - strong: E-mail
+            - generic: info@mnrv.nl
+          - generic: →
+  - generic [ref=f3e14]:
+    - generic [ref=f3e15]:
+      - heading "Verbinden doet versnellen." [level=1] [ref=f3e16]
+      - paragraph [ref=f3e17]: Orkestratie van technologie. Synthese van systemen. Versnelling van resultaat.
+      - generic [ref=f3e18]:
+        - link "Start een project" [ref=f3e19] [cursor=pointer]:
+          - /url: "#contact"
+        - link "Bekijk werk" [ref=f3e20] [cursor=pointer]:
+          - /url: "#werk"
+      - generic "Opdrachtgevers" [ref=f3e21]:
+        - generic [ref=f3e23]:
+          - img "FAINL" [ref=f3e24]
+          - img "Windofy" [ref=f3e25]
+          - img "Notenman" [ref=f3e26]
+          - img "MRJ Voluit" [ref=f3e27]
+          - img "Oostendorp Auto" [ref=f3e28]
+          - img "S. Verdriet"
+    - generic [ref=f3e31]:
+      - img "Dave Vera" [ref=f3e32]
+      - img [ref=f3e33]
+      - img [ref=f3e34]
+  - generic [ref=f3e35]:
+    - heading "Case Studies." [level=2] [ref=f3e36]:
+      - text: Case
+      - text: Studies.
+    - generic [ref=f3e37]:
+      - generic [ref=f3e38]:
+        - paragraph [ref=f3e39]: 01 / Web
+        - heading "Websites & apps" [level=3] [ref=f3e40]
+        - paragraph [ref=f3e41]: Schaalbare websites, apps en marketingsites met slimme UX, gebouwd op een moderne stack. Snel, toegankelijk en ontworpen om te converteren.
+      - generic [ref=f3e42]:
+        - paragraph [ref=f3e43]: 02 / AI
+        - heading "AI-agents & chatbots" [level=3] [ref=f3e44]
+        - paragraph [ref=f3e45]: Intelligente assistenten, productaanbevelingen en automatisering die naadloos in je platform leven — AI die vandaag al werk uit handen neemt.
+      - generic [ref=f3e46]:
+        - paragraph [ref=f3e47]: 03 / Tools
+        - heading "Maatwerk & integraties" [level=3] [ref=f3e48]
+        - paragraph [ref=f3e49]: Interne tools, koppelingen en workflows die systemen verbinden en processen versnellen. Gebouwd rond jouw manier van werken.
+      - generic [ref=f3e50]:
+        - paragraph [ref=f3e51]: 04 / Workforce
+        - heading "Workforce management tools" [level=3] [ref=f3e52]
+        - paragraph [ref=f3e53]: Planning, bezetting, taakverdeling en operationele dashboards die teams grip geven op capaciteit, beschikbaarheid en dagelijkse uitvoering.
+      - generic [ref=f3e54]:
+        - paragraph [ref=f3e55]: 05 / Reviews
+        - heading "Review management" [level=3] [ref=f3e56]
+        - paragraph [ref=f3e57]: Flows voor het verzamelen, monitoren en opvolgen van reviews, met slimme signalering en acties die reputatie en klantrelaties versterken.
+      - generic [ref=f3e58]:
+        - paragraph [ref=f3e59]: 06 / Knowledge
+        - heading "Lokale kennisbanken" [level=3] [ref=f3e60]
+        - paragraph [ref=f3e61]: Kennisbanken op maat waarin bedrijfskennis, processen en antwoorden centraal staan, klaar voor medewerkers, klanten en AI-assistenten.
+  - generic [ref=f3e62]:
+    - generic [ref=f3e63]:
+      - generic [ref=f3e64]:
+        - heading "De kracht van design, development en AI onder één dak." [level=2] [ref=f3e65]
+        - paragraph [ref=f3e66]: MNRV is geen traditioneel bureau met lagen, schakels en trage overdrachten. Wij zijn een compact en slagvaardig team van specialisten die operations, design, development en AI samenbrengen in één geïntegreerde aanpak.
+        - paragraph [ref=f3e67]: Wat ons onderscheidt, is dat we niet denken vanuit losse disciplines, maar vanuit het geheel. De beste digitale oplossingen ontstaan namelijk niet wanneer strategie, processen, design en techniek afzonderlijk van elkaar worden ontwikkeld, maar wanneer ze vanaf het begin als één ecosysteem worden ontworpen.
+      - generic:
+        - img "Andrew en Dave, MNRV"
+    - generic [ref=f3e68]:
+      - paragraph [ref=f3e69]: De mensen achter MNRV
+      - generic [ref=f3e70]:
+        - generic [ref=f3e71]:
+          - paragraph [ref=f3e72]: Chef Speciale
+          - heading "Andrew" [level=3] [ref=f3e73]
+          - paragraph [ref=f3e74]: Specialist in supply chain automation, operations en customer excellence. Waar anderen complexiteit zien, ziet hij kansen om processen slimmer, sneller en beter te organiseren.
+          - paragraph [ref=f3e75]: Zijn kracht ligt in het verbinden van operatie, automatisering en klantbeleving tot één samenwerkend geheel.
+        - generic [ref=f3e76]:
+          - paragraph [ref=f3e77]: AI Architect & Mid-Stack Developer
+          - heading "Dave" [level=3] [ref=f3e78]
+          - paragraph [ref=f3e79]: "Van architectuur en softwareontwikkeling tot AI-integraties en automatisering: Dave bouwt de oplossingen die gebruikers zien én de technologie die daarachter draait."
+          - paragraph [ref=f3e80]: Niet alleen op papier, maar werkend, schaalbaar en klaar voor de praktijk.
+      - generic [ref=f3e81]:
+        - generic [ref=f3e82]:
+          - paragraph [ref=f3e83]: Development Partner
+          - heading "Arpit" [level=3] [ref=f3e84]
+          - paragraph [ref=f3e85]: Bij grotere projecten schakelen we graag de expertise van Arpit in — een waardevolle uitbreiding die complexe oplossingen sneller en efficiënter realiseert.
+        - generic [ref=f3e86]:
+          - paragraph [ref=f3e87]: Grafisch Vormgever
+          - heading "Rick" [level=3] [ref=f3e88]
+          - paragraph [ref=f3e89]: Rick vertaalt complexe ideeën en AI-modellen naar intuïtieve interfaces. Hij maakt configurators en dashboards niet alleen slim, maar ook begrijpelijk en toegankelijk.
+    - generic [ref=f3e90]:
+      - heading "Wat we bouwen" [level=3] [ref=f3e91]
+      - paragraph [ref=f3e92]: Technologie die niet achteraf wordt toegevoegd, maar vanaf de basis slim wordt geïntegreerd.
+      - list [ref=f3e93]:
+        - listitem [ref=f3e94]: Intelligente configurators
+        - listitem [ref=f3e95]: AI-agents & automatiseringen
+        - listitem [ref=f3e96]: Websites & webshops
+        - listitem [ref=f3e97]: Maatwerkplatformen
+        - listitem [ref=f3e98]: Geautomatiseerde bedrijfsprocessen
+        - listitem [ref=f3e99]: Digitale ervaringen voor groei
+    - generic [ref=f3e100]:
+      - paragraph [ref=f3e101]: AI Governance & Private AI
+      - heading "Mens en machine in balans" [level=3] [ref=f3e102]
+      - paragraph [ref=f3e103]: Ons werk bevindt zich op het snijvlak van mens en machine. We bouwen oplossingen die logisch voelen voor gebruikers, terwijl onder de motorkap geavanceerde technologie het zware werk doet. Geen AI om de AI — maar technologie die aantoonbaar waarde toevoegt.
+      - heading "Waarom AI Governance belangrijk is" [level=4] [ref=f3e104]
+      - paragraph [ref=f3e105]: Met de komst van de AI Act en strengere GDPR-eisen wordt het steeds belangrijker om grip te houden op data, modellen en processen. Daarom implementeren wij waar mogelijk lokale AI-oplossingen en private LLM's die draaien binnen de eigen infrastructuur van een organisatie.
+      - paragraph [ref=f3e106]:
+        - strong [ref=f3e107]: "Faciliteren kun je leren:"
+        - text: door de juiste technologie, processen en begeleiding samen te brengen zorgen we ervoor dat AI niet alleen voldoet aan wet- en regelgeving, maar ook daadwerkelijk waarde toevoegt voor de mensen die ermee werken.
+    - generic [ref=f3e108]:
+      - paragraph [ref=f3e109]: Eén geïntegreerd ecosysteem.
+      - text: Strategie · Operations · Design · Development · AI
+  - generic [ref=f3e110]:
+    - heading "Wat er gebouwd is." [level=2] [ref=f3e111]:
+      - text: Wat er
+      - text: gebouwd is.
+    - list [ref=f3e112]:
+      - listitem [ref=f3e113]:
+        - generic [ref=f3e114]:
+          - generic [ref=f3e115]:
+            - generic [ref=f3e116]: "01"
+            - generic [ref=f3e118]: AI-visualisatie · B2B
+          - generic [ref=f3e119]:
+            - figure [ref=f3e120]:
+              - img [ref=f3e121]
+              - img [ref=f3e123]
+              - img "Mr. Jealousy logo" [ref=f3e126]
+            - heading "MRSVision" [level=3] [ref=f3e127]
+          - paragraph [ref=f3e128]:
+            - strong [ref=f3e129]: mrsvision.nl
+            - text: is een interactieve, AI-gestuurde B2B-visualisatietool, ontwikkeld voor en gelieerd aan
+            - strong [ref=f3e130]: Mr. Jealousy
+            - text: ". Het platform neemt de online drempel voor het kopen van maatwerk raambekleding weg: consumenten zien vooraf hoe jaloezieën in hun eigen ruimte staan en worden visueel geholpen bij het juist inmeten."
+            - text: Gebruikers uploaden een foto van hun raam of ruimte, waarna de AI-engine superrealistische maatwerk jaloezieën in de foto rendert — direct schakelen tussen materialen, lamelbreedtes, ladderband of koord en kleuren. Een voor-en-na-slider en simulatie van lichtinval per dagdeel ondersteunen de meet- en bestelhulp, gekoppeld aan de meetgarantie van Mr. Jealousy.
+          - link "Open site ↗" [ref=f3e131] [cursor=pointer]:
+            - /url: https://mrsvision.nl
+      - listitem [ref=f3e132]:
+        - generic [ref=f3e133]:
+          - generic [ref=f3e134]:
+            - generic [ref=f3e135]: "02"
+            - generic [ref=f3e137]: AI Platform
+          - generic [ref=f3e138]:
+            - figure [ref=f3e139]:
+              - img [ref=f3e140]
+              - img [ref=f3e142]
+              - img "FAINL logo" [ref=f3e145]
+            - heading "FAINL" [level=3] [ref=f3e146]
+          - paragraph [ref=f3e147]: Zeven AI-modellen debatteren en leveren één gefundeerde conclusie. Niet één mening, maar een echt antwoord. FAINL is een consensus-orkestratielaag — je vraag wordt gelijktijdig door meerdere AI-modellen verwerkt (Gemini, GPT-4, Claude, Grok en meer) en er wordt één gezaghebbend antwoord gesynthetiseerd. Dit elimineert de bias van een enkel model en brengt meningsverschillen aan het licht, voor een evenwichtiger en betrouwbaarder perspectief.
+          - link "Open site ↗" [ref=f3e148] [cursor=pointer]:
+            - /url: https://fainl.com
+      - listitem [ref=f3e149]:
+        - generic [ref=f3e150]:
+          - generic [ref=f3e151]:
+            - generic [ref=f3e152]: "03"
+            - generic [ref=f3e154]: AI Visualisatie
+          - generic [ref=f3e155]:
+            - figure [ref=f3e156]:
+              - img [ref=f3e157]
+              - img [ref=f3e159]
+              - img "Windofy logo" [ref=f3e162]
+            - heading "Windofy" [level=3] [ref=f3e163]
+          - paragraph [ref=f3e164]: Slimme raamdecoratievisualisatie voor Windofy. MNRV ontwikkelde een visuele configuratie-oplossing waarmee klanten raamdecoratie direct in hun eigen interieur kunnen bekijken. Door foto-upload, productconfiguratie en realistische visualisatie samen te brengen wordt de keuze eenvoudiger, persoonlijker en overtuigender — minder twijfel, betere klantbeslissingen, minder retouren en hogere conversie.
+          - link "Open site ↗" [ref=f3e165] [cursor=pointer]:
+            - /url: https://windofy.com
+      - listitem [ref=f3e166]:
+        - generic [ref=f3e167]:
+          - generic [ref=f3e168]:
+            - generic [ref=f3e169]: "04"
+            - generic [ref=f3e171]: E-commerce
+          - generic [ref=f3e172]:
+            - figure [ref=f3e173]:
+              - img [ref=f3e174]
+              - img [ref=f3e176]
+              - img "De Notenman logo" [ref=f3e179]
+            - heading "De Notenman" [level=3] [ref=f3e180]:
+              - text: De
+              - text: Notenman
+          - paragraph [ref=f3e181]: Bespoke e-commerce · AI-indexering · Backend automation
+          - paragraph [ref=f3e182]: Van ambachtelijke speciaalzaak naar intelligent e-commerceplatform
+          - paragraph [ref=f3e183]: Voor denotenman.com ontwikkelt MNRV geen standaard webshop, maar een volledig maatwerk e-commerceplatform waarin productbeleving, bestelgemak, SEO, AI-indexering, marketing automation en backendbeheer samenkomen. De frontend wordt volledig zelf ontwikkeld, inclusief configurator en een mobile-first gebruikerservaring die klanten snel en intuïtief door het assortiment leidt.
+          - list [ref=f3e184]:
+            - listitem [ref=f3e185]: Zelfontwikkelde storefront en admin portal
+            - listitem [ref=f3e186]: Productbeheer, prijsbeheer en voorraadbeheer
+            - listitem [ref=f3e187]: Reviewmanagement en marketing automation
+            - listitem [ref=f3e188]: SEO-structuur en AI-indexering vanaf de basis
+          - link "Open site ↗" [ref=f3e189] [cursor=pointer]:
+            - /url: https://denotenman.com
+      - listitem [ref=f3e190]:
+        - generic [ref=f3e191]:
+          - generic [ref=f3e192]:
+            - generic [ref=f3e193]: "05"
+            - generic [ref=f3e195]: Maatschappelijk · Podcastplatform
+          - generic [ref=f3e196]:
+            - figure [ref=f3e197]:
+              - img [ref=f3e198]
+              - img [ref=f3e200]
+              - generic [ref=f3e202]:
+                - img "Stuk Verdriet logo"
+            - heading "Stuk Verdriet De Podcast" [level=3] [ref=f3e203]:
+              - text: Stuk Verdriet
+              - text: De Podcast
+          - paragraph [ref=f3e204]:
+            - text: Sommige projecten ontstaan uit strategie, maar de meest betekenisvolle bouw je vanuit overtuiging en gevoel. Achter dit platform schuilt een initiatief dat mensen verbindt op momenten waarop woorden vaak tekortschieten — een plek waar verhalen, herkenning en steun samenkomen rond verlies, rouw en afscheid.
+            - text: "Van strategie, UX en design tot de complete technische realisatie van de website, het podcastplatform, het beheersysteem en de online community: volledig belangeloos ontwikkeld, als bijdrage aan een samenleving waarin technologie mensen dichter bij elkaar kan brengen."
+          - link "Open site ↗" [ref=f3e205] [cursor=pointer]:
+            - /url: https://stukverdriet.com/start
+      - listitem [ref=f3e206]:
+        - generic [ref=f3e207]:
+          - generic [ref=f3e208]:
+            - generic [ref=f3e209]: "06"
+            - generic [ref=f3e211]: Studio
+          - generic [ref=f3e212]:
+            - figure [ref=f3e213]:
+              - img [ref=f3e214]
+              - img [ref=f3e216]
+              - generic [ref=f3e218]:
+                - img "MNRV logo"
+            - heading "MNRV" [level=3] [ref=f3e219]
+          - paragraph [ref=f3e220]: "Onze eigen digitale identiteit — gebouwd op dezelfde principes waarmee we klanten bedienen: strak, snel, met karakter en vol intentie."
+          - link "Open site ↗" [ref=f3e221] [cursor=pointer]:
+            - /url: https://mnrv.nl
+  - generic [ref=f3e222]:
+    - heading "Laten we praten." [level=2] [ref=f3e223]:
+      - text: Laten we
+      - text: praten.
+    - generic [ref=f3e225]:
+      - paragraph [ref=f3e226]: Heb je een idee, een vraag of wil je direct weten wat ik voor jouw bedrijf kan betekenen? Vul de korte intake in, dan kan ik gericht met je meekijken.
+      - generic [ref=f3e228]:
+        - button "Okaayy, let's go!" [ref=f3e229] [cursor=pointer]
+        - generic [ref=f3e230]: (*Een kan koffie en gebruik van laptop, tablet of PC worden aanbevolen)
+      - generic [ref=f3e231]:
+        - link "info@mnrv.nl" [ref=f3e232] [cursor=pointer]:
+          - /url: mailto:info@mnrv.nl
+        - link "mnrv.nl" [ref=f3e233] [cursor=pointer]:
+          - /url: https://mnrv.nl
+  - contentinfo [ref=f3e234]:
+    - img "MNRV" [ref=f3e236]
+    - generic "Social media" [ref=f3e237]:
+      - link "Instagram" [ref=f3e238] [cursor=pointer]:
+        - /url: https://www.instagram.com/mnrv.ai/
+        - img [ref=f3e239]
+      - link "LinkedIn" [ref=f3e241] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/davevera/
+        - img [ref=f3e242]
+      - link "Facebook" [ref=f3e244] [cursor=pointer]:
+        - /url: https://www.facebook.com/meneervera/
+        - img [ref=f3e245]
+      - link "WhatsApp" [ref=f3e247] [cursor=pointer]:
+        - /url: https://wa.me/31682456410
+        - img [ref=f3e248]
+      - link "E-mail" [ref=f3e250] [cursor=pointer]:
+        - /url: mailto:info@mnrv.nl
+        - img [ref=f3e251]
+    - iframe [ref=f3e254]:
+      
+    - generic [ref=f3e255]: © 2025 MNRV / Dave Vera — mnrv.nl
+    - navigation "Juridische documenten MNRV" [ref=f3e256]:
+      - link "Privacyverklaring" [ref=f3e257] [cursor=pointer]:
+        - /url: Documenten/MNRV_Privacyverklaring_12-06-2026.pdf
+      - link "Cookieverklaring" [ref=f3e258] [cursor=pointer]:
+        - /url: Documenten/MNRV_Cookieverklaring_12-06-2026.pdf
+      - link "Algemene Voorwaarden" [ref=f3e259] [cursor=pointer]:
+        - /url: Documenten/MNRV_Algemene_Voorwaarden_12-06-2026.pdf
+      - link "Verwerkersovereenkomst" [ref=f3e260] [cursor=pointer]:
+        - /url: Documenten/MNRV_Verwerkersovereenkomst_12-06-2026.pdf
+      - link "SLA" [ref=f3e261] [cursor=pointer]:
+        - /url: Documenten/MNRV_SLA_06-2026.pdf
+  - dialog "Cookiemelding":
+    - generic [ref=f3e262]:
+      - paragraph [ref=f3e263]: Cookies
+      - paragraph [ref=f3e264]: Wij gebruiken analytische cookies (Google Analytics) om bezoekersgedrag te begrijpen en functionele cookies voor het intakeformulier (Supabase). Jij bepaalt wat je toestaat.
+      - generic [ref=f3e265]:
+        - generic [ref=f3e266] [cursor=pointer]:
+          - checkbox "Analytisch (GA)" [checked] [ref=f3e267]
+          - generic [ref=f3e268]: Analytisch (GA)
+        - generic [ref=f3e269] [cursor=pointer]:
+          - checkbox "Functioneel (Supabase)" [checked] [ref=f3e270]
+          - generic [ref=f3e271]: Functioneel (Supabase)
+      - generic [ref=f3e272]:
+        - button "Alles accepteren" [ref=f3e273] [cursor=pointer]
+        - button "Opslaan" [ref=f3e274] [cursor=pointer]
+        - button "Weigeren" [ref=f3e275] [cursor=pointer]
