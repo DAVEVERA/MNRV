@@ -104,29 +104,19 @@
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    gap: 2px;
+    flex: 0 0 auto;
   }
 
-  .logo-letter {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 52px;
-    line-height: 1;
-    display: inline-block;
-    background: linear-gradient(175deg, #F8CC48 0%, #E88B08 28%, #BC5008 60%, #D4840A 80%, #F5BE2A 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+  .nav-logo img {
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.28));
     transition: transform 0.2s ease, filter 0.2s ease;
   }
 
-  .logo-letter:nth-child(1) { transition-delay: 0ms; }
-  .logo-letter:nth-child(2) { transition-delay: 35ms; }
-  .logo-letter:nth-child(3) { transition-delay: 70ms; }
-  .logo-letter:nth-child(4) { transition-delay: 105ms; }
-
-  .nav-logo:hover .logo-letter {
+  .nav-logo:hover img {
     transform: translateY(-4px);
     filter: drop-shadow(0 5px 10px rgba(210,120,8,0.6));
   }
@@ -1452,7 +1442,7 @@
   @media (max-width: 560px) {
     body > nav { gap: 12px; }
     .nav-logo { flex: 0 0 auto; }
-    .logo-letter { font-size: 36px; }
+    .nav-logo img { width: 40px; height: 40px; }
     .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
     .hero { padding: 96px 16px 48px; }
     .werk { padding-left: 16px; padding-right: 16px; }
@@ -1862,10 +1852,7 @@
 
 <nav>
   <a href="#" class="nav-logo" aria-label="MNRV">
-    <span class="logo-letter">M</span>
-    <span class="logo-letter">N</span>
-    <span class="logo-letter">R</span>
-    <span class="logo-letter">V</span>
+    <img src="img/MNRV_LOGO.png" alt="MNRV">
   </a>
   <a href="#contact" class="nav-cta">Start project</a>
 </nav>
@@ -1979,9 +1966,9 @@
     </div>
     <div class="hero-portret">
       <div class="hero-portret-wrap">
-        <img src="DaveHeel.PNG" alt="Dave Vera" class="hero-portret-img">
-        <img src="PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true">
-        <img src="davelizard.png" alt="" class="hero-portret-lizard" aria-hidden="true">
+        <img src="img/DaveHeel.PNG" alt="Dave Vera" class="hero-portret-img">
+        <img src="img/PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true">
+        <img src="img/davelizard.png" alt="" class="hero-portret-lizard" aria-hidden="true">
       </div>
     </div>
   </div>
@@ -2037,7 +2024,7 @@
       <p class="over-hero-body">Wat ons onderscheidt, is dat we niet denken vanuit losse disciplines, maar vanuit het geheel. De beste digitale oplossingen ontstaan namelijk niet wanneer strategie, processen, design en techniek afzonderlijk van elkaar worden ontwikkeld, maar wanneer ze vanaf het begin als één ecosysteem worden ontworpen.</p>
     </div>
     <div class="over-hero-image">
-      <img src="Andrew%20Dave.png" alt="Andrew en Dave, MNRV" loading="lazy">
+      <img src="img/Andrew%20Dave.png" alt="Andrew en Dave, MNRV" loading="lazy">
     </div>
   </div>
 
@@ -2330,7 +2317,7 @@
           <figure class="werk-project-mark">
             <svg class="werk-logo-ring" width="48" height="47" aria-hidden="true"><use href="#logo-ring-outer"></use></svg>
             <svg class="werk-logo-ring" width="49" height="48" aria-hidden="true"><use href="#logo-ring-inner"></use></svg>
-            <picture><img src="MNRV_LOGO.png" alt="MNRV logo" loading="lazy"></picture>
+            <picture><img src="img/MNRV_LOGO.png" alt="MNRV logo" loading="lazy"></picture>
           </figure>
           <h3 class="werk-project-title">MNRV</h3>
         </div>
@@ -2375,7 +2362,7 @@
       <div class="contact-actions">
         <div class="contact-cta-wrap">
           <button class="btn-primary contact-intake-button" type="button" id="open-intake-modal">Okaayy, let's go!</button>
-          <img class="contact-popout-gif" src="img/okay%20lets%20go.gif" alt="" loading="lazy" aria-hidden="true">
+          <img class="contact-popout-gif" src="video/okay%20lets%20go.gif" alt="" loading="lazy" aria-hidden="true">
           <span class="contact-intake-note">(*Een kan koffie en gebruik van laptop, tablet of PC worden aanbevolen)</span>
         </div>
       </div>
@@ -2425,7 +2412,7 @@
 
 <footer>
   <span class="footer-logo">
-    <img src="MNRV_LOGO.png" alt="MNRV">
+    <img src="img/MNRV_LOGO.png" alt="MNRV">
   </span>
   <div class="footer-socials" aria-label="Social media">
     <a href="https://www.instagram.com/mnrv.ai/" target="_blank" rel="noopener" aria-label="Instagram">
@@ -2580,11 +2567,9 @@ window.addEventListener('scroll', () => {
   if (p > 0.5) {
     nav.style.background = 'rgba(27,38,50,0.75)';
     nav.style.borderBottomColor = 'rgba(255,177,98,0.12)';
-    nav.querySelector('.nav-logo').style.color = '#EEE9DF';
   } else {
     nav.style.background = 'rgba(238,233,223,0.6)';
     nav.style.borderBottomColor = 'rgba(44,59,77,0.08)';
-    nav.querySelector('.nav-logo').style.color = '#1B2632';
   }
 }, { passive: true });
 

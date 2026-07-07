@@ -1,6 +1,8 @@
 # Project-specific
 node_modules/
 .claude/
+.playwright-cli/
+.sixth/
 assets/windows-95-ui-kit/
 TheDaveGame/
 

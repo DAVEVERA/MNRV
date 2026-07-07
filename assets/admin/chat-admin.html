@@ -362,7 +362,7 @@ function getAdminRedirectUrl() {
     return currentUrl;
   }
 
-  return 'https://mnrv.nl/assets/chat-admin.html';
+  return 'https://mnrv.nl/assets/admin/chat-admin.html';
 }
 
 function formatDate(value) {
@@ -508,7 +508,7 @@ async function sendReply(event) {
     admin_id: adminUser.id,
     sender: 'agent',
     message: text,
-    page_path: '/assets/chat-admin.html',
+    page_path: '/assets/admin/chat-admin.html',
     user_agent: window.navigator.userAgent
   });
 
