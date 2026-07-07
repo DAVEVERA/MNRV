@@ -72,18 +72,7 @@
     transition: background 0.05s linear;
   }
 
-  /* LIQUID BACKGROUND */
   html { background: #0B0E13; }
-  #liquid-bg {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.10;
-    will-change: transform;
-  }
 
   /* NAV */
   body > nav {
@@ -738,6 +727,56 @@
   .werk-project--split .werk-project-asset { padding: 10px; gap: 10px; }
   .werk-project--split .werk-project-frame { flex: 1 1 55%; border-radius: 8px; min-height: 160px; }
   .werk-project--split .werk-before-after { flex: 1 1 45%; min-height: 160px; }
+
+  .werk-static-preview {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    flex: 1 1 auto;
+    text-decoration: none;
+  }
+  .werk-static-preview-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .werk-static-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11,14,19,0.15) 0%, rgba(11,14,19,0.75) 100%);
+    transition: background 0.2s ease;
+  }
+  .werk-static-preview:hover .werk-static-preview-overlay,
+  .werk-static-preview:focus-visible .werk-static-preview-overlay {
+    background: linear-gradient(180deg, rgba(11,14,19,0.25) 0%, rgba(11,14,19,0.85) 100%);
+  }
+  .werk-static-preview-cta {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255,177,98,0.5);
+    border-radius: 999px;
+    background: rgba(11,14,19,0.72);
+    color: #FFB162;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 
   @media (min-width: 48em) {
     .werk-project {
@@ -1456,6 +1495,8 @@
     .werk-project-panel { padding: 28px 20px; gap: 14px; }
     /* Live iframe previews zijn zwaar op kleine telefoons: toon alleen tekst + "Open site" link */
     .werk-project-asset { display: none; }
+    /* Statische screenshot-preview (Stuk Verdriet) is licht genoeg om ook op mobiel te tonen */
+    .werk-project-asset--static { display: block; min-height: 200px; }
     .hero-inner { grid-template-columns: 1fr 0.85fr; gap: 8px; }
     .hero-title { font-size: clamp(22px, 8vw, 44px); line-height: 0.95; }
     .hero-sub { font-size: 11px; line-height: 1.45; margin: 10px 0 16px; }
@@ -1856,8 +1897,6 @@
 </head>
 <body>
 
-<canvas id="liquid-bg"></canvas>
-
 <nav>
   <a href="#" class="nav-logo" aria-label="MNRV">
     <img src="img/MNRV_LOGO.png" alt="MNRV">
@@ -2023,7 +2062,7 @@
         <a class="werk-project-link" href="https://mrsvision.nl" target="_blank" rel="noopener">Open site ↗</a>
       </div>
       <div class="werk-project-asset">
-        <iframe class="werk-project-frame" tabindex="-1" src="https://mrj526-635857755618.europe-west4.run.app/" title="MRSVision live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <iframe class="werk-project-frame" tabindex="-1" src="https://mrj526-635857755618.europe-west4.run.app/" title="MRSVision live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation allow-same-origin"></iframe>
         <div class="werk-before-after" data-before-after>
           <p class="werk-before-after-title">Voor &amp; na</p>
           <div class="werk-before-after-frame">
@@ -2070,7 +2109,7 @@
         <a class="werk-project-link" href="https://fainl.com" target="_blank" rel="noopener">Open site ↗</a>
       </div>
       <div class="werk-project-asset">
-        <iframe class="werk-project-frame" tabindex="-1" src="https://fainl.com" title="FAINL live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <iframe class="werk-project-frame" tabindex="-1" src="https://fainl.com" title="FAINL live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation allow-same-origin"></iframe>
         <div class="werk-iframe-fallback">
           <p class="werk-fallback-name">FAINL</p>
           <p class="werk-fallback-note">Preview niet beschikbaar</p>
@@ -2104,7 +2143,7 @@
         <a class="werk-project-link" href="https://windofy.com" target="_blank" rel="noopener">Open site ↗</a>
       </div>
       <div class="werk-project-asset">
-        <iframe class="werk-project-frame" tabindex="-1" src="https://windofy.com" title="Windofy live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <iframe class="werk-project-frame" tabindex="-1" src="https://windofy.com" title="Windofy live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation allow-same-origin"></iframe>
         <div class="werk-iframe-fallback">
           <p class="werk-fallback-name">Windofy</p>
           <p class="werk-fallback-note">Preview niet beschikbaar</p>
@@ -2146,7 +2185,7 @@
         <a class="werk-project-link" href="https://denotenman.com" target="_blank" rel="noopener">Open site ↗</a>
       </div>
       <div class="werk-project-asset">
-        <iframe class="werk-project-frame" tabindex="-1" src="https://denotenman.com" title="De Notenman live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <iframe class="werk-project-frame" tabindex="-1" src="https://denotenman.com" title="De Notenman live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation allow-same-origin"></iframe>
         <div class="werk-iframe-fallback">
           <p class="werk-fallback-name">De Notenman</p>
           <p class="werk-fallback-note">Preview niet beschikbaar</p>
@@ -2181,16 +2220,12 @@
         </p>
         <a class="werk-project-link" href="https://stukverdriet.com/start" target="_blank" rel="noopener">Open site ↗</a>
       </div>
-      <div class="werk-project-asset">
-        <iframe class="werk-project-frame" tabindex="-1" src="https://stukverdriet.com/start" title="Stuk Verdriet live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
-        <div class="werk-iframe-fallback">
-          <p class="werk-fallback-name">Stuk Verdriet</p>
-          <p class="werk-fallback-note">Preview niet beschikbaar</p>
-          <a class="werk-fallback-cta" href="https://stukverdriet.com/start" target="_blank" rel="noopener">Open site ↗</a>
-        </div>
-        <button class="werk-project-maximize" type="button" aria-label="Stuk Verdriet fullscreen openen">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+      <div class="werk-project-asset werk-project-asset--static">
+        <a class="werk-static-preview" href="https://stukverdriet.com/start" target="_blank" rel="noopener" aria-label="Stuk Verdriet bekijken (opent in nieuw tabblad)">
+          <img class="werk-static-preview-img" src="img/stukverdriet-preview.jpg" alt="Schermafbeelding van stukverdriet.com" loading="lazy">
+          <span class="werk-static-preview-overlay"></span>
+          <span class="werk-static-preview-cta">Bekijk live site ↗</span>
+        </a>
       </div>
     </li>
 
@@ -2216,7 +2251,7 @@
         <a class="werk-project-link" href="https://mnrv.nl" target="_blank" rel="noopener">Open site ↗</a>
       </div>
       <div class="werk-project-asset">
-        <iframe class="werk-project-frame" tabindex="-1" src="https://mnrv.nl" title="MNRV live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+        <iframe class="werk-project-frame" tabindex="-1" src="https://mnrv.nl" title="MNRV live preview" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-presentation allow-same-origin"></iframe>
         <div class="werk-iframe-fallback">
           <p class="werk-fallback-name">MNRV</p>
           <p class="werk-fallback-note">Preview niet beschikbaar</p>
@@ -2231,7 +2266,7 @@
   </ul>
 
   <div id="werkFullscreen" class="werk-fullscreen" aria-hidden="true">
-    <iframe id="werkFullscreenFrame" class="werk-fullscreen-frame" title="Project fullscreen preview" sandbox="allow-scripts allow-forms allow-popups allow-presentation"></iframe>
+    <iframe id="werkFullscreenFrame" class="werk-fullscreen-frame" title="Project fullscreen preview" sandbox="allow-scripts allow-forms allow-popups allow-presentation allow-same-origin"></iframe>
     <div class="werk-fullscreen-bar">
       <div id="werkFullscreenTitle" class="werk-fullscreen-title">Project</div>
       <button id="werkFullscreenClose" class="werk-fullscreen-close" type="button" aria-label="Fullscreen sluiten">×</button>
@@ -2840,23 +2875,6 @@ initWerkBeforeAfterSliders();
   // Eerste flikkering na 2-3 seconden
   setTimeout(flicker, 2000 + Math.floor(Math.random() * 1000));
 })();
-</script>
-
-<script type="module">
-import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.27/build/backgrounds/liquid1.min.js';
-const canvas = document.getElementById('liquid-bg');
-const app = LiquidBackground(canvas);
-app.liquidPlane.material.metalness = 0.72;
-app.liquidPlane.material.roughness = 0.28;
-app.liquidPlane.uniforms.displacementScale.value = 1.2;
-app.setRain(false);
-// Cap device pixel ratio to 1 — biggest single GPU win (4× less work on retina)
-if (app.renderer) app.renderer.setPixelRatio(1);
-// Pause WebGL loop when tab hidden, resume on return
-document.addEventListener('visibilitychange', () => {
-  if (!app.renderer) return;
-  app.renderer.setAnimationLoop(document.hidden ? null : () => app.renderer.render(app.scene, app.camera));
-});
 </script>
 
 </body>
