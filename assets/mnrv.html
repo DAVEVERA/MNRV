@@ -94,6 +94,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     background: rgba(238,233,223,0.6);
     border-bottom: 1px solid rgba(44,59,77,0.08);
@@ -473,6 +474,7 @@
 
   .dienst-card {
     background: rgba(238,233,223,0.55);
+    -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     border: 1px solid rgba(44,59,77,0.1);
     padding: 48px 36px;
@@ -773,6 +775,7 @@
     cursor: pointer;
     display: grid;
     place-items: center;
+    -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     transition: background 0.18s, color 0.18s;
   }
@@ -918,6 +921,7 @@
     border-radius: 999px;
     background: rgba(11,14,19,0.72);
     color: #fff;
+    -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
   }
   .werk-fullscreen-title {
@@ -1067,6 +1071,7 @@
       rgba(11,14,19,0.78);
     color: var(--palladian);
     box-shadow: 0 18px 48px rgba(0,0,0,0.26);
+    -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
     cursor: pointer;
     transition: transform 0.18s, background 0.2s, border-color 0.2s;
@@ -1102,6 +1107,7 @@
       radial-gradient(circle at 12% 0%, rgba(198,188,175,0.16), transparent 36%),
       rgba(11,14,19,0.88);
     box-shadow: 0 28px 80px rgba(0,0,0,0.32);
+    -webkit-backdrop-filter: blur(22px);
     backdrop-filter: blur(22px);
     opacity: 0;
     pointer-events: none;
@@ -1246,8 +1252,8 @@
     outline: none;
     border-radius: 2px;
     transition: border-color 0.2s;
-    appearance: none;
     -webkit-appearance: none;
+    appearance: none;
   }
   .form-field input::placeholder,
   .form-field textarea::placeholder { color: rgba(201,193,177,0.35); }
@@ -1394,6 +1400,7 @@
     color: rgba(44,59,77,0.06);
     line-height: 1;
     pointer-events: none;
+    -webkit-user-select: none;
     user-select: none;
     letter-spacing: -0.05em;
   }
@@ -1744,6 +1751,7 @@
     inset: 0;
     z-index: 999;
     background: rgba(11,14,19,0.85);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     align-items: center;
     justify-content: center;
@@ -1843,7 +1851,7 @@
   <link rel="stylesheet" href="../components/cookie-banner.css">
   <script src="../components/cookie-banner.js" defer></script>
   <!-- TrustBox script -->
-  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+  <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
   <!-- End TrustBox script -->
 </head>
 <body>
@@ -2368,7 +2376,7 @@
       </div>
       <div class="contact-info">
         <a href="mailto:info@mnrv.nl">info@mnrv.nl</a>
-        <a href="https://mnrv.nl" target="_blank">mnrv.nl</a>
+        <a href="https://mnrv.nl" target="_blank" rel="noopener">mnrv.nl</a>
       </div>
     </div>
   </div>

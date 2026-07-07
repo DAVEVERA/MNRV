@@ -377,23 +377,23 @@
 
       <div class="grid two">
         <div>
-          <label>Naam <span class="required">*</span></label>
-          <input name="client_name" required>
+          <label for="client_name">Naam <span class="required">*</span></label>
+          <input id="client_name" name="client_name" required>
         </div>
 
         <div>
-          <label>Bedrijfsnaam</label>
-          <input name="company_name">
+          <label for="company_name">Bedrijfsnaam</label>
+          <input id="company_name" name="company_name">
         </div>
 
         <div>
-          <label>E-mailadres <span class="required">*</span></label>
-          <input type="email" name="client_email" required>
+          <label for="client_email">E-mailadres <span class="required">*</span></label>
+          <input type="email" id="client_email" name="client_email" required>
         </div>
 
         <div>
-          <label>Telefoonnummer</label>
-          <input name="phone">
+          <label for="phone">Telefoonnummer</label>
+          <input id="phone" name="phone">
         </div>
       </div>
     </section>
@@ -411,8 +411,8 @@
         <label class="option"><input type="radio" name="website_type" value="Nog niet zeker"> Nog niet zeker</label>
       </div>
 
-      <label>Wat is het belangrijkste doel van de website?</label>
-      <select name="main_goal">
+      <label for="main_goal">Wat is het belangrijkste doel van de website?</label>
+      <select id="main_goal" name="main_goal">
         <option value="">Maak een keuze</option>
         <option>Meer aanvragen of leads</option>
         <option>Meer online verkopen</option>
@@ -424,15 +424,15 @@
         <option>Anders</option>
       </select>
 
-      <label>Beschrijf het doel van de website in je eigen woorden</label>
-      <textarea name="goal_description" placeholder="Bijvoorbeeld: De website moet vertrouwen wekken, duidelijk uitleggen wat wij doen en bezoekers laagdrempelig contact laten opnemen."></textarea>
+      <label for="goal_description">Beschrijf het doel van de website in je eigen woorden</label>
+      <textarea id="goal_description" name="goal_description" placeholder="Bijvoorbeeld: De website moet vertrouwen wekken, duidelijk uitleggen wat wij doen en bezoekers laagdrempelig contact laten opnemen."></textarea>
     </section>
 
     <section class="card">
       <h2>3. Doelgroep en uitstraling</h2>
 
-      <label>Voor wie is de website bedoeld?</label>
-      <textarea name="target_audience" placeholder="Bijvoorbeeld: particuliere klanten, ondernemers, ouders, zorgprofessionals, lokale bezoekers, B2B-klanten..."></textarea>
+      <label for="target_audience">Voor wie is de website bedoeld?</label>
+      <textarea id="target_audience" name="target_audience" placeholder="Bijvoorbeeld: particuliere klanten, ondernemers, ouders, zorgprofessionals, lokale bezoekers, B2B-klanten..."></textarea>
 
       <label>Welke uitstraling past het beste?</label>
       <div class="options">
@@ -444,8 +444,8 @@
         <label class="option"><input type="checkbox" name="style" value="Rustig en minimalistisch"> Rustig en minimalistisch</label>
       </div>
 
-      <label>Wat moet de website vooral NIET worden?</label>
-      <textarea name="not_wanted" placeholder="Bijvoorbeeld: niet te druk, niet standaard, niet schreeuwerig, niet afstandelijk, niet corporate..."></textarea>
+      <label for="not_wanted">Wat moet de website vooral NIET worden?</label>
+      <textarea id="not_wanted" name="not_wanted" placeholder="Bijvoorbeeld: niet te druk, niet standaard, niet schreeuwerig, niet afstandelijk, niet corporate..."></textarea>
     </section>
 
     <section class="card">
@@ -459,11 +459,11 @@
         </p>
       </div>
 
-      <label>Jouw elevator pitch</label>
-      <textarea name="elevator_pitch" placeholder="Voorbeeld: Wij helpen ondernemers met een duidelijke, professionele website die vertrouwen wekt en bezoekers omzet in aanvragen. Geen losse onderdelen, maar strategie, ontwerp en techniek in één geheel."></textarea>
+      <label for="elevator_pitch">Jouw elevator pitch</label>
+      <textarea id="elevator_pitch" name="elevator_pitch" placeholder="Voorbeeld: Wij helpen ondernemers met een duidelijke, professionele website die vertrouwen wekt en bezoekers omzet in aanvragen. Geen losse onderdelen, maar strategie, ontwerp en techniek in één geheel."></textarea>
 
-      <label>Persoonlijke tekst / over jou of over het bedrijf</label>
-      <textarea name="personal_text" placeholder="Vertel wie je bent, waarom je dit doet, waar je voor staat en wat klanten aan jou hebben."></textarea>
+      <label for="personal_text">Persoonlijke tekst / over jou of over het bedrijf</label>
+      <textarea id="personal_text" name="personal_text" placeholder="Vertel wie je bent, waarom je dit doet, waar je voor staat en wat klanten aan jou hebben."></textarea>
 
       <label>Welke pagina’s moeten er komen?</label>
       <div class="options">
@@ -477,8 +477,8 @@
         <label class="option"><input type="checkbox" name="pages" value="Veelgestelde vragen"> Veelgestelde vragen</label>
       </div>
 
-      <label>Zijn er bestaande teksten die gebruikt mogen worden?</label>
-      <textarea name="existing_texts"></textarea>
+      <label for="existing_texts">Zijn er bestaande teksten die gebruikt mogen worden?</label>
+      <textarea id="existing_texts" name="existing_texts"></textarea>
     </section>
 
     <section class="card">
@@ -489,8 +489,8 @@
         sfeerbeelden, productfoto’s, teamfoto’s en eventueel klantcases.
       </p>
 
-      <label>Link naar foto’s / Google Drive / WeTransfer</label>
-      <input name="photo_link" placeholder="Plak hier een link naar je beelden">
+      <label for="photo_link">Link naar foto’s / Google Drive / WeTransfer</label>
+      <input id="photo_link" name="photo_link" placeholder="Plak hier een link naar je beelden">
 
       <label>Welke foto’s kun je aanleveren?</label>
       <div class="options">
@@ -502,20 +502,20 @@
         <label class="option"><input type="checkbox" name="photos_available" value="Nog geen beeldmateriaal"> Nog geen beeldmateriaal</label>
       </div>
 
-      <label>Gewenste kleuren / HEX-codes</label>
-      <textarea name="colors" placeholder="Tip: gebruik https://www.colourpalettegenerator.com/ om kleuren uit een afbeelding te halen."></textarea>
+      <label for="colors">Gewenste kleuren / HEX-codes</label>
+      <textarea id="colors" name="colors" placeholder="Tip: gebruik https://www.colourpalettegenerator.com/ om kleuren uit een afbeelding te halen."></textarea>
 
-      <label>Gewenst lettertype</label>
-      <input name="font_preference" placeholder="Tip: kijk op https://fonts.google.com/">
+      <label for="font_preference">Gewenst lettertype</label>
+      <input id="font_preference" name="font_preference" placeholder="Tip: kijk op https://fonts.google.com/">
 
-      <label>Websites die je mooi vindt</label>
-      <textarea name="inspiration_sites" placeholder="Plak 2 tot 5 links en geef kort aan wat je mooi vindt."></textarea>
+      <label for="inspiration_sites">Websites die je mooi vindt</label>
+      <textarea id="inspiration_sites" name="inspiration_sites" placeholder="Plak 2 tot 5 links en geef kort aan wat je mooi vindt."></textarea>
     </section>
 
     <section class="card">
       <h2>5b. Upload context en content</h2>
 
-      <label>Context uploaden</label>
+      <label for="context_files">Context uploaden</label>
       <p class="hint">
         Upload bestaande teksten, briefing, PDF, Word-document of andere context.
         Maximaal 10MB per bestand. Toegestaan: txt, doc, docx, pdf, odt.
@@ -529,7 +529,7 @@
       >
       <div class="upload-list" id="contextFileList"></div>
 
-      <label>Foto’s / content uploaden</label>
+      <label for="content_files">Foto’s / content uploaden</label>
       <p class="hint">
         Upload foto’s, sfeerbeelden, profielfoto’s of visuele content.
         Maximaal 10MB per bestand. Toegestaan: jpg, jpeg, png, webp.
@@ -559,8 +559,8 @@
         <label class="option"><input type="checkbox" name="features" value="AI of automatisering"> AI of automatisering</label>
       </div>
 
-      <label>Zijn er koppelingen nodig?</label>
-      <textarea name="integrations" placeholder="Bijvoorbeeld Mollie, Stripe, Mailchimp, HubSpot, Google Analytics, Meta Pixel, boekhoudpakket, CRM..."></textarea>
+      <label for="integrations">Zijn er koppelingen nodig?</label>
+      <textarea id="integrations" name="integrations" placeholder="Bijvoorbeeld Mollie, Stripe, Mailchimp, HubSpot, Google Analytics, Meta Pixel, boekhoudpakket, CRM..."></textarea>
     </section>
 
     <section class="card">
@@ -568,13 +568,13 @@
 
       <div class="grid two">
         <div>
-          <label>Wanneer moet de website live?</label>
-          <input name="deadline">
+          <label for="deadline">Wanneer moet de website live?</label>
+          <input id="deadline" name="deadline">
         </div>
 
         <div>
-          <label>Indicatie budget</label>
-          <select name="budget">
+          <label for="budget">Indicatie budget</label>
+          <select id="budget" name="budget">
             <option value="">Maak een keuze</option>
             <option>Tot €1.000</option>
             <option>€1.000 - €2.500</option>
@@ -586,8 +586,8 @@
         </div>
       </div>
 
-      <label>Zijn er belangrijke deadlines, campagnes of lanceringen?</label>
-      <textarea name="planning_notes"></textarea>
+      <label for="planning_notes">Zijn er belangrijke deadlines, campagnes of lanceringen?</label>
+      <textarea id="planning_notes" name="planning_notes"></textarea>
     </section>
 
     <section class="card" id="help-section">
@@ -606,8 +606,8 @@
         <li>Schrijf eerst rommelig. MNRV maakt het later scherp, helder en professioneel.</li>
       </ol>
 
-      <label>Extra opmerkingen</label>
-      <textarea name="extra_notes"></textarea>
+      <label for="extra_notes">Extra opmerkingen</label>
+      <textarea id="extra_notes" name="extra_notes"></textarea>
 
       <div class="actions">
         <button class="primary" type="submit">Intake verzenden</button>

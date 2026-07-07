@@ -1461,11 +1461,11 @@ a {
       z-index: 100001;
       min-width: 320px;
       min-height: 100svh;
-      padding: clamp(18px, 4vw, 56px);
+      padding: 0;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: auto 1fr 1fr;
-      gap: clamp(18px, 3vw, 34px);
+      gap: 0;
       background:
         radial-gradient(circle at 18% 10%, rgba(23,70,255,0.12), transparent 32%),
         radial-gradient(circle at 86% 24%, rgba(0,128,128,0.16), transparent 28%),
@@ -1495,13 +1495,15 @@ a {
         linear-gradient(90deg, rgba(21,21,21,0.06) 1px, transparent 1px),
         linear-gradient(180deg, rgba(21,21,21,0.045) 1px, transparent 1px);
       background-size: 48px 48px;
+      -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
       mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
     }
     .landing-topline {
       grid-row: 1;
       grid-column: 1;
-      width: min(100%, 1180px);
-      margin: 0 auto;
+      width: 100%;
+      margin: 0;
+      padding: clamp(18px, 4vw, 32px) clamp(18px, 4vw, 56px);
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -1546,8 +1548,8 @@ a {
       position: relative;
       min-width: 0;
       min-height: clamp(176px, 34svh, 280px);
-      border: 1px solid rgba(21,21,21,0.14);
-      border-radius: 14px;
+      border: none;
+      border-radius: 0;
       padding: clamp(20px, 4.8vw, 42px);
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -1558,10 +1560,8 @@ a {
       color: #151515;
       overflow: hidden;
       background: rgba(255,250,242,0.76);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 18px 48px rgba(20,18,15,0.09);
       touch-action: manipulation;
-      transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(0);
-      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+      transition: background-color 180ms ease;
     }
     .landing-choice-bg,
     .landing-choice::after {
@@ -1578,17 +1578,9 @@ a {
       z-index: 2;
       background: linear-gradient(180deg, rgba(255,250,242,0.04), rgba(255,250,242,0.88));
     }
-    .landing-choice:hover,
     .landing-choice:focus-visible {
-      outline: none;
-      transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-4px);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 24px 70px rgba(20,18,15,0.15);
-    }
-    .landing-choice:focus-visible {
-      box-shadow:
-        0 0 0 3px #f4f1eb,
-        0 0 0 6px currentColor,
-        0 24px 70px rgba(20,18,15,0.15);
+      outline: 3px solid currentColor;
+      outline-offset: -3px;
     }
     .landing-choice:hover .landing-choice-bg,
     .landing-choice:focus-visible .landing-choice-bg {
@@ -1725,22 +1717,9 @@ a {
         grid-row: 2;
         grid-column: 1 / -1;
       }
-      .landing-choice {
-        min-height: min(720px, calc(100svh - 132px));
-      }
-    }
-
-    @media (min-width: 1280px) {
-      #landing-overlay {
-        padding-inline: max(56px, calc((100vw - 1240px) / 2));
-      }
     }
 
     @media (max-width: 760px) {
-      #landing-overlay {
-        padding: 16px;
-        gap: 14px;
-      }
       .landing-topline {
         letter-spacing: 0.14em;
       }
@@ -1782,9 +1761,6 @@ a {
       .landing-choice-bg {
         animation: none !important;
         transition: none !important;
-      }
-      .landing-choice {
-        transform: none !important;
       }
     }
 
@@ -2611,8 +2587,8 @@ a {
   color: #000000;
   border: none;
   outline: none;
-  user-select: text;
   -webkit-user-select: text;
+  user-select: text;
 }
 
 /* ============================================

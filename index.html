@@ -522,7 +522,6 @@
   var bootStarted = false;
   var bootFinished = false;
   var selectedChoice = 'modern';
-  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var openRetroDirect = false;
   try {
     var params = new URLSearchParams(window.location.search);
@@ -534,7 +533,7 @@
     hour >= 12 && hour < 18 ? 'middag' :
     hour >= 18 && hour < 23 ? 'avond' :
     'nacht';
-  var matrixText = 'Goede ' + dagdeel + '. één keuze, jouw keuze. Links of rechts?';
+  var matrixText = 'Goede ' + dagdeel + '. Welkom bij MNRV. Kies je route: Modern of Retro?';
   var matrixTarget = document.getElementById('matrix-typewriter');
   var matrixIndex = 0;
 
@@ -580,23 +579,6 @@
     retroChoice.addEventListener('click', startBoot);
     retroChoice.addEventListener('focus', function() { selectedChoice = 'retro'; });
     retroChoice.addEventListener('pointerenter', function() { selectedChoice = 'retro'; });
-  }
-
-  if (canHover) {
-    [modernChoice, retroChoice].forEach(function(choice) {
-      if (!choice) return;
-      choice.addEventListener('pointermove', function(e) {
-        var rect = choice.getBoundingClientRect();
-        var x = ((e.clientX - rect.left) / rect.width - 0.5) * 5;
-        var y = ((e.clientY - rect.top) / rect.height - 0.5) * -5;
-        choice.style.setProperty('--tilt-x', x.toFixed(2) + 'deg');
-        choice.style.setProperty('--tilt-y', y.toFixed(2) + 'deg');
-      });
-      choice.addEventListener('pointerleave', function() {
-        choice.style.removeProperty('--tilt-x');
-        choice.style.removeProperty('--tilt-y');
-      });
-    });
   }
 
   document.addEventListener('keydown', function(e) {
