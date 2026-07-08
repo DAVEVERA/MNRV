@@ -28,6 +28,22 @@ createServer(async (request, response) => {
 	try {
 		const url = new URL(request.url || '/', `http://127.0.0.1:${port}`);
 
+		/* CORS: de marble draait embedded op mnrv.nl en praat cross-origin met deze gateway */
+		const origin = request.headers.origin || '';
+		if (isAllowedOrigin(origin)) {
+			response.setHeader('access-control-allow-origin', origin);
+			response.setHeader('vary', 'Origin');
+		}
+		if (request.method === 'OPTIONS') {
+			response.writeHead(204, {
+				'access-control-allow-methods': 'GET,POST,OPTIONS',
+				'access-control-allow-headers': 'content-type',
+				'access-control-max-age': '86400'
+			});
+			response.end();
+			return;
+		}
+
 		if (url.pathname === '/api/health') {
 			sendJson(response, 200, {
 				stt: Boolean(process.env.GOOGLE_ACCESS_TOKEN || process.env.K_SERVICE),
@@ -107,6 +123,14 @@ createServer(async (request, response) => {
 }).listen(port, '0.0.0.0', () => {
 	console.log(`Magical Marble gateway running on http://127.0.0.1:${port}`);
 });
+
+function isAllowedOrigin(origin) {
+	if (!origin) return false;
+	if (/^https:\/\/(www\.)?mnrv\.(nl|ai)$/.test(origin)) return true;
+	if (/^https:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*\.vercel\.app$/.test(origin)) return true;
+	if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return true;
+	return false;
+}
 
 function safeResolve(basePath, relativePath) {
 	const filePath = resolve(basePath, relativePath);
