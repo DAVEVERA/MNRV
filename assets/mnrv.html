@@ -269,7 +269,7 @@
 
   .hero-portret-img,
   .hero-portret-digital,
-  .hero-portret-lizard {
+  .hero-portret-lizard,
   .hero-portret-mutant {
     position: absolute;
     inset: 0;
@@ -287,7 +287,7 @@
   }
 
   .hero-portret-digital,
-  .hero-portret-lizard {
+  .hero-portret-lizard,
   .hero-portret-mutant {
     opacity: 0;
   }
@@ -539,7 +539,6 @@
     mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
   }
   /* focusindicator op het hint-pilletje i.p.v. een rechthoekige ring om de hele stage */
-  .marble-stage:focus-visible ~ .marble-hint {
   .marble-stage:focus-visible ~ .marble-tools .marble-hint {
     box-shadow: 0 0 0 2px rgba(255,177,98,0.85);
     background: rgba(17,22,29,0.55);
@@ -552,7 +551,6 @@
     height: 100%;
     touch-action: pan-y;
   }
-  .marble-hint {
   .marble-tools {
     position: absolute;
     left: 50%;
@@ -1828,8 +1826,7 @@
         <img src="img/DaveHeel.PNG" alt="Dave Vera" class="hero-portret-img">
         <img src="img/PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true">
         <img src="img/davelizard.png" alt="" class="hero-portret-lizard" aria-hidden="true">
-        <img src="img/PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true" style="opacity: 0;">
-        <img src="img/mutant.png" alt="" class="hero-portret-mutant" aria-hidden="true" style="opacity: 0;">
+        <img src="img/mutant.png" alt="" class="hero-portret-mutant" aria-hidden="true">
       </div>
     </div>
   </div>
@@ -1839,7 +1836,6 @@
 <section class="marble-werk" id="ontdek">
   <h2 class="sr-only">Ontdek de projecten</h2>
   <div class="marble-stage" id="marble-stage"></div>
-  <p class="marble-hint">Klik op de bol — elke klik onthult een project</p>
   <div class="marble-tools">
     <p class="marble-hint" id="marble-status" role="status">Klik op de bol — elke klik onthult een project</p>
     <button class="marble-voice-btn" id="marble-voice-btn" type="button" hidden aria-pressed="false">
@@ -2271,10 +2267,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview
 (function() {
   var digital = document.querySelector('.hero-portret-digital');
   var lizard = document.querySelector('.hero-portret-lizard');
-  var glitchLayers = [digital, lizard].filter(Boolean);
-  const digital = document.querySelector('.hero-portret-digital');
-  const mutant = document.querySelector('.hero-portret-mutant');
-  const glitchLayers = [digital, mutant].filter(Boolean);
+  var mutant = document.querySelector('.hero-portret-mutant');
+  var glitchLayers = [digital, lizard, mutant].filter(Boolean);
   if (!glitchLayers.length) return;
 
   var wrap = document.querySelector('.hero-portret-wrap');
