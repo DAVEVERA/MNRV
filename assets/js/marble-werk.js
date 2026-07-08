@@ -123,6 +123,68 @@
 			this.tapHandler = handler;
 		}
 
+		setState(state) {
+			this.state = state;
+			this.container.dataset.state = state;
+			this.applyStateTargets();
+		}
+
+		setAudioLevel(level) {
+			this.audioLevel = Math.min(Math.max(level, 0), 0.35) / 0.35;
+		}
+
+		applyStateTargets() {
+			/* afwijking t.o.v. origineel: baseHaloStrength blijft op de site-baseline (0.36),
+			   de state-feedback komt uit rotatiesnelheid, puls, displacement en audio-level */
+			var intense = this.state === 'listening' || this.state === 'speaking';
+			if (this.haloUniforms && this.haloUniforms.haloPower) {
+				this.haloUniforms.haloPower.value = intense ? 4.1 : 4.4;
+			}
+		}
+
+		async playAudioBlob(blob) {
+			var url = URL.createObjectURL(blob);
+			var audio = new Audio(url);
+			var context = new AudioContext();
+			if (context.state === 'suspended') {
+				await context.resume();
+			}
+			var source = context.createMediaElementSource(audio);
+			var analyser = context.createAnalyser();
+
+			analyser.fftSize = 512;
+			var data = new Uint8Array(analyser.fftSize);
+			source.connect(analyser);
+			analyser.connect(context.destination);
+
+			var self = this;
+			var running = true;
+			var tick = function () {
+				if (!running) return;
+				analyser.getByteTimeDomainData(data);
+				var sum = 0;
+				for (var i = 0; i < data.length; i += 1) {
+					var centered = (data[i] - 128) / 128;
+					sum += centered * centered;
+				}
+				self.setAudioLevel(Math.sqrt(sum / data.length));
+				requestAnimationFrame(tick);
+			};
+
+			await audio.play();
+			tick();
+
+			await new Promise(function (resolve, reject) {
+				audio.onended = function () { resolve(); };
+				audio.onerror = function () { reject(new Error('Audio playback failed.')); };
+			});
+
+			running = false;
+			this.setAudioLevel(0);
+			URL.revokeObjectURL(url);
+			await context.close();
+		}
+
 		start() {
 			if (this.running) return;
 			this.running = true;
@@ -749,7 +811,391 @@
 			closeButton.focus();
 		}
 
-		return { next: next };
+		return { next: next, close: close };
+	}
+
+	/* ---------- Voice agent (port van components/marble/src/voice) ---------- */
+
+	var VOICE_STATUS_TEXT = {
+		'permission-request': 'Microfoon toestaan…',
+		'listening': 'Ik luister — spreek maar',
+		'processing-audio': 'Even verwerken…',
+		'thinking': 'Denken…',
+		'generating': 'Bezig met maken…',
+		'speaking': 'De bol is aan het woord',
+		'error': 'Er ging iets mis — probeer opnieuw'
+	};
+
+	function getVoiceConfig() {
+		var override = null;
+		try {
+			override = new URLSearchParams(window.location.search).get('voiceapi');
+		} catch (error) { /* geen URLSearchParams: geen override */ }
+		return {
+			apiBaseUrl: override || window.MNRV_VOICE_API || '',
+			defaultLanguage: 'nl-NL',
+			useBrowserTTSFallback: true,
+			vad: { silenceMs: 1100, minSpeechMs: 500, volumeThreshold: 0.026, maxListenMs: 18000 }
+		};
+	}
+
+	function VoiceStateMachine() {
+		this.state = 'idle';
+		this.listeners = [];
+	}
+	VoiceStateMachine.prototype.subscribe = function (listener) {
+		this.listeners.push(listener);
+		listener(this.state);
+	};
+	VoiceStateMachine.prototype.transition = function (event) {
+		switch (event.type) {
+			case 'tap': this.set('permission-request'); break;
+			case 'permission-granted':
+			case 'audio-started': this.set('listening'); break;
+			case 'speech-ended': this.set('processing-audio'); break;
+			case 'transcribed': this.set('thinking'); break;
+			case 'agent-response':
+			case 'speaking-start': this.set('speaking'); break;
+			case 'complete': this.set('idle'); break;
+			case 'permission-denied':
+			case 'error': this.set('error'); break;
+		}
+		return this.state;
+	};
+	VoiceStateMachine.prototype.set = function (next) {
+		if (this.state === next) return;
+		this.state = next;
+		for (var i = 0; i < this.listeners.length; i += 1) this.listeners[i](next);
+	};
+
+	async function startAudioCapture() {
+		var stream = await navigator.mediaDevices.getUserMedia({
+			audio: {
+				echoCancellation: true,
+				noiseSuppression: true,
+				autoGainControl: true
+			}
+		});
+
+		var audioContext = new AudioContext();
+		if (audioContext.state === 'suspended') {
+			await audioContext.resume();
+		}
+		var source = audioContext.createMediaStreamSource(stream);
+		var analyser = audioContext.createAnalyser();
+		analyser.fftSize = 512;
+		analyser.smoothingTimeConstant = 0.72;
+		source.connect(analyser);
+
+		var mediaRecorder = new MediaRecorder(stream, {
+			mimeType: getSupportedMimeType()
+		});
+		var data = new Uint8Array(analyser.fftSize);
+
+		return {
+			mediaRecorder: mediaRecorder,
+			stream: stream,
+			audioContext: audioContext,
+			analyser: analyser,
+			getLevel: function () {
+				analyser.getByteTimeDomainData(data);
+				var sum = 0;
+				for (var i = 0; i < data.length; i += 1) {
+					var centered = (data[i] - 128) / 128;
+					sum += centered * centered;
+				}
+				return Math.sqrt(sum / data.length);
+			},
+			stop: function () {
+				if (mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+				stream.getTracks().forEach(function (track) { track.stop(); });
+				void audioContext.close();
+			}
+		};
+	}
+
+	function getSupportedMimeType() {
+		var candidates = [
+			'audio/webm;codecs=opus',
+			'audio/webm',
+			'audio/ogg;codecs=opus'
+		];
+		return candidates.find(function (candidate) { return MediaRecorder.isTypeSupported(candidate); }) || '';
+	}
+
+	function runVad(session, options) {
+		var chunks = [];
+		var startedAt = 0;
+		var lastSpeechAt = 0;
+		var speechDetected = false;
+		var frame = 0;
+		var stopped = false;
+
+		session.mediaRecorder.addEventListener('dataavailable', function (event) {
+			if (event.data.size > 0) chunks.push(event.data);
+		});
+
+		session.mediaRecorder.addEventListener('stop', function () {
+			var blob = new Blob(chunks, { type: session.mediaRecorder.mimeType || 'audio/webm' });
+			if (speechDetected && blob.size > 0) {
+				options.onSpeechEnd(blob);
+			} else if (options.onNoSpeech) {
+				options.onNoSpeech();
+			} else {
+				options.onError(new Error('No speech detected.'));
+			}
+		});
+
+		session.mediaRecorder.start(250);
+		startedAt = performance.now();
+		lastSpeechAt = startedAt;
+
+		function tick(now) {
+			if (stopped) return;
+			var level = session.getLevel();
+			options.onLevel(level);
+
+			if (level >= options.volumeThreshold) {
+				lastSpeechAt = now;
+				if (now - startedAt >= options.minSpeechMs) {
+					speechDetected = true;
+				}
+			}
+
+			if (speechDetected && now - lastSpeechAt >= options.silenceMs) {
+				stop();
+				return;
+			}
+
+			if (!speechDetected && now - startedAt >= options.maxListenMs) {
+				stop();
+				return;
+			}
+
+			frame = requestAnimationFrame(tick);
+		}
+
+		function stop() {
+			if (stopped) return;
+			stopped = true;
+			cancelAnimationFrame(frame);
+			session.stop();
+		}
+
+		frame = requestAnimationFrame(tick);
+		return stop;
+	}
+
+	function VoiceApiClient(apiBaseUrl) {
+		this.apiBaseUrl = apiBaseUrl;
+	}
+	VoiceApiClient.prototype.transcribe = async function (audio, language) {
+		var formData = new FormData();
+		formData.append('audio', audio, 'speech.webm');
+		formData.append('language', language);
+		var response = await fetch(this.apiBaseUrl + '/api/speech/transcribe', {
+			method: 'POST',
+			body: formData
+		});
+		if (!response.ok) throw new Error('Transcribe failed with ' + response.status);
+		return response.json();
+	};
+	VoiceApiClient.prototype.respond = async function (transcript, language, context) {
+		var response = await fetch(this.apiBaseUrl + '/api/agent/respond', {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({ transcript: transcript, language: language, context: context })
+		});
+		if (!response.ok) throw new Error('Respond failed with ' + response.status);
+		return response.json();
+	};
+	VoiceApiClient.prototype.synthesize = async function (text, language) {
+		var response = await fetch(this.apiBaseUrl + '/api/speech/synthesize', {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({ text: text, language: language })
+		});
+		if (response.status === 204) return null;
+		if (!response.ok) throw new Error('TTS failed with ' + response.status);
+		return response.blob();
+	};
+
+	function speakWithBrowserTts(text, language) {
+		if (!('speechSynthesis' in window)) {
+			return Promise.reject(new Error('Browser SpeechSynthesis is unavailable.'));
+		}
+		window.speechSynthesis.cancel();
+		return new Promise(function (resolve, reject) {
+			var utterance = new SpeechSynthesisUtterance(text);
+			utterance.lang = language;
+			utterance.onend = function () { resolve(); };
+			utterance.onerror = function () { reject(new Error('Browser SpeechSynthesis failed.')); };
+			window.speechSynthesis.speak(utterance);
+		});
+	}
+
+	function createVoiceAgent(renderer, config, ui) {
+		var machine = new VoiceStateMachine();
+		var api = new VoiceApiClient(config.apiBaseUrl);
+		var stopVadFn = null;
+		var sessionActive = false;
+		var turnRunning = false;
+		var conversation = [];
+
+		machine.subscribe(function (state) {
+			renderer.setState(state);
+			ui.onState(state);
+			if (state === 'error') {
+				window.setTimeout(function () {
+					if (machine.state === 'error') machine.transition({ type: 'complete' });
+				}, 1400);
+			}
+		});
+
+		function remember(turn) {
+			conversation.push(turn);
+			if (conversation.length > 12) conversation.splice(0, conversation.length - 12);
+		}
+
+		async function runSession() {
+			while (sessionActive) {
+				await runTurn();
+				if (sessionActive) await wait(180);
+			}
+			renderer.setAudioLevel(0);
+			if (machine.state !== 'error') machine.transition({ type: 'complete' });
+			ui.onSession(false);
+		}
+
+		async function runTurn() {
+			if (turnRunning) return;
+			turnRunning = true;
+			try {
+				var capture = await startAudioCapture();
+				machine.transition({ type: 'permission-granted' });
+				machine.transition({ type: 'audio-started' });
+
+				var audio = await new Promise(function (resolve, reject) {
+					stopVadFn = runVad(capture, {
+						silenceMs: config.vad.silenceMs,
+						minSpeechMs: config.vad.minSpeechMs,
+						volumeThreshold: config.vad.volumeThreshold,
+						maxListenMs: config.vad.maxListenMs,
+						onLevel: function (level) { renderer.setAudioLevel(level); },
+						onSpeechEnd: resolve,
+						onNoSpeech: function () { resolve(null); },
+						onError: reject
+					});
+				});
+				stopVadFn = null;
+				renderer.setAudioLevel(0);
+
+				if (!sessionActive || !audio) return;
+
+				machine.transition({ type: 'speech-ended' });
+				var transcription = await api.transcribe(audio, config.defaultLanguage);
+				machine.transition({ type: 'transcribed' });
+
+				if (!sessionActive || !transcription.transcript || !transcription.transcript.trim()) return;
+
+				var language = transcription.language || config.defaultLanguage;
+				var response = await api.respond(transcription.transcript, language, conversation.slice(-10));
+				machine.transition({ type: 'agent-response' });
+				remember({ role: 'user', text: transcription.transcript });
+				remember({ role: 'assistant', text: response.text });
+
+				if (!sessionActive) return;
+
+				machine.transition({ type: 'speaking-start' });
+				await speak(response.text, response.language || language);
+			} catch (error) {
+				sessionActive = false;
+				renderer.setAudioLevel(0);
+				if (stopVadFn) { stopVadFn(); stopVadFn = null; }
+				machine.transition({ type: 'error' });
+				ui.onSession(false);
+				await wait(900);
+			} finally {
+				turnRunning = false;
+			}
+		}
+
+		async function speak(text, language) {
+			try {
+				var audio = await api.synthesize(text, language);
+				if (audio) {
+					await renderer.playAudioBlob(audio);
+					return;
+				}
+			} catch (error) {
+				if (!config.useBrowserTTSFallback) throw error;
+			}
+			if (config.useBrowserTTSFallback) {
+				await speakWithBrowserTts(text, language);
+			}
+		}
+
+		return {
+			isActive: function () { return sessionActive; },
+			start: function () {
+				if (sessionActive) return;
+				sessionActive = true;
+				ui.onSession(true);
+				machine.transition({ type: 'tap' });
+				void runSession();
+			},
+			stop: function () {
+				sessionActive = false;
+				if (stopVadFn) { stopVadFn(); stopVadFn = null; }
+				renderer.setAudioLevel(0);
+				ui.onSession(false);
+			}
+		};
+	}
+
+	function wait(ms) {
+		return new Promise(function (resolve) { window.setTimeout(resolve, ms); });
+	}
+
+	function initVoice(renderer, popout, voiceRef) {
+		var config = getVoiceConfig();
+		var button = document.getElementById('marble-voice-btn');
+		var statusNode = document.getElementById('marble-status');
+		if (!config.apiBaseUrl || !button || !statusNode) return;
+		if (!navigator.mediaDevices || !window.MediaRecorder) return;
+
+		var label = button.querySelector('.marble-voice-btn-label');
+		var defaultHint = statusNode.textContent;
+
+		var ui = {
+			onState: function (state) {
+				statusNode.textContent = VOICE_STATUS_TEXT[state] || defaultHint;
+			},
+			onSession: function (active) {
+				button.dataset.active = active ? 'true' : 'false';
+				button.setAttribute('aria-pressed', active ? 'true' : 'false');
+				if (label) label.textContent = active ? 'Gesprek stoppen' : 'Praat met de bol';
+			}
+		};
+
+		/* de praatknop verschijnt alleen wanneer de gateway echt bereikbaar en gezond is */
+		fetch(config.apiBaseUrl + '/api/health', { signal: AbortSignal.timeout(6000) })
+			.then(function (response) { return response.ok ? response.json() : null; })
+			.then(function (health) {
+				if (!health || !health.stt || !health.llm) return;
+				var agent = createVoiceAgent(renderer, config, ui);
+				voiceRef.agent = agent;
+				button.hidden = false;
+				button.addEventListener('click', function () {
+					if (agent.isActive()) {
+						agent.stop();
+						return;
+					}
+					popout.close();
+					agent.start();
+				});
+			})
+			.catch(function () { /* gateway offline: knop blijft verborgen */ });
 	}
 
 	/* ---------- Init ---------- */
@@ -772,7 +1218,16 @@
 		var popout = createPopoutController(popoutRoot, stage, {
 			onCycle: function () { renderer.cycleColor(); }
 		});
-		renderer.onTap(function () { popout.next(); });
+		var voiceRef = { agent: null };
+		renderer.onTap(function () {
+			/* tijdens een gesprek: tik op de bol stopt de sessie (zoals in het origineel) */
+			if (voiceRef.agent && voiceRef.agent.isActive()) {
+				voiceRef.agent.stop();
+				return;
+			}
+			popout.next();
+		});
+		initVoice(renderer, popout, voiceRef);
 
 		if ('IntersectionObserver' in window) {
 			var observer = new IntersectionObserver(function (entries) {

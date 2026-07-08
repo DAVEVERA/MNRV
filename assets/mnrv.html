@@ -269,7 +269,8 @@
 
   .hero-portret-img,
   .hero-portret-digital,
-  .hero-portret-lizard {
+  .hero-portret-lizard,
+  .hero-portret-heihachi {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -537,7 +538,7 @@
     mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
   }
   /* focusindicator op het hint-pilletje i.p.v. een rechthoekige ring om de hele stage */
-  .marble-stage:focus-visible ~ .marble-hint {
+  .marble-stage:focus-visible ~ .marble-tools .marble-hint {
     box-shadow: 0 0 0 2px rgba(255,177,98,0.85);
     background: rgba(17,22,29,0.55);
     animation: none;
@@ -549,12 +550,17 @@
     height: 100%;
     touch-action: pan-y;
   }
-  .marble-hint {
+  .marble-tools {
     position: absolute;
     left: 50%;
     bottom: 20px;
     transform: translateX(-50%);
     z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .marble-hint {
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
     font-weight: 600;
@@ -569,6 +575,43 @@
     pointer-events: none;
     white-space: nowrap;
     animation: marbleHintPulse 2.8s ease-in-out infinite;
+  }
+  .marble-voice-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 9px 18px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    background: rgba(17,22,29,0.4);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.9);
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .marble-voice-btn:hover,
+  .marble-voice-btn:focus-visible {
+    border-color: rgba(255,177,98,0.72);
+    background: rgba(17,22,29,0.6);
+  }
+  .marble-voice-btn[data-active="true"] {
+    border-color: rgba(255,177,98,0.9);
+    color: rgb(255,177,98);
+  }
+  /* luister-/spreekstatus laat de statuspil vol oplichten */
+  .marble-stage[data-state="listening"] ~ .marble-tools .marble-hint,
+  .marble-stage[data-state="speaking"] ~ .marble-tools .marble-hint {
+    animation: none;
+    opacity: 1;
+    background: rgba(17,22,29,0.55);
   }
   @keyframes marbleHintPulse {
     0%, 100% { opacity: 0.55; }
@@ -737,7 +780,9 @@
       /* smal scherm: gradient-straal = halve breedte, dus ruimere stops voor dezelfde aura-look */
       background: radial-gradient(circle closest-side at 50% 50%, var(--marble-bg-start) 72%, #C1BFBC 130%);
     }
-    .marble-hint { font-size: 9px; bottom: 14px; }
+    .marble-tools { bottom: 14px; flex-direction: column; gap: 8px; }
+    .marble-hint { font-size: 9px; }
+    .marble-voice-btn { font-size: 10px; }
     .marble-popout__content { padding: 20px 18px 22px; }
     .marble-popout__actions { flex-direction: column; align-items: stretch; }
   }
@@ -1650,6 +1695,7 @@
 </style>
   <link rel="stylesheet" href="../components/cookie-banner.css">
   <script src="../components/cookie-banner.js" defer></script>
+  <script>window.MNRV_VOICE_API = 'https://marble-agent-jcoumwoq4q-ez.a.run.app';</script>
   <script src="vendor/three.min.js" defer></script>
   <script src="vendor/OrbitControls.js" defer></script>
   <script src="js/marble-werk.js" defer></script>
@@ -1778,6 +1824,7 @@
         <img src="img/DaveHeel.PNG" alt="Dave Vera" class="hero-portret-img">
         <img src="img/PortretDaveHeel2digital.png" alt="" class="hero-portret-digital" aria-hidden="true">
         <img src="img/davelizard.png" alt="" class="hero-portret-lizard" aria-hidden="true">
+        <img src="img/heihachi.png" alt="" class="hero-portret-heihachi" aria-hidden="true" style="opacity: 0;">
       </div>
     </div>
   </div>
@@ -1787,7 +1834,13 @@
 <section class="marble-werk" id="ontdek">
   <h2 class="sr-only">Ontdek de projecten</h2>
   <div class="marble-stage" id="marble-stage"></div>
-  <p class="marble-hint">Klik op de bol — elke klik onthult een project</p>
+  <div class="marble-tools">
+    <p class="marble-hint" id="marble-status" role="status">Klik op de bol — elke klik onthult een project</p>
+    <button class="marble-voice-btn" id="marble-voice-btn" type="button" hidden aria-pressed="false">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+      <span class="marble-voice-btn-label">Praat met de bol</span>
+    </button>
+  </div>
 </section>
 <div id="marble-popout-root"></div>
 
@@ -2213,6 +2266,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview
   var digital = document.querySelector('.hero-portret-digital');
   var lizard = document.querySelector('.hero-portret-lizard');
   var glitchLayers = [digital, lizard].filter(Boolean);
+  var heihachi = document.querySelector('.hero-portret-heihachi');
+  var glitchLayers = [digital, lizard, heihachi].filter(Boolean);
   if (!glitchLayers.length) return;
 
   var wrap = document.querySelector('.hero-portret-wrap');
