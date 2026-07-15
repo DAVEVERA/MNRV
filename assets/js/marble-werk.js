@@ -35,7 +35,7 @@
 			num: '04',
 			cat: 'E-commerce',
 			title: 'De Notenman',
-			url: 'https://denotenman.com',
+			url: 'https://denotenman.vercel.app/',
 			img: 'img/denotenman-preview.jpg',
 			desc: 'Geen standaard webshop, maar een volledig maatwerk e-commerceplatform waarin productbeleving, bestelgemak, SEO, AI-indexering, marketing automation en backendbeheer samenkomen.'
 		},
