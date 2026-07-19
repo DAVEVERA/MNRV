@@ -92,26 +92,36 @@
     const icons = document.querySelectorAll('.desktop-icon');
     let selectedIcon = null;
 
+    function activateIcon(icon) {
+      const target = icon.getAttribute('data-target');
+      const windowId = icon.getAttribute('data-window');
+
+      if (windowId) {
+        showWindow(windowId);
+      } else if (target) {
+        window.location.href = target;
+      }
+    }
+
     icons.forEach(function(icon) {
-      // Single click to select
       icon.addEventListener('click', function(e) {
         e.preventDefault();
         if (selectedIcon) selectedIcon.classList.remove('selected');
         icon.classList.add('selected');
         selectedIcon = icon;
         closeStartMenu();
+        activateIcon(icon);
       });
 
-      // Double click to open
       icon.addEventListener('dblclick', function(e) {
         e.preventDefault();
-        const target = icon.getAttribute('data-target');
-        const windowId = icon.getAttribute('data-window');
+        activateIcon(icon);
+      });
 
-        if (windowId) {
-          showWindow(windowId);
-        } else if (target) {
-          window.location.href = target;
+      icon.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activateIcon(icon);
         }
       });
     });

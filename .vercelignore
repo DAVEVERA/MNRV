@@ -1,1 +1,5 @@
 assets/img/bjjhjkhkjhgkj.mp4
+.tmp-*.png
+components/marble/output/
+components/marble/public/assets/logo_clients/
+assets/legacy/FLOATNODES.txt

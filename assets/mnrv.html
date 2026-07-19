@@ -507,9 +507,106 @@
 
   /* MARBLE — interactieve knikker met project-popouts */
   .marble-werk {
+    --marble-bg-start: rgb(217, 38, 38);
+    --marble-bg-end: rgb(36, 15, 15);
     position: relative;
-    padding: 0;
+    padding: clamp(72px, 9vw, 132px) clamp(20px, 5vw, 64px);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 42%, var(--marble-bg-start) 0%, var(--marble-bg-start) 34%, var(--marble-bg-end) 100%);
+    color: #fff;
+    transition: background 0.3s ease;
   }
+  .marble-network {
+    position: relative;
+    width: min(100%, 980px);
+    min-height: clamp(500px, 66vw, 650px);
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+  }
+  .marble-network::before {
+    content: "";
+    position: absolute;
+    width: clamp(260px, 38vw, 390px);
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle, rgba(255,255,255,0.12) 0 24%, transparent 25%),
+      radial-gradient(circle, rgba(255,255,255,0.08) 0 46%, transparent 47%),
+      radial-gradient(circle, rgba(255,255,255,0.06) 0 68%, transparent 69%);
+    box-shadow: inset 0 0 34px rgba(255,255,255,0.06);
+    animation: marbleNetworkBreathe 5.2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .marble-network-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .marble-network-line {
+    fill: none;
+    stroke: rgba(255,255,255,0.58);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-dasharray: 520;
+    stroke-dashoffset: 520;
+    animation: marbleLineDraw 1.5s ease forwards, marbleLinePulse 4.8s ease-in-out infinite;
+  }
+  .marble-network-line:nth-child(2) { animation-delay: 0.08s, 1.1s; }
+  .marble-network-line:nth-child(3) { animation-delay: 0.16s, 1.3s; }
+  .marble-network-line:nth-child(4) { animation-delay: 0.24s, 1.5s; }
+  .marble-network-line:nth-child(5) { animation-delay: 0.32s, 1.7s; }
+  .marble-network-line:nth-child(6) { animation-delay: 0.40s, 1.9s; }
+  .marble-node {
+    position: absolute;
+    z-index: 3;
+    width: clamp(126px, 14vw, 184px);
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+    cursor: pointer;
+    transition: scale 0.22s ease, filter 0.22s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .marble-node:hover,
+  .marble-node:focus-visible {
+    scale: 1.08;
+    filter: drop-shadow(0 18px 28px rgba(0,0,0,0.32));
+    outline: none;
+  }
+  .marble-node img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,0.22));
+  }
+  .marble-node--flows { top: 20%; left: 14%; }
+  .marble-node--ai { top: 50%; left: 8%; transform: translateY(-50%); }
+  .marble-node--data { bottom: 20%; left: 14%; }
+  .marble-node--ux { top: 20%; right: 14%; }
+  .marble-node--web { top: 50%; right: 8%; transform: translateY(-50%); }
+  .marble-node--growth { bottom: 20%; right: 14%; }
+  .marble-float-a { animation: marbleFloatUp 3.2s ease-in-out infinite; }
+  .marble-float-b { animation: marbleFloatDown 3.5s ease-in-out infinite; }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -525,21 +622,20 @@
     --marble-bg-start: rgb(217, 38, 38);
     --marble-bg-end: rgb(36, 15, 15);
     position: relative;
-    width: 100%;
-    height: min(94vh, 140vw);
-    height: min(94svh, 140vw);
-    min-height: 442px;
+    width: clamp(144px, 20vw, 220px);
+    height: clamp(144px, 20vw, 220px);
     overflow: hidden;
     /* aura: marble-kleur loopt als cirkel rond de bol en vloeit over naar de sectiekleur (#C1BFBC) */
-    background: radial-gradient(circle closest-side at 50% 50%, var(--marble-bg-start) 52%, #C1BFBC 96%);
+    background: radial-gradient(circle, var(--marble-bg-start), var(--marble-bg-end));
+    border-radius: 999px;
+    box-shadow: 0 28px 90px rgba(0,0,0,0.5), 0 0 64px rgba(255,255,255,0.18);
     cursor: pointer;
     outline: none;
     /* zachte kleurovergang naar de secties erboven en eronder — geen harde scheidingslijn */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
+    z-index: 4;
   }
   /* focusindicator op het hint-pilletje i.p.v. een rechthoekige ring om de hele stage */
-  .marble-stage:focus-visible ~ .marble-tools .marble-hint {
+  .marble-werk:has(.marble-stage:focus-visible) .marble-hint {
     box-shadow: 0 0 0 2px rgba(255,177,98,0.85);
     background: rgba(17,22,29,0.55);
     animation: none;
@@ -552,13 +648,13 @@
     touch-action: pan-y;
   }
   .marble-tools {
-    position: absolute;
-    left: 50%;
-    bottom: 20px;
-    transform: translateX(-50%);
-    z-index: 1;
+    position: relative;
+    width: min(100%, 980px);
+    margin: -92px auto 42px;
+    z-index: 5;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
   }
   .marble-hint {
@@ -608,8 +704,8 @@
     color: rgb(255,177,98);
   }
   /* luister-/spreekstatus laat de statuspil vol oplichten */
-  .marble-stage[data-state="listening"] ~ .marble-tools .marble-hint,
-  .marble-stage[data-state="speaking"] ~ .marble-tools .marble-hint {
+  .marble-werk:has(.marble-stage[data-state="listening"]) .marble-hint,
+  .marble-werk:has(.marble-stage[data-state="speaking"]) .marble-hint {
     animation: none;
     opacity: 1;
     background: rgba(17,22,29,0.55);
@@ -617,6 +713,57 @@
   @keyframes marbleHintPulse {
     0%, 100% { opacity: 0.55; }
     50% { opacity: 1; }
+  }
+  .marble-client-strip {
+    width: min(100%, 980px);
+    margin: clamp(12px, 3vw, 24px) auto 0;
+    display: grid;
+    gap: 16px;
+    text-align: center;
+  }
+  .marble-client-strip p {
+    margin: 0;
+    color: rgba(255,255,255,0.66);
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .marble-client-logos {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    align-items: center;
+  }
+  .marble-client-logos img {
+    width: 100%;
+    height: 58px;
+    object-fit: contain;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 12px 34px rgba(0,0,0,0.18);
+  }
+  @keyframes marbleLineDraw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes marbleLinePulse {
+    0%, 100% { opacity: 0.42; }
+    50% { opacity: 0.78; }
+  }
+  @keyframes marbleNetworkBreathe {
+    0%, 100% { transform: scale(0.98); opacity: 0.86; }
+    50% { transform: scale(1.03); opacity: 1; }
+  }
+  @keyframes marbleFloatUp {
+    0%, 100% { translate: 0 0; rotate: -1deg; }
+    50% { translate: 0 -9px; rotate: 1deg; }
+  }
+  @keyframes marbleFloatDown {
+    0%, 100% { translate: 0 0; rotate: 1deg; }
+    50% { translate: 0 9px; rotate: -1deg; }
   }
 
   /* De kaart mag de marble nooit afdekken: op smalle schermen een bottom-sheet
@@ -690,10 +837,14 @@
   @media (min-width: 1100px) {
     .marble-popout__media { aspect-ratio: 16 / 10; }
   }
-  .marble-popout__media img {
+  .marble-popout__media img,
+  .marble-popout__media iframe {
     display: block;
     width: 100%;
     height: 100%;
+    border: 0;
+  }
+  .marble-popout__media img {
     object-fit: cover;
     object-position: top center;
   }
@@ -772,21 +923,67 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .marble-hint { animation: none; }
+    .marble-network-line,
+    .marble-network::before,
+    .marble-float-a,
+    .marble-float-b { animation: none; }
     .marble-popout,
     .marble-popout__panel { animation: none; }
   }
-  @media (max-width: 560px) {
-    .marble-stage {
-      min-height: 390px;
-      /* smal scherm: gradient-straal = halve breedte, dus ruimere stops voor dezelfde aura-look */
-      background: radial-gradient(circle closest-side at 50% 50%, var(--marble-bg-start) 72%, #C1BFBC 130%);
+  @media (max-width: 760px) {
+    .marble-werk {
+      padding: 56px 20px 64px;
     }
+    .marble-network {
+      width: 100%;
+      max-width: 340px;
+      min-height: 660px;
+      margin-left: 0;
+      margin-right: auto;
+    }
+    .marble-network-lines {
+      transform: rotate(90deg) scale(0.88);
+    }
+    .marble-node {
+      width: 104px;
+    }
+    .marble-node--flows { top: 4%; left: 0; }
+    .marble-node--ai { top: 19%; left: min(236px, calc(100vw - 126px)); right: auto; transform: none; }
+    .marble-node--data { top: 38%; left: 0; bottom: auto; }
+    .marble-node--ux { bottom: 38%; left: min(236px, calc(100vw - 126px)); right: auto; top: auto; }
+    .marble-node--web { bottom: 19%; left: 0; right: auto; top: auto; transform: none; }
+    .marble-node--growth { bottom: 4%; left: min(236px, calc(100vw - 126px)); right: auto; }
+    .marble-tools {
+      margin-top: -78px;
+      margin-bottom: 34px;
+    }
+    .marble-client-strip {
+      max-width: 340px;
+      margin-left: 0;
+      margin-right: auto;
+    }
+    .marble-client-logos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .marble-client-logos img {
+      height: 64px;
+    }
+  }
+  @media (max-width: 560px) {
     .marble-hint { font-size: 9px; bottom: 14px; }
     .marble-tools { bottom: 14px; flex-direction: column; gap: 8px; }
     .marble-hint { font-size: 9px; }
     .marble-voice-btn { font-size: 10px; }
     .marble-popout__content { padding: 20px 18px 22px; }
     .marble-popout__actions { flex-direction: column; align-items: stretch; }
+  }
+  @media (max-width: 420px) {
+    .marble-network { min-height: 610px; }
+    .marble-stage {
+      width: 150px;
+      height: 150px;
+    }
+    .marble-node { width: 92px; }
   }
 
   /* CONTACT + alles eronder = wit */
@@ -1835,12 +2032,33 @@
 <!-- MARBLE: interactieve knikker — klik voor een project -->
 <section class="marble-werk" id="ontdek">
   <h2 class="sr-only">Ontdek de projecten</h2>
-  <div class="marble-stage" id="marble-stage"></div>
-  <div class="marble-tools">
-    <p class="marble-hint" id="marble-status" role="status">Klik op de bol — elke klik onthult een project</p>
-    <button class="marble-voice-btn" id="marble-voice-btn" type="button" hidden aria-pressed="false">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
-      <span class="marble-voice-btn-label">Praat met de bol</span>
+  <div class="marble-network" aria-label="MNRV netwerk visual">
+    <svg class="marble-network-lines" viewBox="0 0 800 450" aria-hidden="true">
+      <path class="marble-network-line" d="M 400 225 C 250 225, 200 120, 160 120" />
+      <path class="marble-network-line" d="M 400 225 C 250 225, 180 225, 120 225" />
+      <path class="marble-network-line" d="M 400 225 C 250 225, 200 330, 160 330" />
+      <path class="marble-network-line" d="M 400 225 C 550 225, 600 120, 640 120" />
+      <path class="marble-network-line" d="M 400 225 C 550 225, 620 225, 680 225" />
+      <path class="marble-network-line" d="M 400 225 C 550 225, 600 330, 640 330" />
+    </svg>
+    <button class="marble-node marble-node--flows marble-float-a" type="button" data-project-index="3" aria-label="Open project De Notenman">
+      <img src="logo_clients/Notenman_logo.png" alt="De Notenman" loading="lazy">
+    </button>
+    <button class="marble-node marble-node--ai marble-float-b" type="button" data-project-index="0" aria-label="Open project MRSVision">
+      <img src="logo_clients/mrjvoluit.png" alt="MRJ Voluit" loading="lazy">
+    </button>
+    <button class="marble-node marble-node--data marble-float-a" type="button" data-project-index="1" aria-label="Open project FAINL">
+      <img src="logo_clients/FAINL.png" alt="FAINL" loading="lazy">
+    </button>
+    <div class="marble-stage" id="marble-stage"></div>
+    <button class="marble-node marble-node--ux marble-float-b" type="button" data-project-index="4" aria-label="Open project Stuk Verdriet">
+      <img src="logo_clients/sverdriet_logo.webp" alt="Stuk Verdriet" loading="lazy">
+    </button>
+    <button class="marble-node marble-node--web marble-float-a" type="button" data-project-index="2" aria-label="Open project Windofy">
+      <img src="logo_clients/windofy-logo.png" alt="Windofy" loading="lazy">
+    </button>
+    <button class="marble-node marble-node--growth marble-float-b" type="button" data-project-index="6" aria-label="Open project Oostendorp Auto">
+      <img src="logo_clients/oostendorpauto.png" alt="Oostendorp Auto" loading="lazy">
     </button>
   </div>
 </section>

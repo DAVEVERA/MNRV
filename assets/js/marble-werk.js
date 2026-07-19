@@ -9,25 +9,28 @@
 	var PROJECTS = [
 		{
 			num: '01',
-			cat: 'AI-visualisatie · B2B',
+			cat: 'AI-visualisatie - B2B',
 			title: 'MRSVision',
 			url: 'https://mrsvision.nl',
+			frameUrl: 'https://mrj526-635857755618.europe-west4.run.app/',
 			img: 'img/mrsvision-after.jpg',
-			desc: 'Interactieve, AI-gestuurde B2B-visualisatietool voor maatwerk raambekleding. Consumenten zien vooraf hoe jaloezieën in hun eigen ruimte staan en worden visueel geholpen bij het juist inmeten.'
+			desc: 'Interactieve, AI-gestuurde B2B-visualisatietool voor maatwerk raambekleding. Consumenten zien vooraf hoe jaloezieen in hun eigen ruimte staan en worden visueel geholpen bij het juist inmeten.'
 		},
 		{
 			num: '02',
 			cat: 'AI Platform',
 			title: 'FAINL',
 			url: 'https://fainl.com',
+			frameUrl: 'https://fainl.com',
 			img: 'img/fainl-preview.jpg',
-			desc: 'Zeven AI-modellen debatteren en leveren één gefundeerde conclusie. FAINL is een consensus-orkestratielaag: je vraag wordt gelijktijdig door meerdere AI-modellen verwerkt en er wordt één gezaghebbend antwoord gesynthetiseerd.'
+			desc: 'Zeven AI-modellen debatteren en leveren een gefundeerde conclusie. FAINL is een consensus-orkestratielaag: je vraag wordt gelijktijdig door meerdere AI-modellen verwerkt en er wordt een gezaghebbend antwoord gesynthetiseerd.'
 		},
 		{
 			num: '03',
 			cat: 'AI Visualisatie',
 			title: 'Windofy',
 			url: 'https://windofy.com',
+			frameUrl: 'https://windofy.com',
 			img: 'img/windofy-preview.jpg',
 			desc: 'Slimme raamdecoratievisualisatie: klanten bekijken raamdecoratie direct in hun eigen interieur. Foto-upload, productconfiguratie en realistische visualisatie maken de keuze eenvoudiger, persoonlijker en overtuigender.'
 		},
@@ -35,25 +38,37 @@
 			num: '04',
 			cat: 'E-commerce',
 			title: 'De Notenman',
-			url: 'https://denotenman.vercel.app/',
+			url: 'https://denotenman.com',
+			frameUrl: 'https://denotenman.com',
 			img: 'img/denotenman-preview.jpg',
 			desc: 'Geen standaard webshop, maar een volledig maatwerk e-commerceplatform waarin productbeleving, bestelgemak, SEO, AI-indexering, marketing automation en backendbeheer samenkomen.'
 		},
 		{
 			num: '05',
-			cat: 'Maatschappelijk · Podcastplatform',
+			cat: 'Maatschappelijk - Podcastplatform',
 			title: 'Stuk Verdriet',
 			url: 'https://stukverdriet.com/start',
+			frameUrl: 'https://stukverdriet.com/start',
 			img: 'img/stukverdriet-preview.jpg',
-			desc: 'Een platform dat mensen verbindt op momenten waarop woorden tekortschieten — verhalen, herkenning en steun rond verlies, rouw en afscheid. Volledig belangeloos ontwikkeld.'
+			desc: 'Een platform dat mensen verbindt op momenten waarop woorden tekortschieten: verhalen, herkenning en steun rond verlies, rouw en afscheid. Volledig belangeloos ontwikkeld.'
 		},
 		{
 			num: '06',
 			cat: 'Studio',
 			title: 'MNRV',
 			url: 'https://mnrv.nl',
+			frameUrl: 'https://mnrv.nl',
 			img: 'img/mnrv-preview.jpg',
-			desc: 'Onze eigen digitale identiteit — gebouwd op dezelfde principes waarmee we klanten bedienen: strak, snel, met karakter en vol intentie.'
+			desc: 'Onze eigen digitale identiteit, gebouwd op dezelfde principes waarmee we klanten bedienen: strak, snel, met karakter en vol intentie.'
+		},
+		{
+			num: '07',
+			cat: 'Automotive',
+			title: 'Oostendorp Auto',
+			url: 'https://www.oostendorp-autogroep.nl/',
+			frameUrl: 'https://www.oostendorp-autogroep.nl/',
+			img: 'logo_clients/oostendorpauto.png',
+			desc: 'Digitale merk- en website-ervaring voor een automotive opdrachtgever, gericht op heldere presentatie, snelle orientatie en vertrouwen in de route naar contact.'
 		}
 	];
 
@@ -450,8 +465,15 @@
 		}
 
 		updateBackgroundColor() {
-			this.container.style.setProperty('--marble-bg-start', rgbString(this.backgroundSpring.start.current));
-			this.container.style.setProperty('--marble-bg-end', rgbString(this.backgroundSpring.end.current));
+			var start = rgbString(this.backgroundSpring.start.current);
+			var end = rgbString(this.backgroundSpring.end.current);
+			this.container.style.setProperty('--marble-bg-start', start);
+			this.container.style.setProperty('--marble-bg-end', end);
+			var section = this.container.closest('.marble-werk');
+			if (section) {
+				section.style.setProperty('--marble-bg-start', start);
+				section.style.setProperty('--marble-bg-end', end);
+			}
 		}
 
 		animate(currentTime) {
@@ -702,6 +724,12 @@
 			show(PROJECTS[projectIndex]);
 		}
 
+		function showByIndex(index) {
+			if (!PROJECTS.length) return;
+			projectIndex = ((index % PROJECTS.length) + PROJECTS.length) % PROJECTS.length;
+			show(PROJECTS[projectIndex]);
+		}
+
 		/* Volgend project via de kaart of de backdrop: laat de marble ook van kleur wisselen */
 		function advance() {
 			if (options && options.onCycle) options.onCycle();
@@ -743,11 +771,20 @@
 
 			var figure = document.createElement('figure');
 			figure.className = 'marble-popout__media';
-			var image = document.createElement('img');
-			image.src = project.img;
-			image.alt = 'Preview van ' + project.title;
-			image.loading = 'lazy';
-			figure.appendChild(image);
+			if (project.frameUrl) {
+				var frame = document.createElement('iframe');
+				frame.src = project.frameUrl;
+				frame.title = project.title + ' live preview';
+				frame.loading = 'lazy';
+				frame.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-presentation allow-same-origin');
+				figure.appendChild(frame);
+			} else {
+				var image = document.createElement('img');
+				image.src = project.img;
+				image.alt = 'Preview van ' + project.title;
+				image.loading = 'lazy';
+				figure.appendChild(image);
+			}
 
 			var content = document.createElement('div');
 			content.className = 'marble-popout__content';
@@ -811,7 +848,7 @@
 			closeButton.focus();
 		}
 
-		return { next: next, close: close };
+		return { next: next, close: close, show: showByIndex };
 	}
 
 	/* ---------- Voice agent (port van components/marble/src/voice) ---------- */
@@ -1174,7 +1211,7 @@
 			onSession: function (active) {
 				button.dataset.active = active ? 'true' : 'false';
 				button.setAttribute('aria-pressed', active ? 'true' : 'false');
-				if (label) label.textContent = active ? 'Gesprek stoppen' : 'Praat met de bol';
+				if (label) label.textContent = active ? 'Gesprek stoppen' : 'Gesprek starten';
 			}
 		};
 
@@ -1218,6 +1255,18 @@
 		var popout = createPopoutController(popoutRoot, stage, {
 			onCycle: function () { renderer.cycleColor(); }
 		});
+		var projectNodes = document.querySelectorAll('.marble-node[data-project-index]');
+		for (var i = 0; i < projectNodes.length; i += 1) {
+			projectNodes[i].addEventListener('click', function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+				var index = Number(this.getAttribute('data-project-index'));
+				if (!Number.isNaN(index)) {
+					renderer.cycleColor();
+					popout.show(index);
+				}
+			});
+		}
 		var voiceRef = { agent: null };
 		renderer.onTap(function () {
 			/* tijdens een gesprek: tik op de bol stopt de sessie (zoals in het origineel) */
