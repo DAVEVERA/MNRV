@@ -556,8 +556,8 @@
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-dasharray: 14 10;
-    stroke-dashoffset: 520;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
     vector-effect: non-scaling-stroke;
     filter: drop-shadow(0 0 0 rgba(255,210,31,0));
     animation: marbleLineDraw 1.5s ease forwards, marbleLinePulse 4.8s ease-in-out infinite;
@@ -628,7 +628,7 @@
     stroke-width: 3.4;
     opacity: 1;
     filter: drop-shadow(0 0 12px rgba(255,210,31,0.72));
-    animation: marbleLineElectric 0.42s steps(2, end) infinite;
+    animation: marbleLineGlow 0.62s ease-in-out infinite alternate;
   }
   .marble-float-a { animation: marbleFloatUp 3.2s ease-in-out infinite; }
   .marble-float-b { animation: marbleFloatDown 3.5s ease-in-out infinite; }
@@ -778,10 +778,9 @@
     0%, 100% { opacity: 0.42; }
     50% { opacity: 0.78; }
   }
-  @keyframes marbleLineElectric {
-    0% { stroke-dashoffset: 0; opacity: 0.75; }
-    50% { stroke-dashoffset: -34; opacity: 1; }
-    100% { stroke-dashoffset: -68; opacity: 0.86; }
+  @keyframes marbleLineGlow {
+    from { opacity: 0.78; filter: drop-shadow(0 0 7px rgba(255,210,31,0.46)); }
+    to { opacity: 1; filter: drop-shadow(0 0 17px rgba(255,210,31,0.82)); }
   }
   @keyframes marbleNetworkBreathe {
     0%, 100% { transform: scale(0.98); opacity: 0.86; }
@@ -2054,12 +2053,12 @@
   <h2 class="sr-only">Ontdek de projecten</h2>
   <div class="marble-network" aria-label="MNRV netwerk visual">
     <svg class="marble-network-lines" viewBox="0 0 800 450" preserveAspectRatio="none" aria-hidden="true">
-      <path class="marble-network-line" data-connection="notenman" d="M 400 225 L 338 198 L 292 118 L 112 68" />
-      <path class="marble-network-line" data-connection="mrsvision" d="M 400 225 L 454 164 L 351 96 L 288 32" />
-      <path class="marble-network-line" data-connection="fainl" d="M 400 225 L 300 248 L 214 199 L 96 261" />
-      <path class="marble-network-line" data-connection="stukverdriet" d="M 400 225 L 505 184 L 561 112 L 664 90" />
-      <path class="marble-network-line" data-connection="windofy" d="M 400 225 L 513 251 L 612 216 L 704 248" />
-      <path class="marble-network-line" data-connection="oostendorp" d="M 400 225 L 435 303 L 498 337 L 536 387" />
+      <path class="marble-network-line" data-connection="notenman" pathLength="1" d="M 400 225 C 336 198, 254 95, 112 68" />
+      <path class="marble-network-line" data-connection="mrsvision" pathLength="1" d="M 400 225 C 458 164, 352 98, 288 32" />
+      <path class="marble-network-line" data-connection="fainl" pathLength="1" d="M 400 225 C 300 254, 208 205, 96 261" />
+      <path class="marble-network-line" data-connection="stukverdriet" pathLength="1" d="M 400 225 C 506 184, 560 106, 664 90" />
+      <path class="marble-network-line" data-connection="windofy" pathLength="1" d="M 400 225 C 512 252, 610 214, 704 248" />
+      <path class="marble-network-line" data-connection="oostendorp" pathLength="1" d="M 400 225 C 430 304, 494 336, 536 387" />
     </svg>
     <button class="marble-node marble-node--flows marble-float-a" type="button" data-connection="notenman" data-project-index="3" aria-label="Open project De Notenman">
       <img src="logo_clients/Notenman_logo.png" alt="De Notenman" loading="lazy">

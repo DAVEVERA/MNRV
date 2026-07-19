@@ -1269,12 +1269,9 @@
 		}
 		var voiceRef = { agent: null };
 		renderer.onTap(function () {
-			/* tijdens een gesprek: tik op de bol stopt de sessie (zoals in het origineel) */
 			if (voiceRef.agent && voiceRef.agent.isActive()) {
 				voiceRef.agent.stop();
-				return;
 			}
-			popout.next();
 		});
 		initVoice(renderer, popout, voiceRef);
 
