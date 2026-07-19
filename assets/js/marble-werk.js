@@ -685,32 +685,10 @@
 	function createPopoutController(root, stage, options) {
 		var projectIndex = -1;
 		var keyListener = null;
-		var lockTimer = null;
-		var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-		function sheetMode() {
-			return window.innerWidth < 1100;
-		}
 
 		/* Sheet-modus: scroll de pagina zó dat de marble zichtbaar blijft boven de kaart */
-		function ensureMarbleVisible() {
-			if (!sheetMode()) return 0;
-			var rect = stage.getBoundingClientRect();
-			var vh = window.innerHeight;
-			var sheetH = Math.min(vh * 0.52, 560);
-			var target = (vh - sheetH) / 2;
-			var delta = (rect.top + rect.height / 2) - target;
-			if (Math.abs(delta) < 8) return 0;
-			window.scrollBy({ top: delta, behavior: reducedMotion ? 'auto' : 'smooth' });
-			return reducedMotion ? 0 : 380;
-		}
-
 		function close() {
 			root.replaceChildren();
-			if (lockTimer) {
-				clearTimeout(lockTimer);
-				lockTimer = null;
-			}
 			document.body.style.overflow = '';
 			if (keyListener) {
 				document.removeEventListener('keydown', keyListener);
@@ -738,11 +716,7 @@
 
 		function show(project) {
 			root.replaceChildren();
-			var lockDelay = ensureMarbleVisible();
-			if (lockTimer) clearTimeout(lockTimer);
-			lockTimer = setTimeout(function () {
-				document.body.style.overflow = 'hidden';
-			}, lockDelay);
+			document.body.style.overflow = 'hidden';
 
 			var backdrop = document.createElement('div');
 			backdrop.className = 'marble-popout';
@@ -750,13 +724,7 @@
 			backdrop.setAttribute('aria-modal', 'true');
 			backdrop.setAttribute('aria-label', project.title);
 			backdrop.addEventListener('click', function (event) {
-				if (event.target !== backdrop) return;
-				/* klik op de (zichtbare) marble bladert door; klik daarbuiten sluit */
-				var r = stage.getBoundingClientRect();
-				var opStage = event.clientX >= r.left && event.clientX <= r.right &&
-					event.clientY >= r.top && event.clientY <= r.bottom;
-				if (opStage) advance();
-				else close();
+				if (event.target === backdrop) close();
 			});
 
 			var panel = document.createElement('article');
@@ -849,6 +817,91 @@
 		}
 
 		return { next: next, close: close, show: showByIndex };
+	}
+
+	/* ---------- Content-aware netwerkverbindingen ---------- */
+
+	var CONNECTION_BENDS = {
+		notenman: -0.24,
+		mrsvision: 0.2,
+		fainl: 0.24,
+		stukverdriet: -0.18,
+		windofy: 0.16,
+		oostendorp: -0.22
+	};
+
+	function svgPointFromRect(rect, bounds, scaleX, scaleY) {
+		return {
+			x: (rect.left + rect.width / 2 - bounds.left) * scaleX,
+			y: (rect.top + rect.height / 2 - bounds.top) * scaleY
+		};
+	}
+
+	function formatPathNumber(value) {
+		return Math.round(value * 10) / 10;
+	}
+
+	function updateConnectionLines(stage) {
+		var network = stage.closest('.marble-network');
+		if (!network) return;
+		var svg = network.querySelector('.marble-network-lines');
+		if (!svg) return;
+
+		var svgBounds = svg.getBoundingClientRect();
+		if (!svgBounds.width || !svgBounds.height) return;
+		var viewBox = svg.viewBox.baseVal;
+		var scaleX = viewBox.width / svgBounds.width;
+		var scaleY = viewBox.height / svgBounds.height;
+		var start = svgPointFromRect(stage.getBoundingClientRect(), svgBounds, scaleX, scaleY);
+		var nodes = network.querySelectorAll('.marble-node[data-connection]');
+
+		for (var i = 0; i < nodes.length; i += 1) {
+			var node = nodes[i];
+			var connection = node.getAttribute('data-connection');
+			var path = svg.querySelector('.marble-network-line[data-connection="' + connection + '"]');
+			if (!path) continue;
+
+			var end = svgPointFromRect(node.getBoundingClientRect(), svgBounds, scaleX, scaleY);
+			var dx = end.x - start.x;
+			var dy = end.y - start.y;
+			var distance = Math.sqrt(dx * dx + dy * dy) || 1;
+			var normalX = -dy / distance;
+			var normalY = dx / distance;
+			var bend = CONNECTION_BENDS[connection] || 0.16;
+			var spread = Math.min(Math.max(distance * 0.28, 34), 104);
+			var kinkA = {
+				x: start.x + dx * 0.34 + normalX * spread * bend,
+				y: start.y + dy * 0.34 + normalY * spread * bend
+			};
+			var kinkB = {
+				x: start.x + dx * 0.72 - normalX * spread * bend,
+				y: start.y + dy * 0.72 - normalY * spread * bend
+			};
+
+			path.setAttribute('d', [
+				'M', formatPathNumber(start.x), formatPathNumber(start.y),
+				'L', formatPathNumber(kinkA.x), formatPathNumber(kinkA.y),
+				'L', formatPathNumber(kinkB.x), formatPathNumber(kinkB.y),
+				'L',
+				formatPathNumber(end.x), formatPathNumber(end.y)
+			].join(' '));
+		}
+	}
+
+	function initConnectionLines(stage) {
+		var network = stage.closest('.marble-network');
+		if (!network) return;
+		var update = function () { updateConnectionLines(stage); };
+		requestAnimationFrame(update);
+		window.addEventListener('resize', update, { passive: true });
+
+		if ('ResizeObserver' in window) {
+			var observer = new ResizeObserver(update);
+			observer.observe(network);
+			observer.observe(stage);
+			var nodes = network.querySelectorAll('.marble-node[data-connection]');
+			for (var i = 0; i < nodes.length; i += 1) observer.observe(nodes[i]);
+		}
 	}
 
 	/* ---------- Voice agent (port van components/marble/src/voice) ---------- */
@@ -1255,6 +1308,7 @@
 		var popout = createPopoutController(popoutRoot, stage, {
 			onCycle: function () { renderer.cycleColor(); }
 		});
+		initConnectionLines(stage);
 		var projectNodes = document.querySelectorAll('.marble-node[data-project-index]');
 		for (var i = 0; i < projectNodes.length; i += 1) {
 			projectNodes[i].addEventListener('click', function (event) {

@@ -1,0 +1,416 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<div class="top-brand gsap-fade">@DERMEXCEL</div>
+
+<div class="graphic-container">
+
+  <div class="circles gsap-scale"></div>
+
+  <svg class="lines-svg" viewBox="0 0 800 450">
+    <path class="line-path" d="M 400 225 C 250 225, 200 120, 160 120" />
+    <path class="line-path" d="M 400 225 C 250 225, 180 225, 120 225" />
+    <path class="line-path" d="M 400 225 C 250 225, 200 330, 160 330" />
+
+    <path class="line-path" d="M 400 225 C 550 225, 600 120, 640 120" />
+    <path class="line-path" d="M 400 225 C 550 225, 620 225, 680 225" />
+    <path class="line-path" d="M 400 225 C 550 225, 600 330, 640 330" />
+  </svg>
+
+  <img class="brain gsap-pop float-slow" src="https://emojicdn.elk.sh/🧠" alt="Brain">
+
+  <div class="icon-node n-l1 float-anim">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h8m-4-4l4 4-4 4m8-4v8m-4-8V4"></path>
+    </svg>
+  </div>
+  <div class="icon-node n-l2 float-anim-alt">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+    </svg>
+  </div>
+  <div class="icon-node n-l3 float-anim">
+    S
+  </div>
+
+  <div class="icon-node n-r1 float-anim-alt">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+      <path d="M8 12s1.5 2 4 2 4-2 4-2"></path>
+      <line x1="9" y1="9" x2="9.01" y2="9"></line>
+      <line x1="15" y1="9" x2="15.01" y2="9"></line>
+    </svg>
+  </div>
+  <div class="icon-node n-r2 float-anim">
+    <span class="logo-text">DX</span>
+  </div>
+  <div class="icon-node n-r3 float-anim-alt">
+    <svg viewBox="0 0 24 24" fill="white">
+      <polygon points="3 11 11 3 15 7 7 15"></polygon>
+      <polygon points="9 17 17 9 21 13 13 21"></polygon>
+    </svg>
+  </div>
+
+</div>
+
+<div class="text-section">
+  <h1 class="gsap-slide-up">
+    CONFIDENCE
+    <strong>IS OUR SCIENCE</strong>
+  </h1>
+  <div class="pointer-emoji float-slow gsap-fade">👉</div>
+</div>
+
+<div class="footer-brand gsap-fade">
+  R E I N V E N T Y O U R S E L F
+</div> :root {
+  --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #ffffff 100%);
+  --text-dark: #222;
+  --text-light: #888;
+
+  /* 3D Dark Clay Properties */
+  --clay-dark-bg: #2a2a2a;
+  --clay-shadow-out: 10px 15px 25px rgba(0, 0, 0, 0.15),
+    -5px -5px 15px rgba(255, 255, 255, 0.8);
+  --clay-shadow-in: inset 2px 2px 5px rgba(255, 255, 255, 0.15),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+
+  /* 3D Brain Highlight */
+  --brain-glow: drop-shadow(0 10px 15px rgba(255, 100, 100, 0.2));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-dark);
+  min-height: 120vh; /* For scrolling */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* --- Header / Top --- */
+.top-brand {
+  margin-top: 40px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--text-light);
+  text-transform: uppercase;
+}
+
+/* --- Main Graphic Container --- */
+.graphic-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Concentric Circles --- */
+.circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.02);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.circles::before {
+  content: "";
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+  position: absolute;
+}
+
+.circles::after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  position: absolute;
+}
+
+/* --- Center Brain --- */
+.brain {
+  position: relative;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  filter: var(--brain-glow);
+}
+
+/* --- Connecting Lines --- */
+.lines-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.line-path {
+  fill: none;
+  stroke: #333;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+
+/* --- Floating Icons --- */
+.icon-node {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background: var(--clay-dark-bg);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: var(--clay-shadow-out), var(--clay-shadow-in);
+  z-index: 5;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.icon-node:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.icon-node svg {
+  width: 32px;
+  height: 32px;
+  fill: white;
+}
+
+/* Node Positions */
+.n-l1 {
+  top: 20%;
+  left: 15%;
+}
+.n-l2 {
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+}
+.n-l3 {
+  bottom: 20%;
+  left: 15%;
+}
+
+.n-r1 {
+  top: 20%;
+  right: 15%;
+}
+.n-r2 {
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  font-family: serif;
+}
+.n-r3 {
+  bottom: 20%;
+  right: 15%;
+}
+
+/* Specific logo adjustments based on image */
+.logo-text {
+  font-size: 16px;
+  letter-spacing: -0.5px;
+}
+
+/* --- Typography Section --- */
+.text-section {
+  text-align: center;
+  margin-top: 40px;
+  position: relative;
+  z-index: 10;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 42px;
+  letter-spacing: -1px;
+  color: #333;
+  line-height: 1.2;
+}
+
+h1 strong {
+  font-weight: 700;
+  color: var(--text-dark);
+  display: block;
+  font-size: 48px;
+}
+
+.pointer-emoji {
+  font-size: 24px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* --- Footer --- */
+.footer-brand {
+  margin-top: 80px;
+  font-size: 10px;
+  letter-spacing: 12px;
+  color: #bbb;
+}
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // --- 1. Initial Reveal Timeline ---
+  const tl = gsap.timeline();
+
+  // Set up SVG lines for drawing animation
+  const paths = document.querySelectorAll(".line-path");
+  paths.forEach((path) => {
+    const length = path.getTotalLength();
+    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+  });
+
+  tl.from(".gsap-fade", { opacity: 0, duration: 1, ease: "power2.out" })
+    .from(
+      ".gsap-scale",
+      { scale: 0, opacity: 0, duration: 1.2, ease: "back.out(1.2)" },
+      "-=0.8"
+    )
+    .from(
+      ".gsap-pop",
+      {
+        scale: 0,
+        rotation: -30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "back.out(2)"
+      },
+      "-=0.6"
+    )
+    .to(
+      ".line-path",
+      {
+        strokeDashoffset: 0,
+        duration: 1.5,
+        ease: "power2.inOut",
+        stagger: { amount: 0.5, from: "center" }
+      },
+      "-=0.4"
+    )
+    .from(
+      ".icon-node",
+      {
+        scale: 0,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "back.out(1.5)"
+      },
+      "-=1.2"
+    )
+    .from(
+      ".gsap-slide-up",
+      { y: 40, opacity: 0, duration: 0.8, ease: "power3.out" },
+      "-=0.8"
+    );
+
+  // --- 2. Continuous Organic Floating ---
+  // Enhances the 3D matte feel by simulating suspension
+
+  gsap.utils.toArray(".float-anim").forEach((node, i) => {
+    gsap.to(node, {
+      y: "-=8",
+      rotation: "2",
+      duration: 2.5 + i * 0.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: i * 0.1
+    });
+  });
+
+  gsap.utils.toArray(".float-anim-alt").forEach((node, i) => {
+    gsap.to(node, {
+      y: "+=8",
+      rotation: "-2",
+      duration: 2.8 + i * 0.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: i * 0.15
+    });
+  });
+
+  gsap.to(".float-slow", {
+    y: "-=5",
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  // --- 3. Interactive Hover Effect on Nodes ---
+  const nodes = document.querySelectorAll(".icon-node");
+  nodes.forEach((node) => {
+    node.addEventListener("mouseenter", () => {
+      gsap.to(node, {
+        scale: 1.15,
+        duration: 0.3,
+        ease: "back.out(2)",
+        overwrite: "auto"
+      });
+    });
+    node.addEventListener("mouseleave", () => {
+      gsap.to(node, {
+        scale: 1,
+        duration: 0.3,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    });
+  });
+
+  // --- 4. Scroll Parallax (Subtle) ---
+  gsap.to(".graphic-container", {
+    y: 50,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "body",
+      start: "top top",
+      end: "bottom top",
+      scrub: 1
+    }
+  });
+});
