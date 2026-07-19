@@ -174,46 +174,6 @@
 <body>
 
 <!-- ============================================
-     LANDING ROUTE CHOICE
-     ============================================ -->
-<div id="landing-overlay" aria-label="Kies je MNRV ervaring">
-  <div class="landing-ambient" aria-hidden="true"></div>
-  <div class="landing-topline" aria-hidden="true">
-    <div class="matrix-intro" aria-live="polite">
-      <span id="matrix-typewriter"></span><span class="matrix-cursor">█</span>
-    </div>
-  </div>
-
-  <button class="landing-choice landing-choice-modern" id="landing-modern" type="button">
-    <span class="landing-choice-bg" aria-hidden="true">
-      <video class="landing-route-video" autoplay muted loop preload="none" src="assets/video/modernroute_bg.mp4"></video>
-    </span>
-    <span class="landing-content">
-      <span class="landing-title">Modern route</span>
-      <span class="landing-copy">Directe route naar informatie en contact.</span>
-      <span class="landing-meta">
-      </span>
-    </span>
-  </button>
-
-  <div class="landing-center-mark" aria-hidden="true">
-    <img src="assets/img/MNRV_LOGO.png" alt="MNRV logo">
-  </div>
-
-  <button class="landing-choice landing-choice-retro" id="landing-retro" type="button">
-    <span class="landing-choice-bg" aria-hidden="true">
-      <video class="landing-route-video" autoplay muted loop preload="none" src="assets/video/marioretro_BG.mp4"></video>
-    </span>
-    <span class="landing-content">
-      <span class="landing-title">Retro route</span>
-      <span class="landing-copy">The lighter "site" of life.</span>
-      <span class="landing-meta">
-      </span>
-    </span>
-  </button>
-</div>
-
-<!-- ============================================
      BOOT SEQUENCE OVERLAY
      ============================================ -->
 <div id="boot-overlay">
@@ -259,6 +219,12 @@
       <img class="icon-img" src="assets/icons/internet-explorer.png" alt="Internet Explorer" draggable="false">
       <span class="icon-label">Internet Explorer</span>
     </div>
+
+    <!-- Moderne route -->
+    <a class="desktop-icon" tabindex="0" data-target="assets/mnrv.html">
+      <img class="icon-img" src="assets/icons/w98_Html_32x32_4.png" alt="Moderne route" draggable="false">
+      <span class="icon-label">Moderne route</span>
+    </a>
 
     <!-- Portfolio -->
     <a class="desktop-icon" tabindex="0" data-target="portfolio.html">
@@ -313,6 +279,10 @@
       <button class="win-toolbar-btn" type="button" data-browser-action="home" title="Startpagina">
         <svg viewBox="0 0 16 16"><path d="M8 2 L2 8 L5 8 L5 14 L11 14 L11 8 L14 8 Z" fill="#000"/></svg>
         Start
+      </button>
+      <button class="win-toolbar-btn" type="button" data-browser-action="modern" title="Moderne route">
+        <svg viewBox="0 0 16 16"><path d="M2 3h12v9H2z" fill="#fff" stroke="#000"/><path d="M4 5h8M4 7h8M4 9h5" stroke="#000"/><path d="M6 14h4" stroke="#000"/></svg>
+        Modern
       </button>
     </div>
     <div class="win-addressbar">
@@ -488,6 +458,10 @@
       <img src="assets/icons/w98_Notepad_16x16_4.png" alt="" draggable="false">
       <span>Over MNRV</span>
     </a>
+    <a class="start-menu-item" href="assets/mnrv.html">
+      <img src="assets/icons/w98_Html_16x16_4.png" alt="" draggable="false">
+      <span>Moderne route</span>
+    </a>
     <a class="start-menu-item" href="intakeformulier.html">
       <img src="assets/icons/FileText_16x16_4.png" alt="" draggable="false">
       <span>Intakeformulier</span>
@@ -511,40 +485,18 @@
 
 <script>
 /* ============================================
-   LANDING + BOOT SEQUENCE CONTROLLER (Video)
+   RETRO BOOT SEQUENCE CONTROLLER (Video)
    ============================================ */
 (function() {
-  var landing = document.getElementById('landing-overlay');
-  var modernChoice = document.getElementById('landing-modern');
-  var retroChoice = document.getElementById('landing-retro');
   var overlay = document.getElementById('boot-overlay');
   var video = document.getElementById('boot-video');
   var bootStarted = false;
   var bootFinished = false;
-  var selectedChoice = 'modern';
   var openRetroDirect = false;
   try {
     var params = new URLSearchParams(window.location.search);
     openRetroDirect = params.get('retro') === '1' || window.location.hash === '#retro';
   } catch (err) {}
-  var hour = new Date().getHours();
-  var dagdeel =
-    hour >= 5 && hour < 12 ? 'morgen' :
-    hour >= 12 && hour < 18 ? 'middag' :
-    hour >= 18 && hour < 23 ? 'avond' :
-    'nacht';
-  var matrixText = 'Goede ' + dagdeel + '. Welkom bij MNRV. Kies je route: Modern of Retro?';
-  var matrixTarget = document.getElementById('matrix-typewriter');
-  var matrixIndex = 0;
-
-  function typeWriter() {
-    if (!matrixTarget || matrixIndex >= matrixText.length) return;
-    matrixTarget.textContent += matrixText.charAt(matrixIndex);
-    matrixIndex++;
-    setTimeout(typeWriter, 100);
-  }
-
-  setTimeout(typeWriter, 650);
 
   if (video) {
     video.pause();
@@ -557,7 +509,6 @@
     bootStarted = true;
     bootFinished = true;
 
-    if (landing) landing.classList.add('done');
     if (overlay) overlay.classList.add('done');
 
     var directDesktop = document.querySelector('.desktop');
@@ -569,53 +520,7 @@
     if (directStartMenu) directStartMenu.classList.remove('booting');
   }
 
-  if (modernChoice) {
-    modernChoice.addEventListener('click', goModern);
-    modernChoice.addEventListener('focus', function() { selectedChoice = 'modern'; });
-    modernChoice.addEventListener('pointerenter', function() { selectedChoice = 'modern'; });
-  }
-
-  if (retroChoice) {
-    retroChoice.addEventListener('click', startBoot);
-    retroChoice.addEventListener('focus', function() { selectedChoice = 'retro'; });
-    retroChoice.addEventListener('pointerenter', function() { selectedChoice = 'retro'; });
-  }
-
   document.addEventListener('keydown', function(e) {
-    if (!bootStarted) {
-      var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-
-      if (key === 'ArrowLeft') {
-        selectedChoice = 'modern';
-        if (modernChoice) modernChoice.focus();
-        e.preventDefault();
-        return;
-      }
-      if (key === 'ArrowRight') {
-        selectedChoice = 'retro';
-        if (retroChoice) retroChoice.focus();
-        e.preventDefault();
-        return;
-      }
-      if (key === 'a') {
-        goModern();
-        return;
-      }
-      if (key === 'd') {
-        startBoot();
-        return;
-      }
-      if (key === 'Enter') {
-        if (document.activeElement === modernChoice || selectedChoice === 'modern') {
-          goModern();
-        } else {
-          startBoot();
-        }
-        e.preventDefault();
-      }
-      return;
-    }
-
     if (e.key === 'Escape') {
       skipBoot();
     }
@@ -631,20 +536,9 @@
     });
   }
 
-  function goModern() {
-    window.location.href = 'assets/mnrv.html';
-  }
-
   function startBoot() {
     if (bootStarted) return;
     bootStarted = true;
-
-    if (landing) {
-      landing.classList.add('fade-out');
-      setTimeout(function() {
-        landing.classList.add('done');
-      }, 420);
-    }
 
     if (overlay) {
       overlay.classList.add('active');
@@ -702,6 +596,9 @@
   };
 
   window.startBoot = startBoot;
+  if (!openRetroDirect) {
+    window.addEventListener('DOMContentLoaded', startBoot);
+  }
 })();
 </script>
 
@@ -762,7 +659,7 @@
         '<div><button onclick="parent.MNRVRetroBrowser.search(document.querySelector(&quot;.search&quot;).value)">Google Search</button>' +
         '<button onclick="parent.MNRVRetroBrowser.go(&quot;http://mnrv.local/&quot;)">I&#39;m Feeling Lucky</button></div>' +
         '<div class="bar"><a href="#" onclick="parent.MNRVRetroBrowser.go(&quot;http://geocities.com/area51/&quot;);return false;">Browse the old web</a> - ' +
-        '<a href="#" onclick="parent.MNRVRetroBrowser.go(&quot;http://mnrv.local/&quot;);return false;">MNRV modern site</a></div>' +
+        '<a href="#" onclick="parent.MNRVRetroBrowser.openModern();return false;">MNRV moderne route</a></div>' +
         '<p class="small">Nostalgische browserweergave. Geen lokale bestanden, geen server, geen externe emulator.</p>' +
         '</div>');
     }
@@ -781,6 +678,7 @@
       return pageChrome('MNRV', '<div class="wrap mnrv">' +
         '<h1>MNRV</h1><p>Welkom op de nostalgische Internet Explorer editie.</p>' +
         '<ul><li>AI agents</li><li>Websites</li><li>UX/UI</li><li>Automation</li></ul>' +
+        '<p><a href="#" onclick="parent.MNRVRetroBrowser.openModern();return false;">Bekijk de moderne route</a></p>' +
         '<p><a href="#" onclick="parent.MNRVRetroBrowser.go(&quot;http://google.com/&quot;);return false;">Terug naar start</a></p>' +
         '</div>');
     }
@@ -839,7 +737,11 @@
       go('http://google.com/search?q=' + encodeURIComponent(q));
     }
 
-    window.MNRVRetroBrowser = { go: go, search: search };
+    function openModern() {
+      window.location.href = 'assets/mnrv.html';
+    }
+
+    window.MNRVRetroBrowser = { go: go, search: search, openModern: openModern };
 
     function initRetroBrowser() {
       frame = document.getElementById('retro-browser-frame');
@@ -861,6 +763,7 @@
           if (action === 'forward') forward();
           if (action === 'refresh') refresh();
           if (action === 'home') go('http://google.com/');
+          if (action === 'modern') openModern();
         });
       });
 
