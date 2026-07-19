@@ -423,8 +423,51 @@
   }
 
   /* DIENSTEN */
+  .hero,
+  .diensten {
+    position: relative;
+    isolation: isolate;
+  }
+  .hero::after,
+  .diensten::before,
+  .contact::before,
+  footer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero > *,
+  .diensten > *,
+  .contact > *,
+  footer > * {
+    position: relative;
+    z-index: 1;
+  }
+  .hero::after {
+    bottom: 0;
+    height: clamp(120px, 13vw, 220px);
+    background: linear-gradient(
+      to bottom,
+      rgba(246,244,240,0) 0%,
+      rgba(217,38,38,0.16) 54%,
+      rgba(217,38,38,0.36) 100%
+    );
+  }
   .diensten {
     padding: 64px 48px;
+  }
+  .diensten::before {
+    top: 0;
+    height: clamp(120px, 14vw, 220px);
+    background: linear-gradient(
+      to bottom,
+      rgba(36,15,15,0.88) 0%,
+      rgba(85,45,37,0.44) 42%,
+      rgba(198,188,175,0) 100%
+    );
   }
 
   .section-eyebrow {
@@ -606,12 +649,12 @@
     box-shadow: none;
     filter: drop-shadow(0 12px 18px rgba(0,0,0,0.22));
   }
-  .marble-node--flows { --node-x: 14%; --node-y: 15%; }
-  .marble-node--ai { --node-x: 36%; --node-y: 7%; }
-  .marble-node--data { --node-x: 12%; --node-y: 58%; }
-  .marble-node--ux { --node-x: 83%; --node-y: 20%; }
-  .marble-node--web { --node-x: 88%; --node-y: 55%; }
-  .marble-node--growth { --node-x: 67%; --node-y: 86%; }
+  .marble-node--flows { --node-x: 9%; --node-y: 32%; }
+  .marble-node--ai { --node-x: 43%; --node-y: 7%; }
+  .marble-node--data { --node-x: 21%; --node-y: 84%; }
+  .marble-node--ux { --node-x: 82%; --node-y: 12%; }
+  .marble-node--web { --node-x: 91%; --node-y: 64%; }
+  .marble-node--growth { --node-x: 62%; --node-y: 93%; }
   .marble-network:has(.marble-node[data-connection="notenman"]:hover) .marble-network-line[data-connection="notenman"],
   .marble-network:has(.marble-node[data-connection="notenman"]:focus-visible) .marble-network-line[data-connection="notenman"],
   .marble-network:has(.marble-node[data-connection="mrsvision"]:hover) .marble-network-line[data-connection="mrsvision"],
@@ -628,6 +671,7 @@
     stroke-width: 3.4;
     opacity: 1;
     filter: drop-shadow(0 0 12px rgba(255,210,31,0.72));
+    stroke-dasharray: 0.08 0.035 0.02 0.035;
     animation: marbleLineGlow 0.62s ease-in-out infinite alternate;
   }
   .marble-float-a { animation: marbleFloatUp 3.2s ease-in-out infinite; }
@@ -1013,6 +1057,18 @@
   /* CONTACT */
   .contact {
     padding: 120px 48px 80px;
+    position: relative;
+    isolation: isolate;
+  }
+  .contact::before {
+    top: 0;
+    height: clamp(120px, 14vw, 220px);
+    background: linear-gradient(
+      to bottom,
+      rgba(10,16,24,0.82) 0%,
+      rgba(23,29,34,0.38) 48%,
+      rgba(23,29,34,0) 100%
+    );
   }
 
   .contact .section-title { color: var(--palladian); }
@@ -1370,12 +1426,28 @@
 
   /* FOOTER */
   footer {
+    position: relative;
+    isolation: isolate;
     padding: 40px 48px;
-    border-top: 1px solid rgba(238,233,223,0.08);
+    border-top: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(11,14,19,0.08) 0%,
+      rgba(11,14,19,0.62) 100%
+    );
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     gap: 24px;
     align-items: center;
+  }
+  footer::before {
+    top: clamp(-120px, -10vw, -72px);
+    height: clamp(120px, 10vw, 180px);
+    background: linear-gradient(
+      to bottom,
+      rgba(23,29,34,0) 0%,
+      rgba(11,14,19,0.52) 100%
+    );
   }
 
   .footer-trustpilot {
@@ -1580,10 +1652,19 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(165deg,
-      rgba(8,12,18,0.82) 0%,
-      rgba(14,22,32,0.88) 40%,
-      rgba(10,16,24,0.84) 100%);
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(198,188,175,0) 0%,
+        rgba(8,12,18,0.78) 13%,
+        rgba(14,22,32,0.9) 50%,
+        rgba(10,16,24,0.82) 86%,
+        rgba(10,16,24,0) 100%
+      ),
+      linear-gradient(165deg,
+        rgba(8,12,18,0.82) 0%,
+        rgba(14,22,32,0.88) 40%,
+        rgba(10,16,24,0.84) 100%);
     pointer-events: none;
   }
 
@@ -2053,12 +2134,12 @@
   <h2 class="sr-only">Ontdek de projecten</h2>
   <div class="marble-network" aria-label="MNRV netwerk visual">
     <svg class="marble-network-lines" viewBox="0 0 800 450" preserveAspectRatio="none" aria-hidden="true">
-      <path class="marble-network-line" data-connection="notenman" pathLength="1" d="M 400 225 C 336 198, 254 95, 112 68" />
-      <path class="marble-network-line" data-connection="mrsvision" pathLength="1" d="M 400 225 C 458 164, 352 98, 288 32" />
-      <path class="marble-network-line" data-connection="fainl" pathLength="1" d="M 400 225 C 300 254, 208 205, 96 261" />
-      <path class="marble-network-line" data-connection="stukverdriet" pathLength="1" d="M 400 225 C 506 184, 560 106, 664 90" />
-      <path class="marble-network-line" data-connection="windofy" pathLength="1" d="M 400 225 C 512 252, 610 214, 704 248" />
-      <path class="marble-network-line" data-connection="oostendorp" pathLength="1" d="M 400 225 C 430 304, 494 336, 536 387" />
+      <path class="marble-network-line" data-connection="notenman" pathLength="1" d="M 400 225 C 310 176, 252 184, 72 144" />
+      <path class="marble-network-line" data-connection="mrsvision" pathLength="1" d="M 400 225 C 430 151, 283 116, 344 32" />
+      <path class="marble-network-line" data-connection="fainl" pathLength="1" d="M 400 225 C 292 296, 292 394, 168 378" />
+      <path class="marble-network-line" data-connection="stukverdriet" pathLength="1" d="M 400 225 C 498 126, 590 85, 656 54" />
+      <path class="marble-network-line" data-connection="windofy" pathLength="1" d="M 400 225 C 548 218, 586 334, 728 288" />
+      <path class="marble-network-line" data-connection="oostendorp" pathLength="1" d="M 400 225 C 456 323, 386 427, 496 419" />
     </svg>
     <button class="marble-node marble-node--flows marble-float-a" type="button" data-connection="notenman" data-project-index="3" aria-label="Open project De Notenman">
       <img src="logo_clients/Notenman_logo.png" alt="De Notenman" loading="lazy">
