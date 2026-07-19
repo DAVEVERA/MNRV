@@ -852,7 +852,8 @@
 		var viewBox = svg.viewBox.baseVal;
 		var scaleX = viewBox.width / svgBounds.width;
 		var scaleY = viewBox.height / svgBounds.height;
-		var start = svgPointFromRect(stage.getBoundingClientRect(), svgBounds, scaleX, scaleY);
+		var stageRect = stage.getBoundingClientRect();
+		var stageCenter = svgPointFromRect(stageRect, svgBounds, scaleX, scaleY);
 		var nodes = network.querySelectorAll('.marble-node[data-connection]');
 
 		for (var i = 0; i < nodes.length; i += 1) {
@@ -861,28 +862,30 @@
 			var path = svg.querySelector('.marble-network-line[data-connection="' + connection + '"]');
 			if (!path) continue;
 
-			var end = svgPointFromRect(node.getBoundingClientRect(), svgBounds, scaleX, scaleY);
+			var nodeRect = node.getBoundingClientRect();
+			var nodeCenter = svgPointFromRect(nodeRect, svgBounds, scaleX, scaleY);
+			var start = stageCenter;
+			var end = nodeCenter;
 			var dx = end.x - start.x;
 			var dy = end.y - start.y;
 			var distance = Math.sqrt(dx * dx + dy * dy) || 1;
 			var normalX = -dy / distance;
 			var normalY = dx / distance;
 			var bend = CONNECTION_BENDS[connection] || 0.16;
-			var spread = Math.min(Math.max(distance * 0.28, 34), 104);
-			var kinkA = {
-				x: start.x + dx * 0.34 + normalX * spread * bend,
-				y: start.y + dy * 0.34 + normalY * spread * bend
+			var spread = Math.min(Math.max(distance * 0.38, 52), 148);
+			var c1 = {
+				x: start.x + dx * 0.28 + normalX * spread * bend,
+				y: start.y + dy * 0.28 + normalY * spread * bend
 			};
-			var kinkB = {
-				x: start.x + dx * 0.72 - normalX * spread * bend,
-				y: start.y + dy * 0.72 - normalY * spread * bend
+			var c2 = {
+				x: start.x + dx * 0.76 - normalX * spread * bend * 0.72,
+				y: start.y + dy * 0.76 - normalY * spread * bend * 0.72
 			};
 
 			path.setAttribute('d', [
 				'M', formatPathNumber(start.x), formatPathNumber(start.y),
-				'L', formatPathNumber(kinkA.x), formatPathNumber(kinkA.y),
-				'L', formatPathNumber(kinkB.x), formatPathNumber(kinkB.y),
-				'L',
+				'C', formatPathNumber(c1.x), formatPathNumber(c1.y) + ',',
+				formatPathNumber(c2.x), formatPathNumber(c2.y) + ',',
 				formatPathNumber(end.x), formatPathNumber(end.y)
 			].join(' '));
 		}

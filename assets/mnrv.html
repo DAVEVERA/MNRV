@@ -533,7 +533,7 @@
     position: absolute;
     top: clamp(-190px, -15vw, -92px);
     right: 0;
-    bottom: clamp(-210px, -16vw, -104px);
+    bottom: clamp(-300px, -22vw, -150px);
     left: 0;
     z-index: 0;
     pointer-events: none;
@@ -553,8 +553,8 @@
         color-mix(in srgb, var(--marble-bg-end) 74%, transparent) 78%,
         transparent 100%
       );
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 90%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 90%, transparent 100%);
   }
   .marble-network {
     position: relative;
@@ -1017,7 +1017,12 @@
   }
   @media (max-width: 760px) {
     .marble-werk {
-      padding: 56px 20px 64px;
+      margin: -48px 0 -150px;
+      padding: 112px 20px 176px;
+    }
+    .diensten {
+      margin-top: -126px;
+      padding-top: 198px;
     }
     .marble-network {
       width: 100%;
