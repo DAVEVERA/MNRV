@@ -5,6 +5,9 @@ node_modules/
 .sixth/
 assets/windows-95-ui-kit/
 TheDaveGame/
+.tmp-*.png
+components/marble/output/
+components/marble/public/assets/logo_clients/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -555,9 +555,13 @@
     stroke: rgba(255,255,255,0.58);
     stroke-width: 1.8;
     stroke-linecap: round;
-    stroke-dasharray: 520;
+    stroke-linejoin: round;
+    stroke-dasharray: 14 10;
     stroke-dashoffset: 520;
+    vector-effect: non-scaling-stroke;
+    filter: drop-shadow(0 0 0 rgba(255,210,31,0));
     animation: marbleLineDraw 1.5s ease forwards, marbleLinePulse 4.8s ease-in-out infinite;
+    transition: stroke 0.2s ease, stroke-width 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
   }
   .marble-network-line:nth-child(2) { animation-delay: 0.08s, 1.1s; }
   .marble-network-line:nth-child(3) { animation-delay: 0.16s, 1.3s; }
@@ -569,6 +573,8 @@
     z-index: 3;
     width: clamp(126px, 14vw, 184px);
     aspect-ratio: 16 / 9;
+    left: var(--node-x);
+    top: var(--node-y);
     display: grid;
     place-items: center;
     padding: 0;
@@ -581,6 +587,7 @@
     transition: scale 0.22s ease, filter 0.22s ease;
     -webkit-appearance: none;
     appearance: none;
+    transform: translate(-50%, -50%);
   }
   .marble-node:hover,
   .marble-node:focus-visible {
@@ -599,12 +606,30 @@
     box-shadow: none;
     filter: drop-shadow(0 12px 18px rgba(0,0,0,0.22));
   }
-  .marble-node--flows { top: 20%; left: 14%; }
-  .marble-node--ai { top: 50%; left: 8%; transform: translateY(-50%); }
-  .marble-node--data { bottom: 20%; left: 14%; }
-  .marble-node--ux { top: 20%; right: 14%; }
-  .marble-node--web { top: 50%; right: 8%; transform: translateY(-50%); }
-  .marble-node--growth { bottom: 20%; right: 14%; }
+  .marble-node--flows { --node-x: 14%; --node-y: 15%; }
+  .marble-node--ai { --node-x: 36%; --node-y: 7%; }
+  .marble-node--data { --node-x: 12%; --node-y: 58%; }
+  .marble-node--ux { --node-x: 83%; --node-y: 20%; }
+  .marble-node--web { --node-x: 88%; --node-y: 55%; }
+  .marble-node--growth { --node-x: 67%; --node-y: 86%; }
+  .marble-network:has(.marble-node[data-connection="notenman"]:hover) .marble-network-line[data-connection="notenman"],
+  .marble-network:has(.marble-node[data-connection="notenman"]:focus-visible) .marble-network-line[data-connection="notenman"],
+  .marble-network:has(.marble-node[data-connection="mrsvision"]:hover) .marble-network-line[data-connection="mrsvision"],
+  .marble-network:has(.marble-node[data-connection="mrsvision"]:focus-visible) .marble-network-line[data-connection="mrsvision"],
+  .marble-network:has(.marble-node[data-connection="fainl"]:hover) .marble-network-line[data-connection="fainl"],
+  .marble-network:has(.marble-node[data-connection="fainl"]:focus-visible) .marble-network-line[data-connection="fainl"],
+  .marble-network:has(.marble-node[data-connection="stukverdriet"]:hover) .marble-network-line[data-connection="stukverdriet"],
+  .marble-network:has(.marble-node[data-connection="stukverdriet"]:focus-visible) .marble-network-line[data-connection="stukverdriet"],
+  .marble-network:has(.marble-node[data-connection="windofy"]:hover) .marble-network-line[data-connection="windofy"],
+  .marble-network:has(.marble-node[data-connection="windofy"]:focus-visible) .marble-network-line[data-connection="windofy"],
+  .marble-network:has(.marble-node[data-connection="oostendorp"]:hover) .marble-network-line[data-connection="oostendorp"],
+  .marble-network:has(.marble-node[data-connection="oostendorp"]:focus-visible) .marble-network-line[data-connection="oostendorp"] {
+    stroke: rgb(255,210,31);
+    stroke-width: 3.4;
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(255,210,31,0.72));
+    animation: marbleLineElectric 0.42s steps(2, end) infinite;
+  }
   .marble-float-a { animation: marbleFloatUp 3.2s ease-in-out infinite; }
   .marble-float-b { animation: marbleFloatDown 3.5s ease-in-out infinite; }
   .sr-only {
@@ -752,6 +777,11 @@
   @keyframes marbleLinePulse {
     0%, 100% { opacity: 0.42; }
     50% { opacity: 0.78; }
+  }
+  @keyframes marbleLineElectric {
+    0% { stroke-dashoffset: 0; opacity: 0.75; }
+    50% { stroke-dashoffset: -34; opacity: 1; }
+    100% { stroke-dashoffset: -68; opacity: 0.86; }
   }
   @keyframes marbleNetworkBreathe {
     0%, 100% { transform: scale(0.98); opacity: 0.86; }
@@ -938,21 +968,11 @@
       width: 100%;
       max-width: 340px;
       min-height: 660px;
-      margin-left: 0;
-      margin-right: auto;
-    }
-    .marble-network-lines {
-      transform: rotate(90deg) scale(0.88);
+      margin-inline: auto;
     }
     .marble-node {
-      width: 104px;
+      width: 96px;
     }
-    .marble-node--flows { top: 4%; left: 0; }
-    .marble-node--ai { top: 19%; left: min(236px, calc(100vw - 126px)); right: auto; transform: none; }
-    .marble-node--data { top: 38%; left: 0; bottom: auto; }
-    .marble-node--ux { bottom: 38%; left: min(236px, calc(100vw - 126px)); right: auto; top: auto; }
-    .marble-node--web { bottom: 19%; left: 0; right: auto; top: auto; transform: none; }
-    .marble-node--growth { bottom: 4%; left: min(236px, calc(100vw - 126px)); right: auto; }
     .marble-tools {
       margin-top: -78px;
       margin-bottom: 34px;
@@ -983,7 +1003,7 @@
       width: 150px;
       height: 150px;
     }
-    .marble-node { width: 92px; }
+    .marble-node { width: 86px; }
   }
 
   /* CONTACT + alles eronder = wit */
@@ -2033,31 +2053,31 @@
 <section class="marble-werk" id="ontdek">
   <h2 class="sr-only">Ontdek de projecten</h2>
   <div class="marble-network" aria-label="MNRV netwerk visual">
-    <svg class="marble-network-lines" viewBox="0 0 800 450" aria-hidden="true">
-      <path class="marble-network-line" d="M 400 225 C 250 225, 200 120, 160 120" />
-      <path class="marble-network-line" d="M 400 225 C 250 225, 180 225, 120 225" />
-      <path class="marble-network-line" d="M 400 225 C 250 225, 200 330, 160 330" />
-      <path class="marble-network-line" d="M 400 225 C 550 225, 600 120, 640 120" />
-      <path class="marble-network-line" d="M 400 225 C 550 225, 620 225, 680 225" />
-      <path class="marble-network-line" d="M 400 225 C 550 225, 600 330, 640 330" />
+    <svg class="marble-network-lines" viewBox="0 0 800 450" preserveAspectRatio="none" aria-hidden="true">
+      <path class="marble-network-line" data-connection="notenman" d="M 400 225 L 338 198 L 292 118 L 112 68" />
+      <path class="marble-network-line" data-connection="mrsvision" d="M 400 225 L 454 164 L 351 96 L 288 32" />
+      <path class="marble-network-line" data-connection="fainl" d="M 400 225 L 300 248 L 214 199 L 96 261" />
+      <path class="marble-network-line" data-connection="stukverdriet" d="M 400 225 L 505 184 L 561 112 L 664 90" />
+      <path class="marble-network-line" data-connection="windofy" d="M 400 225 L 513 251 L 612 216 L 704 248" />
+      <path class="marble-network-line" data-connection="oostendorp" d="M 400 225 L 435 303 L 498 337 L 536 387" />
     </svg>
-    <button class="marble-node marble-node--flows marble-float-a" type="button" data-project-index="3" aria-label="Open project De Notenman">
+    <button class="marble-node marble-node--flows marble-float-a" type="button" data-connection="notenman" data-project-index="3" aria-label="Open project De Notenman">
       <img src="logo_clients/Notenman_logo.png" alt="De Notenman" loading="lazy">
     </button>
-    <button class="marble-node marble-node--ai marble-float-b" type="button" data-project-index="0" aria-label="Open project MRSVision">
+    <button class="marble-node marble-node--ai marble-float-b" type="button" data-connection="mrsvision" data-project-index="0" aria-label="Open project MRSVision">
       <img src="logo_clients/mrjvoluit.png" alt="MRJ Voluit" loading="lazy">
     </button>
-    <button class="marble-node marble-node--data marble-float-a" type="button" data-project-index="1" aria-label="Open project FAINL">
+    <button class="marble-node marble-node--data marble-float-a" type="button" data-connection="fainl" data-project-index="1" aria-label="Open project FAINL">
       <img src="logo_clients/FAINL.png" alt="FAINL" loading="lazy">
     </button>
     <div class="marble-stage" id="marble-stage"></div>
-    <button class="marble-node marble-node--ux marble-float-b" type="button" data-project-index="4" aria-label="Open project Stuk Verdriet">
+    <button class="marble-node marble-node--ux marble-float-b" type="button" data-connection="stukverdriet" data-project-index="4" aria-label="Open project Stuk Verdriet">
       <img src="logo_clients/sverdriet_logo.webp" alt="Stuk Verdriet" loading="lazy">
     </button>
-    <button class="marble-node marble-node--web marble-float-a" type="button" data-project-index="2" aria-label="Open project Windofy">
+    <button class="marble-node marble-node--web marble-float-a" type="button" data-connection="windofy" data-project-index="2" aria-label="Open project Windofy">
       <img src="logo_clients/windofy-logo.png" alt="Windofy" loading="lazy">
     </button>
-    <button class="marble-node marble-node--growth marble-float-b" type="button" data-project-index="6" aria-label="Open project Oostendorp Auto">
+    <button class="marble-node marble-node--growth marble-float-b" type="button" data-connection="oostendorp" data-project-index="6" aria-label="Open project Oostendorp Auto">
       <img src="logo_clients/oostendorpauto.png" alt="Oostendorp Auto" loading="lazy">
     </button>
   </div>
