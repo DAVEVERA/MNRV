@@ -2670,7 +2670,6 @@ a {
 .minesweeper-wrap {
   max-width: 100%;
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 480px) {

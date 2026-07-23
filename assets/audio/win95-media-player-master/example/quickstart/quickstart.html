@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<style>
-  @font-face {
-    font-family: 'MS Sans Serif';
-    src: url(../src/ms-sans-serif.ttf);
-  }
-  body {
-    font-family: 'MS Sans Serif', sans-serif;
-  }
-  .player {
-    width: 350px;
-  }
-</style>
-<div id="app"></div>
-<script src="quickstart.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Win95 Media Player quickstart example</title>
+    <style>
+      @font-face {
+        font-family: 'MS Sans Serif';
+        src: url(../src/ms-sans-serif.ttf);
+      }
+      body {
+        font-family: 'MS Sans Serif', sans-serif;
+      }
+      .player {
+        width: 350px;
+        max-width: 100%;
+      }
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main aria-label="Win95 Media Player quickstart">
+      <h1 class="visually-hidden">Win95 Media Player quickstart</h1>
+      <div id="app"></div>
+    </main>
+    <script src="quickstart.js"></script>
+  </body>
+</html>
