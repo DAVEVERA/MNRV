@@ -238,6 +238,12 @@
       <span class="icon-label">Intakeformulier</span>
     </a>
 
+    <!-- Media Player -->
+    <div class="desktop-icon" tabindex="0" data-window="mediaplayer-window">
+      <img class="icon-img" src="assets/icons/w98_MediaPlayer_32x32_4.png" alt="Media Player" draggable="false">
+      <span class="icon-label">Media Player</span>
+    </div>
+
   </div>
 
   
@@ -351,7 +357,27 @@
     </div>
   </div>
 
-
+  <!-- ============================================
+       MEDIA PLAYER WINDOW
+       ============================================ -->
+  <div id="mediaplayer-window" class="win-window hidden mediaplayer-window">
+    <div class="win-titlebar">
+      <img class="win-titlebar-icon" src="assets/icons/w98_MediaPlayer_16x16_4.png" alt="Media Player" draggable="false">
+      <span class="win-titlebar-title">Media Player</span>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+        <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
+      </div>
+    </div>
+    <div class="win-body mediaplayer-window-body">
+      <iframe class="mediaplayer-frame" src="mediaplayer.html" title="Media Player" loading="lazy"></iframe>
+    </div>
+    <div class="win-statusbar">
+      <span class="win-statusbar-section">Gereed</span>
+      <span class="win-statusbar-section">MPlayer</span>
+    </div>
+  </div>
 
 
 </div><!-- /.desktop -->
@@ -466,6 +492,10 @@
       <img src="assets/icons/FileText_16x16_4.png" alt="" draggable="false">
       <span>Intakeformulier</span>
     </a>
+    <div class="start-menu-item" id="start-mediaplayer">
+      <img src="assets/icons/w98_MediaPlayer_16x16_4.png" alt="" draggable="false">
+      <span>Media Player</span>
+    </div>
     <div class="start-menu-separator"></div>
     <div class="start-menu-item d-flex gap-8">
       <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" fill="#0077b5"/><text x="3" y="12" fill="#fff" font-size="8" font-weight="bold">in</text></svg>

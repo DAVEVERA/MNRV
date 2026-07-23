@@ -61,6 +61,15 @@
         showShutdownDialog();
       });
     }
+
+    // Media Player start menu item click handler
+    const mediaBtn = document.getElementById('start-mediaplayer');
+    if (mediaBtn) {
+      mediaBtn.addEventListener('click', function() {
+        closeStartMenu();
+        showWindow('mediaplayer-window');
+      });
+    }
   }
 
   function closeStartMenu() {

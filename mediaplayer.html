@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows 95 Media Player</title>
+  <style>
+    /* Reset & Fonts */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @font-face {
+      font-family: 'Pixelated MS Sans Serif';
+      src: url('assets/audio/win95-media-player-master/example/src/ms-sans-serif.ttf');
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      background: #c0c0c0;
+      font-family: "Pixelated MS Sans Serif", "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Geneva, sans-serif;
+      font-size: 11px;
+      overflow: hidden;
+      -webkit-font-smoothing: none;
+      -moz-osx-font-smoothing: unset;
+    }
+
+    .player-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      background: #c0c0c0;
+    }
+
+    /* Windows 95 Tab Bar Styling */
+    .playlist-tabs {
+      display: flex;
+      background: #c0c0c0;
+      padding: 6px 8px 0 8px;
+      border-bottom: 2px solid #808080;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .tab-btn {
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #fff #808080 #c0c0c0 #fff; /* Win95 bevel */
+      border-bottom: none;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      padding: 4px 12px;
+      font-family: "Pixelated MS Sans Serif", "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Geneva, sans-serif;
+      font-size: 11px;
+      cursor: pointer;
+      position: relative;
+      top: 2px;
+      z-index: 1;
+      color: #000;
+    }
+
+    .tab-btn:focus {
+      outline: none;
+    }
+
+    .tab-btn.active {
+      background: #c0c0c0;
+      border-color: #fff #808080 #c0c0c0 #fff;
+      padding-bottom: 6px;
+      top: 0;
+      z-index: 2;
+      font-weight: bold;
+    }
+
+    .player-container {
+      padding: 10px;
+      background: #c0c0c0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+    }
+
+    /* Override React95 styling to strip outer window boundaries */
+    .win95-player {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-shadow: none !important;
+      border: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .win95-player > div {
+      height: 100% !important;
+    }
+
+    /* Hide the outer WindowHeader completely to avoid double titlebars */
+    .win95-player header,
+    .win95-player .win-titlebar,
+    .win95-player [class*="WindowHeader"] {
+      display: none !important;
+    }
+
+    /* Remove border and shadow of the nested React95 Window */
+    .win95-player,
+    .win95-player [class*="Window"] {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* Video area adjustments */
+    video {
+      background: #000 !important;
+      border: 2px inset #fff !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Load bundled media player -->
+  <script src="assets/audio/mediaplayer.bundle.js"></script>
+</body>
+</html>
