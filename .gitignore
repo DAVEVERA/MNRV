@@ -177,6 +177,7 @@ marimo/_lsp/
 __marimo__/
 
 .vercel
+.worktrees/
 
 # Local oversized media draft excluded from GitHub and Vercel deploys.
 assets/img/bjjhjkhkjhgkj.mp4
