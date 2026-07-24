@@ -9,7 +9,7 @@ Target: `C:\Users\Thinkpat\Desktop\MNRV-git-sync`
 Deliver three coordinated improvements without destabilizing the existing static MNRV website:
 
 1. Remove the complete `.over-team` block from the modern page and replace visible section separators with one continuous color flow.
-2. Add a locally hosted, playable Freedoom 0.13.0 Phase 1 experience to the retro desktop, with Episodes 1-3 highlighted, desktop keyboard/mouse controls, and an optional mobile touch overlay.
+2. Add a locally hosted, playable Freedoom 0.13.0 Phase 1 experience to the retro desktop, with Episodes 1-4 available as equal launcher choices, desktop keyboard/mouse controls, and an optional mobile touch overlay.
 3. Replace the broken legacy media-player runtime with a complete, dependable Windows 95-styled player.
 
 The result must remain a static, same-origin website. Each surface must be isolated so that a failure in the game or media player cannot break the retro desktop or modern page.
@@ -17,6 +17,7 @@ The result must remain a static, same-origin website. Each surface must be isola
 ## Global Constraints
 
 - Use the official Freedoom 0.13.0 release and its `freedoom1.wad` content.
+- Use the existing `DOOM/DOOM.png` file directly as the desktop icon, Start-menu icon, game-window icon, and launcher branding. Do not replace, regenerate, or silently substitute this logo.
 - Do not publish original commercial DOOM WADs, music, sound effects, or other proprietary game data.
 - Host the game runtime, WAD package, media, scripts, licenses, and credits locally; do not use remote gameplay iframes or CDN runtime dependencies.
 - Preserve the existing modern-page hero, services, governance, contact, modal, navigation, and footer content unless explicitly covered below.
@@ -34,16 +35,16 @@ Use a pinned, locally built WebAssembly port based on `cloudflare/doom-wasm` / C
 
 The runtime is vendored or built reproducibly from an exact upstream revision. Generated runtime artifacts are committed only when required by the static hosting model, along with matching source and license obligations.
 
-Freedoom Phase 1 includes four episodes. The MNRV launcher prominently offers Episodes 1-3 as requested. Episode 4 is not presented as a primary launcher choice, although it remains part of the unmodified official `freedoom1.wad`.
+Freedoom Phase 1 includes four episodes. The MNRV launcher presents Episodes 1-4 as equal primary choices from the unmodified official `freedoom1.wad`.
 
 ## Freedoom Game Design
 
 ### Player experience
 
-- Entry point: a Freedoom desktop icon and Start-menu item in the retro environment.
+- Entry point: a Freedoom desktop icon and Start-menu item in the retro environment, both using `DOOM/DOOM.png`.
 - Container: a large, draggable, resizable Windows 98-style window with maximize, minimize, close, and fullscreen behavior.
 - Boot flow: branded retro loading surface, real asset progress, recoverable error state, episode selection, and a deliberate Start action that unlocks browser audio.
-- Core loop: choose Episode 1-3, start the first map or continue a save, move/explore/fight, receive the engine's original feedback, save or pause, and resume or restart.
+- Core loop: choose Episode 1-4, start the first map or continue a save, move/explore/fight, receive the engine's original feedback, save or pause, and resume or restart.
 - Session recovery: saves and settings survive a page reload through IndexedDB-backed storage.
 
 ### Runtime isolation
@@ -214,7 +215,7 @@ Modern page:
 
 - Modern page contains no `.over-team`, team-person markup, or team-only CSS.
 - Remaining Over subsections have no top/bottom divider borders.
-- Desktop and Start-menu launch targets exist and are keyboard accessible.
+- Desktop and Start-menu launch targets exist, are keyboard accessible, and reference the exact `DOOM/DOOM.png` asset.
 - Parent/iframe lifecycle message names and origin validation are covered.
 - Media state transitions and keyboard mappings are unit-tested around a controllable media adapter.
 - Static references resolve and no original commercial DOOM assets enter the deploy set.
@@ -223,7 +224,7 @@ Modern page:
 
 - Cold-load the retro desktop without fetching game payloads.
 - Open the game and observe real loading progress and a useful ready state.
-- Start E1M1, E2M1, and E3M1.
+- Start E1M1, E2M1, E3M1, and E4M1.
 - Verify keyboard movement, mouse input, fire, use, weapon switching, pause, and pointer-lock release.
 - Verify touch movement, aim, fire, use, weapon switching, hide/show controls, and safe-area layout.
 - Save, reload the page, and load the saved game.
