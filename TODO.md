@@ -2,26 +2,27 @@
 
 ## Goal
 
-Resolve the supplied diagnostics with minimal, accessible, mobile-safe changes
-and avoid turning bundled third-party demo pages into indexable site content.
+Deliver the approved MNRV modern-page, media-player, and four-episode Freedoom
+upgrade as one tested retro-desktop release.
 
 ## Tasks
 
-- [x] Inspect current implementation
-- [x] Identify required changes
-- [x] Add failing regression checks
-- [x] Implement smallest safe changes
-- [x] Run narrow verification
-- [x] Run rendered mobile and desktop checks
-- [x] Complete specialist quality review
-- [ ] Final review
+- [x] Inspect current implementation and root causes
+- [x] Approve integrated architecture and interaction design
+- [x] Write and self-review three executable implementation plans
+- [ ] Remove team block and blend modern sections continuously
+- [ ] Replace broken media bundle with the native media player
+- [ ] Build verified Freedoom 0.13.0 runtime and licensed local assets
+- [ ] Add Episodes 1-4 launcher, persistence, lifecycle, and error recovery
+- [ ] Add optional touch overlay and desktop keyboard/mouse controls
+- [ ] Integrate exact Doom logo into desktop, Start menu, window, and launcher
+- [ ] Run full automated, browser, accessibility, responsive, and gameplay gates
+- [ ] Complete final diff and payload review
 
 ## Blocker
 
-During final verification, four bundled demo images and two unrelated MP4 files
-became deleted in the shared worktree. They existed when the loop began and the
-specialist agents did not remove them. User confirmation is required before
-restoring or adapting content around these concurrent changes.
+None. Implementation proceeds in an isolated worktree so unrelated main-worktree
+assets remain untouched.
 
 ## Completion Marker
 
