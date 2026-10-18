@@ -731,6 +731,7 @@ function formToObject() {
 
   form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     if (!data[cb.name]) data[cb.name] = [];
+    else if (!Array.isArray(data[cb.name])) data[cb.name] = [data[cb.name]];
   });
 
   return data;
@@ -748,7 +749,7 @@ function restoreDraft() {
 
       fields.forEach(field => {
         if (field.type === "checkbox") {
-          field.checked = Array.isArray(value) && value.includes(field.value);
+          field.checked = (Array.isArray(value) ? value : [value]).includes(field.value);
         } else if (field.type === "radio") {
           field.checked = field.value === value;
         } else if (field.type !== "file") {
@@ -821,15 +822,20 @@ async function uploadFiles(bucket, inputId, intakeId) {
   return uploaded;
 }
 
+let isSubmitting = false;
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  if (isSubmitting) return;
+  isSubmitting = true;
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
 
   successBox.style.display = "none";
   errorBox.style.display = "none";
 
-  saveDraft();
-
   try {
+    clearTimeout(saveTimer);
+    saveDraft();
     validateFiles("context_files", allowedContextExtensions);
     validateFiles("content_files", allowedContentExtensions);
 
@@ -864,35 +870,45 @@ form.addEventListener("submit", async (e) => {
 
     if (error) throw error;
 
-    statusEl.textContent = "Ontvangstmelding versturen...";
-
-    const mailResponse = await fetch("/api/send-intake-mail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        intake_id: submissionId,
-        client_email: answers.client_email,
-        client_name: answers.client_name,
-        company_name: answers.company_name,
-        answers: finalAnswers,
-        uploads
-      })
-    });
-
-    if (!mailResponse.ok) {
-      const mailError = await mailResponse.json().catch(() => ({}));
-      throw new Error(mailError.error || "Bevestigingsmail kon niet worden verstuurd.");
-    }
-
+    // The intake is received once the database confirms the insert.
+    // Mail delivery must not turn a saved intake into a failed submission.
+    clearTimeout(saveTimer);
     localStorage.removeItem(STORAGE_KEY);
     form.reset();
     renderFileList("context_files", "contextFileList");
     renderFileList("content_files", "contentFileList");
-
+    successBox.textContent = "Bedankt. Je intake is succesvol ingezonden. MNRV gaat ermee aan de slag.";
     successBox.style.display = "block";
-    statusEl.textContent = "Ingezonden";
+    let mailFailed = false;
+    try {
+      statusEl.textContent = "Ontvangstmelding versturen...";
+
+      const mailResponse = await fetch("/api/send-intake-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          intake_id: submissionId,
+          client_email: answers.client_email,
+          client_name: answers.client_name,
+          company_name: answers.company_name,
+          answers: finalAnswers,
+          uploads
+        })
+      });
+
+      if (!mailResponse.ok) {
+        const mailError = await mailResponse.json().catch(() => ({}));
+        throw new Error(mailError.error || "Bevestigingsmail kon niet worden verstuurd.");
+      }
+
+    } catch (mailError) {
+      console.error(mailError);
+      mailFailed = true;
+      successBox.textContent = "Je intake is succesvol opgeslagen. De e-mailbevestiging kon niet worden verstuurd. Je hoeft de intake niet opnieuw in te dienen.";
+    }
+    statusEl.textContent = mailFailed ? "Ingezonden, e-mailbevestiging niet verstuurd" : "Ingezonden";
 
     if (window.MNRV && window.MNRV.clippyShowTip) {
       window.MNRV.clippyShowTip("Gelukt! Je intake is ingezonden. MNRV gaat ermee aan de slag.");
@@ -906,6 +922,9 @@ form.addEventListener("submit", async (e) => {
     if (window.MNRV && window.MNRV.clippyShowTip) {
       window.MNRV.clippyShowTip("Oeps, er ging iets mis. Geen paniek: je antwoorden zijn lokaal bewaard.");
     }
+  } finally {
+    isSubmitting = false;
+    submitButton.disabled = false;
   }
 });
 
@@ -1151,3 +1170,4 @@ window.MNRV = window.MNRV || {};
 
 </body>
 </html>
+
