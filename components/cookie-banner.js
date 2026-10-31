@@ -44,6 +44,8 @@
   function save(prefs) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); }
     catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('mnrv:consent', { detail: prefs })); }
+    catch (e) {}
   }
 
   /* ── Banner HTML ─────────────────────────────────────── */

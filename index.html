@@ -39,7 +39,7 @@
   <meta property="og:url" content="https://mnrv.nl/">
   <meta property="og:title" content="MNRV - AI Agents, Websites & Automation">
   <meta property="og:description" content="MNRV bouwt slimme websites, AI agents, chatbots, UX/UI en automation voor bedrijven die sneller en slimmer willen werken.">
-  <meta property="og:image" content="https://mnrv.nl/assets/img/MNRV_LOGO.png">
+  <meta property="og:image" content="https://mnrv.nl/og-image.jpg">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:site_name" content="MNRV">
 
@@ -48,11 +48,11 @@
   <meta property="twitter:url" content="https://mnrv.nl/">
   <meta property="twitter:title" content="MNRV - AI Agents, Websites & Automation">
   <meta property="twitter:description" content="MNRV bouwt slimme websites, AI agents, chatbots, UX/UI en automation.">
-  <meta property="twitter:image" content="https://mnrv.nl/assets/img/MNRV_LOGO.png">
+  <meta property="twitter:image" content="https://mnrv.nl/og-image.jpg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/MNRV_LOGO.png">
-  <link rel="apple-touch-icon" href="assets/img/MNRV_LOGO.png">
+  <link rel="icon" type="image/png" href="assets/img/MNRV_LOGO-48.png">
+  <link rel="apple-touch-icon" href="assets/img/MNRV_LOGO-180.png">
 
   <!-- Geo Tags -->
   <meta name="geo.region" content="NL">
@@ -181,7 +181,7 @@
 
   <video id="boot-video" muted preload="none" src="assets/video/Win_boot.mp4"></video>
 
-  <button id="boot-skip" onclick="skipBoot()">Druk op ESC om over te slaan</button>
+  <button id="boot-skip" type="button" onclick="skipBoot()">Overslaan (Esc)</button>
 </div>
 
 <div class="desktop booting">
@@ -533,9 +533,39 @@
   var bootStarted = false;
   var bootFinished = false;
   var openRetroDirect = false;
+  var BOOT_KEY = 'mnrv_booted_v1';
+
+  // The boot video plays once. The "seen" flag lives in sessionStorage; it is only
+  // kept across visits (localStorage) when functional cookies are allowed.
+  function functionalAllowed() {
+    try {
+      var consent = JSON.parse(localStorage.getItem('mnrv_consent_v1'));
+      return !!(consent && consent.functionality);
+    } catch (err) { return false; }
+  }
+  function hasBooted() {
+    try {
+      return sessionStorage.getItem(BOOT_KEY) === '1' || localStorage.getItem(BOOT_KEY) === '1';
+    } catch (err) { return false; }
+  }
+  function rememberBoot() {
+    try {
+      sessionStorage.setItem(BOOT_KEY, '1');
+      if (functionalAllowed()) localStorage.setItem(BOOT_KEY, '1');
+    } catch (err) {}
+  }
+  document.addEventListener('mnrv:consent', function(e) {
+    try {
+      if (e.detail && e.detail.functionality && sessionStorage.getItem(BOOT_KEY) === '1') {
+        localStorage.setItem(BOOT_KEY, '1');
+      }
+    } catch (err) {}
+  });
+
   try {
     var params = new URLSearchParams(window.location.search);
-    openRetroDirect = params.get('retro') === '1' || window.location.hash === '#retro';
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    openRetroDirect = params.get('retro') === '1' || window.location.hash === '#retro' || hasBooted() || reducedMotion;
   } catch (err) {}
 
   if (video) {
@@ -605,6 +635,7 @@
   function finishBoot(instant) {
     if (bootFinished) return;
     bootFinished = true;
+    rememberBoot();
 
     if (video) {
       video.pause();
