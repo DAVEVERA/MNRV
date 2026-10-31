@@ -1286,3 +1286,44 @@ button.coolBtn,
         min-height: calc(var(--fc-card-h) + 330px);
     }
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Fit the whole table inside the window, so phones and tablets never scroll sideways.
+   The game viewport is 100vw - 22px wide; card width is derived from that budget.
+   --------------------------------------------------------------------------------------------- */
+@media only screen and (max-width: 559px) {
+    :root {
+        --fc-card-w: clamp(30px, calc((100vw - 62px) / 8), 44px);
+        --fc-card-h: calc(var(--fc-card-w) * 1.4);
+        --fc-gap: 4px;
+        --fc-table-pad: 6px;
+    }
+
+    /* The menu bar's "Spel" button opens the same menu, so the title column can go. */
+    #topArea {
+        grid-template-columns: repeat(8, var(--fc-card-w));
+        min-width: 0;
+    }
+
+    #topArea > div#gameTitle {
+        display: none;
+    }
+
+    #cardOpen {
+        grid-column: 5 / span 4;
+    }
+}
+
+@media only screen and (min-width: 560px) and (max-width: 759px) {
+    :root {
+        --fc-card-w: min(50px, calc((100vw - 176px) / 8));
+        --fc-card-h: calc(var(--fc-card-w) * 1.4);
+    }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1099px) {
+    :root {
+        --fc-card-w: min(72px, calc((100vw - 242px) / 8));
+        --fc-card-h: calc(var(--fc-card-w) * 1.4);
+    }
+}
