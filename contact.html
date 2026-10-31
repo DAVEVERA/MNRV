@@ -792,7 +792,8 @@
       success.classList.remove('hide');
       if (status) status.textContent = 'Bericht verzonden';
     }).catch(function(err) {
-      errorBox.textContent = (err && err.message ? err.message : 'Versturen lukte niet.') + ' Je bericht staat nog in het formulier.';
+      var reason = err instanceof TypeError ? 'Geen verbinding. Mail ons direct via info@mnrv.nl.' : (err && err.message ? err.message : 'Versturen lukte niet.');
+      errorBox.textContent = reason + ' Je bericht staat nog in het formulier.';
       errorBox.classList.remove('hide');
       if (status) status.textContent = 'Niet verzonden';
     }).then(function() {

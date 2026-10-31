@@ -448,7 +448,7 @@
 
   .section-title {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(20px, 5vw, 64px);
+    font-size: clamp(32px, 6vw, 64px);
     font-weight: 300;
     line-height: 1;
     letter-spacing: -0.03em;
@@ -638,6 +638,99 @@
     color: var(--oatmeal);
     font-weight: 300;
     margin-bottom: 32px;
+  }
+
+  /* Quick contact form */
+  .quick-contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .quick-contact[hidden], .qc-done[hidden] { display: none; }
+  .qc-row { display: flex; flex-direction: column; gap: 6px; }
+  .qc-row--full { grid-column: 1 / -1; }
+  .qc-row label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--palladian);
+  }
+  .qc-row input,
+  .qc-row textarea {
+    font: 16px/1.5 'Roboto', sans-serif;
+    color: var(--palladian);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(238,233,223,0.28);
+    border-radius: 2px;
+    padding: 12px 14px;
+    min-height: 48px;
+    width: 100%;
+    resize: vertical;
+  }
+  .qc-row input:focus-visible,
+  .qc-row textarea:focus-visible {
+    outline: 2px solid #FFB162;
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+  .qc-row [aria-invalid="true"] { border-color: #ff8a80; }
+  .qc-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .contact-text .qc-status {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-weight: 400;
+    min-height: 1.4em;
+    font-size: 15px;
+    color: #ffb4ab;
+  }
+  .contact-text .qc-status:empty { display: none; }
+  .contact .qc-submit {
+    background: var(--palladian);
+    color: var(--abyss);
+    border-color: var(--palladian);
+  }
+  .contact .qc-submit:hover:not([disabled]) { background: #fff; color: var(--abyss); }
+  .contact .contact-intake-button {
+    background: transparent;
+    color: var(--palladian);
+    border: 2px solid rgba(238,233,223,0.7);
+  }
+  .contact .contact-intake-button:hover { background: rgba(238,233,223,0.1); border-color: var(--palladian); }
+  .qc-submit {
+    grid-column: 1 / -1;
+    justify-self: start;
+    cursor: pointer;
+    min-height: 48px;
+  }
+  .qc-submit[disabled] { opacity: 0.6; cursor: progress; }
+  .qc-done {
+    margin-bottom: 40px;
+    padding: 20px 22px;
+    border-left: 3px solid #FFB162;
+    background: rgba(255,255,255,0.05);
+    color: var(--oatmeal);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .qc-done:focus { outline: none; }
+  .contact-text .qc-done p { margin: 0; font-size: 16px; color: var(--oatmeal); font-weight: 400; }
+  .contact-text .qc-done .qc-done-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--palladian);
+    margin-bottom: 4px;
+  }
+  .contact-text .contact-or {
+    font-weight: 400;
+    font-size: 15px;
+    color: rgba(238,233,223,0.72);
+    margin-bottom: 16px;
+  }
+  @media (max-width: 640px) {
+    .quick-contact { grid-template-columns: 1fr; }
+    .qc-submit { justify-self: stretch; text-align: center; }
   }
 
   .contact-info {
@@ -1859,8 +1952,36 @@
   <div class="contact-layout">
     <div class="contact-text">
       <p>
-        Heb je een idee, een vraag of wil je direct weten wat ik voor jouw bedrijf kan betekenen? Vul de korte intake in, dan kan ik gericht met je meekijken.
+        Heb je een idee, een vraag of wil je weten wat ik voor jouw bedrijf kan betekenen? Stuur een kort bericht. Op werkdagen reageer ik binnen 24 uur.
       </p>
+
+      <form class="quick-contact" id="quick-contact" novalidate>
+        <div class="qc-row">
+          <label for="qc-name">Naam</label>
+          <input id="qc-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120">
+        </div>
+        <div class="qc-row">
+          <label for="qc-email">E-mail</label>
+          <input id="qc-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200">
+        </div>
+        <div class="qc-row qc-row--full">
+          <label for="qc-message">Waar kan ik je mee helpen?</label>
+          <textarea id="qc-message" name="message" rows="4" required minlength="10" maxlength="2000"></textarea>
+        </div>
+        <div class="qc-hp" aria-hidden="true">
+          <label for="qc-website">Laat dit veld leeg</label>
+          <input id="qc-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="qc-status" id="qc-status" role="status" aria-live="polite"></p>
+        <button class="btn-primary qc-submit" type="submit" id="qc-submit">Verstuur bericht</button>
+      </form>
+
+      <div class="qc-done" id="qc-done" hidden tabindex="-1">
+        <p class="qc-done-title">Bedankt, je bericht is binnen.</p>
+        <p>Op werkdagen reageer ik binnen 24 uur, op het e-mailadres dat je hebt opgegeven.</p>
+      </div>
+
+      <p class="contact-or">Liever meteen alles kwijt? Vul de uitgebreide website-intake in.</p>
       <div class="contact-actions">
         <div class="contact-cta-wrap">
           <button class="btn-primary contact-intake-button" type="button" id="open-intake-modal">Okaayy, let's go!</button>
@@ -2116,6 +2237,79 @@ function initIntakeModal() {
 }
 
 initIntakeModal();
+
+function initQuickContact() {
+  const form = document.getElementById('quick-contact');
+  const done = document.getElementById('qc-done');
+  const status = document.getElementById('qc-status');
+  const submit = document.getElementById('qc-submit');
+  if (!form || !done || !status || !submit) return;
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const fields = {
+    name: document.getElementById('qc-name'),
+    email: document.getElementById('qc-email'),
+    message: document.getElementById('qc-message'),
+    website: document.getElementById('qc-website'),
+  };
+  const checks = [
+    [fields.name, (v) => v.trim().length >= 2, 'Vul je naam in.'],
+    [fields.email, (v) => EMAIL_RE.test(v.trim()), 'Vul een geldig e-mailadres in.'],
+    [fields.message, (v) => v.trim().length >= 10, 'Schrijf minimaal 10 tekens.'],
+  ];
+
+  function validate() {
+    let firstInvalid = null;
+    const messages = [];
+    checks.forEach(([field, ok, message]) => {
+      const valid = ok(field.value);
+      field.setAttribute('aria-invalid', valid ? 'false' : 'true');
+      if (!valid) {
+        messages.push(message);
+        firstInvalid = firstInvalid || field;
+      }
+    });
+    status.textContent = messages.join(' ');
+    if (firstInvalid) firstInvalid.focus();
+    return !firstInvalid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (submit.disabled || !validate()) return;
+
+    submit.disabled = true;
+    submit.textContent = 'Versturen...';
+    status.textContent = '';
+
+    try {
+      const res = await fetch('/api/send-contact-mail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fields.name.value,
+          email: fields.email.value,
+          message: fields.message.value,
+          website: fields.website.value,
+          source: 'moderne route',
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'Versturen lukte niet.');
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    } catch (err) {
+      const reason = err instanceof TypeError ? 'Geen verbinding. Mail anders naar info@mnrv.nl.' : err.message;
+      status.textContent = `${reason} Je bericht staat nog in het formulier.`;
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'Verstuur bericht';
+    }
+  });
+}
+
+initQuickContact();
 
 function openPreview(url, title) {
   const modal = document.getElementById('preview-modal');
