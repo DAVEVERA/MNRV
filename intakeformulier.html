@@ -48,7 +48,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/clippyjs/clippy.js@8bfd1f92c725c6bc3a435d538a77c3302b327c08/build/clippy.css">
-  <script>window.CLIPPY_CDN = 'https://cdn.jsdelivr.net/gh/clippyjs/clippy.js@8bfd1f92c725c6bc3a435d538a77c3302b327c08/agents/';</script>
+  <script>
+    window.CLIPPY_CDN = 'https://cdn.jsdelivr.net/gh/clippyjs/clippy.js@8bfd1f92c725c6bc3a435d538a77c3302b327c08/agents/';
+    // Browsers block Clippy's sounds until the user interacts; swallow that rejection.
+    (function() {
+      var origPlay = HTMLAudioElement.prototype.play;
+      HTMLAudioElement.prototype.play = function() {
+        var result = origPlay.call(this);
+        return result && result.catch ? result.catch(function() {}) : result;
+      };
+    })();
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/clippyjs@0.0.3/dist/clippy.min.js" defer></script>
 
