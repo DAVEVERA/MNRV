@@ -166,4 +166,9 @@
   .cb-modern .cb-btn { width: 100%; text-align: center; }
 
   .cb-retro { max-width: calc(100% - 24px); margin: 0 12px 12px; }
+
+  .cb-modern .cb-toggle,
+  .cb-retro-body label { min-height: 44px; font-size: 14px; }
+  .cb-modern .cb-toggle input,
+  .cb-retro-body input { width: 18px; height: 18px; }
 }

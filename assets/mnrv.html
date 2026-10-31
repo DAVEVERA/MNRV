@@ -405,7 +405,7 @@
     width: auto;
     max-width: 110px;
     object-fit: contain;
-    opacity: 0.55;
+    opacity: 0.78;
     filter: grayscale(1);
     flex-shrink: 0;
     transition: opacity 0.2s, filter 0.2s;
@@ -449,10 +449,10 @@
   .section-title {
     font-family: 'Poppins', sans-serif;
     font-size: clamp(20px, 5vw, 64px);
-    font-weight: 200;
+    font-weight: 300;
     line-height: 1;
     letter-spacing: -0.03em;
-    color: #eee9df8c;
+    color: var(--abyss);
     margin-bottom: 20px;
   }
 
@@ -704,9 +704,9 @@
 
   .contact-intake-note {
     max-width: 360px;
-    color: rgba(40,56,61,0.64);
+    color: rgba(238,233,223,0.68);
     font-family: 'Roboto', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.45;
   }
 
@@ -1006,8 +1006,8 @@
   }
 
   .footer-copy {
-    font-size: 12px;
-    color: rgba(255,255,255,0.25);
+    font-size: 13px;
+    color: rgba(255,255,255,0.62);
   }
 
   .footer-socials {
@@ -1053,16 +1053,20 @@
   }
 
   .footer-legal a {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.4;
-    color: rgba(255,255,255,0.36);
+    color: rgba(255,255,255,0.66);
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
     text-decoration: none;
     transition: color 0.15s;
   }
 
   .footer-legal a:hover,
   .footer-legal a:focus-visible {
-    color: rgba(255,255,255,0.72);
+    color: #fff;
+    text-decoration: underline;
     outline: none;
   }
 
@@ -1086,7 +1090,7 @@
   /* RESPONSIVE */
   @media (max-width: 900px) {
     body > nav { padding: 18px 24px; }
-    .hero { padding: 110px 20px 60px; }
+    .hero { min-height: auto; padding: 32px 20px 60px; }
     .diensten, .contact { padding: 80px 24px; }
     .diensten-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
@@ -1095,21 +1099,23 @@
     .footer-trustpilot { margin: 0 auto; }
     .footer-legal { gap: 8px 14px; padding-top: 2px; }
     .social-flyout {
-      left: 14px;
-      right: auto;
+      left: auto;
+      right: 12px;
       top: auto;
-      bottom: 92px;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
       transform: none;
     }
+    .social-flyout-toggle { width: 48px; height: 48px; }
+    .social-flyout-toggle svg { width: 20px; height: 20px; }
     .social-flyout-panel {
-      left: 0;
-      right: auto;
+      left: auto;
+      right: 0;
       top: auto;
-      bottom: 66px;
-      width: min(330px, calc(100vw - 28px));
+      bottom: 60px;
+      width: min(330px, calc(100vw - 24px));
       max-height: min(430px, calc(100vh - 118px));
       transform: translateY(12px) scale(0.98);
-      transform-origin: left bottom;
+      transform-origin: right bottom;
     }
     .social-flyout.open .social-flyout-panel {
       transform: translateY(0) scale(1);
@@ -1117,7 +1123,7 @@
     /* hero blijft horizontaal: tekst links, foto rechts */
     .hero-inner { grid-template-columns: 1.05fr 0.95fr; gap: 20px; }
     .hero-title { font-size: clamp(30px, 7.5vw, 64px); }
-    .hero-sub { font-size: clamp(12px, 2.6vw, 18px); margin: 18px 0 26px; }
+    .hero-sub { font-size: clamp(15px, 2.6vw, 18px); margin: 18px 0 26px; }
     .hero-label { font-size: 9px; margin-bottom: 16px; }
     .hero-portret { align-items: center; }
     .hero-portret svg { max-height: 70vh; }
@@ -1128,15 +1134,15 @@
     .nav-logo { flex: 0 0 auto; }
     .nav-logo img { width: 40px; height: 40px; }
     .nav-cta { padding: 10px 14px; font-size: 11px; white-space: nowrap; }
-    .hero { padding: 96px 16px 48px; }
-    .hero-inner { grid-template-columns: 1fr 0.85fr; gap: 8px; }
-    .hero-title { font-size: clamp(22px, 8vw, 44px); line-height: 0.95; }
-    .hero-sub { font-size: 11px; line-height: 1.45; margin: 10px 0 16px; }
-    .hero-ctas { gap: 8px; }
-    .btn-primary { padding: 10px 14px; font-size: 10px; }
-    .btn-secondary { padding: 8px 12px; font-size: 10px; }
-    .logo-marquee { margin-top: 20px; }
-    .logo-marquee-group img { height: 22px; }
+    .hero { min-height: auto; padding: 16px 20px 24px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+    .hero-title { font-size: clamp(40px, 12vw, 56px); line-height: 0.95; }
+    .hero-sub { font-size: 16px; line-height: 1.5; margin: 16px 0 24px; }
+    .hero-ctas { gap: 10px; }
+    .hero-ctas .btn-primary,
+    .hero-ctas .btn-secondary { flex: 1 1 auto; text-align: center; font-size: 13px; padding: 14px 18px; }
+    .logo-marquee { margin-top: 28px; }
+    .logo-marquee-group img { height: 28px; }
     .hero-portret-wrap { max-height: 55vh; }
     .contact-actions { margin-bottom: 24px; }
     .contact-cta-wrap { width: 100%; }
@@ -1153,11 +1159,13 @@
     .contact-cta-wrap:focus-within .contact-popout-gif {
       transform: none;
     }
-    .contact-intake-note { max-width: 280px; font-size: 11px; }
+    .contact-intake-note { max-width: 280px; font-size: 13px; }
     .intake-modal-inner { height: 90vh; }
-    .hero-portret { align-items: center; }
-    .hero-portret svg { max-height: 62vh; }
-    .hero-portret-wrap { max-height: 62vh; }
+    .hero-portret { align-items: center; justify-content: center; }
+    .hero-portret svg { max-height: 60vh; }
+    .hero-portret-wrap { max-height: 60vh; width: min(100%, 320px); margin: 0 auto; }
+    .footer-legal a { min-height: 44px; padding: 0 6px; }
+    .contact-info a { display: inline-flex; align-items: center; min-height: 44px; }
     /* foto staat gecentreerd (niet op de bodem): alleen zachte diffusie, geen harde contactkern */
     .hero-portret::before { display: none; }
     .hero-portret::after {
@@ -1247,7 +1255,7 @@
   /* TEAM — editorial rows */
   .over-team { margin-bottom: 72px; }
   .over-section-label {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -1269,7 +1277,7 @@
     border-left: 1px solid rgba(255,255,255,0.06);
   }
   .over-person-role {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -1287,17 +1295,17 @@
   }
   .over-team-secondary .over-person-name { font-size: 22px; }
   .over-person-desc {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.72;
-    color: rgba(255,255,255,0.48);
+    color: rgba(255,255,255,0.68);
     font-weight: 300;
     margin: 0;
   }
   .over-person-strength {
     margin-top: 16px;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.65;
-    color: rgba(255,255,255,0.28);
+    color: rgba(255,255,255,0.56);
     font-style: italic;
     font-weight: 300;
   }
@@ -1862,7 +1870,7 @@
       </div>
       <div class="contact-info">
         <a href="mailto:info@mnrv.nl">info@mnrv.nl</a>
-        <a href="https://mnrv.nl" target="_blank" rel="noopener">mnrv.nl</a>
+        <a href="tel:+31682456410">+31 6 82 45 64 10</a>
       </div>
     </div>
   </div>
@@ -1936,7 +1944,7 @@
     <a href="https://nl.trustpilot.com/review/mnrv.nl" target="_blank" rel="noopener">Trustpilot</a>
   </div>
   <!-- End TrustBox widget -->
-  <span class="footer-copy">© 2025 MNRV / Dave Vera — mnrv.nl</span>
+  <span class="footer-copy">© <span id="footer-year">2026</span> MNRV / Dave Vera</span>
   <nav class="footer-legal" aria-label="Juridische documenten MNRV">
     <a href="Documenten/MNRV_Privacyverklaring_12-06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">Privacyverklaring</a>
     <a href="Documenten/MNRV_Cookieverklaring_12-06-2026.pdf" target="_blank" rel="noopener" type="application/pdf">Cookieverklaring</a>
@@ -2017,6 +2025,11 @@ window.addEventListener('scroll', () => {
   if (!_sTick) { requestAnimationFrame(() => { onScroll(); _sTick = false; }); _sTick = true; }
 }, { passive: true });
 onScroll();
+
+(function setFooterYear() {
+  const el = document.getElementById('footer-year');
+  if (el) el.textContent = String(new Date().getFullYear());
+})();
 
 function initSocialFlyout() {
   const flyout = document.getElementById('social-flyout');
@@ -2149,6 +2162,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview
   var mutant = document.querySelector('.hero-portret-mutant');
   var glitchLayers = [digital, lizard, mutant].filter(Boolean);
   if (!glitchLayers.length) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var wrap = document.querySelector('.hero-portret-wrap');
 
