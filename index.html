@@ -59,7 +59,7 @@
   <meta name="geo.placename" content="Nederland">
 
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/clippyjs/clippy.js/assets/clippy.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/clippyjs/clippy.js@8bfd1f92c725c6bc3a435d538a77c3302b327c08/build/clippy.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
   
 
@@ -68,17 +68,18 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://mnrv.nl/#organization",
     "name": "MNRV",
     "description": "AI bureau gespecialiseerd in websites, AI agents, chatbots, UX/UI en automation",
     "url": "https://mnrv.nl",
     "logo": "https://mnrv.nl/assets/img/MNRV_LOGO.png",
     "foundingDate": "2024",
     "email": "info@mnrv.nl",
-    },
+    "telephone": "+31682456410",
     "sameAs": [
-      "https://www.linkedin.com/company/mnrv",
-      "https://www.facebook.com/mnrv",
-      "https://www.instagram.com/mnrv",
+      "https://www.instagram.com/mnrv.ai/",
+      "https://www.linkedin.com/in/davevera/",
+      "https://www.facebook.com/meneervera/",
       "https://github.com/DAVEVERA"
     ],
     "contactPoint": {
@@ -190,11 +191,13 @@
        ============================================ -->
   <div class="desktop-icons">
 
-    <!-- My LAVA -->
+    <!-- My LAVA: hidden until omnicontent.nl is live (remove the template tags to restore) -->
+    <template id="lava-icon-hidden">
     <div class="desktop-icon" tabindex="0" data-window="lava-window">
       <img class="icon-img" src="assets/icons/Computer_32x32_4.png" alt="My LAVA" draggable="false">
       <span class="icon-label">My LAVA</span>
     </div>
+    </template>
 
     <!-- Minesweeper -->
     <a class="desktop-icon" tabindex="0" data-target="minesweeper.html">
@@ -333,7 +336,9 @@
 
   <!-- ============================================
        MY LAVA WINDOW (IE-style)
+       Hidden until omnicontent.nl is live (remove the template tags to restore)
        ============================================ -->
+  <template id="lava-window-hidden">
   <div id="lava-window" class="win-window hidden lava-window">
     <div class="win-titlebar">
       <img class="win-titlebar-icon" src="assets/icons/Computer_16x16_4.png" alt="My LAVA" draggable="false">
@@ -356,6 +361,7 @@
       <span class="win-statusbar-section">Internet</span>
     </div>
   </div>
+  </template>
 
   <!-- ============================================
        MEDIA PLAYER WINDOW
@@ -480,9 +486,13 @@
       <span>Portfolio</span>
     </a>
     <div class="start-menu-separator"></div>
-    <a class="start-menu-item" href="portfolio.html">
+    <a class="start-menu-item" href="assets/mnrv.html#over">
       <img src="assets/icons/w98_Notepad_16x16_4.png" alt="" draggable="false">
       <span>Over MNRV</span>
+    </a>
+    <a class="start-menu-item" href="contact.html">
+      <img src="assets/icons/Mail_16x16_4.png" alt="" draggable="false">
+      <span>Contact</span>
     </a>
     <a class="start-menu-item" href="assets/mnrv.html">
       <img src="assets/icons/w98_Html_16x16_4.png" alt="" draggable="false">
@@ -499,11 +509,11 @@
     <div class="start-menu-separator"></div>
     <div class="start-menu-item d-flex gap-8">
       <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" fill="#0077b5"/><text x="3" y="12" fill="#fff" font-size="8" font-weight="bold">in</text></svg>
-      <a href="#" target="_blank" class="clean-link">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/davevera/" target="_blank" rel="noopener" class="clean-link">LinkedIn</a>
     </div>
     <div class="start-menu-item d-flex gap-8">
       <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#25d366"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">W</text></svg>
-      <a href="#" target="_blank" class="clean-link">WhatsApp</a>
+      <a href="https://wa.me/31682456410" target="_blank" rel="noopener" class="clean-link">WhatsApp</a>
     </div>
     <div class="start-menu-separator"></div>
     <div class="start-menu-item" id="start-shutdown">
@@ -812,7 +822,7 @@
   })();
 
   // Point ClippyJS to jsdelivr CDN for agent assets (gitcdn.xyz is dead)
-  window.CLIPPY_CDN = 'https://cdn.jsdelivr.net/gh/clippyjs/clippy.js/agents/';
+  window.CLIPPY_CDN = 'https://cdn.jsdelivr.net/gh/clippyjs/clippy.js@8bfd1f92c725c6bc3a435d538a77c3302b327c08/agents/';
   // Silence ClippyJS sound errors (browsers block autoplay audio)
   (function() {
     var origPlay = HTMLAudioElement.prototype.play;
@@ -880,7 +890,8 @@
       agent.show();
       agent.play('Greeting');
       agent.speak(generalTips[0]);
-      agent.mute();
+      // clippyjs 0.0.3 has no mute(); audio is already silenced via the play() override above
+      if (typeof agent.mute === 'function') agent.mute();
 
       // Disable the built-in drag (we want Clippy pinned)
       var el = document.querySelector('.clippy');

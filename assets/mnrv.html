@@ -505,6 +505,113 @@
     font-weight: 300;
   }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* WERK — cases */
+  .werk {
+    position: relative;
+    z-index: 2;
+    padding: 64px 48px;
+  }
+  .werk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .case-card {
+    display: flex;
+    flex-direction: column;
+    background: #eee9df8c;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(44,59,77,0.1);
+    transition: transform 0.3s, background 0.3s;
+  }
+  .case-card:hover { transform: translateY(-4px); background: rgba(238,233,223,0.85); }
+  .case-media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #fff;
+    display: grid;
+    place-items: center;
+  }
+  .case-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .case-media--logo img {
+    width: 62%;
+    height: 62%;
+    object-fit: contain;
+  }
+  .case-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px 28px 32px;
+    flex: 1;
+  }
+  .case-meta {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .case-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--abyss);
+  }
+  .case-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--abyss);
+    font-weight: 400;
+  }
+  .case-link {
+    margin-top: auto;
+    padding-top: 8px;
+    align-self: flex-start;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--abyss);
+    text-decoration: none;
+    border-bottom: 2px solid var(--blue);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .case-link:hover,
+  .case-link:focus-visible { color: var(--blue); }
+  @media (max-width: 1024px) {
+    .werk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .werk { padding: 56px 24px; }
+    .werk-grid { grid-template-columns: 1fr; }
+    .case-body { padding: 22px 20px 26px; }
+  }
+
   /* CONTACT + alles eronder = wit */
   .contact, footer {
     color: #fff;
@@ -1519,7 +1626,7 @@
       </p>
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary">Start een project</a>
-        <a href="../portfolio.html" class="btn-secondary">Bekijk werk</a>
+        <a href="#werk" class="btn-secondary">Bekijk werk</a>
       </div>
       <div class="logo-marquee" aria-label="Opdrachtgevers">
         <div class="logo-marquee-track">
@@ -1588,6 +1695,68 @@
       <h3>Lokale kennisbanken</h3>
       <p>Kennisbanken op maat waarin bedrijfskennis, processen en antwoorden centraal staan, klaar voor medewerkers, klanten en AI-assistenten.</p>
     </div>
+  </div>
+</section>
+
+<!-- WERK -->
+<section class="werk" id="werk" aria-labelledby="werk-title">
+  <p class="section-eyebrow">Cases</p>
+  <h2 class="section-title" id="werk-title">Werk</h2>
+  <div class="werk-grid">
+    <article class="case-card">
+      <div class="case-media"><img src="img/mrsvision-after.jpg" alt="Woonkamer met houten jaloezieën, gevisualiseerd met MRSVision" width="1024" height="1024" loading="lazy"></div>
+      <div class="case-body">
+        <p class="case-meta">AI-visualisatie · B2B</p>
+        <h3>MRSVision</h3>
+        <p>Interactieve, AI-gestuurde B2B-visualisatietool voor maatwerk raambekleding. Consumenten zien vooraf hoe jaloezieën in hun eigen ruimte staan en worden visueel geholpen bij het juist inmeten.</p>
+        <a class="case-link" href="https://mrsvision.nl" target="_blank" rel="noopener">Bekijk live <span aria-hidden="true">↗</span><span class="sr-only"> (opent in nieuw tabblad)</span></a>
+      </div>
+    </article>
+    <article class="case-card">
+      <div class="case-media"><img src="img/fainl-preview.jpg" alt="Startscherm van FAINL met een vraagveld voor het AI-consortium" width="1200" height="900" loading="lazy"></div>
+      <div class="case-body">
+        <p class="case-meta">AI-platform</p>
+        <h3>FAINL</h3>
+        <p>Zeven AI-modellen debatteren en leveren een gefundeerde conclusie. Je vraag wordt gelijktijdig door meerdere modellen verwerkt, waarna één gezaghebbend antwoord wordt gesynthetiseerd.</p>
+        <a class="case-link" href="https://fainl.com" target="_blank" rel="noopener">Bekijk live <span aria-hidden="true">↗</span><span class="sr-only"> (opent in nieuw tabblad)</span></a>
+      </div>
+    </article>
+    <article class="case-card">
+      <div class="case-media"><img src="img/windofy-preview.jpg" alt="Homepage van Windofy met een voor-en-na-vergelijking van raamdecoratie" width="1200" height="900" loading="lazy"></div>
+      <div class="case-body">
+        <p class="case-meta">AI-visualisatie</p>
+        <h3>Windofy</h3>
+        <p>Klanten bekijken raamdecoratie direct in hun eigen interieur. Foto-upload, productconfiguratie en realistische visualisatie maken de keuze eenvoudiger, persoonlijker en overtuigender.</p>
+        <a class="case-link" href="https://windofy.com" target="_blank" rel="noopener">Bekijk live <span aria-hidden="true">↗</span><span class="sr-only"> (opent in nieuw tabblad)</span></a>
+      </div>
+    </article>
+    <article class="case-card">
+      <div class="case-media case-media--logo"><img src="logo_clients/Notenman_logo.png" alt="Logo De Notenman" loading="lazy"></div>
+      <div class="case-body">
+        <p class="case-meta">E-commerce</p>
+        <h3>De Notenman</h3>
+        <p>Geen standaard webshop, maar een maatwerk e-commerceplatform waarin productbeleving, bestelgemak, SEO, AI-indexering, marketing automation en backendbeheer samenkomen.</p>
+        <a class="case-link" href="https://denotenman.com" target="_blank" rel="noopener">Bekijk live <span aria-hidden="true">↗</span><span class="sr-only"> (opent in nieuw tabblad)</span></a>
+      </div>
+    </article>
+    <article class="case-card">
+      <div class="case-media"><img src="img/stukverdriet-preview.jpg" alt="Homepage van Stuk Verdriet met twee podcastmakers aan tafel" width="1200" height="900" loading="lazy"></div>
+      <div class="case-body">
+        <p class="case-meta">Maatschappelijk · Podcastplatform</p>
+        <h3>Stuk Verdriet</h3>
+        <p>Een platform dat mensen verbindt op momenten waarop woorden tekortschieten: verhalen, herkenning en steun rond verlies, rouw en afscheid. Volledig belangeloos ontwikkeld.</p>
+        <a class="case-link" href="https://stukverdriet.com/start" target="_blank" rel="noopener">Bekijk live <span aria-hidden="true">↗</span><span class="sr-only"> (opent in nieuw tabblad)</span></a>
+      </div>
+    </article>
+    <article class="case-card">
+      <div class="case-media case-media--logo"><img src="logo_clients/oostendorpauto.png" alt="Logo Oostendorp Autogroep" loading="lazy"></div>
+      <div class="case-body">
+        <p class="case-meta">Automotive</p>
+        <h3>Oostendorp Auto</h3>
+        <p>Digitale merk- en website-ervaring voor een automotive opdrachtgever, gericht op heldere presentatie, snelle oriëntatie en vertrouwen in de route naar contact.</p>
+        <a class="case-link" href="https://www.oostendorp-autogroep.nl/" target="_blank" rel="noopener">Bekijk live <span aria-hidden="true">↗</span><span class="sr-only"> (opent in nieuw tabblad)</span></a>
+      </div>
+    </article>
   </div>
 </section>
 

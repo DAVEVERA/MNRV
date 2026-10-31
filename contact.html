@@ -53,6 +53,10 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
+    .contact-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .send-error { margin: 8px 0 0; padding: 6px 8px; border: 1px solid #b00020; background: #fff0f0; color: #b00020; }
+    .send-error.hide { display: none; }
+
     .page-window.is-minimized { display: none; }
     .page-window.is-maximized {
       margin: 0;
@@ -455,8 +459,14 @@
                 </div>
                 </fieldset>
 
+                <div class="contact-hp" aria-hidden="true">
+                  <label for="website">Laat dit veld leeg</label>
+                  <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                <p class="send-error hide" id="send-error" role="alert"></p>
+
                 <div class="contact-actions">
-                  <button type="submit" class="win-btn win-btn-default">Verzenden</button>
+                  <button type="submit" class="win-btn win-btn-default" id="contact-submit">Verzenden</button>
                   <button type="reset" class="win-btn" onclick="resetErrors()">Wissen</button>
                 </div>
               </form>
@@ -747,10 +757,48 @@
     var form = document.getElementById('contact-form');
     var success = document.getElementById('success-msg');
     var ref = document.getElementById('msg-ref');
-    if (ref) ref.textContent = 'MNRV-' + Date.now().toString(36).toUpperCase();
-    form.classList.add('hide');
-    success.classList.remove('hide');
-    if (status) status.textContent = 'Bericht verzonden';
+    var submit = document.getElementById('contact-submit');
+    var errorBox = document.getElementById('send-error');
+    if (submit.disabled) return false;
+
+    var payload = {
+      name: form.naam.value,
+      email: form.email.value,
+      company: form.bedrijf.value,
+      phone: form.telefoon.value,
+      message: form.bericht.value,
+      interests: Array.prototype.map.call(form.querySelectorAll('input[name="interesse"]:checked'), function(i) { return i.value; }),
+      website: form.website.value,
+      source: 'contact.html'
+    };
+
+    submit.disabled = true;
+    submit.textContent = 'Bezig...';
+    errorBox.classList.add('hide');
+    if (status) status.textContent = 'Bericht verzenden...';
+
+    fetch('/api/send-contact-mail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res) {
+      return res.json().catch(function() { return {}; }).then(function(data) {
+        if (!res.ok) throw new Error(data.error || 'Versturen lukte niet.');
+        return data;
+      });
+    }).then(function(data) {
+      if (ref) ref.textContent = data.id ? String(data.id).slice(0, 8).toUpperCase() : 'MNRV-' + Date.now().toString(36).toUpperCase();
+      form.classList.add('hide');
+      success.classList.remove('hide');
+      if (status) status.textContent = 'Bericht verzonden';
+    }).catch(function(err) {
+      errorBox.textContent = (err && err.message ? err.message : 'Versturen lukte niet.') + ' Je bericht staat nog in het formulier.';
+      errorBox.classList.remove('hide');
+      if (status) status.textContent = 'Niet verzonden';
+    }).then(function() {
+      submit.disabled = false;
+      submit.textContent = 'Verzenden';
+    });
     return false;
   }
 

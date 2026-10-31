@@ -145,12 +145,12 @@
 
     <div class="win-addressbar">
       <label for="mnrv-addr">Adres:</label>
-      <input id="mnrv-addr" type="text" readonly class="win-input flex-1" value="assets/mnrv.html" title="Huidige URL">
+      <input id="mnrv-addr" type="text" readonly class="win-input flex-1" value="assets/mnrv.html#werk" title="Huidige URL">
       <button type="button" class="win-btn btn-sm" onclick="openExternal()" title="Open externe tab">Ga</button>
     </div>
 
     <div class="win-body embed-body flex-1">
-      <iframe id="mnrv-frame" class="embed-frame" src="assets/mnrv.html" sandbox="allow-scripts allow-popups allow-forms allow-presentation" allowfullscreen title="MNRV moderne website"></iframe>
+      <iframe id="mnrv-frame" class="embed-frame" src="assets/mnrv.html#werk" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-presentation" allowfullscreen title="MNRV moderne website"></iframe>
     </div>
 
     <div class="win-statusbar">
@@ -183,12 +183,12 @@
     <button type="button" onclick="openExternal()">Open extern</button>
     <button type="button" onclick="closeFs()">Sluiten (Esc)</button>
   </div>
-  <iframe class="embed-fs-frame" id="embed-fs-frame" src="about:blank" sandbox="allow-scripts allow-popups allow-forms allow-presentation" allowfullscreen title="MNRV moderne website fullscreen"></iframe>
+  <iframe class="embed-fs-frame" id="embed-fs-frame" src="about:blank" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-presentation" allowfullscreen title="MNRV moderne website fullscreen"></iframe>
 </div>
 
 <script>
 (function() {
-  var embeddedUrl = 'assets/mnrv.html';
+  var embeddedUrl = 'assets/mnrv.html#werk';
   var frame = document.getElementById('mnrv-frame');
   var status = document.getElementById('mnrv-status');
   var fsBox = document.getElementById('embed-fs');
